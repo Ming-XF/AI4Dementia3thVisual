@@ -1,0 +1,13 @@
+{"time":"2025-09-16T13:44:47.059032714+08:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-09-16T13:44:47.210268641+08:00","level":"WARN","msg":"GraphQL client is nil, skipping feature loading"}
+{"time":"2025-09-16T13:44:47.21046854+08:00","level":"INFO","msg":"stream: created new stream","id":"vxl6haiz"}
+{"time":"2025-09-16T13:44:47.210502581+08:00","level":"INFO","msg":"stream: started","id":"vxl6haiz"}
+{"time":"2025-09-16T13:44:47.21062495+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"vxl6haiz"}
+{"time":"2025-09-16T13:44:47.210728157+08:00","level":"INFO","msg":"sender: started","stream_id":"vxl6haiz"}
+{"time":"2025-09-16T13:44:47.210800325+08:00","level":"INFO","msg":"handler: started","stream_id":"vxl6haiz"}
+{"time":"2025-09-16T13:44:47.212385564+08:00","level":"WARN","msg":"runupserter: server does not expand metric globs but the x_server_side_expand_glob_metrics setting is set; ignoring"}
+{"time":"2025-09-16T13:49:19.791708861+08:00","level":"INFO","msg":"stream: closing","id":"vxl6haiz"}
+{"time":"2025-09-16T13:49:19.79199321+08:00","level":"INFO","msg":"handler: closed","stream_id":"vxl6haiz"}
+{"time":"2025-09-16T13:49:19.792016217+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":"vxl6haiz"}
+{"time":"2025-09-16T13:49:19.792051239+08:00","level":"INFO","msg":"sender: closed","stream_id":"vxl6haiz"}
+{"time":"2025-09-16T13:49:19.792203439+08:00","level":"INFO","msg":"stream: closed","id":"vxl6haiz"}

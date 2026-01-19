@@ -1,0 +1,22 @@
+2025-11-10 16:14:54,456 INFO    MainThread:190601 [wandb_init.py:setup_run_log_directory():703] Logging user logs to /root/autodl-tmp/AI4Dementia2th/wandb/offline-run-20251110_161454-5jyvnua1/logs/debug.log
+2025-11-10 16:14:54,456 INFO    MainThread:190601 [wandb_init.py:setup_run_log_directory():704] Logging internal logs to /root/autodl-tmp/AI4Dementia2th/wandb/offline-run-20251110_161454-5jyvnua1/logs/debug-internal.log
+2025-11-10 16:14:54,456 INFO    MainThread:190601 [wandb_init.py:init():830] calling init triggers
+2025-11-10 16:14:54,456 INFO    MainThread:190601 [wandb_init.py:init():835] wandb.init called with sweep_config: {}
+config: {'_wandb': {}}
+2025-11-10 16:14:54,456 INFO    MainThread:190601 [wandb_init.py:init():871] starting backend
+2025-11-10 16:14:54,456 INFO    MainThread:190601 [wandb_init.py:init():874] sending inform_init request
+2025-11-10 16:14:54,458 INFO    MainThread:190601 [wandb_init.py:init():882] backend started and connected
+2025-11-10 16:14:54,465 INFO    MainThread:190601 [wandb_init.py:init():953] updated telemetry
+2025-11-10 16:14:55,047 INFO    MainThread:190601 [wandb_init.py:init():977] communicating run to backend with 90.0 second timeout
+2025-11-10 16:14:55,050 INFO    MainThread:190601 [wandb_init.py:init():1029] starting run threads in backend
+2025-11-10 16:14:55,313 INFO    MainThread:190601 [wandb_run.py:_console_start():2458] atexit reg
+2025-11-10 16:14:55,313 INFO    MainThread:190601 [wandb_run.py:_redirect():2306] redirect: wrap_raw
+2025-11-10 16:14:55,313 INFO    MainThread:190601 [wandb_run.py:_redirect():2375] Wrapping output streams.
+2025-11-10 16:14:55,313 INFO    MainThread:190601 [wandb_run.py:_redirect():2398] Redirects installed.
+2025-11-10 16:14:55,314 INFO    MainThread:190601 [wandb_init.py:init():1075] run started, returning control to user process
+2025-11-10 16:57:20,832 INFO    MainThread:190601 [wandb_run.py:_finish():2224] finishing run cwg/Dementia/5jyvnua1
+2025-11-10 16:57:20,832 INFO    MainThread:190601 [wandb_run.py:_atexit_cleanup():2423] got exitcode: 0
+2025-11-10 16:57:20,832 INFO    MainThread:190601 [wandb_run.py:_restore():2405] restore
+2025-11-10 16:57:20,832 INFO    MainThread:190601 [wandb_run.py:_restore():2411] restore done
+2025-11-10 16:57:20,837 INFO    MainThread:190601 [wandb_run.py:_footer_history_summary_info():3903] rendering history
+2025-11-10 16:57:20,838 INFO    MainThread:190601 [wandb_run.py:_footer_history_summary_info():3935] rendering summary

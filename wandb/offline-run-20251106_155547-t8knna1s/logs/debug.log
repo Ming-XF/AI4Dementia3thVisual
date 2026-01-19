@@ -1,0 +1,32 @@
+2025-11-06 15:55:47,664 INFO    MainThread:1926 [wandb_setup.py:_flush():80] Current SDK version is 0.21.0
+2025-11-06 15:55:47,665 INFO    MainThread:1926 [wandb_setup.py:_flush():80] Configure stats pid to 1926
+2025-11-06 15:55:47,665 INFO    MainThread:1926 [wandb_setup.py:_flush():80] Loading settings from /root/.config/wandb/settings
+2025-11-06 15:55:47,665 INFO    MainThread:1926 [wandb_setup.py:_flush():80] Loading settings from /root/autodl-tmp/AI4Dementia2th/wandb/settings
+2025-11-06 15:55:47,665 INFO    MainThread:1926 [wandb_setup.py:_flush():80] Loading settings from environment variables
+2025-11-06 15:55:47,665 INFO    MainThread:1926 [wandb_init.py:setup_run_log_directory():703] Logging user logs to /root/autodl-tmp/AI4Dementia2th/wandb/offline-run-20251106_155547-t8knna1s/logs/debug.log
+2025-11-06 15:55:47,665 INFO    MainThread:1926 [wandb_init.py:setup_run_log_directory():704] Logging internal logs to /root/autodl-tmp/AI4Dementia2th/wandb/offline-run-20251106_155547-t8knna1s/logs/debug-internal.log
+2025-11-06 15:55:47,665 INFO    MainThread:1926 [wandb_init.py:init():830] calling init triggers
+2025-11-06 15:55:47,665 INFO    MainThread:1926 [wandb_init.py:init():835] wandb.init called with sweep_config: {}
+config: {'_wandb': {}}
+2025-11-06 15:55:47,665 INFO    MainThread:1926 [wandb_init.py:init():871] starting backend
+2025-11-06 15:55:47,856 WARNING MainThread:1926 [wandb_init.py:init():1610] [no run ID] interrupted
+Traceback (most recent call last):
+  File "/root/miniconda3/lib/python3.8/site-packages/wandb/sdk/wandb_init.py", line 1606, in init
+    return wi.init(run_settings, run_config, run_printer)
+  File "/root/miniconda3/lib/python3.8/site-packages/wandb/sdk/wandb_init.py", line 873, in init
+    service = self._wl.ensure_service()
+  File "/root/miniconda3/lib/python3.8/site-packages/wandb/sdk/wandb_setup.py", line 325, in ensure_service
+    self._connection = service_connection.connect_to_service(self._settings)
+  File "/root/miniconda3/lib/python3.8/site-packages/wandb/sdk/lib/service/service_connection.py", line 33, in connect_to_service
+    return _start_and_connect_service(settings)
+  File "/root/miniconda3/lib/python3.8/site-packages/wandb/sdk/lib/service/service_connection.py", line 45, in _start_and_connect_service
+    proc = service_process.start(settings)
+  File "/root/miniconda3/lib/python3.8/site-packages/wandb/sdk/lib/service/service_process.py", line 33, in start
+    return _launch_server(settings)
+  File "/root/miniconda3/lib/python3.8/site-packages/wandb/sdk/lib/service/service_process.py", line 97, in _launch_server
+    proc = subprocess.Popen(
+  File "/root/miniconda3/lib/python3.8/subprocess.py", line 858, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/root/miniconda3/lib/python3.8/subprocess.py", line 1660, in _execute_child
+    part = os.read(errpipe_read, 50000)
+KeyboardInterrupt

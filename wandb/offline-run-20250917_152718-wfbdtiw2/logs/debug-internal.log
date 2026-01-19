@@ -1,0 +1,13 @@
+{"time":"2025-09-17T15:27:19.151384899+08:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-09-17T15:27:19.306623382+08:00","level":"WARN","msg":"GraphQL client is nil, skipping feature loading"}
+{"time":"2025-09-17T15:27:19.306849367+08:00","level":"INFO","msg":"stream: created new stream","id":"wfbdtiw2"}
+{"time":"2025-09-17T15:27:19.306882809+08:00","level":"INFO","msg":"stream: started","id":"wfbdtiw2"}
+{"time":"2025-09-17T15:27:19.307019145+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"wfbdtiw2"}
+{"time":"2025-09-17T15:27:19.307055001+08:00","level":"INFO","msg":"sender: started","stream_id":"wfbdtiw2"}
+{"time":"2025-09-17T15:27:19.307120775+08:00","level":"INFO","msg":"handler: started","stream_id":"wfbdtiw2"}
+{"time":"2025-09-17T15:27:19.308230837+08:00","level":"WARN","msg":"runupserter: server does not expand metric globs but the x_server_side_expand_glob_metrics setting is set; ignoring"}
+{"time":"2025-09-17T15:27:21.316176836+08:00","level":"INFO","msg":"stream: closing","id":"wfbdtiw2"}
+{"time":"2025-09-17T15:27:21.316457606+08:00","level":"INFO","msg":"handler: closed","stream_id":"wfbdtiw2"}
+{"time":"2025-09-17T15:27:21.316503209+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":"wfbdtiw2"}
+{"time":"2025-09-17T15:27:21.316516978+08:00","level":"INFO","msg":"sender: closed","stream_id":"wfbdtiw2"}
+{"time":"2025-09-17T15:27:21.316588025+08:00","level":"INFO","msg":"stream: closed","id":"wfbdtiw2"}

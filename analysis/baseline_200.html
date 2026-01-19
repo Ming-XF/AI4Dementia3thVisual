@@ -1,0 +1,213 @@
+
+    <html>
+    <head>
+        <title>Model Metrics Comparison</title>
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                margin: 20px 0;
+                font-family: 'Times New Roman', Times, serif;
+                font-size: 12pt;
+                text-align: center;
+            }
+            /* 三线表样式 */
+            .three-line-table {
+                border: none;
+            }
+            .three-line-table thead th {
+                border-bottom: 2px solid #000;
+                border-top: 2px solid #000;
+                padding: 8px 12px;
+                font-weight: bold;
+                text-align: center;
+            }
+            .three-line-table tbody td {
+                border-bottom: 1px solid #ddd;
+                padding: 6px 12px;
+                border-left: none;
+                border-right: none;
+                text-align: center;
+            }
+            .three-line-table tbody tr:last-child td {
+                border-bottom: 2px solid #000;
+            }
+            .three-line-table th.metric-header {
+                border-top: 2px solid #000;
+                border-bottom: 1px solid #ddd;
+                text-align: center;
+            }
+            /* 精度指标下框线样式 */
+            .accuracy-header {
+                border-bottom: 2px solid #000 !important;
+            }
+            /* 性能最优加粗样式 */
+            .best-metric {
+                font-weight: bold;
+                background-color: #f8f9fa;
+                text-align: center;
+            }
+            /* 次优指标下划线样式 */
+            .second-best-metric {
+                text-decoration: underline;
+                text-align: center;
+            }
+            /* 表头样式 */
+            .table-caption {
+                caption-side: top;
+                text-align: center;
+                font-weight: bold;
+                margin-bottom: 10px;
+                font-size: 14pt;
+            }
+            /* 模型名称单元格居中 */
+            .model-name {
+                text-align: center;
+                font-weight: normal;
+            }
+            .model-name-best {
+                text-align: center;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="text-align: center; font-family: 'Times New Roman', Times, serif;">
+            Model Metrics Comparison (Average of Best Epochs from 3 Runs)
+        </h1>
+        <table class="three-line-table">
+            <caption class="table-caption">Table 1: Comparison of Model Performance Metrics</caption>
+            <thead>
+                <tr>
+                    <th rowspan="2" style="border-top: 2px solid #000; text-align: center;">Model</th>
+                    <th colspan="5" class="metric-header" style="text-align: center;">Metrics (Average of Best Epochs)</th>
+                </tr>
+                <tr>
+                    <th class="accuracy-header" style="text-align: center;">AUC</th>
+                    <th class="accuracy-header" style="text-align: center;">Accuracy</th>
+                    <th class="accuracy-header" style="text-align: center;">Precision</th>
+                    <th class="accuracy-header" style="text-align: center;">Recall</th>
+                    <th class="accuracy-header" style="text-align: center;">F-score</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+                <tr>
+                    <td class="model-name">TCACNet</td>
+                    <td class="">0.5255</td>
+                    <td class="">0.5256</td>
+                    <td class="">0.3689</td>
+                    <td class="">0.6310</td>
+                    <td class="">0.4648</td>
+                </tr>
+        
+                <tr>
+                    <td class="model-name">TCANet</td>
+                    <td class="">0.5327</td>
+                    <td class="">0.5256</td>
+                    <td class="">0.6958</td>
+                    <td class="">0.6786</td>
+                    <td class="">0.4926</td>
+                </tr>
+        
+                <tr>
+                    <td class="model-name">LMDA</td>
+                    <td class="">0.5642</td>
+                    <td class="">0.5449</td>
+                    <td class="">0.3924</td>
+                    <td class="">0.5119</td>
+                    <td class="">0.4442</td>
+                </tr>
+        
+                <tr>
+                    <td class="model-name">DeepConvNet</td>
+                    <td class="">0.5957</td>
+                    <td class="">0.5321</td>
+                    <td class="">0.3917</td>
+                    <td class="">0.5357</td>
+                    <td class="">0.4444</td>
+                </tr>
+        
+                <tr>
+                    <td class="model-name">EEGNet</td>
+                    <td class="">0.6200</td>
+                    <td class="">0.6026</td>
+                    <td class="">0.6020</td>
+                    <td class="">0.7738</td>
+                    <td class="">0.6761</td>
+                </tr>
+        
+                <tr>
+                    <td class="model-name">SteadyNet</td>
+                    <td class="">0.6567</td>
+                    <td class="">0.5385</td>
+                    <td class="">0.5385</td>
+                    <td class="best-metric">1.0000</td>
+                    <td class="">0.7000</td>
+                </tr>
+        
+                <tr>
+                    <td class="model-name">ShallowConvNet</td>
+                    <td class="">0.7396</td>
+                    <td class="">0.6474</td>
+                    <td class="">0.6662</td>
+                    <td class="">0.7500</td>
+                    <td class="">0.6861</td>
+                </tr>
+        
+                <tr>
+                    <td class="model-name">FBNetGen</td>
+                    <td class="">0.7569</td>
+                    <td class="">0.6603</td>
+                    <td class="">0.6639</td>
+                    <td class="">0.7857</td>
+                    <td class="">0.7132</td>
+                </tr>
+        
+                <tr>
+                    <td class="model-name">ALTER</td>
+                    <td class="">0.8522</td>
+                    <td class="">0.6731</td>
+                    <td class="second-best-metric">0.8611</td>
+                    <td class="">0.5119</td>
+                    <td class="">0.6007</td>
+                </tr>
+        
+                <tr>
+                    <td class="model-name">BNT</td>
+                    <td class="">0.8700</td>
+                    <td class="">0.7244</td>
+                    <td class="">0.8167</td>
+                    <td class="">0.6429</td>
+                    <td class="">0.7080</td>
+                </tr>
+        
+                <tr>
+                    <td class="model-name">BrainNetCNN</td>
+                    <td class="second-best-metric">0.8872</td>
+                    <td class="second-best-metric">0.7821</td>
+                    <td class="">0.7554</td>
+                    <td class="">0.8810</td>
+                    <td class="second-best-metric">0.8123</td>
+                </tr>
+        
+                <tr>
+                    <td class="model-name">SrCVIB</td>
+                    <td class="best-metric">0.9995</td>
+                    <td class="best-metric">0.9615</td>
+                    <td class="best-metric">0.9677</td>
+                    <td class="second-best-metric">0.9643</td>
+                    <td class="best-metric">0.9642</td>
+                </tr>
+        
+            </tbody>
+        </table>
+        <div style="margin-top: 10px; font-family: 'Times New Roman', Times, serif; font-size: 10pt; text-align: center;">
+            <p><strong>Note:</strong> 
+            <span style="font-weight: bold;">Bold values</span> indicate the best performance for each metric. 
+            <span style="text-decoration: underline;">Underlined values</span> indicate the second best performance. 
+            Higher values indicate better performance for all metrics.</p>
+        </div>
+    </body>
+    </html>
+    

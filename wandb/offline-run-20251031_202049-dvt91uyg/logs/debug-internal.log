@@ -1,0 +1,13 @@
+{"time":"2025-10-31T20:20:50.104445224+08:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-10-31T20:20:50.266953462+08:00","level":"WARN","msg":"GraphQL client is nil, skipping feature loading"}
+{"time":"2025-10-31T20:20:50.267142997+08:00","level":"INFO","msg":"stream: created new stream","id":"dvt91uyg"}
+{"time":"2025-10-31T20:20:50.267173484+08:00","level":"INFO","msg":"stream: started","id":"dvt91uyg"}
+{"time":"2025-10-31T20:20:50.26723989+08:00","level":"INFO","msg":"sender: started","stream_id":"dvt91uyg"}
+{"time":"2025-10-31T20:20:50.267223097+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"dvt91uyg"}
+{"time":"2025-10-31T20:20:50.2672855+08:00","level":"INFO","msg":"handler: started","stream_id":"dvt91uyg"}
+{"time":"2025-10-31T20:20:50.268247673+08:00","level":"WARN","msg":"runupserter: server does not expand metric globs but the x_server_side_expand_glob_metrics setting is set; ignoring"}
+{"time":"2025-10-31T20:20:51.281443526+08:00","level":"INFO","msg":"stream: closing","id":"dvt91uyg"}
+{"time":"2025-10-31T20:20:51.281660728+08:00","level":"INFO","msg":"handler: closed","stream_id":"dvt91uyg"}
+{"time":"2025-10-31T20:20:51.281681612+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":"dvt91uyg"}
+{"time":"2025-10-31T20:20:51.281700524+08:00","level":"INFO","msg":"sender: closed","stream_id":"dvt91uyg"}
+{"time":"2025-10-31T20:20:51.281950644+08:00","level":"INFO","msg":"stream: closed","id":"dvt91uyg"}

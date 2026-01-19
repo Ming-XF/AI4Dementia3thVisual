@@ -1,0 +1,13 @@
+{"time":"2025-11-11T10:29:33.300325709+08:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-11-11T10:29:33.447032406+08:00","level":"WARN","msg":"GraphQL client is nil, skipping feature loading"}
+{"time":"2025-11-11T10:29:33.44726083+08:00","level":"INFO","msg":"stream: created new stream","id":"zoepdd3s"}
+{"time":"2025-11-11T10:29:33.44734458+08:00","level":"INFO","msg":"stream: started","id":"zoepdd3s"}
+{"time":"2025-11-11T10:29:33.447351336+08:00","level":"INFO","msg":"handler: started","stream_id":"zoepdd3s"}
+{"time":"2025-11-11T10:29:33.447486443+08:00","level":"INFO","msg":"sender: started","stream_id":"zoepdd3s"}
+{"time":"2025-11-11T10:29:33.447563767+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"zoepdd3s"}
+{"time":"2025-11-11T10:29:33.448713029+08:00","level":"WARN","msg":"runupserter: server does not expand metric globs but the x_server_side_expand_glob_metrics setting is set; ignoring"}
+{"time":"2025-11-11T10:29:49.474879604+08:00","level":"INFO","msg":"stream: closing","id":"zoepdd3s"}
+{"time":"2025-11-11T10:29:49.475203368+08:00","level":"INFO","msg":"handler: closed","stream_id":"zoepdd3s"}
+{"time":"2025-11-11T10:29:49.475260891+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":"zoepdd3s"}
+{"time":"2025-11-11T10:29:49.475306579+08:00","level":"INFO","msg":"sender: closed","stream_id":"zoepdd3s"}
+{"time":"2025-11-11T10:29:49.475390598+08:00","level":"INFO","msg":"stream: closed","id":"zoepdd3s"}

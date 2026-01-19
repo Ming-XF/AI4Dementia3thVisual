@@ -1,0 +1,14 @@
+{"time":"2025-11-01T19:59:15.779729679+08:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-11-01T19:59:15.942505214+08:00","level":"WARN","msg":"GraphQL client is nil, skipping feature loading"}
+{"time":"2025-11-01T19:59:15.942741211+08:00","level":"INFO","msg":"stream: created new stream","id":"zluaodxs"}
+{"time":"2025-11-01T19:59:15.942786953+08:00","level":"INFO","msg":"stream: started","id":"zluaodxs"}
+{"time":"2025-11-01T19:59:15.942814357+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"zluaodxs"}
+{"time":"2025-11-01T19:59:15.942830578+08:00","level":"INFO","msg":"handler: started","stream_id":"zluaodxs"}
+{"time":"2025-11-01T19:59:15.942852393+08:00","level":"INFO","msg":"sender: started","stream_id":"zluaodxs"}
+{"time":"2025-11-01T19:59:15.943336135+08:00","level":"WARN","msg":"runupserter: server does not expand metric globs but the x_server_side_expand_glob_metrics setting is set; ignoring"}
+{"time":"2025-11-01T20:09:23.322460136+08:00","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-11-01T20:09:23.325397642+08:00","level":"INFO","msg":"stream: closing","id":"zluaodxs"}
+{"time":"2025-11-01T20:09:23.325434265+08:00","level":"INFO","msg":"handler: closed","stream_id":"zluaodxs"}
+{"time":"2025-11-01T20:09:23.325455405+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":"zluaodxs"}
+{"time":"2025-11-01T20:09:23.325509925+08:00","level":"INFO","msg":"sender: closed","stream_id":"zluaodxs"}
+{"time":"2025-11-01T20:09:23.32568314+08:00","level":"INFO","msg":"stream: closed","id":"zluaodxs"}

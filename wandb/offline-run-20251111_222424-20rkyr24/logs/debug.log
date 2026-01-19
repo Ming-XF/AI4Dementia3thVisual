@@ -1,0 +1,27 @@
+2025-11-11 22:24:24,870 INFO    MainThread:107021 [wandb_setup.py:_flush():80] Current SDK version is 0.21.0
+2025-11-11 22:24:24,870 INFO    MainThread:107021 [wandb_setup.py:_flush():80] Configure stats pid to 107021
+2025-11-11 22:24:24,870 INFO    MainThread:107021 [wandb_setup.py:_flush():80] Loading settings from /root/.config/wandb/settings
+2025-11-11 22:24:24,870 INFO    MainThread:107021 [wandb_setup.py:_flush():80] Loading settings from /root/autodl-tmp/AI4Dementia2th/wandb/settings
+2025-11-11 22:24:24,870 INFO    MainThread:107021 [wandb_setup.py:_flush():80] Loading settings from environment variables
+2025-11-11 22:24:24,870 INFO    MainThread:107021 [wandb_init.py:setup_run_log_directory():703] Logging user logs to /root/autodl-tmp/AI4Dementia2th/wandb/offline-run-20251111_222424-20rkyr24/logs/debug.log
+2025-11-11 22:24:24,870 INFO    MainThread:107021 [wandb_init.py:setup_run_log_directory():704] Logging internal logs to /root/autodl-tmp/AI4Dementia2th/wandb/offline-run-20251111_222424-20rkyr24/logs/debug-internal.log
+2025-11-11 22:24:24,871 INFO    MainThread:107021 [wandb_init.py:init():830] calling init triggers
+2025-11-11 22:24:24,871 INFO    MainThread:107021 [wandb_init.py:init():835] wandb.init called with sweep_config: {}
+config: {'_wandb': {}}
+2025-11-11 22:24:24,871 INFO    MainThread:107021 [wandb_init.py:init():871] starting backend
+2025-11-11 22:24:25,249 INFO    MainThread:107021 [wandb_init.py:init():874] sending inform_init request
+2025-11-11 22:24:25,275 INFO    MainThread:107021 [wandb_init.py:init():882] backend started and connected
+2025-11-11 22:24:25,279 INFO    MainThread:107021 [wandb_init.py:init():953] updated telemetry
+2025-11-11 22:24:25,311 INFO    MainThread:107021 [wandb_init.py:init():977] communicating run to backend with 90.0 second timeout
+2025-11-11 22:24:25,457 INFO    MainThread:107021 [wandb_init.py:init():1029] starting run threads in backend
+2025-11-11 22:24:25,686 INFO    MainThread:107021 [wandb_run.py:_console_start():2458] atexit reg
+2025-11-11 22:24:25,686 INFO    MainThread:107021 [wandb_run.py:_redirect():2306] redirect: wrap_raw
+2025-11-11 22:24:25,687 INFO    MainThread:107021 [wandb_run.py:_redirect():2375] Wrapping output streams.
+2025-11-11 22:24:25,687 INFO    MainThread:107021 [wandb_run.py:_redirect():2398] Redirects installed.
+2025-11-11 22:24:25,688 INFO    MainThread:107021 [wandb_init.py:init():1075] run started, returning control to user process
+2025-11-12 00:21:11,732 INFO    MainThread:107021 [wandb_run.py:_finish():2224] finishing run cwg/Dementia/20rkyr24
+2025-11-12 00:21:11,732 INFO    MainThread:107021 [wandb_run.py:_atexit_cleanup():2423] got exitcode: 0
+2025-11-12 00:21:11,732 INFO    MainThread:107021 [wandb_run.py:_restore():2405] restore
+2025-11-12 00:21:11,732 INFO    MainThread:107021 [wandb_run.py:_restore():2411] restore done
+2025-11-12 00:21:11,738 INFO    MainThread:107021 [wandb_run.py:_footer_history_summary_info():3903] rendering history
+2025-11-12 00:21:11,739 INFO    MainThread:107021 [wandb_run.py:_footer_history_summary_info():3935] rendering summary

@@ -1,0 +1,159 @@
+
+    <html>
+    <head>
+        <title>Model Metrics Comparison</title>
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                margin: 20px 0;
+                font-family: 'Times New Roman', Times, serif;
+                font-size: 12pt;
+                text-align: center;
+            }
+            /* 三线表样式 */
+            .three-line-table {
+                border: none;
+            }
+            .three-line-table thead th {
+                border-bottom: 2px solid #000;
+                border-top: 2px solid #000;
+                padding: 8px 12px;
+                font-weight: bold;
+                text-align: center;
+            }
+            .three-line-table tbody td {
+                border-bottom: 1px solid #ddd;
+                padding: 6px 12px;
+                border-left: none;
+                border-right: none;
+                text-align: center;
+            }
+            .three-line-table tbody tr:last-child td {
+                border-bottom: 2px solid #000;
+            }
+            .three-line-table th.metric-header {
+                border-top: 2px solid #000;
+                border-bottom: 1px solid #ddd;
+                text-align: center;
+            }
+            /* 精度指标下框线样式 */
+            .accuracy-header {
+                border-bottom: 2px solid #000 !important;
+            }
+            /* 性能最优加粗样式 */
+            .best-metric {
+                font-weight: bold;
+                background-color: #f8f9fa;
+                text-align: center;
+            }
+            /* 次优指标下划线样式 */
+            .second-best-metric {
+                text-decoration: underline;
+                text-align: center;
+            }
+            /* 表头样式 */
+            .table-caption {
+                caption-side: top;
+                text-align: center;
+                font-weight: bold;
+                margin-bottom: 10px;
+                font-size: 14pt;
+            }
+            /* 模型名称单元格居中 */
+            .model-name {
+                text-align: center;
+                font-weight: normal;
+            }
+            .model-name-best {
+                text-align: center;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="text-align: center; font-family: 'Times New Roman', Times, serif;">
+            Model Metrics Comparison (Average of Best Epochs from 3 Runs)
+        </h1>
+        <table class="three-line-table">
+            <caption class="table-caption">Table 1: Comparison of Model Performance Metrics</caption>
+            <thead>
+                <tr>
+                    <th rowspan="2" style="border-top: 2px solid #000; text-align: center;">Model</th>
+                    <th colspan="5" class="metric-header" style="text-align: center;">Metrics (Average of Best Epochs)</th>
+                </tr>
+                <tr>
+                    <th class="accuracy-header" style="text-align: center;">AUC</th>
+                    <th class="accuracy-header" style="text-align: center;">Accuracy</th>
+                    <th class="accuracy-header" style="text-align: center;">Precision</th>
+                    <th class="accuracy-header" style="text-align: center;">Recall</th>
+                    <th class="accuracy-header" style="text-align: center;">F-score</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+                <tr>
+                    <td class="model-name">SrCVIB_wo_r</td>
+                    <td class="">0.6641</td>
+                    <td class="">0.4733</td>
+                    <td class="">0.4926</td>
+                    <td class="">0.4623</td>
+                    <td class="">0.4601</td>
+                </tr>
+        
+                <tr>
+                    <td class="model-name">SrCVIB_wo_f</td>
+                    <td class="">0.7079</td>
+                    <td class="">0.5300</td>
+                    <td class="">0.4965</td>
+                    <td class="">0.5149</td>
+                    <td class="">0.4888</td>
+                </tr>
+        
+                <tr>
+                    <td class="model-name">SrCVIB_wo_t</td>
+                    <td class="">0.7600</td>
+                    <td class="">0.5800</td>
+                    <td class="">0.5824</td>
+                    <td class="">0.5680</td>
+                    <td class="">0.5684</td>
+                </tr>
+        
+                <tr>
+                    <td class="model-name">SrCVIB_wo_k</td>
+                    <td class="second-best-metric">0.7807</td>
+                    <td class="second-best-metric">0.5933</td>
+                    <td class="second-best-metric">0.5852</td>
+                    <td class="">0.5789</td>
+                    <td class="">0.5768</td>
+                </tr>
+        
+                <tr>
+                    <td class="model-name">SrCVIB</td>
+                    <td class="best-metric">0.7997</td>
+                    <td class="best-metric">0.6000</td>
+                    <td class="">0.5840</td>
+                    <td class="second-best-metric">0.5853</td>
+                    <td class="second-best-metric">0.5819</td>
+                </tr>
+        
+                <tr>
+                    <td class="model-name">SrCVIB_wo_p</td>
+                    <td class="">0.7767</td>
+                    <td class="best-metric">0.6000</td>
+                    <td class="best-metric">0.5874</td>
+                    <td class="best-metric">0.5868</td>
+                    <td class="best-metric">0.5848</td>
+                </tr>
+        
+            </tbody>
+        </table>
+        <div style="margin-top: 10px; font-family: 'Times New Roman', Times, serif; font-size: 10pt; text-align: center;">
+            <p><strong>Note:</strong> 
+            <span style="font-weight: bold;">Bold values</span> indicate the best performance for each metric. 
+            <span style="text-decoration: underline;">Underlined values</span> indicate the second best performance. 
+            Higher values indicate better performance for all metrics.</p>
+        </div>
+    </body>
+    </html>
+    

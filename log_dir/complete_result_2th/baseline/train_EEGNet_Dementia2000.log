@@ -1,0 +1,2298 @@
+11/24/2025 18:01:18 - INFO - __main__ -   ########## Repeat:0 ##########
+11/24/2025 18:01:18 - INFO - utils.trainer -   ***** Running training *****
+11/24/2025 18:01:18 - INFO - utils.trainer -     Num examples = 239
+11/24/2025 18:01:18 - INFO - utils.trainer -     Num Epochs = 200
+11/24/2025 18:01:18 - INFO - utils.trainer -     Total train batch size = 16
+11/24/2025 18:01:18 - INFO - utils.trainer -     warmup steps = 400
+11/24/2025 18:01:18 - INFO - utils.trainer -     Total optimization steps = 47800
+11/24/2025 18:01:18 - INFO - utils.trainer -     Save steps = 200
+11/24/2025 18:01:18 - INFO - root -   Parameters [normal] length [11]
+11/24/2025 18:01:34 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:01:37 - INFO - utils.trainer -   AUC: 0.53208
+11/24/2025 18:01:37 - INFO - utils.trainer -   Accuracy: 0.53782
+11/24/2025 18:01:37 - INFO - utils.trainer -   Precision: 0.48197
+11/24/2025 18:01:37 - INFO - utils.trainer -   Recall: 0.34028
+11/24/2025 18:01:37 - INFO - utils.trainer -   F_score: 0.39891
+11/24/2025 18:01:37 - INFO - utils.trainer -   Specificity: 0.69991
+11/24/2025 18:01:37 - INFO - utils.trainer -   Sensitivity: 0.34028
+11/24/2025 18:01:37 - INFO - utils.trainer -   Loss: 0.77074
+11/24/2025 18:01:37 - INFO - utils.trainer -    Train loss: 0.77998, Test loss: 0.77074,Epoch time = 15.910s
+11/24/2025 18:01:38 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:01:53 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:01:57 - INFO - utils.trainer -   AUC: 0.52249
+11/24/2025 18:01:57 - INFO - utils.trainer -   Accuracy: 0.50652
+11/24/2025 18:01:57 - INFO - utils.trainer -   Precision: 0.46725
+11/24/2025 18:01:57 - INFO - utils.trainer -   Recall: 0.67708
+11/24/2025 18:01:57 - INFO - utils.trainer -   F_score: 0.55293
+11/24/2025 18:01:57 - INFO - utils.trainer -   Specificity: 0.36657
+11/24/2025 18:01:57 - INFO - utils.trainer -   Sensitivity: 0.67708
+11/24/2025 18:01:57 - INFO - utils.trainer -   Loss: 0.80742
+11/24/2025 18:01:57 - INFO - utils.trainer -    Train loss: 0.77466, Test loss: 0.80742,Epoch time = 15.394s
+11/24/2025 18:02:13 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:02:17 - INFO - utils.trainer -   AUC: 0.52702
+11/24/2025 18:02:17 - INFO - utils.trainer -   Accuracy: 0.51017
+11/24/2025 18:02:17 - INFO - utils.trainer -   Precision: 0.46748
+11/24/2025 18:02:17 - INFO - utils.trainer -   Recall: 0.62384
+11/24/2025 18:02:17 - INFO - utils.trainer -   F_score: 0.53446
+11/24/2025 18:02:17 - INFO - utils.trainer -   Specificity: 0.41690
+11/24/2025 18:02:17 - INFO - utils.trainer -   Sensitivity: 0.62384
+11/24/2025 18:02:17 - INFO - utils.trainer -   Loss: 0.80175
+11/24/2025 18:02:17 - INFO - utils.trainer -    Train loss: 0.75866, Test loss: 0.80175,Epoch time = 15.484s
+11/24/2025 18:02:32 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:02:36 - INFO - utils.trainer -   AUC: 0.54119
+11/24/2025 18:02:36 - INFO - utils.trainer -   Accuracy: 0.51382
+11/24/2025 18:02:36 - INFO - utils.trainer -   Precision: 0.47606
+11/24/2025 18:02:36 - INFO - utils.trainer -   Recall: 0.78241
+11/24/2025 18:02:36 - INFO - utils.trainer -   F_score: 0.59194
+11/24/2025 18:02:36 - INFO - utils.trainer -   Specificity: 0.29345
+11/24/2025 18:02:36 - INFO - utils.trainer -   Sensitivity: 0.78241
+11/24/2025 18:02:36 - INFO - utils.trainer -   Loss: 0.79815
+11/24/2025 18:02:36 - INFO - utils.trainer -    Train loss: 0.76840, Test loss: 0.79815,Epoch time = 15.433s
+11/24/2025 18:02:52 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:02:56 - INFO - utils.trainer -   AUC: 0.55241
+11/24/2025 18:02:56 - INFO - utils.trainer -   Accuracy: 0.54512
+11/24/2025 18:02:56 - INFO - utils.trainer -   Precision: 0.49612
+11/24/2025 18:02:56 - INFO - utils.trainer -   Recall: 0.59259
+11/24/2025 18:02:56 - INFO - utils.trainer -   F_score: 0.54008
+11/24/2025 18:02:56 - INFO - utils.trainer -   Specificity: 0.50617
+11/24/2025 18:02:56 - INFO - utils.trainer -   Sensitivity: 0.59259
+11/24/2025 18:02:56 - INFO - utils.trainer -   Loss: 0.76663
+11/24/2025 18:02:56 - INFO - utils.trainer -    Train loss: 0.76592, Test loss: 0.76663,Epoch time = 15.405s
+11/24/2025 18:02:56 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:03:10 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:03:15 - INFO - utils.trainer -   AUC: 0.57748
+11/24/2025 18:03:15 - INFO - utils.trainer -   Accuracy: 0.56964
+11/24/2025 18:03:15 - INFO - utils.trainer -   Precision: 0.52113
+11/24/2025 18:03:15 - INFO - utils.trainer -   Recall: 0.55671
+11/24/2025 18:03:15 - INFO - utils.trainer -   F_score: 0.53833
+11/24/2025 18:03:15 - INFO - utils.trainer -   Specificity: 0.58025
+11/24/2025 18:03:15 - INFO - utils.trainer -   Sensitivity: 0.55671
+11/24/2025 18:03:15 - INFO - utils.trainer -   Loss: 0.74126
+11/24/2025 18:03:15 - INFO - utils.trainer -    Train loss: 0.76216, Test loss: 0.74126,Epoch time = 14.737s
+11/24/2025 18:03:15 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:03:29 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:03:34 - INFO - utils.trainer -   AUC: 0.58607
+11/24/2025 18:03:34 - INFO - utils.trainer -   Accuracy: 0.57016
+11/24/2025 18:03:34 - INFO - utils.trainer -   Precision: 0.52066
+11/24/2025 18:03:34 - INFO - utils.trainer -   Recall: 0.58333
+11/24/2025 18:03:34 - INFO - utils.trainer -   F_score: 0.55022
+11/24/2025 18:03:34 - INFO - utils.trainer -   Specificity: 0.55935
+11/24/2025 18:03:34 - INFO - utils.trainer -   Sensitivity: 0.58333
+11/24/2025 18:03:34 - INFO - utils.trainer -   Loss: 0.73971
+11/24/2025 18:03:34 - INFO - utils.trainer -    Train loss: 0.72556, Test loss: 0.73971,Epoch time = 14.898s
+11/24/2025 18:03:34 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:03:49 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:03:53 - INFO - utils.trainer -   AUC: 0.52824
+11/24/2025 18:03:53 - INFO - utils.trainer -   Accuracy: 0.53938
+11/24/2025 18:03:53 - INFO - utils.trainer -   Precision: 0.48593
+11/24/2025 18:03:53 - INFO - utils.trainer -   Recall: 0.37963
+11/24/2025 18:03:53 - INFO - utils.trainer -   F_score: 0.42625
+11/24/2025 18:03:53 - INFO - utils.trainer -   Specificity: 0.67047
+11/24/2025 18:03:53 - INFO - utils.trainer -   Sensitivity: 0.37963
+11/24/2025 18:03:53 - INFO - utils.trainer -   Loss: 0.77211
+11/24/2025 18:03:53 - INFO - utils.trainer -    Train loss: 0.74491, Test loss: 0.77211,Epoch time = 15.311s
+11/24/2025 18:04:09 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:04:13 - INFO - utils.trainer -   AUC: 0.52424
+11/24/2025 18:04:13 - INFO - utils.trainer -   Accuracy: 0.53678
+11/24/2025 18:04:13 - INFO - utils.trainer -   Precision: 0.48230
+11/24/2025 18:04:13 - INFO - utils.trainer -   Recall: 0.37847
+11/24/2025 18:04:13 - INFO - utils.trainer -   F_score: 0.42412
+11/24/2025 18:04:13 - INFO - utils.trainer -   Specificity: 0.66667
+11/24/2025 18:04:13 - INFO - utils.trainer -   Sensitivity: 0.37847
+11/24/2025 18:04:13 - INFO - utils.trainer -   Loss: 0.77512
+11/24/2025 18:04:13 - INFO - utils.trainer -    Train loss: 0.75669, Test loss: 0.77512,Epoch time = 15.324s
+11/24/2025 18:04:29 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:04:32 - INFO - utils.trainer -   AUC: 0.51807
+11/24/2025 18:04:32 - INFO - utils.trainer -   Accuracy: 0.54095
+11/24/2025 18:04:32 - INFO - utils.trainer -   Precision: 0.48462
+11/24/2025 18:04:32 - INFO - utils.trainer -   Recall: 0.29167
+11/24/2025 18:04:32 - INFO - utils.trainer -   F_score: 0.36416
+11/24/2025 18:04:32 - INFO - utils.trainer -   Specificity: 0.74549
+11/24/2025 18:04:32 - INFO - utils.trainer -   Sensitivity: 0.29167
+11/24/2025 18:04:32 - INFO - utils.trainer -   Loss: 0.77076
+11/24/2025 18:04:32 - INFO - utils.trainer -    Train loss: 0.76164, Test loss: 0.77076,Epoch time = 15.514s
+11/24/2025 18:04:48 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:04:52 - INFO - utils.trainer -   AUC: 0.52877
+11/24/2025 18:04:52 - INFO - utils.trainer -   Accuracy: 0.56286
+11/24/2025 18:04:52 - INFO - utils.trainer -   Precision: 0.56436
+11/24/2025 18:04:52 - INFO - utils.trainer -   Recall: 0.13194
+11/24/2025 18:04:52 - INFO - utils.trainer -   F_score: 0.21388
+11/24/2025 18:04:52 - INFO - utils.trainer -   Specificity: 0.91643
+11/24/2025 18:04:52 - INFO - utils.trainer -   Sensitivity: 0.13194
+11/24/2025 18:04:52 - INFO - utils.trainer -   Loss: 0.75027
+11/24/2025 18:04:52 - INFO - utils.trainer -    Train loss: 0.72963, Test loss: 0.75027,Epoch time = 15.497s
+11/24/2025 18:05:08 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:05:12 - INFO - utils.trainer -   AUC: 0.50000
+11/24/2025 18:05:12 - INFO - utils.trainer -   Accuracy: 0.54930
+11/24/2025 18:05:12 - INFO - utils.trainer -   Precision: 0.00000
+11/24/2025 18:05:12 - INFO - utils.trainer -   Recall: 0.00000
+11/24/2025 18:05:12 - INFO - utils.trainer -   F_score: 0.00000
+11/24/2025 18:05:12 - INFO - utils.trainer -   Specificity: 1.00000
+11/24/2025 18:05:12 - INFO - utils.trainer -   Sensitivity: 0.00000
+11/24/2025 18:05:12 - INFO - utils.trainer -   Loss: 0.76326
+11/24/2025 18:05:12 - INFO - utils.trainer -    Train loss: 0.70522, Test loss: 0.76326,Epoch time = 15.529s
+11/24/2025 18:05:27 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:05:32 - INFO - utils.trainer -   AUC: 0.50242
+11/24/2025 18:05:32 - INFO - utils.trainer -   Accuracy: 0.55138
+11/24/2025 18:05:32 - INFO - utils.trainer -   Precision: 0.83333
+11/24/2025 18:05:32 - INFO - utils.trainer -   Recall: 0.00579
+11/24/2025 18:05:32 - INFO - utils.trainer -   F_score: 0.01149
+11/24/2025 18:05:32 - INFO - utils.trainer -   Specificity: 0.99905
+11/24/2025 18:05:32 - INFO - utils.trainer -   Sensitivity: 0.00579
+11/24/2025 18:05:32 - INFO - utils.trainer -   Loss: 0.76118
+11/24/2025 18:05:32 - INFO - utils.trainer -    Train loss: 0.71582, Test loss: 0.76118,Epoch time = 15.473s
+11/24/2025 18:05:47 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:05:51 - INFO - utils.trainer -   AUC: 0.54522
+11/24/2025 18:05:51 - INFO - utils.trainer -   Accuracy: 0.58164
+11/24/2025 18:05:51 - INFO - utils.trainer -   Precision: 0.74219
+11/24/2025 18:05:51 - INFO - utils.trainer -   Recall: 0.10995
+11/24/2025 18:05:51 - INFO - utils.trainer -   F_score: 0.19153
+11/24/2025 18:05:51 - INFO - utils.trainer -   Specificity: 0.96866
+11/24/2025 18:05:51 - INFO - utils.trainer -   Sensitivity: 0.10995
+11/24/2025 18:05:51 - INFO - utils.trainer -   Loss: 0.73094
+11/24/2025 18:05:51 - INFO - utils.trainer -    Train loss: 0.69576, Test loss: 0.73094,Epoch time = 15.409s
+11/24/2025 18:05:51 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:06:07 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:06:11 - INFO - utils.trainer -   AUC: 0.62040
+11/24/2025 18:06:11 - INFO - utils.trainer -   Accuracy: 0.63537
+11/24/2025 18:06:11 - INFO - utils.trainer -   Precision: 0.66145
+11/24/2025 18:06:11 - INFO - utils.trainer -   Recall: 0.39120
+11/24/2025 18:06:11 - INFO - utils.trainer -   F_score: 0.49164
+11/24/2025 18:06:11 - INFO - utils.trainer -   Specificity: 0.83571
+11/24/2025 18:06:11 - INFO - utils.trainer -   Sensitivity: 0.39120
+11/24/2025 18:06:11 - INFO - utils.trainer -   Loss: 0.67708
+11/24/2025 18:06:11 - INFO - utils.trainer -    Train loss: 0.67810, Test loss: 0.67708,Epoch time = 15.479s
+11/24/2025 18:06:11 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:06:27 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:06:32 - INFO - utils.trainer -   AUC: 0.63192
+11/24/2025 18:06:32 - INFO - utils.trainer -   Accuracy: 0.61294
+11/24/2025 18:06:32 - INFO - utils.trainer -   Precision: 0.54803
+11/24/2025 18:06:32 - INFO - utils.trainer -   Recall: 0.80556
+11/24/2025 18:06:32 - INFO - utils.trainer -   F_score: 0.65230
+11/24/2025 18:06:32 - INFO - utils.trainer -   Specificity: 0.45489
+11/24/2025 18:06:32 - INFO - utils.trainer -   Sensitivity: 0.80556
+11/24/2025 18:06:32 - INFO - utils.trainer -   Loss: 0.69979
+11/24/2025 18:06:32 - INFO - utils.trainer -    Train loss: 0.67039, Test loss: 0.69979,Epoch time = 15.688s
+11/24/2025 18:06:48 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:06:52 - INFO - utils.trainer -   AUC: 0.62860
+11/24/2025 18:06:52 - INFO - utils.trainer -   Accuracy: 0.64163
+11/24/2025 18:06:52 - INFO - utils.trainer -   Precision: 0.67594
+11/24/2025 18:06:52 - INFO - utils.trainer -   Recall: 0.39352
+11/24/2025 18:06:52 - INFO - utils.trainer -   F_score: 0.49744
+11/24/2025 18:06:52 - INFO - utils.trainer -   Specificity: 0.84520
+11/24/2025 18:06:52 - INFO - utils.trainer -   Sensitivity: 0.39352
+11/24/2025 18:06:52 - INFO - utils.trainer -   Loss: 0.67044
+11/24/2025 18:06:52 - INFO - utils.trainer -    Train loss: 0.67803, Test loss: 0.67044,Epoch time = 15.910s
+11/24/2025 18:06:52 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:07:07 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:07:12 - INFO - utils.trainer -   AUC: 0.52863
+11/24/2025 18:07:12 - INFO - utils.trainer -   Accuracy: 0.57225
+11/24/2025 18:07:12 - INFO - utils.trainer -   Precision: 0.82353
+11/24/2025 18:07:12 - INFO - utils.trainer -   Recall: 0.06481
+11/24/2025 18:07:12 - INFO - utils.trainer -   F_score: 0.12017
+11/24/2025 18:07:12 - INFO - utils.trainer -   Specificity: 0.98860
+11/24/2025 18:07:12 - INFO - utils.trainer -   Sensitivity: 0.06481
+11/24/2025 18:07:12 - INFO - utils.trainer -   Loss: 0.74029
+11/24/2025 18:07:12 - INFO - utils.trainer -    Train loss: 0.66227, Test loss: 0.74029,Epoch time = 15.467s
+11/24/2025 18:07:27 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:07:31 - INFO - utils.trainer -   AUC: 0.63053
+11/24/2025 18:07:31 - INFO - utils.trainer -   Accuracy: 0.64632
+11/24/2025 18:07:31 - INFO - utils.trainer -   Precision: 0.69057
+11/24/2025 18:07:31 - INFO - utils.trainer -   Recall: 0.39005
+11/24/2025 18:07:31 - INFO - utils.trainer -   F_score: 0.49852
+11/24/2025 18:07:31 - INFO - utils.trainer -   Specificity: 0.85660
+11/24/2025 18:07:31 - INFO - utils.trainer -   Sensitivity: 0.39005
+11/24/2025 18:07:31 - INFO - utils.trainer -   Loss: 0.66592
+11/24/2025 18:07:31 - INFO - utils.trainer -    Train loss: 0.68417, Test loss: 0.66592,Epoch time = 15.055s
+11/24/2025 18:07:31 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:07:46 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:07:51 - INFO - utils.trainer -   AUC: 0.58979
+11/24/2025 18:07:51 - INFO - utils.trainer -   Accuracy: 0.61815
+11/24/2025 18:07:51 - INFO - utils.trainer -   Precision: 0.71711
+11/24/2025 18:07:51 - INFO - utils.trainer -   Recall: 0.25231
+11/24/2025 18:07:51 - INFO - utils.trainer -   F_score: 0.37329
+11/24/2025 18:07:51 - INFO - utils.trainer -   Specificity: 0.91833
+11/24/2025 18:07:51 - INFO - utils.trainer -   Sensitivity: 0.25231
+11/24/2025 18:07:51 - INFO - utils.trainer -   Loss: 0.69439
+11/24/2025 18:07:51 - INFO - utils.trainer -    Train loss: 0.68124, Test loss: 0.69439,Epoch time = 15.260s
+11/24/2025 18:08:06 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:08:11 - INFO - utils.trainer -   AUC: 0.63171
+11/24/2025 18:08:11 - INFO - utils.trainer -   Accuracy: 0.61398
+11/24/2025 18:08:11 - INFO - utils.trainer -   Precision: 0.55141
+11/24/2025 18:08:11 - INFO - utils.trainer -   Recall: 0.76968
+11/24/2025 18:08:11 - INFO - utils.trainer -   F_score: 0.64251
+11/24/2025 18:08:11 - INFO - utils.trainer -   Specificity: 0.48623
+11/24/2025 18:08:11 - INFO - utils.trainer -   Sensitivity: 0.76968
+11/24/2025 18:08:11 - INFO - utils.trainer -   Loss: 0.69857
+11/24/2025 18:08:11 - INFO - utils.trainer -    Train loss: 0.69826, Test loss: 0.69857,Epoch time = 15.715s
+11/24/2025 18:08:26 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:08:30 - INFO - utils.trainer -   AUC: 0.62304
+11/24/2025 18:08:30 - INFO - utils.trainer -   Accuracy: 0.63954
+11/24/2025 18:08:30 - INFO - utils.trainer -   Precision: 0.66667
+11/24/2025 18:08:30 - INFO - utils.trainer -   Recall: 0.40046
+11/24/2025 18:08:30 - INFO - utils.trainer -   F_score: 0.50036
+11/24/2025 18:08:30 - INFO - utils.trainer -   Specificity: 0.83571
+11/24/2025 18:08:30 - INFO - utils.trainer -   Sensitivity: 0.40046
+11/24/2025 18:08:30 - INFO - utils.trainer -   Loss: 0.67281
+11/24/2025 18:08:30 - INFO - utils.trainer -    Train loss: 0.67962, Test loss: 0.67281,Epoch time = 15.255s
+11/24/2025 18:08:46 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:08:50 - INFO - utils.trainer -   AUC: 0.60842
+11/24/2025 18:08:50 - INFO - utils.trainer -   Accuracy: 0.61033
+11/24/2025 18:08:50 - INFO - utils.trainer -   Precision: 0.56940
+11/24/2025 18:08:50 - INFO - utils.trainer -   Recall: 0.55556
+11/24/2025 18:08:50 - INFO - utils.trainer -   F_score: 0.56239
+11/24/2025 18:08:50 - INFO - utils.trainer -   Specificity: 0.65527
+11/24/2025 18:08:50 - INFO - utils.trainer -   Sensitivity: 0.55556
+11/24/2025 18:08:50 - INFO - utils.trainer -   Loss: 0.70261
+11/24/2025 18:08:50 - INFO - utils.trainer -    Train loss: 0.65583, Test loss: 0.70261,Epoch time = 15.446s
+11/24/2025 18:09:05 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:09:10 - INFO - utils.trainer -   AUC: 0.57960
+11/24/2025 18:09:10 - INFO - utils.trainer -   Accuracy: 0.58477
+11/24/2025 18:09:10 - INFO - utils.trainer -   Precision: 0.54450
+11/24/2025 18:09:10 - INFO - utils.trainer -   Recall: 0.48148
+11/24/2025 18:09:10 - INFO - utils.trainer -   F_score: 0.51106
+11/24/2025 18:09:10 - INFO - utils.trainer -   Specificity: 0.66952
+11/24/2025 18:09:10 - INFO - utils.trainer -   Sensitivity: 0.48148
+11/24/2025 18:09:10 - INFO - utils.trainer -   Loss: 0.72757
+11/24/2025 18:09:10 - INFO - utils.trainer -    Train loss: 0.70799, Test loss: 0.72757,Epoch time = 15.462s
+11/24/2025 18:09:25 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:09:30 - INFO - utils.trainer -   AUC: 0.67512
+11/24/2025 18:09:30 - INFO - utils.trainer -   Accuracy: 0.65623
+11/24/2025 18:09:30 - INFO - utils.trainer -   Precision: 0.58738
+11/24/2025 18:09:30 - INFO - utils.trainer -   Recall: 0.79745
+11/24/2025 18:09:30 - INFO - utils.trainer -   F_score: 0.67649
+11/24/2025 18:09:30 - INFO - utils.trainer -   Specificity: 0.54036
+11/24/2025 18:09:30 - INFO - utils.trainer -   Sensitivity: 0.79745
+11/24/2025 18:09:30 - INFO - utils.trainer -   Loss: 0.65555
+11/24/2025 18:09:30 - INFO - utils.trainer -    Train loss: 0.69072, Test loss: 0.65555,Epoch time = 15.530s
+11/24/2025 18:09:30 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:09:45 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:09:49 - INFO - utils.trainer -   AUC: 0.62539
+11/24/2025 18:09:49 - INFO - utils.trainer -   Accuracy: 0.63902
+11/24/2025 18:09:49 - INFO - utils.trainer -   Precision: 0.64478
+11/24/2025 18:09:49 - INFO - utils.trainer -   Recall: 0.44329
+11/24/2025 18:09:49 - INFO - utils.trainer -   F_score: 0.52538
+11/24/2025 18:09:49 - INFO - utils.trainer -   Specificity: 0.79962
+11/24/2025 18:09:49 - INFO - utils.trainer -   Sensitivity: 0.44329
+11/24/2025 18:09:49 - INFO - utils.trainer -   Loss: 0.67393
+11/24/2025 18:09:49 - INFO - utils.trainer -    Train loss: 0.68353, Test loss: 0.67393,Epoch time = 15.559s
+11/24/2025 18:10:05 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:10:09 - INFO - utils.trainer -   AUC: 0.52356
+11/24/2025 18:10:09 - INFO - utils.trainer -   Accuracy: 0.47626
+11/24/2025 18:10:09 - INFO - utils.trainer -   Precision: 0.46249
+11/24/2025 18:10:09 - INFO - utils.trainer -   Recall: 0.99884
+11/24/2025 18:10:09 - INFO - utils.trainer -   F_score: 0.63223
+11/24/2025 18:10:09 - INFO - utils.trainer -   Specificity: 0.04748
+11/24/2025 18:10:09 - INFO - utils.trainer -   Sensitivity: 0.99884
+11/24/2025 18:10:09 - INFO - utils.trainer -   Loss: 0.83774
+11/24/2025 18:10:09 - INFO - utils.trainer -    Train loss: 0.68027, Test loss: 0.83774,Epoch time = 15.494s
+11/24/2025 18:10:25 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:10:29 - INFO - utils.trainer -   AUC: 0.63997
+11/24/2025 18:10:29 - INFO - utils.trainer -   Accuracy: 0.65623
+11/24/2025 18:10:29 - INFO - utils.trainer -   Precision: 0.71762
+11/24/2025 18:10:29 - INFO - utils.trainer -   Recall: 0.39120
+11/24/2025 18:10:29 - INFO - utils.trainer -   F_score: 0.50637
+11/24/2025 18:10:29 - INFO - utils.trainer -   Specificity: 0.87369
+11/24/2025 18:10:29 - INFO - utils.trainer -   Sensitivity: 0.39120
+11/24/2025 18:10:29 - INFO - utils.trainer -   Loss: 0.65574
+11/24/2025 18:10:29 - INFO - utils.trainer -    Train loss: 0.66571, Test loss: 0.65574,Epoch time = 15.829s
+11/24/2025 18:10:29 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:10:45 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:10:49 - INFO - utils.trainer -   AUC: 0.66144
+11/24/2025 18:10:49 - INFO - utils.trainer -   Accuracy: 0.65884
+11/24/2025 18:10:49 - INFO - utils.trainer -   Precision: 0.61538
+11/24/2025 18:10:49 - INFO - utils.trainer -   Recall: 0.64815
+11/24/2025 18:10:49 - INFO - utils.trainer -   F_score: 0.63134
+11/24/2025 18:10:49 - INFO - utils.trainer -   Specificity: 0.66762
+11/24/2025 18:10:49 - INFO - utils.trainer -   Sensitivity: 0.64815
+11/24/2025 18:10:49 - INFO - utils.trainer -   Loss: 0.65306
+11/24/2025 18:10:49 - INFO - utils.trainer -    Train loss: 0.64938, Test loss: 0.65306,Epoch time = 15.796s
+11/24/2025 18:10:49 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:11:05 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:11:09 - INFO - utils.trainer -   AUC: 0.67433
+11/24/2025 18:11:09 - INFO - utils.trainer -   Accuracy: 0.65832
+11/24/2025 18:11:09 - INFO - utils.trainer -   Precision: 0.59474
+11/24/2025 18:11:09 - INFO - utils.trainer -   Recall: 0.75926
+11/24/2025 18:11:09 - INFO - utils.trainer -   F_score: 0.66701
+11/24/2025 18:11:09 - INFO - utils.trainer -   Specificity: 0.57550
+11/24/2025 18:11:09 - INFO - utils.trainer -   Sensitivity: 0.75926
+11/24/2025 18:11:09 - INFO - utils.trainer -   Loss: 0.65407
+11/24/2025 18:11:09 - INFO - utils.trainer -    Train loss: 0.65257, Test loss: 0.65407,Epoch time = 15.829s
+11/24/2025 18:11:25 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:11:29 - INFO - utils.trainer -   AUC: 0.65413
+11/24/2025 18:11:29 - INFO - utils.trainer -   Accuracy: 0.64789
+11/24/2025 18:11:29 - INFO - utils.trainer -   Precision: 0.59793
+11/24/2025 18:11:29 - INFO - utils.trainer -   Recall: 0.66782
+11/24/2025 18:11:29 - INFO - utils.trainer -   F_score: 0.63095
+11/24/2025 18:11:29 - INFO - utils.trainer -   Specificity: 0.63153
+11/24/2025 18:11:29 - INFO - utils.trainer -   Sensitivity: 0.66782
+11/24/2025 18:11:29 - INFO - utils.trainer -   Loss: 0.66476
+11/24/2025 18:11:29 - INFO - utils.trainer -    Train loss: 0.66581, Test loss: 0.66476,Epoch time = 15.645s
+11/24/2025 18:11:45 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:11:49 - INFO - utils.trainer -   AUC: 0.65991
+11/24/2025 18:11:49 - INFO - utils.trainer -   Accuracy: 0.63589
+11/24/2025 18:11:49 - INFO - utils.trainer -   Precision: 0.56157
+11/24/2025 18:11:49 - INFO - utils.trainer -   Recall: 0.87616
+11/24/2025 18:11:49 - INFO - utils.trainer -   F_score: 0.68445
+11/24/2025 18:11:49 - INFO - utils.trainer -   Specificity: 0.43875
+11/24/2025 18:11:49 - INFO - utils.trainer -   Sensitivity: 0.87616
+11/24/2025 18:11:49 - INFO - utils.trainer -   Loss: 0.67694
+11/24/2025 18:11:49 - INFO - utils.trainer -    Train loss: 0.66083, Test loss: 0.67694,Epoch time = 15.759s
+11/24/2025 18:12:05 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:12:09 - INFO - utils.trainer -   AUC: 0.68391
+11/24/2025 18:12:09 - INFO - utils.trainer -   Accuracy: 0.67188
+11/24/2025 18:12:09 - INFO - utils.trainer -   Precision: 0.62252
+11/24/2025 18:12:09 - INFO - utils.trainer -   Recall: 0.69097
+11/24/2025 18:12:09 - INFO - utils.trainer -   F_score: 0.65496
+11/24/2025 18:12:09 - INFO - utils.trainer -   Specificity: 0.65622
+11/24/2025 18:12:09 - INFO - utils.trainer -   Sensitivity: 0.69097
+11/24/2025 18:12:09 - INFO - utils.trainer -   Loss: 0.64056
+11/24/2025 18:12:09 - INFO - utils.trainer -    Train loss: 0.64241, Test loss: 0.64056,Epoch time = 15.813s
+11/24/2025 18:12:09 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:12:24 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:12:29 - INFO - utils.trainer -   AUC: 0.68823
+11/24/2025 18:12:29 - INFO - utils.trainer -   Accuracy: 0.68649
+11/24/2025 18:12:29 - INFO - utils.trainer -   Precision: 0.66794
+11/24/2025 18:12:29 - INFO - utils.trainer -   Recall: 0.60532
+11/24/2025 18:12:29 - INFO - utils.trainer -   F_score: 0.63509
+11/24/2025 18:12:29 - INFO - utils.trainer -   Specificity: 0.75309
+11/24/2025 18:12:29 - INFO - utils.trainer -   Sensitivity: 0.60532
+11/24/2025 18:12:29 - INFO - utils.trainer -   Loss: 0.62591
+11/24/2025 18:12:29 - INFO - utils.trainer -    Train loss: 0.63759, Test loss: 0.62591,Epoch time = 15.527s
+11/24/2025 18:12:29 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:12:44 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:12:48 - INFO - utils.trainer -   AUC: 0.63318
+11/24/2025 18:12:48 - INFO - utils.trainer -   Accuracy: 0.65050
+11/24/2025 18:12:48 - INFO - utils.trainer -   Precision: 0.69246
+11/24/2025 18:12:48 - INFO - utils.trainer -   Recall: 0.40394
+11/24/2025 18:12:48 - INFO - utils.trainer -   F_score: 0.51023
+11/24/2025 18:12:48 - INFO - utils.trainer -   Specificity: 0.85280
+11/24/2025 18:12:48 - INFO - utils.trainer -   Sensitivity: 0.40394
+11/24/2025 18:12:48 - INFO - utils.trainer -   Loss: 0.66211
+11/24/2025 18:12:48 - INFO - utils.trainer -    Train loss: 0.64700, Test loss: 0.66211,Epoch time = 15.721s
+11/24/2025 18:13:04 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:13:08 - INFO - utils.trainer -   AUC: 0.62184
+11/24/2025 18:13:08 - INFO - utils.trainer -   Accuracy: 0.63954
+11/24/2025 18:13:08 - INFO - utils.trainer -   Precision: 0.67335
+11/24/2025 18:13:08 - INFO - utils.trainer -   Recall: 0.38889
+11/24/2025 18:13:08 - INFO - utils.trainer -   F_score: 0.49303
+11/24/2025 18:13:08 - INFO - utils.trainer -   Specificity: 0.84520
+11/24/2025 18:13:08 - INFO - utils.trainer -   Sensitivity: 0.38889
+11/24/2025 18:13:08 - INFO - utils.trainer -   Loss: 0.67321
+11/24/2025 18:13:08 - INFO - utils.trainer -    Train loss: 0.64477, Test loss: 0.67321,Epoch time = 15.422s
+11/24/2025 18:13:23 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:13:28 - INFO - utils.trainer -   AUC: 0.62268
+11/24/2025 18:13:28 - INFO - utils.trainer -   Accuracy: 0.63798
+11/24/2025 18:13:28 - INFO - utils.trainer -   Precision: 0.64808
+11/24/2025 18:13:28 - INFO - utils.trainer -   Recall: 0.43056
+11/24/2025 18:13:28 - INFO - utils.trainer -   F_score: 0.51739
+11/24/2025 18:13:28 - INFO - utils.trainer -   Specificity: 0.80817
+11/24/2025 18:13:28 - INFO - utils.trainer -   Sensitivity: 0.43056
+11/24/2025 18:13:28 - INFO - utils.trainer -   Loss: 0.67425
+11/24/2025 18:13:28 - INFO - utils.trainer -    Train loss: 0.65593, Test loss: 0.67425,Epoch time = 15.275s
+11/24/2025 18:13:43 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:13:47 - INFO - utils.trainer -   AUC: 0.61526
+11/24/2025 18:13:47 - INFO - utils.trainer -   Accuracy: 0.62806
+11/24/2025 18:13:47 - INFO - utils.trainer -   Precision: 0.64007
+11/24/2025 18:13:47 - INFO - utils.trainer -   Recall: 0.39931
+11/24/2025 18:13:47 - INFO - utils.trainer -   F_score: 0.49180
+11/24/2025 18:13:47 - INFO - utils.trainer -   Specificity: 0.81576
+11/24/2025 18:13:47 - INFO - utils.trainer -   Sensitivity: 0.39931
+11/24/2025 18:13:47 - INFO - utils.trainer -   Loss: 0.68338
+11/24/2025 18:13:47 - INFO - utils.trainer -    Train loss: 0.66579, Test loss: 0.68338,Epoch time = 15.353s
+11/24/2025 18:14:02 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:14:06 - INFO - utils.trainer -   AUC: 0.68043
+11/24/2025 18:14:06 - INFO - utils.trainer -   Accuracy: 0.65154
+11/24/2025 18:14:06 - INFO - utils.trainer -   Precision: 0.57504
+11/24/2025 18:14:06 - INFO - utils.trainer -   Recall: 0.86921
+11/24/2025 18:14:06 - INFO - utils.trainer -   F_score: 0.69217
+11/24/2025 18:14:06 - INFO - utils.trainer -   Specificity: 0.47293
+11/24/2025 18:14:06 - INFO - utils.trainer -   Sensitivity: 0.86921
+11/24/2025 18:14:06 - INFO - utils.trainer -   Loss: 0.66113
+11/24/2025 18:14:06 - INFO - utils.trainer -    Train loss: 0.65513, Test loss: 0.66113,Epoch time = 14.988s
+11/24/2025 18:14:21 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:14:26 - INFO - utils.trainer -   AUC: 0.71115
+11/24/2025 18:14:26 - INFO - utils.trainer -   Accuracy: 0.69171
+11/24/2025 18:14:26 - INFO - utils.trainer -   Precision: 0.62489
+11/24/2025 18:14:26 - INFO - utils.trainer -   Recall: 0.79051
+11/24/2025 18:14:26 - INFO - utils.trainer -   F_score: 0.69801
+11/24/2025 18:14:26 - INFO - utils.trainer -   Specificity: 0.61064
+11/24/2025 18:14:26 - INFO - utils.trainer -   Sensitivity: 0.79051
+11/24/2025 18:14:26 - INFO - utils.trainer -   Loss: 0.62004
+11/24/2025 18:14:26 - INFO - utils.trainer -    Train loss: 0.64273, Test loss: 0.62004,Epoch time = 15.087s
+11/24/2025 18:14:26 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:14:42 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:14:46 - INFO - utils.trainer -   AUC: 0.64316
+11/24/2025 18:14:46 - INFO - utils.trainer -   Accuracy: 0.62911
+11/24/2025 18:14:46 - INFO - utils.trainer -   Precision: 0.56478
+11/24/2025 18:14:46 - INFO - utils.trainer -   Recall: 0.77199
+11/24/2025 18:14:46 - INFO - utils.trainer -   F_score: 0.65232
+11/24/2025 18:14:46 - INFO - utils.trainer -   Specificity: 0.51187
+11/24/2025 18:14:46 - INFO - utils.trainer -   Sensitivity: 0.77199
+11/24/2025 18:14:46 - INFO - utils.trainer -   Loss: 0.68385
+11/24/2025 18:14:46 - INFO - utils.trainer -    Train loss: 0.63522, Test loss: 0.68385,Epoch time = 15.421s
+11/24/2025 18:15:02 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:15:06 - INFO - utils.trainer -   AUC: 0.63907
+11/24/2025 18:15:06 - INFO - utils.trainer -   Accuracy: 0.61398
+11/24/2025 18:15:06 - INFO - utils.trainer -   Precision: 0.54486
+11/24/2025 18:15:06 - INFO - utils.trainer -   Recall: 0.87153
+11/24/2025 18:15:06 - INFO - utils.trainer -   F_score: 0.67053
+11/24/2025 18:15:06 - INFO - utils.trainer -   Specificity: 0.40266
+11/24/2025 18:15:06 - INFO - utils.trainer -   Sensitivity: 0.87153
+11/24/2025 18:15:06 - INFO - utils.trainer -   Loss: 0.69894
+11/24/2025 18:15:06 - INFO - utils.trainer -    Train loss: 0.66108, Test loss: 0.69894,Epoch time = 15.733s
+11/24/2025 18:15:22 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:15:26 - INFO - utils.trainer -   AUC: 0.62954
+11/24/2025 18:15:26 - INFO - utils.trainer -   Accuracy: 0.63172
+11/24/2025 18:15:26 - INFO - utils.trainer -   Precision: 0.59316
+11/24/2025 18:15:26 - INFO - utils.trainer -   Recall: 0.58218
+11/24/2025 18:15:26 - INFO - utils.trainer -   F_score: 0.58762
+11/24/2025 18:15:26 - INFO - utils.trainer -   Specificity: 0.67236
+11/24/2025 18:15:26 - INFO - utils.trainer -   Sensitivity: 0.58218
+11/24/2025 18:15:26 - INFO - utils.trainer -   Loss: 0.68101
+11/24/2025 18:15:26 - INFO - utils.trainer -    Train loss: 0.64365, Test loss: 0.68101,Epoch time = 15.702s
+11/24/2025 18:15:42 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:15:46 - INFO - utils.trainer -   AUC: 0.58277
+11/24/2025 18:15:46 - INFO - utils.trainer -   Accuracy: 0.61137
+11/24/2025 18:15:46 - INFO - utils.trainer -   Precision: 0.66213
+11/24/2025 18:15:46 - INFO - utils.trainer -   Recall: 0.28125
+11/24/2025 18:15:46 - INFO - utils.trainer -   F_score: 0.39480
+11/24/2025 18:15:46 - INFO - utils.trainer -   Specificity: 0.88224
+11/24/2025 18:15:46 - INFO - utils.trainer -   Sensitivity: 0.28125
+11/24/2025 18:15:46 - INFO - utils.trainer -   Loss: 0.70146
+11/24/2025 18:15:46 - INFO - utils.trainer -    Train loss: 0.69556, Test loss: 0.70146,Epoch time = 15.620s
+11/24/2025 18:16:02 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:16:06 - INFO - utils.trainer -   AUC: 0.60982
+11/24/2025 18:16:06 - INFO - utils.trainer -   Accuracy: 0.63537
+11/24/2025 18:16:06 - INFO - utils.trainer -   Precision: 0.73639
+11/24/2025 18:16:06 - INFO - utils.trainer -   Recall: 0.29745
+11/24/2025 18:16:06 - INFO - utils.trainer -   F_score: 0.42374
+11/24/2025 18:16:06 - INFO - utils.trainer -   Specificity: 0.91263
+11/24/2025 18:16:06 - INFO - utils.trainer -   Sensitivity: 0.29745
+11/24/2025 18:16:06 - INFO - utils.trainer -   Loss: 0.67696
+11/24/2025 18:16:06 - INFO - utils.trainer -    Train loss: 0.68662, Test loss: 0.67696,Epoch time = 15.903s
+11/24/2025 18:16:22 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:16:26 - INFO - utils.trainer -   AUC: 0.60542
+11/24/2025 18:16:26 - INFO - utils.trainer -   Accuracy: 0.62806
+11/24/2025 18:16:26 - INFO - utils.trainer -   Precision: 0.69509
+11/24/2025 18:16:26 - INFO - utils.trainer -   Recall: 0.31134
+11/24/2025 18:16:26 - INFO - utils.trainer -   F_score: 0.43006
+11/24/2025 18:16:26 - INFO - utils.trainer -   Specificity: 0.88794
+11/24/2025 18:16:26 - INFO - utils.trainer -   Sensitivity: 0.31134
+11/24/2025 18:16:26 - INFO - utils.trainer -   Loss: 0.68485
+11/24/2025 18:16:26 - INFO - utils.trainer -    Train loss: 0.65747, Test loss: 0.68485,Epoch time = 15.682s
+11/24/2025 18:16:41 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:16:46 - INFO - utils.trainer -   AUC: 0.64829
+11/24/2025 18:16:46 - INFO - utils.trainer -   Accuracy: 0.66093
+11/24/2025 18:16:46 - INFO - utils.trainer -   Precision: 0.70420
+11/24/2025 18:16:46 - INFO - utils.trainer -   Recall: 0.42708
+11/24/2025 18:16:46 - INFO - utils.trainer -   F_score: 0.53170
+11/24/2025 18:16:46 - INFO - utils.trainer -   Specificity: 0.85280
+11/24/2025 18:16:46 - INFO - utils.trainer -   Sensitivity: 0.42708
+11/24/2025 18:16:46 - INFO - utils.trainer -   Loss: 0.65076
+11/24/2025 18:16:46 - INFO - utils.trainer -    Train loss: 0.65779, Test loss: 0.65076,Epoch time = 15.699s
+11/24/2025 18:17:01 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:17:05 - INFO - utils.trainer -   AUC: 0.67265
+11/24/2025 18:17:05 - INFO - utils.trainer -   Accuracy: 0.67866
+11/24/2025 18:17:05 - INFO - utils.trainer -   Precision: 0.67714
+11/24/2025 18:17:05 - INFO - utils.trainer -   Recall: 0.54861
+11/24/2025 18:17:05 - INFO - utils.trainer -   F_score: 0.60614
+11/24/2025 18:17:05 - INFO - utils.trainer -   Specificity: 0.78538
+11/24/2025 18:17:05 - INFO - utils.trainer -   Sensitivity: 0.54861
+11/24/2025 18:17:05 - INFO - utils.trainer -   Loss: 0.63502
+11/24/2025 18:17:05 - INFO - utils.trainer -    Train loss: 0.64140, Test loss: 0.63502,Epoch time = 15.618s
+11/24/2025 18:17:21 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:17:25 - INFO - utils.trainer -   AUC: 0.67391
+11/24/2025 18:17:25 - INFO - utils.trainer -   Accuracy: 0.65571
+11/24/2025 18:17:25 - INFO - utils.trainer -   Precision: 0.58733
+11/24/2025 18:17:25 - INFO - utils.trainer -   Recall: 0.79398
+11/24/2025 18:17:25 - INFO - utils.trainer -   F_score: 0.67520
+11/24/2025 18:17:25 - INFO - utils.trainer -   Specificity: 0.54226
+11/24/2025 18:17:25 - INFO - utils.trainer -   Sensitivity: 0.79398
+11/24/2025 18:17:25 - INFO - utils.trainer -   Loss: 0.65694
+11/24/2025 18:17:25 - INFO - utils.trainer -    Train loss: 0.63416, Test loss: 0.65694,Epoch time = 15.614s
+11/24/2025 18:17:41 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:17:46 - INFO - utils.trainer -   AUC: 0.60026
+11/24/2025 18:17:46 - INFO - utils.trainer -   Accuracy: 0.63119
+11/24/2025 18:17:46 - INFO - utils.trainer -   Precision: 0.80545
+11/24/2025 18:17:46 - INFO - utils.trainer -   Recall: 0.23958
+11/24/2025 18:17:46 - INFO - utils.trainer -   F_score: 0.36931
+11/24/2025 18:17:46 - INFO - utils.trainer -   Specificity: 0.95252
+11/24/2025 18:17:46 - INFO - utils.trainer -   Sensitivity: 0.23958
+11/24/2025 18:17:46 - INFO - utils.trainer -   Loss: 0.68075
+11/24/2025 18:17:46 - INFO - utils.trainer -    Train loss: 0.62808, Test loss: 0.68075,Epoch time = 16.143s
+11/24/2025 18:18:01 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:18:05 - INFO - utils.trainer -   AUC: 0.50347
+11/24/2025 18:18:05 - INFO - utils.trainer -   Accuracy: 0.55243
+11/24/2025 18:18:05 - INFO - utils.trainer -   Precision: 1.00000
+11/24/2025 18:18:05 - INFO - utils.trainer -   Recall: 0.00694
+11/24/2025 18:18:05 - INFO - utils.trainer -   F_score: 0.01379
+11/24/2025 18:18:05 - INFO - utils.trainer -   Specificity: 1.00000
+11/24/2025 18:18:05 - INFO - utils.trainer -   Sensitivity: 0.00694
+11/24/2025 18:18:05 - INFO - utils.trainer -   Loss: 0.76014
+11/24/2025 18:18:05 - INFO - utils.trainer -    Train loss: 0.63183, Test loss: 0.76014,Epoch time = 15.496s
+11/24/2025 18:18:21 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:18:25 - INFO - utils.trainer -   AUC: 0.66268
+11/24/2025 18:18:25 - INFO - utils.trainer -   Accuracy: 0.64945
+11/24/2025 18:18:25 - INFO - utils.trainer -   Precision: 0.59057
+11/24/2025 18:18:25 - INFO - utils.trainer -   Recall: 0.72454
+11/24/2025 18:18:25 - INFO - utils.trainer -   F_score: 0.65073
+11/24/2025 18:18:25 - INFO - utils.trainer -   Specificity: 0.58784
+11/24/2025 18:18:25 - INFO - utils.trainer -   Sensitivity: 0.72454
+11/24/2025 18:18:25 - INFO - utils.trainer -   Loss: 0.66282
+11/24/2025 18:18:25 - INFO - utils.trainer -    Train loss: 0.62306, Test loss: 0.66282,Epoch time = 15.537s
+11/24/2025 18:18:41 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:18:45 - INFO - utils.trainer -   AUC: 0.65851
+11/24/2025 18:18:45 - INFO - utils.trainer -   Accuracy: 0.62963
+11/24/2025 18:18:45 - INFO - utils.trainer -   Precision: 0.55189
+11/24/2025 18:18:45 - INFO - utils.trainer -   Recall: 0.94792
+11/24/2025 18:18:45 - INFO - utils.trainer -   F_score: 0.69761
+11/24/2025 18:18:45 - INFO - utils.trainer -   Specificity: 0.36847
+11/24/2025 18:18:45 - INFO - utils.trainer -   Sensitivity: 0.94792
+11/24/2025 18:18:45 - INFO - utils.trainer -   Loss: 0.68367
+11/24/2025 18:18:45 - INFO - utils.trainer -    Train loss: 0.60924, Test loss: 0.68367,Epoch time = 15.492s
+11/24/2025 18:19:00 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:19:04 - INFO - utils.trainer -   AUC: 0.70383
+11/24/2025 18:19:04 - INFO - utils.trainer -   Accuracy: 0.69744
+11/24/2025 18:19:04 - INFO - utils.trainer -   Precision: 0.64854
+11/24/2025 18:19:04 - INFO - utils.trainer -   Recall: 0.71759
+11/24/2025 18:19:04 - INFO - utils.trainer -   F_score: 0.68132
+11/24/2025 18:19:04 - INFO - utils.trainer -   Specificity: 0.68091
+11/24/2025 18:19:04 - INFO - utils.trainer -   Sensitivity: 0.71759
+11/24/2025 18:19:04 - INFO - utils.trainer -   Loss: 0.61495
+11/24/2025 18:19:04 - INFO - utils.trainer -    Train loss: 0.63487, Test loss: 0.61495,Epoch time = 14.837s
+11/24/2025 18:19:04 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:19:19 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:19:23 - INFO - utils.trainer -   AUC: 0.71803
+11/24/2025 18:19:23 - INFO - utils.trainer -   Accuracy: 0.70944
+11/24/2025 18:19:23 - INFO - utils.trainer -   Precision: 0.66040
+11/24/2025 18:19:23 - INFO - utils.trainer -   Recall: 0.73148
+11/24/2025 18:19:23 - INFO - utils.trainer -   F_score: 0.69412
+11/24/2025 18:19:23 - INFO - utils.trainer -   Specificity: 0.69136
+11/24/2025 18:19:23 - INFO - utils.trainer -   Sensitivity: 0.73148
+11/24/2025 18:19:23 - INFO - utils.trainer -   Loss: 0.60282
+11/24/2025 18:19:23 - INFO - utils.trainer -    Train loss: 0.61675, Test loss: 0.60282,Epoch time = 15.265s
+11/24/2025 18:19:23 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:19:39 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:19:43 - INFO - utils.trainer -   AUC: 0.61561
+11/24/2025 18:19:43 - INFO - utils.trainer -   Accuracy: 0.63954
+11/24/2025 18:19:43 - INFO - utils.trainer -   Precision: 0.74230
+11/24/2025 18:19:43 - INFO - utils.trainer -   Recall: 0.30671
+11/24/2025 18:19:43 - INFO - utils.trainer -   F_score: 0.43407
+11/24/2025 18:19:43 - INFO - utils.trainer -   Specificity: 0.91263
+11/24/2025 18:19:43 - INFO - utils.trainer -   Sensitivity: 0.30671
+11/24/2025 18:19:43 - INFO - utils.trainer -   Loss: 0.67304
+11/24/2025 18:19:43 - INFO - utils.trainer -    Train loss: 0.60547, Test loss: 0.67304,Epoch time = 15.327s
+11/24/2025 18:19:58 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:20:02 - INFO - utils.trainer -   AUC: 0.71336
+11/24/2025 18:20:02 - INFO - utils.trainer -   Accuracy: 0.69536
+11/24/2025 18:20:02 - INFO - utils.trainer -   Precision: 0.61885
+11/24/2025 18:20:02 - INFO - utils.trainer -   Recall: 0.84375
+11/24/2025 18:20:02 - INFO - utils.trainer -   F_score: 0.71401
+11/24/2025 18:20:02 - INFO - utils.trainer -   Specificity: 0.57360
+11/24/2025 18:20:02 - INFO - utils.trainer -   Sensitivity: 0.84375
+11/24/2025 18:20:02 - INFO - utils.trainer -   Loss: 0.61737
+11/24/2025 18:20:02 - INFO - utils.trainer -    Train loss: 0.61731, Test loss: 0.61737,Epoch time = 15.256s
+11/24/2025 18:20:18 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:20:22 - INFO - utils.trainer -   AUC: 0.63663
+11/24/2025 18:20:22 - INFO - utils.trainer -   Accuracy: 0.66093
+11/24/2025 18:20:22 - INFO - utils.trainer -   Precision: 0.77577
+11/24/2025 18:20:22 - INFO - utils.trainer -   Recall: 0.34838
+11/24/2025 18:20:22 - INFO - utils.trainer -   F_score: 0.48083
+11/24/2025 18:20:22 - INFO - utils.trainer -   Specificity: 0.91738
+11/24/2025 18:20:22 - INFO - utils.trainer -   Sensitivity: 0.34838
+11/24/2025 18:20:22 - INFO - utils.trainer -   Loss: 0.65213
+11/24/2025 18:20:22 - INFO - utils.trainer -    Train loss: 0.59201, Test loss: 0.65213,Epoch time = 15.624s
+11/24/2025 18:20:38 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:20:42 - INFO - utils.trainer -   AUC: 0.52936
+11/24/2025 18:20:42 - INFO - utils.trainer -   Accuracy: 0.57329
+11/24/2025 18:20:42 - INFO - utils.trainer -   Precision: 0.94231
+11/24/2025 18:20:42 - INFO - utils.trainer -   Recall: 0.05671
+11/24/2025 18:20:42 - INFO - utils.trainer -   F_score: 0.10699
+11/24/2025 18:20:42 - INFO - utils.trainer -   Specificity: 0.99715
+11/24/2025 18:20:42 - INFO - utils.trainer -   Sensitivity: 0.05671
+11/24/2025 18:20:42 - INFO - utils.trainer -   Loss: 0.73918
+11/24/2025 18:20:42 - INFO - utils.trainer -    Train loss: 0.62352, Test loss: 0.73918,Epoch time = 15.612s
+11/24/2025 18:20:58 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:21:02 - INFO - utils.trainer -   AUC: 0.71275
+11/24/2025 18:21:02 - INFO - utils.trainer -   Accuracy: 0.70057
+11/24/2025 18:21:02 - INFO - utils.trainer -   Precision: 0.63916
+11/24/2025 18:21:02 - INFO - utils.trainer -   Recall: 0.77083
+11/24/2025 18:21:02 - INFO - utils.trainer -   F_score: 0.69885
+11/24/2025 18:21:02 - INFO - utils.trainer -   Specificity: 0.64292
+11/24/2025 18:21:02 - INFO - utils.trainer -   Sensitivity: 0.77083
+11/24/2025 18:21:02 - INFO - utils.trainer -   Loss: 0.61186
+11/24/2025 18:21:02 - INFO - utils.trainer -    Train loss: 0.61411, Test loss: 0.61186,Epoch time = 15.634s
+11/24/2025 18:21:17 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:21:21 - INFO - utils.trainer -   AUC: 0.66393
+11/24/2025 18:21:21 - INFO - utils.trainer -   Accuracy: 0.66771
+11/24/2025 18:21:21 - INFO - utils.trainer -   Precision: 0.64496
+11/24/2025 18:21:21 - INFO - utils.trainer -   Recall: 0.58449
+11/24/2025 18:21:21 - INFO - utils.trainer -   F_score: 0.61324
+11/24/2025 18:21:21 - INFO - utils.trainer -   Specificity: 0.73599
+11/24/2025 18:21:21 - INFO - utils.trainer -   Sensitivity: 0.58449
+11/24/2025 18:21:21 - INFO - utils.trainer -   Loss: 0.64463
+11/24/2025 18:21:21 - INFO - utils.trainer -    Train loss: 0.61099, Test loss: 0.64463,Epoch time = 15.251s
+11/24/2025 18:21:36 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:21:41 - INFO - utils.trainer -   AUC: 0.70553
+11/24/2025 18:21:41 - INFO - utils.trainer -   Accuracy: 0.68179
+11/24/2025 18:21:41 - INFO - utils.trainer -   Precision: 0.59650
+11/24/2025 18:21:41 - INFO - utils.trainer -   Recall: 0.90856
+11/24/2025 18:21:41 - INFO - utils.trainer -   F_score: 0.72018
+11/24/2025 18:21:41 - INFO - utils.trainer -   Specificity: 0.49573
+11/24/2025 18:21:41 - INFO - utils.trainer -   Sensitivity: 0.90856
+11/24/2025 18:21:41 - INFO - utils.trainer -   Loss: 0.63086
+11/24/2025 18:21:41 - INFO - utils.trainer -    Train loss: 0.62026, Test loss: 0.63086,Epoch time = 15.388s
+11/24/2025 18:21:56 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:22:00 - INFO - utils.trainer -   AUC: 0.70881
+11/24/2025 18:22:00 - INFO - utils.trainer -   Accuracy: 0.68597
+11/24/2025 18:22:00 - INFO - utils.trainer -   Precision: 0.59970
+11/24/2025 18:22:00 - INFO - utils.trainer -   Recall: 0.91204
+11/24/2025 18:22:00 - INFO - utils.trainer -   F_score: 0.72360
+11/24/2025 18:22:00 - INFO - utils.trainer -   Specificity: 0.50047
+11/24/2025 18:22:00 - INFO - utils.trainer -   Sensitivity: 0.91204
+11/24/2025 18:22:00 - INFO - utils.trainer -   Loss: 0.62705
+11/24/2025 18:22:00 - INFO - utils.trainer -    Train loss: 0.60141, Test loss: 0.62705,Epoch time = 15.207s
+11/24/2025 18:22:15 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:22:19 - INFO - utils.trainer -   AUC: 0.65145
+11/24/2025 18:22:19 - INFO - utils.trainer -   Accuracy: 0.62389
+11/24/2025 18:22:19 - INFO - utils.trainer -   Precision: 0.55011
+11/24/2025 18:22:19 - INFO - utils.trainer -   Recall: 0.90856
+11/24/2025 18:22:19 - INFO - utils.trainer -   F_score: 0.68529
+11/24/2025 18:22:19 - INFO - utils.trainer -   Specificity: 0.39031
+11/24/2025 18:22:19 - INFO - utils.trainer -   Sensitivity: 0.90856
+11/24/2025 18:22:19 - INFO - utils.trainer -   Loss: 0.68964
+11/24/2025 18:22:19 - INFO - utils.trainer -    Train loss: 0.62854, Test loss: 0.68964,Epoch time = 14.956s
+11/24/2025 18:22:34 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:22:38 - INFO - utils.trainer -   AUC: 0.70820
+11/24/2025 18:22:38 - INFO - utils.trainer -   Accuracy: 0.69640
+11/24/2025 18:22:38 - INFO - utils.trainer -   Precision: 0.62657
+11/24/2025 18:22:38 - INFO - utils.trainer -   Recall: 0.80787
+11/24/2025 18:22:38 - INFO - utils.trainer -   F_score: 0.70576
+11/24/2025 18:22:38 - INFO - utils.trainer -   Specificity: 0.60494
+11/24/2025 18:22:38 - INFO - utils.trainer -   Sensitivity: 0.80787
+11/24/2025 18:22:38 - INFO - utils.trainer -   Loss: 0.61655
+11/24/2025 18:22:38 - INFO - utils.trainer -    Train loss: 0.62942, Test loss: 0.61655,Epoch time = 15.012s
+11/24/2025 18:22:53 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:22:58 - INFO - utils.trainer -   AUC: 0.66941
+11/24/2025 18:22:58 - INFO - utils.trainer -   Accuracy: 0.64267
+11/24/2025 18:22:58 - INFO - utils.trainer -   Precision: 0.56462
+11/24/2025 18:22:58 - INFO - utils.trainer -   Recall: 0.90509
+11/24/2025 18:22:58 - INFO - utils.trainer -   F_score: 0.69542
+11/24/2025 18:22:58 - INFO - utils.trainer -   Specificity: 0.42735
+11/24/2025 18:22:58 - INFO - utils.trainer -   Sensitivity: 0.90509
+11/24/2025 18:22:58 - INFO - utils.trainer -   Loss: 0.67052
+11/24/2025 18:22:58 - INFO - utils.trainer -    Train loss: 0.63696, Test loss: 0.67052,Epoch time = 15.211s
+11/24/2025 18:23:13 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:23:18 - INFO - utils.trainer -   AUC: 0.74505
+11/24/2025 18:23:18 - INFO - utils.trainer -   Accuracy: 0.72926
+11/24/2025 18:23:18 - INFO - utils.trainer -   Precision: 0.66076
+11/24/2025 18:23:18 - INFO - utils.trainer -   Recall: 0.82060
+11/24/2025 18:23:18 - INFO - utils.trainer -   F_score: 0.73206
+11/24/2025 18:23:18 - INFO - utils.trainer -   Specificity: 0.65432
+11/24/2025 18:23:18 - INFO - utils.trainer -   Sensitivity: 0.82060
+11/24/2025 18:23:18 - INFO - utils.trainer -   Loss: 0.58362
+11/24/2025 18:23:18 - INFO - utils.trainer -    Train loss: 0.61374, Test loss: 0.58362,Epoch time = 15.335s
+11/24/2025 18:23:18 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:23:33 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:23:37 - INFO - utils.trainer -   AUC: 0.74574
+11/24/2025 18:23:37 - INFO - utils.trainer -   Accuracy: 0.72874
+11/24/2025 18:23:37 - INFO - utils.trainer -   Precision: 0.66381
+11/24/2025 18:23:37 - INFO - utils.trainer -   Recall: 0.80671
+11/24/2025 18:23:37 - INFO - utils.trainer -   F_score: 0.72832
+11/24/2025 18:23:37 - INFO - utils.trainer -   Specificity: 0.66477
+11/24/2025 18:23:37 - INFO - utils.trainer -   Sensitivity: 0.80671
+11/24/2025 18:23:37 - INFO - utils.trainer -   Loss: 0.58298
+11/24/2025 18:23:37 - INFO - utils.trainer -    Train loss: 0.60289, Test loss: 0.58298,Epoch time = 15.373s
+11/24/2025 18:23:52 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:23:57 - INFO - utils.trainer -   AUC: 0.73856
+11/24/2025 18:23:57 - INFO - utils.trainer -   Accuracy: 0.73239
+11/24/2025 18:23:57 - INFO - utils.trainer -   Precision: 0.68730
+11/24/2025 18:23:57 - INFO - utils.trainer -   Recall: 0.74537
+11/24/2025 18:23:57 - INFO - utils.trainer -   F_score: 0.71516
+11/24/2025 18:23:57 - INFO - utils.trainer -   Specificity: 0.72175
+11/24/2025 18:23:57 - INFO - utils.trainer -   Sensitivity: 0.74537
+11/24/2025 18:23:57 - INFO - utils.trainer -   Loss: 0.58055
+11/24/2025 18:23:57 - INFO - utils.trainer -    Train loss: 0.59049, Test loss: 0.58055,Epoch time = 15.434s
+11/24/2025 18:23:57 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:24:13 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:24:17 - INFO - utils.trainer -   AUC: 0.70777
+11/24/2025 18:24:17 - INFO - utils.trainer -   Accuracy: 0.68336
+11/24/2025 18:24:17 - INFO - utils.trainer -   Precision: 0.59742
+11/24/2025 18:24:17 - INFO - utils.trainer -   Recall: 0.91204
+11/24/2025 18:24:17 - INFO - utils.trainer -   F_score: 0.72194
+11/24/2025 18:24:17 - INFO - utils.trainer -   Specificity: 0.49573
+11/24/2025 18:24:17 - INFO - utils.trainer -   Sensitivity: 0.91204
+11/24/2025 18:24:17 - INFO - utils.trainer -   Loss: 0.62917
+11/24/2025 18:24:17 - INFO - utils.trainer -    Train loss: 0.59668, Test loss: 0.62917,Epoch time = 15.823s
+11/24/2025 18:24:34 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:24:38 - INFO - utils.trainer -   AUC: 0.68880
+11/24/2025 18:24:38 - INFO - utils.trainer -   Accuracy: 0.68701
+11/24/2025 18:24:38 - INFO - utils.trainer -   Precision: 0.66459
+11/24/2025 18:24:38 - INFO - utils.trainer -   Recall: 0.61690
+11/24/2025 18:24:38 - INFO - utils.trainer -   F_score: 0.63986
+11/24/2025 18:24:38 - INFO - utils.trainer -   Specificity: 0.74454
+11/24/2025 18:24:38 - INFO - utils.trainer -   Sensitivity: 0.61690
+11/24/2025 18:24:38 - INFO - utils.trainer -   Loss: 0.62534
+11/24/2025 18:24:38 - INFO - utils.trainer -    Train loss: 0.62641, Test loss: 0.62534,Epoch time = 16.445s
+11/24/2025 18:24:54 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:24:58 - INFO - utils.trainer -   AUC: 0.50347
+11/24/2025 18:24:58 - INFO - utils.trainer -   Accuracy: 0.55243
+11/24/2025 18:24:58 - INFO - utils.trainer -   Precision: 1.00000
+11/24/2025 18:24:58 - INFO - utils.trainer -   Recall: 0.00694
+11/24/2025 18:24:58 - INFO - utils.trainer -   F_score: 0.01379
+11/24/2025 18:24:58 - INFO - utils.trainer -   Specificity: 1.00000
+11/24/2025 18:24:58 - INFO - utils.trainer -   Sensitivity: 0.00694
+11/24/2025 18:24:58 - INFO - utils.trainer -   Loss: 0.76014
+11/24/2025 18:24:58 - INFO - utils.trainer -    Train loss: 0.62549, Test loss: 0.76014,Epoch time = 15.622s
+11/24/2025 18:25:14 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:25:18 - INFO - utils.trainer -   AUC: 0.65017
+11/24/2025 18:25:18 - INFO - utils.trainer -   Accuracy: 0.64789
+11/24/2025 18:25:18 - INFO - utils.trainer -   Precision: 0.60488
+11/24/2025 18:25:18 - INFO - utils.trainer -   Recall: 0.63079
+11/24/2025 18:25:18 - INFO - utils.trainer -   F_score: 0.61756
+11/24/2025 18:25:18 - INFO - utils.trainer -   Specificity: 0.66192
+11/24/2025 18:25:18 - INFO - utils.trainer -   Sensitivity: 0.63079
+11/24/2025 18:25:18 - INFO - utils.trainer -   Loss: 0.66477
+11/24/2025 18:25:18 - INFO - utils.trainer -    Train loss: 0.62169, Test loss: 0.66477,Epoch time = 15.690s
+11/24/2025 18:25:33 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:25:38 - INFO - utils.trainer -   AUC: 0.70047
+11/24/2025 18:25:38 - INFO - utils.trainer -   Accuracy: 0.70005
+11/24/2025 18:25:38 - INFO - utils.trainer -   Precision: 0.67515
+11/24/2025 18:25:38 - INFO - utils.trainer -   Recall: 0.64468
+11/24/2025 18:25:38 - INFO - utils.trainer -   F_score: 0.65956
+11/24/2025 18:25:38 - INFO - utils.trainer -   Specificity: 0.74549
+11/24/2025 18:25:38 - INFO - utils.trainer -   Sensitivity: 0.64468
+11/24/2025 18:25:38 - INFO - utils.trainer -   Loss: 0.61252
+11/24/2025 18:25:38 - INFO - utils.trainer -    Train loss: 0.64593, Test loss: 0.61252,Epoch time = 15.622s
+11/24/2025 18:25:53 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:25:57 - INFO - utils.trainer -   AUC: 0.60809
+11/24/2025 18:25:57 - INFO - utils.trainer -   Accuracy: 0.63537
+11/24/2025 18:25:57 - INFO - utils.trainer -   Precision: 0.74924
+11/24/2025 18:25:57 - INFO - utils.trainer -   Recall: 0.28704
+11/24/2025 18:25:57 - INFO - utils.trainer -   F_score: 0.41506
+11/24/2025 18:25:57 - INFO - utils.trainer -   Specificity: 0.92118
+11/24/2025 18:25:57 - INFO - utils.trainer -   Sensitivity: 0.28704
+11/24/2025 18:25:57 - INFO - utils.trainer -   Loss: 0.67747
+11/24/2025 18:25:57 - INFO - utils.trainer -    Train loss: 0.62726, Test loss: 0.67747,Epoch time = 15.691s
+11/24/2025 18:26:13 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:26:17 - INFO - utils.trainer -   AUC: 0.75360
+11/24/2025 18:26:17 - INFO - utils.trainer -   Accuracy: 0.74231
+11/24/2025 18:26:17 - INFO - utils.trainer -   Precision: 0.68353
+11/24/2025 18:26:17 - INFO - utils.trainer -   Recall: 0.79745
+11/24/2025 18:26:17 - INFO - utils.trainer -   F_score: 0.73611
+11/24/2025 18:26:17 - INFO - utils.trainer -   Specificity: 0.69706
+11/24/2025 18:26:17 - INFO - utils.trainer -   Sensitivity: 0.79745
+11/24/2025 18:26:17 - INFO - utils.trainer -   Loss: 0.57015
+11/24/2025 18:26:17 - INFO - utils.trainer -    Train loss: 0.61523, Test loss: 0.57015,Epoch time = 15.633s
+11/24/2025 18:26:17 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:26:33 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:26:37 - INFO - utils.trainer -   AUC: 0.72023
+11/24/2025 18:26:37 - INFO - utils.trainer -   Accuracy: 0.72300
+11/24/2025 18:26:37 - INFO - utils.trainer -   Precision: 0.74026
+11/24/2025 18:26:37 - INFO - utils.trainer -   Recall: 0.59375
+11/24/2025 18:26:37 - INFO - utils.trainer -   F_score: 0.65896
+11/24/2025 18:26:37 - INFO - utils.trainer -   Specificity: 0.82906
+11/24/2025 18:26:37 - INFO - utils.trainer -   Sensitivity: 0.59375
+11/24/2025 18:26:37 - INFO - utils.trainer -   Loss: 0.58944
+11/24/2025 18:26:37 - INFO - utils.trainer -    Train loss: 0.60999, Test loss: 0.58944,Epoch time = 15.902s
+11/24/2025 18:26:53 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:26:57 - INFO - utils.trainer -   AUC: 0.70295
+11/24/2025 18:26:57 - INFO - utils.trainer -   Accuracy: 0.71309
+11/24/2025 18:26:57 - INFO - utils.trainer -   Precision: 0.72754
+11/24/2025 18:26:57 - INFO - utils.trainer -   Recall: 0.58102
+11/24/2025 18:26:57 - INFO - utils.trainer -   F_score: 0.64607
+11/24/2025 18:26:57 - INFO - utils.trainer -   Specificity: 0.82146
+11/24/2025 18:26:57 - INFO - utils.trainer -   Sensitivity: 0.58102
+11/24/2025 18:26:57 - INFO - utils.trainer -   Loss: 0.59966
+11/24/2025 18:26:57 - INFO - utils.trainer -    Train loss: 0.59995, Test loss: 0.59966,Epoch time = 15.549s
+11/24/2025 18:27:13 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:27:17 - INFO - utils.trainer -   AUC: 0.73069
+11/24/2025 18:27:17 - INFO - utils.trainer -   Accuracy: 0.73448
+11/24/2025 18:27:17 - INFO - utils.trainer -   Precision: 0.71833
+11/24/2025 18:27:17 - INFO - utils.trainer -   Recall: 0.67593
+11/24/2025 18:27:17 - INFO - utils.trainer -   F_score: 0.69648
+11/24/2025 18:27:17 - INFO - utils.trainer -   Specificity: 0.78253
+11/24/2025 18:27:17 - INFO - utils.trainer -   Sensitivity: 0.67593
+11/24/2025 18:27:17 - INFO - utils.trainer -   Loss: 0.57814
+11/24/2025 18:27:17 - INFO - utils.trainer -    Train loss: 0.60136, Test loss: 0.57814,Epoch time = 15.562s
+11/24/2025 18:27:32 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:27:37 - INFO - utils.trainer -   AUC: 0.68670
+11/24/2025 18:27:37 - INFO - utils.trainer -   Accuracy: 0.66041
+11/24/2025 18:27:37 - INFO - utils.trainer -   Precision: 0.57837
+11/24/2025 18:27:37 - INFO - utils.trainer -   Recall: 0.90972
+11/24/2025 18:27:37 - INFO - utils.trainer -   F_score: 0.70715
+11/24/2025 18:27:37 - INFO - utils.trainer -   Specificity: 0.45584
+11/24/2025 18:27:37 - INFO - utils.trainer -   Sensitivity: 0.90972
+11/24/2025 18:27:37 - INFO - utils.trainer -   Loss: 0.65258
+11/24/2025 18:27:37 - INFO - utils.trainer -    Train loss: 0.60582, Test loss: 0.65258,Epoch time = 15.473s
+11/24/2025 18:27:52 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:27:56 - INFO - utils.trainer -   AUC: 0.70496
+11/24/2025 18:27:56 - INFO - utils.trainer -   Accuracy: 0.68649
+11/24/2025 18:27:56 - INFO - utils.trainer -   Precision: 0.60596
+11/24/2025 18:27:56 - INFO - utils.trainer -   Recall: 0.87037
+11/24/2025 18:27:56 - INFO - utils.trainer -   F_score: 0.71449
+11/24/2025 18:27:56 - INFO - utils.trainer -   Specificity: 0.53561
+11/24/2025 18:27:56 - INFO - utils.trainer -   Sensitivity: 0.87037
+11/24/2025 18:27:56 - INFO - utils.trainer -   Loss: 0.62654
+11/24/2025 18:27:56 - INFO - utils.trainer -    Train loss: 0.62096, Test loss: 0.62654,Epoch time = 15.344s
+11/24/2025 18:28:12 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:28:16 - INFO - utils.trainer -   AUC: 0.67085
+11/24/2025 18:28:16 - INFO - utils.trainer -   Accuracy: 0.64006
+11/24/2025 18:28:16 - INFO - utils.trainer -   Precision: 0.56110
+11/24/2025 18:28:16 - INFO - utils.trainer -   Recall: 0.92477
+11/24/2025 18:28:16 - INFO - utils.trainer -   F_score: 0.69843
+11/24/2025 18:28:16 - INFO - utils.trainer -   Specificity: 0.40646
+11/24/2025 18:28:16 - INFO - utils.trainer -   Sensitivity: 0.92477
+11/24/2025 18:28:16 - INFO - utils.trainer -   Loss: 0.67312
+11/24/2025 18:28:16 - INFO - utils.trainer -    Train loss: 0.63290, Test loss: 0.67312,Epoch time = 15.298s
+11/24/2025 18:28:31 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:28:35 - INFO - utils.trainer -   AUC: 0.53496
+11/24/2025 18:28:35 - INFO - utils.trainer -   Accuracy: 0.57903
+11/24/2025 18:28:35 - INFO - utils.trainer -   Precision: 0.89041
+11/24/2025 18:28:35 - INFO - utils.trainer -   Recall: 0.07523
+11/24/2025 18:28:35 - INFO - utils.trainer -   F_score: 0.13874
+11/24/2025 18:28:35 - INFO - utils.trainer -   Specificity: 0.99240
+11/24/2025 18:28:35 - INFO - utils.trainer -   Sensitivity: 0.07523
+11/24/2025 18:28:35 - INFO - utils.trainer -   Loss: 0.73357
+11/24/2025 18:28:35 - INFO - utils.trainer -    Train loss: 0.62537, Test loss: 0.73357,Epoch time = 15.027s
+11/24/2025 18:28:51 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:28:55 - INFO - utils.trainer -   AUC: 0.64601
+11/24/2025 18:28:55 - INFO - utils.trainer -   Accuracy: 0.67188
+11/24/2025 18:28:55 - INFO - utils.trainer -   Precision: 0.82369
+11/24/2025 18:28:55 - INFO - utils.trainer -   Recall: 0.34606
+11/24/2025 18:28:55 - INFO - utils.trainer -   F_score: 0.48737
+11/24/2025 18:28:55 - INFO - utils.trainer -   Specificity: 0.93922
+11/24/2025 18:28:55 - INFO - utils.trainer -   Sensitivity: 0.34606
+11/24/2025 18:28:55 - INFO - utils.trainer -   Loss: 0.64033
+11/24/2025 18:28:55 - INFO - utils.trainer -    Train loss: 0.62324, Test loss: 0.64033,Epoch time = 15.265s
+11/24/2025 18:29:10 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:29:15 - INFO - utils.trainer -   AUC: 0.62475
+11/24/2025 18:29:15 - INFO - utils.trainer -   Accuracy: 0.65415
+11/24/2025 18:29:15 - INFO - utils.trainer -   Precision: 0.83168
+11/24/2025 18:29:15 - INFO - utils.trainer -   Recall: 0.29167
+11/24/2025 18:29:15 - INFO - utils.trainer -   F_score: 0.43188
+11/24/2025 18:29:15 - INFO - utils.trainer -   Specificity: 0.95157
+11/24/2025 18:29:15 - INFO - utils.trainer -   Sensitivity: 0.29167
+11/24/2025 18:29:15 - INFO - utils.trainer -   Loss: 0.65859
+11/24/2025 18:29:15 - INFO - utils.trainer -    Train loss: 0.58975, Test loss: 0.65859,Epoch time = 15.634s
+11/24/2025 18:29:30 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:29:34 - INFO - utils.trainer -   AUC: 0.59898
+11/24/2025 18:29:34 - INFO - utils.trainer -   Accuracy: 0.55764
+11/24/2025 18:29:34 - INFO - utils.trainer -   Precision: 0.50474
+11/24/2025 18:29:34 - INFO - utils.trainer -   Recall: 0.98611
+11/24/2025 18:29:34 - INFO - utils.trainer -   F_score: 0.66771
+11/24/2025 18:29:34 - INFO - utils.trainer -   Specificity: 0.20608
+11/24/2025 18:29:34 - INFO - utils.trainer -   Sensitivity: 0.98611
+11/24/2025 18:29:34 - INFO - utils.trainer -   Loss: 0.75579
+11/24/2025 18:29:34 - INFO - utils.trainer -    Train loss: 0.60264, Test loss: 0.75579,Epoch time = 15.416s
+11/24/2025 18:29:50 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:29:54 - INFO - utils.trainer -   AUC: 0.69063
+11/24/2025 18:29:54 - INFO - utils.trainer -   Accuracy: 0.68858
+11/24/2025 18:29:54 - INFO - utils.trainer -   Precision: 0.67181
+11/24/2025 18:29:54 - INFO - utils.trainer -   Recall: 0.60417
+11/24/2025 18:29:54 - INFO - utils.trainer -   F_score: 0.63620
+11/24/2025 18:29:54 - INFO - utils.trainer -   Specificity: 0.75783
+11/24/2025 18:29:54 - INFO - utils.trainer -   Sensitivity: 0.60417
+11/24/2025 18:29:54 - INFO - utils.trainer -   Loss: 0.62259
+11/24/2025 18:29:54 - INFO - utils.trainer -    Train loss: 0.61081, Test loss: 0.62259,Epoch time = 15.665s
+11/24/2025 18:30:10 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:30:14 - INFO - utils.trainer -   AUC: 0.68347
+11/24/2025 18:30:14 - INFO - utils.trainer -   Accuracy: 0.67449
+11/24/2025 18:30:14 - INFO - utils.trainer -   Precision: 0.62048
+11/24/2025 18:30:14 - INFO - utils.trainer -   Recall: 0.71528
+11/24/2025 18:30:14 - INFO - utils.trainer -   F_score: 0.66452
+11/24/2025 18:30:14 - INFO - utils.trainer -   Specificity: 0.64103
+11/24/2025 18:30:14 - INFO - utils.trainer -   Sensitivity: 0.71528
+11/24/2025 18:30:14 - INFO - utils.trainer -   Loss: 0.63736
+11/24/2025 18:30:14 - INFO - utils.trainer -    Train loss: 0.61001, Test loss: 0.63736,Epoch time = 15.683s
+11/24/2025 18:30:30 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:30:34 - INFO - utils.trainer -   AUC: 0.69747
+11/24/2025 18:30:34 - INFO - utils.trainer -   Accuracy: 0.69744
+11/24/2025 18:30:34 - INFO - utils.trainer -   Precision: 0.66745
+11/24/2025 18:30:34 - INFO - utils.trainer -   Recall: 0.65509
+11/24/2025 18:30:34 - INFO - utils.trainer -   F_score: 0.66121
+11/24/2025 18:30:34 - INFO - utils.trainer -   Specificity: 0.73219
+11/24/2025 18:30:34 - INFO - utils.trainer -   Sensitivity: 0.65509
+11/24/2025 18:30:34 - INFO - utils.trainer -   Loss: 0.61524
+11/24/2025 18:30:34 - INFO - utils.trainer -    Train loss: 0.60214, Test loss: 0.61524,Epoch time = 15.675s
+11/24/2025 18:30:50 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:30:54 - INFO - utils.trainer -   AUC: 0.70777
+11/24/2025 18:30:54 - INFO - utils.trainer -   Accuracy: 0.68388
+11/24/2025 18:30:54 - INFO - utils.trainer -   Precision: 0.60047
+11/24/2025 18:30:54 - INFO - utils.trainer -   Recall: 0.89236
+11/24/2025 18:30:54 - INFO - utils.trainer -   F_score: 0.71788
+11/24/2025 18:30:54 - INFO - utils.trainer -   Specificity: 0.51282
+11/24/2025 18:30:54 - INFO - utils.trainer -   Sensitivity: 0.89236
+11/24/2025 18:30:54 - INFO - utils.trainer -   Loss: 0.62965
+11/24/2025 18:30:54 - INFO - utils.trainer -    Train loss: 0.59656, Test loss: 0.62965,Epoch time = 15.760s
+11/24/2025 18:31:10 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:31:14 - INFO - utils.trainer -   AUC: 0.70456
+11/24/2025 18:31:14 - INFO - utils.trainer -   Accuracy: 0.71466
+11/24/2025 18:31:14 - INFO - utils.trainer -   Precision: 0.74804
+11/24/2025 18:31:14 - INFO - utils.trainer -   Recall: 0.55324
+11/24/2025 18:31:14 - INFO - utils.trainer -   F_score: 0.63606
+11/24/2025 18:31:14 - INFO - utils.trainer -   Specificity: 0.84710
+11/24/2025 18:31:14 - INFO - utils.trainer -   Sensitivity: 0.55324
+11/24/2025 18:31:14 - INFO - utils.trainer -   Loss: 0.59831
+11/24/2025 18:31:14 - INFO - utils.trainer -    Train loss: 0.60567, Test loss: 0.59831,Epoch time = 15.794s
+11/24/2025 18:31:29 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:31:34 - INFO - utils.trainer -   AUC: 0.64595
+11/24/2025 18:31:34 - INFO - utils.trainer -   Accuracy: 0.62128
+11/24/2025 18:31:34 - INFO - utils.trainer -   Precision: 0.55074
+11/24/2025 18:31:34 - INFO - utils.trainer -   Recall: 0.86690
+11/24/2025 18:31:34 - INFO - utils.trainer -   F_score: 0.67356
+11/24/2025 18:31:34 - INFO - utils.trainer -   Specificity: 0.41975
+11/24/2025 18:31:34 - INFO - utils.trainer -   Sensitivity: 0.86690
+11/24/2025 18:31:34 - INFO - utils.trainer -   Loss: 0.69247
+11/24/2025 18:31:34 - INFO - utils.trainer -    Train loss: 0.59511, Test loss: 0.69247,Epoch time = 15.733s
+11/24/2025 18:31:49 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:31:53 - INFO - utils.trainer -   AUC: 0.73973
+11/24/2025 18:31:53 - INFO - utils.trainer -   Accuracy: 0.72770
+11/24/2025 18:31:53 - INFO - utils.trainer -   Precision: 0.65863
+11/24/2025 18:31:53 - INFO - utils.trainer -   Recall: 0.82176
+11/24/2025 18:31:53 - INFO - utils.trainer -   F_score: 0.73120
+11/24/2025 18:31:53 - INFO - utils.trainer -   Specificity: 0.65052
+11/24/2025 18:31:53 - INFO - utils.trainer -   Sensitivity: 0.82176
+11/24/2025 18:31:53 - INFO - utils.trainer -   Loss: 0.58519
+11/24/2025 18:31:53 - INFO - utils.trainer -    Train loss: 0.59015, Test loss: 0.58519,Epoch time = 15.685s
+11/24/2025 18:32:09 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:32:13 - INFO - utils.trainer -   AUC: 0.73782
+11/24/2025 18:32:13 - INFO - utils.trainer -   Accuracy: 0.72666
+11/24/2025 18:32:13 - INFO - utils.trainer -   Precision: 0.67490
+11/24/2025 18:32:13 - INFO - utils.trainer -   Recall: 0.75926
+11/24/2025 18:32:13 - INFO - utils.trainer -   F_score: 0.71460
+11/24/2025 18:32:13 - INFO - utils.trainer -   Specificity: 0.69991
+11/24/2025 18:32:13 - INFO - utils.trainer -   Sensitivity: 0.75926
+11/24/2025 18:32:13 - INFO - utils.trainer -   Loss: 0.58572
+11/24/2025 18:32:13 - INFO - utils.trainer -    Train loss: 0.59877, Test loss: 0.58572,Epoch time = 15.653s
+11/24/2025 18:32:29 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:32:33 - INFO - utils.trainer -   AUC: 0.69137
+11/24/2025 18:32:33 - INFO - utils.trainer -   Accuracy: 0.66197
+11/24/2025 18:32:33 - INFO - utils.trainer -   Precision: 0.57574
+11/24/2025 18:32:33 - INFO - utils.trainer -   Recall: 0.95023
+11/24/2025 18:32:33 - INFO - utils.trainer -   F_score: 0.71703
+11/24/2025 18:32:33 - INFO - utils.trainer -   Specificity: 0.42545
+11/24/2025 18:32:33 - INFO - utils.trainer -   Sensitivity: 0.95023
+11/24/2025 18:32:33 - INFO - utils.trainer -   Loss: 0.65123
+11/24/2025 18:32:33 - INFO - utils.trainer -    Train loss: 0.59242, Test loss: 0.65123,Epoch time = 15.433s
+11/24/2025 18:32:48 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:32:53 - INFO - utils.trainer -   AUC: 0.70228
+11/24/2025 18:32:53 - INFO - utils.trainer -   Accuracy: 0.67501
+11/24/2025 18:32:53 - INFO - utils.trainer -   Precision: 0.58700
+11/24/2025 18:32:53 - INFO - utils.trainer -   Recall: 0.94097
+11/24/2025 18:32:53 - INFO - utils.trainer -   F_score: 0.72299
+11/24/2025 18:32:53 - INFO - utils.trainer -   Specificity: 0.45679
+11/24/2025 18:32:53 - INFO - utils.trainer -   Sensitivity: 0.94097
+11/24/2025 18:32:53 - INFO - utils.trainer -   Loss: 0.63835
+11/24/2025 18:32:53 - INFO - utils.trainer -    Train loss: 0.60623, Test loss: 0.63835,Epoch time = 15.407s
+11/24/2025 18:33:08 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:33:12 - INFO - utils.trainer -   AUC: 0.76457
+11/24/2025 18:33:12 - INFO - utils.trainer -   Accuracy: 0.75222
+11/24/2025 18:33:12 - INFO - utils.trainer -   Precision: 0.69050
+11/24/2025 18:33:12 - INFO - utils.trainer -   Recall: 0.81597
+11/24/2025 18:33:12 - INFO - utils.trainer -   F_score: 0.74801
+11/24/2025 18:33:12 - INFO - utils.trainer -   Specificity: 0.69991
+11/24/2025 18:33:12 - INFO - utils.trainer -   Sensitivity: 0.81597
+11/24/2025 18:33:12 - INFO - utils.trainer -   Loss: 0.56024
+11/24/2025 18:33:12 - INFO - utils.trainer -    Train loss: 0.59037, Test loss: 0.56024,Epoch time = 15.395s
+11/24/2025 18:33:12 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:33:28 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:33:32 - INFO - utils.trainer -   AUC: 0.67617
+11/24/2025 18:33:32 - INFO - utils.trainer -   Accuracy: 0.69588
+11/24/2025 18:33:32 - INFO - utils.trainer -   Precision: 0.82005
+11/24/2025 18:33:32 - INFO - utils.trainer -   Recall: 0.41667
+11/24/2025 18:33:32 - INFO - utils.trainer -   F_score: 0.55257
+11/24/2025 18:33:32 - INFO - utils.trainer -   Specificity: 0.92498
+11/24/2025 18:33:32 - INFO - utils.trainer -   Sensitivity: 0.41667
+11/24/2025 18:33:32 - INFO - utils.trainer -   Loss: 0.61711
+11/24/2025 18:33:32 - INFO - utils.trainer -    Train loss: 0.56903, Test loss: 0.61711,Epoch time = 15.310s
+11/24/2025 18:33:47 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:33:51 - INFO - utils.trainer -   AUC: 0.69428
+11/24/2025 18:33:51 - INFO - utils.trainer -   Accuracy: 0.66719
+11/24/2025 18:33:51 - INFO - utils.trainer -   Precision: 0.58200
+11/24/2025 18:33:51 - INFO - utils.trainer -   Recall: 0.92824
+11/24/2025 18:33:51 - INFO - utils.trainer -   F_score: 0.71543
+11/24/2025 18:33:51 - INFO - utils.trainer -   Specificity: 0.45299
+11/24/2025 18:33:51 - INFO - utils.trainer -   Sensitivity: 0.92824
+11/24/2025 18:33:51 - INFO - utils.trainer -   Loss: 0.64601
+11/24/2025 18:33:51 - INFO - utils.trainer -    Train loss: 0.61432, Test loss: 0.64601,Epoch time = 15.026s
+11/24/2025 18:34:06 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:34:11 - INFO - utils.trainer -   AUC: 0.73509
+11/24/2025 18:34:11 - INFO - utils.trainer -   Accuracy: 0.73292
+11/24/2025 18:34:11 - INFO - utils.trainer -   Precision: 0.71569
+11/24/2025 18:34:11 - INFO - utils.trainer -   Recall: 0.67593
+11/24/2025 18:34:11 - INFO - utils.trainer -   F_score: 0.69524
+11/24/2025 18:34:11 - INFO - utils.trainer -   Specificity: 0.77968
+11/24/2025 18:34:11 - INFO - utils.trainer -   Sensitivity: 0.67593
+11/24/2025 18:34:11 - INFO - utils.trainer -   Loss: 0.57970
+11/24/2025 18:34:11 - INFO - utils.trainer -    Train loss: 0.59905, Test loss: 0.57970,Epoch time = 15.214s
+11/24/2025 18:34:26 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:34:30 - INFO - utils.trainer -   AUC: 0.71674
+11/24/2025 18:34:30 - INFO - utils.trainer -   Accuracy: 0.71466
+11/24/2025 18:34:30 - INFO - utils.trainer -   Precision: 0.67749
+11/24/2025 18:34:30 - INFO - utils.trainer -   Recall: 0.70023
+11/24/2025 18:34:30 - INFO - utils.trainer -   F_score: 0.68867
+11/24/2025 18:34:30 - INFO - utils.trainer -   Specificity: 0.72650
+11/24/2025 18:34:30 - INFO - utils.trainer -   Sensitivity: 0.70023
+11/24/2025 18:34:30 - INFO - utils.trainer -   Loss: 0.59837
+11/24/2025 18:34:30 - INFO - utils.trainer -    Train loss: 0.58419, Test loss: 0.59837,Epoch time = 15.301s
+11/24/2025 18:34:46 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:34:50 - INFO - utils.trainer -   AUC: 0.71415
+11/24/2025 18:34:50 - INFO - utils.trainer -   Accuracy: 0.71518
+11/24/2025 18:34:50 - INFO - utils.trainer -   Precision: 0.70025
+11/24/2025 18:34:50 - INFO - utils.trainer -   Recall: 0.64352
+11/24/2025 18:34:50 - INFO - utils.trainer -   F_score: 0.67069
+11/24/2025 18:34:50 - INFO - utils.trainer -   Specificity: 0.77398
+11/24/2025 18:34:50 - INFO - utils.trainer -   Sensitivity: 0.64352
+11/24/2025 18:34:50 - INFO - utils.trainer -   Loss: 0.59735
+11/24/2025 18:34:50 - INFO - utils.trainer -    Train loss: 0.57106, Test loss: 0.59735,Epoch time = 15.561s
+11/24/2025 18:35:06 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:35:10 - INFO - utils.trainer -   AUC: 0.74594
+11/24/2025 18:35:10 - INFO - utils.trainer -   Accuracy: 0.72144
+11/24/2025 18:35:10 - INFO - utils.trainer -   Precision: 0.63200
+11/24/2025 18:35:10 - INFO - utils.trainer -   Recall: 0.91435
+11/24/2025 18:35:10 - INFO - utils.trainer -   F_score: 0.74740
+11/24/2025 18:35:10 - INFO - utils.trainer -   Specificity: 0.56315
+11/24/2025 18:35:10 - INFO - utils.trainer -   Sensitivity: 0.91435
+11/24/2025 18:35:10 - INFO - utils.trainer -   Loss: 0.59151
+11/24/2025 18:35:10 - INFO - utils.trainer -    Train loss: 0.57908, Test loss: 0.59151,Epoch time = 15.362s
+11/24/2025 18:35:26 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:35:30 - INFO - utils.trainer -   AUC: 0.72497
+11/24/2025 18:35:30 - INFO - utils.trainer -   Accuracy: 0.71622
+11/24/2025 18:35:30 - INFO - utils.trainer -   Precision: 0.66097
+11/24/2025 18:35:30 - INFO - utils.trainer -   Recall: 0.76042
+11/24/2025 18:35:30 - INFO - utils.trainer -   F_score: 0.70721
+11/24/2025 18:35:30 - INFO - utils.trainer -   Specificity: 0.67996
+11/24/2025 18:35:30 - INFO - utils.trainer -   Sensitivity: 0.76042
+11/24/2025 18:35:30 - INFO - utils.trainer -   Loss: 0.59620
+11/24/2025 18:35:30 - INFO - utils.trainer -    Train loss: 0.57619, Test loss: 0.59620,Epoch time = 15.605s
+11/24/2025 18:35:45 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:35:49 - INFO - utils.trainer -   AUC: 0.72119
+11/24/2025 18:35:49 - INFO - utils.trainer -   Accuracy: 0.69118
+11/24/2025 18:35:49 - INFO - utils.trainer -   Precision: 0.60104
+11/24/2025 18:35:49 - INFO - utils.trainer -   Recall: 0.93634
+11/24/2025 18:35:49 - INFO - utils.trainer -   F_score: 0.73213
+11/24/2025 18:35:49 - INFO - utils.trainer -   Specificity: 0.49003
+11/24/2025 18:35:49 - INFO - utils.trainer -   Sensitivity: 0.93634
+11/24/2025 18:35:49 - INFO - utils.trainer -   Loss: 0.62193
+11/24/2025 18:35:49 - INFO - utils.trainer -    Train loss: 0.58455, Test loss: 0.62193,Epoch time = 14.645s
+11/24/2025 18:36:03 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:36:07 - INFO - utils.trainer -   AUC: 0.75610
+11/24/2025 18:36:07 - INFO - utils.trainer -   Accuracy: 0.74700
+11/24/2025 18:36:07 - INFO - utils.trainer -   Precision: 0.68707
+11/24/2025 18:36:07 - INFO - utils.trainer -   Recall: 0.80556
+11/24/2025 18:36:07 - INFO - utils.trainer -   F_score: 0.74161
+11/24/2025 18:36:07 - INFO - utils.trainer -   Specificity: 0.69896
+11/24/2025 18:36:07 - INFO - utils.trainer -   Sensitivity: 0.80556
+11/24/2025 18:36:07 - INFO - utils.trainer -   Loss: 0.56550
+11/24/2025 18:36:07 - INFO - utils.trainer -    Train loss: 0.60623, Test loss: 0.56550,Epoch time = 14.354s
+11/24/2025 18:36:23 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:36:27 - INFO - utils.trainer -   AUC: 0.73248
+11/24/2025 18:36:27 - INFO - utils.trainer -   Accuracy: 0.73709
+11/24/2025 18:36:27 - INFO - utils.trainer -   Precision: 0.75496
+11/24/2025 18:36:27 - INFO - utils.trainer -   Recall: 0.61690
+11/24/2025 18:36:27 - INFO - utils.trainer -   F_score: 0.67898
+11/24/2025 18:36:27 - INFO - utils.trainer -   Specificity: 0.83571
+11/24/2025 18:36:27 - INFO - utils.trainer -   Sensitivity: 0.61690
+11/24/2025 18:36:27 - INFO - utils.trainer -   Loss: 0.57560
+11/24/2025 18:36:27 - INFO - utils.trainer -    Train loss: 0.58498, Test loss: 0.57560,Epoch time = 15.354s
+11/24/2025 18:36:42 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:36:46 - INFO - utils.trainer -   AUC: 0.75374
+11/24/2025 18:36:46 - INFO - utils.trainer -   Accuracy: 0.74387
+11/24/2025 18:36:46 - INFO - utils.trainer -   Precision: 0.70206
+11/24/2025 18:36:46 - INFO - utils.trainer -   Recall: 0.75000
+11/24/2025 18:36:46 - INFO - utils.trainer -   F_score: 0.72524
+11/24/2025 18:36:46 - INFO - utils.trainer -   Specificity: 0.73884
+11/24/2025 18:36:46 - INFO - utils.trainer -   Sensitivity: 0.75000
+11/24/2025 18:36:46 - INFO - utils.trainer -   Loss: 0.56818
+11/24/2025 18:36:46 - INFO - utils.trainer -    Train loss: 0.56586, Test loss: 0.56818,Epoch time = 15.352s
+11/24/2025 18:37:02 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:37:06 - INFO - utils.trainer -   AUC: 0.58850
+11/24/2025 18:37:06 - INFO - utils.trainer -   Accuracy: 0.54617
+11/24/2025 18:37:06 - INFO - utils.trainer -   Precision: 0.49826
+11/24/2025 18:37:06 - INFO - utils.trainer -   Recall: 0.99190
+11/24/2025 18:37:06 - INFO - utils.trainer -   F_score: 0.66331
+11/24/2025 18:37:06 - INFO - utils.trainer -   Specificity: 0.18044
+11/24/2025 18:37:06 - INFO - utils.trainer -   Sensitivity: 0.99190
+11/24/2025 18:37:06 - INFO - utils.trainer -   Loss: 0.76772
+11/24/2025 18:37:06 - INFO - utils.trainer -    Train loss: 0.56930, Test loss: 0.76772,Epoch time = 15.538s
+11/24/2025 18:37:22 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:37:26 - INFO - utils.trainer -   AUC: 0.75595
+11/24/2025 18:37:26 - INFO - utils.trainer -   Accuracy: 0.73709
+11/24/2025 18:37:26 - INFO - utils.trainer -   Precision: 0.65437
+11/24/2025 18:37:26 - INFO - utils.trainer -   Recall: 0.88310
+11/24/2025 18:37:26 - INFO - utils.trainer -   F_score: 0.75172
+11/24/2025 18:37:26 - INFO - utils.trainer -   Specificity: 0.61728
+11/24/2025 18:37:26 - INFO - utils.trainer -   Sensitivity: 0.88310
+11/24/2025 18:37:26 - INFO - utils.trainer -   Loss: 0.57588
+11/24/2025 18:37:26 - INFO - utils.trainer -    Train loss: 0.57770, Test loss: 0.57588,Epoch time = 15.642s
+11/24/2025 18:37:41 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:37:45 - INFO - utils.trainer -   AUC: 0.77411
+11/24/2025 18:37:45 - INFO - utils.trainer -   Accuracy: 0.75222
+11/24/2025 18:37:45 - INFO - utils.trainer -   Precision: 0.66525
+11/24/2025 18:37:45 - INFO - utils.trainer -   Recall: 0.90625
+11/24/2025 18:37:45 - INFO - utils.trainer -   F_score: 0.76727
+11/24/2025 18:37:45 - INFO - utils.trainer -   Specificity: 0.62583
+11/24/2025 18:37:45 - INFO - utils.trainer -   Sensitivity: 0.90625
+11/24/2025 18:37:45 - INFO - utils.trainer -   Loss: 0.55993
+11/24/2025 18:37:45 - INFO - utils.trainer -    Train loss: 0.56407, Test loss: 0.55993,Epoch time = 15.455s
+11/24/2025 18:37:45 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:38:01 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:38:05 - INFO - utils.trainer -   AUC: 0.71904
+11/24/2025 18:38:05 - INFO - utils.trainer -   Accuracy: 0.72196
+11/24/2025 18:38:05 - INFO - utils.trainer -   Precision: 0.71805
+11/24/2025 18:38:05 - INFO - utils.trainer -   Recall: 0.63079
+11/24/2025 18:38:05 - INFO - utils.trainer -   F_score: 0.67160
+11/24/2025 18:38:05 - INFO - utils.trainer -   Specificity: 0.79677
+11/24/2025 18:38:05 - INFO - utils.trainer -   Sensitivity: 0.63079
+11/24/2025 18:38:05 - INFO - utils.trainer -   Loss: 0.59037
+11/24/2025 18:38:05 - INFO - utils.trainer -    Train loss: 0.56565, Test loss: 0.59037,Epoch time = 15.495s
+11/24/2025 18:38:20 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:38:24 - INFO - utils.trainer -   AUC: 0.74860
+11/24/2025 18:38:24 - INFO - utils.trainer -   Accuracy: 0.74752
+11/24/2025 18:38:24 - INFO - utils.trainer -   Precision: 0.71991
+11/24/2025 18:38:24 - INFO - utils.trainer -   Recall: 0.71991
+11/24/2025 18:38:24 - INFO - utils.trainer -   F_score: 0.71991
+11/24/2025 18:38:24 - INFO - utils.trainer -   Specificity: 0.77018
+11/24/2025 18:38:24 - INFO - utils.trainer -   Sensitivity: 0.71991
+11/24/2025 18:38:24 - INFO - utils.trainer -   Loss: 0.56521
+11/24/2025 18:38:24 - INFO - utils.trainer -    Train loss: 0.57410, Test loss: 0.56521,Epoch time = 15.258s
+11/24/2025 18:38:39 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:38:43 - INFO - utils.trainer -   AUC: 0.72490
+11/24/2025 18:38:43 - INFO - utils.trainer -   Accuracy: 0.73448
+11/24/2025 18:38:43 - INFO - utils.trainer -   Precision: 0.76374
+11/24/2025 18:38:43 - INFO - utils.trainer -   Recall: 0.59491
+11/24/2025 18:38:43 - INFO - utils.trainer -   F_score: 0.66884
+11/24/2025 18:38:43 - INFO - utils.trainer -   Specificity: 0.84900
+11/24/2025 18:38:43 - INFO - utils.trainer -   Sensitivity: 0.59491
+11/24/2025 18:38:43 - INFO - utils.trainer -   Loss: 0.57852
+11/24/2025 18:38:43 - INFO - utils.trainer -    Train loss: 0.57410, Test loss: 0.57852,Epoch time = 15.088s
+11/24/2025 18:38:58 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:39:03 - INFO - utils.trainer -   AUC: 0.67945
+11/24/2025 18:39:03 - INFO - utils.trainer -   Accuracy: 0.69849
+11/24/2025 18:39:03 - INFO - utils.trainer -   Precision: 0.78373
+11/24/2025 18:39:03 - INFO - utils.trainer -   Recall: 0.45718
+11/24/2025 18:39:03 - INFO - utils.trainer -   F_score: 0.57749
+11/24/2025 18:39:03 - INFO - utils.trainer -   Specificity: 0.89649
+11/24/2025 18:39:03 - INFO - utils.trainer -   Sensitivity: 0.45718
+11/24/2025 18:39:03 - INFO - utils.trainer -   Loss: 0.61434
+11/24/2025 18:39:03 - INFO - utils.trainer -    Train loss: 0.57630, Test loss: 0.61434,Epoch time = 14.906s
+11/24/2025 18:39:18 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:39:22 - INFO - utils.trainer -   AUC: 0.76673
+11/24/2025 18:39:22 - INFO - utils.trainer -   Accuracy: 0.76109
+11/24/2025 18:39:22 - INFO - utils.trainer -   Precision: 0.73280
+11/24/2025 18:39:22 - INFO - utils.trainer -   Recall: 0.73958
+11/24/2025 18:39:22 - INFO - utils.trainer -   F_score: 0.73618
+11/24/2025 18:39:22 - INFO - utils.trainer -   Specificity: 0.77873
+11/24/2025 18:39:22 - INFO - utils.trainer -   Sensitivity: 0.73958
+11/24/2025 18:39:22 - INFO - utils.trainer -   Loss: 0.55132
+11/24/2025 18:39:22 - INFO - utils.trainer -    Train loss: 0.56603, Test loss: 0.55132,Epoch time = 15.284s
+11/24/2025 18:39:22 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:39:38 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:39:42 - INFO - utils.trainer -   AUC: 0.76405
+11/24/2025 18:39:42 - INFO - utils.trainer -   Accuracy: 0.74491
+11/24/2025 18:39:42 - INFO - utils.trainer -   Precision: 0.65612
+11/24/2025 18:39:42 - INFO - utils.trainer -   Recall: 0.91204
+11/24/2025 18:39:42 - INFO - utils.trainer -   F_score: 0.76320
+11/24/2025 18:39:42 - INFO - utils.trainer -   Specificity: 0.60779
+11/24/2025 18:39:42 - INFO - utils.trainer -   Sensitivity: 0.91204
+11/24/2025 18:39:42 - INFO - utils.trainer -   Loss: 0.56830
+11/24/2025 18:39:42 - INFO - utils.trainer -    Train loss: 0.56647, Test loss: 0.56830,Epoch time = 15.462s
+11/24/2025 18:39:58 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:40:03 - INFO - utils.trainer -   AUC: 0.76441
+11/24/2025 18:40:03 - INFO - utils.trainer -   Accuracy: 0.74596
+11/24/2025 18:40:03 - INFO - utils.trainer -   Precision: 0.66153
+11/24/2025 18:40:03 - INFO - utils.trainer -   Recall: 0.89352
+11/24/2025 18:40:03 - INFO - utils.trainer -   F_score: 0.76022
+11/24/2025 18:40:03 - INFO - utils.trainer -   Specificity: 0.62488
+11/24/2025 18:40:03 - INFO - utils.trainer -   Sensitivity: 0.89352
+11/24/2025 18:40:03 - INFO - utils.trainer -   Loss: 0.56691
+11/24/2025 18:40:03 - INFO - utils.trainer -    Train loss: 0.57343, Test loss: 0.56691,Epoch time = 15.778s
+11/24/2025 18:40:18 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:40:22 - INFO - utils.trainer -   AUC: 0.75918
+11/24/2025 18:40:22 - INFO - utils.trainer -   Accuracy: 0.75587
+11/24/2025 18:40:22 - INFO - utils.trainer -   Precision: 0.72049
+11/24/2025 18:40:22 - INFO - utils.trainer -   Recall: 0.74884
+11/24/2025 18:40:22 - INFO - utils.trainer -   F_score: 0.73439
+11/24/2025 18:40:22 - INFO - utils.trainer -   Specificity: 0.76163
+11/24/2025 18:40:22 - INFO - utils.trainer -   Sensitivity: 0.74884
+11/24/2025 18:40:22 - INFO - utils.trainer -   Loss: 0.55682
+11/24/2025 18:40:22 - INFO - utils.trainer -    Train loss: 0.55240, Test loss: 0.55682,Epoch time = 15.497s
+11/24/2025 18:40:38 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:40:42 - INFO - utils.trainer -   AUC: 0.72762
+11/24/2025 18:40:42 - INFO - utils.trainer -   Accuracy: 0.73239
+11/24/2025 18:40:42 - INFO - utils.trainer -   Precision: 0.74341
+11/24/2025 18:40:42 - INFO - utils.trainer -   Recall: 0.62037
+11/24/2025 18:40:42 - INFO - utils.trainer -   F_score: 0.67634
+11/24/2025 18:40:42 - INFO - utils.trainer -   Specificity: 0.82431
+11/24/2025 18:40:42 - INFO - utils.trainer -   Sensitivity: 0.62037
+11/24/2025 18:40:42 - INFO - utils.trainer -   Loss: 0.58024
+11/24/2025 18:40:42 - INFO - utils.trainer -    Train loss: 0.57516, Test loss: 0.58024,Epoch time = 15.723s
+11/24/2025 18:40:58 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:41:02 - INFO - utils.trainer -   AUC: 0.73402
+11/24/2025 18:41:02 - INFO - utils.trainer -   Accuracy: 0.73865
+11/24/2025 18:41:02 - INFO - utils.trainer -   Precision: 0.72547
+11/24/2025 18:41:02 - INFO - utils.trainer -   Recall: 0.67593
+11/24/2025 18:41:02 - INFO - utils.trainer -   F_score: 0.69982
+11/24/2025 18:41:02 - INFO - utils.trainer -   Specificity: 0.79012
+11/24/2025 18:41:02 - INFO - utils.trainer -   Sensitivity: 0.67593
+11/24/2025 18:41:02 - INFO - utils.trainer -   Loss: 0.57418
+11/24/2025 18:41:02 - INFO - utils.trainer -    Train loss: 0.55685, Test loss: 0.57418,Epoch time = 15.737s
+11/24/2025 18:41:17 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:41:22 - INFO - utils.trainer -   AUC: 0.71157
+11/24/2025 18:41:22 - INFO - utils.trainer -   Accuracy: 0.71622
+11/24/2025 18:41:22 - INFO - utils.trainer -   Precision: 0.70888
+11/24/2025 18:41:22 - INFO - utils.trainer -   Recall: 0.62847
+11/24/2025 18:41:22 - INFO - utils.trainer -   F_score: 0.66626
+11/24/2025 18:41:22 - INFO - utils.trainer -   Specificity: 0.78822
+11/24/2025 18:41:22 - INFO - utils.trainer -   Sensitivity: 0.62847
+11/24/2025 18:41:22 - INFO - utils.trainer -   Loss: 0.59667
+11/24/2025 18:41:22 - INFO - utils.trainer -    Train loss: 0.56160, Test loss: 0.59667,Epoch time = 15.526s
+11/24/2025 18:41:37 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:41:41 - INFO - utils.trainer -   AUC: 0.72830
+11/24/2025 18:41:41 - INFO - utils.trainer -   Accuracy: 0.73552
+11/24/2025 18:41:41 - INFO - utils.trainer -   Precision: 0.78199
+11/24/2025 18:41:41 - INFO - utils.trainer -   Recall: 0.57292
+11/24/2025 18:41:41 - INFO - utils.trainer -   F_score: 0.66132
+11/24/2025 18:41:41 - INFO - utils.trainer -   Specificity: 0.86895
+11/24/2025 18:41:41 - INFO - utils.trainer -   Sensitivity: 0.57292
+11/24/2025 18:41:41 - INFO - utils.trainer -   Loss: 0.57679
+11/24/2025 18:41:41 - INFO - utils.trainer -    Train loss: 0.56136, Test loss: 0.57679,Epoch time = 15.579s
+11/24/2025 18:41:57 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:42:01 - INFO - utils.trainer -   AUC: 0.72513
+11/24/2025 18:42:01 - INFO - utils.trainer -   Accuracy: 0.72561
+11/24/2025 18:42:01 - INFO - utils.trainer -   Precision: 0.71611
+11/24/2025 18:42:01 - INFO - utils.trainer -   Recall: 0.64815
+11/24/2025 18:42:01 - INFO - utils.trainer -   F_score: 0.68044
+11/24/2025 18:42:01 - INFO - utils.trainer -   Specificity: 0.78917
+11/24/2025 18:42:01 - INFO - utils.trainer -   Sensitivity: 0.64815
+11/24/2025 18:42:01 - INFO - utils.trainer -   Loss: 0.58675
+11/24/2025 18:42:01 - INFO - utils.trainer -    Train loss: 0.58484, Test loss: 0.58675,Epoch time = 15.535s
+11/24/2025 18:42:16 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:42:20 - INFO - utils.trainer -   AUC: 0.75038
+11/24/2025 18:42:20 - INFO - utils.trainer -   Accuracy: 0.74961
+11/24/2025 18:42:20 - INFO - utils.trainer -   Precision: 0.72803
+11/24/2025 18:42:20 - INFO - utils.trainer -   Recall: 0.70949
+11/24/2025 18:42:20 - INFO - utils.trainer -   F_score: 0.71864
+11/24/2025 18:42:20 - INFO - utils.trainer -   Specificity: 0.78253
+11/24/2025 18:42:20 - INFO - utils.trainer -   Sensitivity: 0.70949
+11/24/2025 18:42:20 - INFO - utils.trainer -   Loss: 0.56347
+11/24/2025 18:42:20 - INFO - utils.trainer -    Train loss: 0.56823, Test loss: 0.56347,Epoch time = 15.187s
+11/24/2025 18:42:35 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:42:39 - INFO - utils.trainer -   AUC: 0.77995
+11/24/2025 18:42:39 - INFO - utils.trainer -   Accuracy: 0.76056
+11/24/2025 18:42:39 - INFO - utils.trainer -   Precision: 0.68527
+11/24/2025 18:42:39 - INFO - utils.trainer -   Recall: 0.86690
+11/24/2025 18:42:39 - INFO - utils.trainer -   F_score: 0.76546
+11/24/2025 18:42:39 - INFO - utils.trainer -   Specificity: 0.67331
+11/24/2025 18:42:39 - INFO - utils.trainer -   Sensitivity: 0.86690
+11/24/2025 18:42:39 - INFO - utils.trainer -   Loss: 0.55136
+11/24/2025 18:42:39 - INFO - utils.trainer -    Train loss: 0.55477, Test loss: 0.55136,Epoch time = 14.937s
+11/24/2025 18:42:55 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:43:00 - INFO - utils.trainer -   AUC: 0.76220
+11/24/2025 18:43:00 - INFO - utils.trainer -   Accuracy: 0.76213
+11/24/2025 18:43:00 - INFO - utils.trainer -   Precision: 0.76494
+11/24/2025 18:43:00 - INFO - utils.trainer -   Recall: 0.68171
+11/24/2025 18:43:00 - INFO - utils.trainer -   F_score: 0.72093
+11/24/2025 18:43:00 - INFO - utils.trainer -   Specificity: 0.82811
+11/24/2025 18:43:00 - INFO - utils.trainer -   Sensitivity: 0.68171
+11/24/2025 18:43:00 - INFO - utils.trainer -   Loss: 0.54998
+11/24/2025 18:43:00 - INFO - utils.trainer -    Train loss: 0.56236, Test loss: 0.54998,Epoch time = 15.443s
+11/24/2025 18:43:00 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:43:15 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:43:20 - INFO - utils.trainer -   AUC: 0.50579
+11/24/2025 18:43:20 - INFO - utils.trainer -   Accuracy: 0.55399
+11/24/2025 18:43:20 - INFO - utils.trainer -   Precision: 1.00000
+11/24/2025 18:43:20 - INFO - utils.trainer -   Recall: 0.01042
+11/24/2025 18:43:20 - INFO - utils.trainer -   F_score: 0.02062
+11/24/2025 18:43:20 - INFO - utils.trainer -   Specificity: 1.00000
+11/24/2025 18:43:20 - INFO - utils.trainer -   Sensitivity: 0.01042
+11/24/2025 18:43:20 - INFO - utils.trainer -   Loss: 0.75857
+11/24/2025 18:43:20 - INFO - utils.trainer -    Train loss: 0.55604, Test loss: 0.75857,Epoch time = 15.326s
+11/24/2025 18:43:35 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:43:40 - INFO - utils.trainer -   AUC: 0.73601
+11/24/2025 18:43:40 - INFO - utils.trainer -   Accuracy: 0.70892
+11/24/2025 18:43:40 - INFO - utils.trainer -   Precision: 0.61591
+11/24/2025 18:43:40 - INFO - utils.trainer -   Recall: 0.94097
+11/24/2025 18:43:40 - INFO - utils.trainer -   F_score: 0.74451
+11/24/2025 18:43:40 - INFO - utils.trainer -   Specificity: 0.51852
+11/24/2025 18:43:40 - INFO - utils.trainer -   Sensitivity: 0.94097
+11/24/2025 18:43:40 - INFO - utils.trainer -   Loss: 0.60405
+11/24/2025 18:43:40 - INFO - utils.trainer -    Train loss: 0.55645, Test loss: 0.60405,Epoch time = 15.448s
+11/24/2025 18:43:55 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:43:59 - INFO - utils.trainer -   AUC: 0.77202
+11/24/2025 18:43:59 - INFO - utils.trainer -   Accuracy: 0.77308
+11/24/2025 18:43:59 - INFO - utils.trainer -   Precision: 0.76449
+11/24/2025 18:43:59 - INFO - utils.trainer -   Recall: 0.71759
+11/24/2025 18:43:59 - INFO - utils.trainer -   F_score: 0.74030
+11/24/2025 18:43:59 - INFO - utils.trainer -   Specificity: 0.81861
+11/24/2025 18:43:59 - INFO - utils.trainer -   Sensitivity: 0.71759
+11/24/2025 18:43:59 - INFO - utils.trainer -   Loss: 0.53983
+11/24/2025 18:43:59 - INFO - utils.trainer -    Train loss: 0.55348, Test loss: 0.53983,Epoch time = 15.595s
+11/24/2025 18:43:59 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:44:15 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:44:19 - INFO - utils.trainer -   AUC: 0.76332
+11/24/2025 18:44:19 - INFO - utils.trainer -   Accuracy: 0.74544
+11/24/2025 18:44:19 - INFO - utils.trainer -   Precision: 0.65905
+11/24/2025 18:44:19 - INFO - utils.trainer -   Recall: 0.90162
+11/24/2025 18:44:19 - INFO - utils.trainer -   F_score: 0.76149
+11/24/2025 18:44:19 - INFO - utils.trainer -   Specificity: 0.61728
+11/24/2025 18:44:19 - INFO - utils.trainer -   Sensitivity: 0.90162
+11/24/2025 18:44:19 - INFO - utils.trainer -   Loss: 0.56752
+11/24/2025 18:44:19 - INFO - utils.trainer -    Train loss: 0.55396, Test loss: 0.56752,Epoch time = 15.599s
+11/24/2025 18:44:35 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:44:39 - INFO - utils.trainer -   AUC: 0.75981
+11/24/2025 18:44:39 - INFO - utils.trainer -   Accuracy: 0.73657
+11/24/2025 18:44:39 - INFO - utils.trainer -   Precision: 0.64371
+11/24/2025 18:44:39 - INFO - utils.trainer -   Recall: 0.93056
+11/24/2025 18:44:39 - INFO - utils.trainer -   F_score: 0.76100
+11/24/2025 18:44:39 - INFO - utils.trainer -   Specificity: 0.57740
+11/24/2025 18:44:39 - INFO - utils.trainer -   Sensitivity: 0.93056
+11/24/2025 18:44:39 - INFO - utils.trainer -   Loss: 0.57611
+11/24/2025 18:44:39 - INFO - utils.trainer -    Train loss: 0.55732, Test loss: 0.57611,Epoch time = 15.621s
+11/24/2025 18:44:55 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:44:59 - INFO - utils.trainer -   AUC: 0.73901
+11/24/2025 18:44:59 - INFO - utils.trainer -   Accuracy: 0.74387
+11/24/2025 18:44:59 - INFO - utils.trainer -   Precision: 0.74443
+11/24/2025 18:44:59 - INFO - utils.trainer -   Recall: 0.65741
+11/24/2025 18:44:59 - INFO - utils.trainer -   F_score: 0.69822
+11/24/2025 18:44:59 - INFO - utils.trainer -   Specificity: 0.81481
+11/24/2025 18:44:59 - INFO - utils.trainer -   Sensitivity: 0.65741
+11/24/2025 18:44:59 - INFO - utils.trainer -   Loss: 0.56884
+11/24/2025 18:44:59 - INFO - utils.trainer -    Train loss: 0.56494, Test loss: 0.56884,Epoch time = 15.688s
+11/24/2025 18:45:14 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:45:18 - INFO - utils.trainer -   AUC: 0.75864
+11/24/2025 18:45:18 - INFO - utils.trainer -   Accuracy: 0.75743
+11/24/2025 18:45:18 - INFO - utils.trainer -   Precision: 0.72800
+11/24/2025 18:45:18 - INFO - utils.trainer -   Recall: 0.73727
+11/24/2025 18:45:18 - INFO - utils.trainer -   F_score: 0.73260
+11/24/2025 18:45:18 - INFO - utils.trainer -   Specificity: 0.77398
+11/24/2025 18:45:18 - INFO - utils.trainer -   Sensitivity: 0.73727
+11/24/2025 18:45:18 - INFO - utils.trainer -   Loss: 0.55551
+11/24/2025 18:45:18 - INFO - utils.trainer -    Train loss: 0.56182, Test loss: 0.55551,Epoch time = 15.312s
+11/24/2025 18:45:34 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:45:38 - INFO - utils.trainer -   AUC: 0.72979
+11/24/2025 18:45:38 - INFO - utils.trainer -   Accuracy: 0.73396
+11/24/2025 18:45:38 - INFO - utils.trainer -   Precision: 0.73537
+11/24/2025 18:45:38 - INFO - utils.trainer -   Recall: 0.64005
+11/24/2025 18:45:38 - INFO - utils.trainer -   F_score: 0.68441
+11/24/2025 18:45:38 - INFO - utils.trainer -   Specificity: 0.81102
+11/24/2025 18:45:38 - INFO - utils.trainer -   Sensitivity: 0.64005
+11/24/2025 18:45:38 - INFO - utils.trainer -   Loss: 0.57817
+11/24/2025 18:45:38 - INFO - utils.trainer -    Train loss: 0.58051, Test loss: 0.57817,Epoch time = 15.301s
+11/24/2025 18:45:53 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:45:57 - INFO - utils.trainer -   AUC: 0.74120
+11/24/2025 18:45:57 - INFO - utils.trainer -   Accuracy: 0.74648
+11/24/2025 18:45:57 - INFO - utils.trainer -   Precision: 0.75610
+11/24/2025 18:45:57 - INFO - utils.trainer -   Recall: 0.64583
+11/24/2025 18:45:57 - INFO - utils.trainer -   F_score: 0.69663
+11/24/2025 18:45:57 - INFO - utils.trainer -   Specificity: 0.82906
+11/24/2025 18:45:57 - INFO - utils.trainer -   Sensitivity: 0.64583
+11/24/2025 18:45:57 - INFO - utils.trainer -   Loss: 0.56635
+11/24/2025 18:45:57 - INFO - utils.trainer -    Train loss: 0.57832, Test loss: 0.56635,Epoch time = 15.010s
+11/24/2025 18:46:12 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:46:16 - INFO - utils.trainer -   AUC: 0.77439
+11/24/2025 18:46:16 - INFO - utils.trainer -   Accuracy: 0.77673
+11/24/2025 18:46:16 - INFO - utils.trainer -   Precision: 0.78093
+11/24/2025 18:46:16 - INFO - utils.trainer -   Recall: 0.70139
+11/24/2025 18:46:16 - INFO - utils.trainer -   F_score: 0.73902
+11/24/2025 18:46:16 - INFO - utils.trainer -   Specificity: 0.83856
+11/24/2025 18:46:16 - INFO - utils.trainer -   Sensitivity: 0.70139
+11/24/2025 18:46:16 - INFO - utils.trainer -   Loss: 0.53599
+11/24/2025 18:46:16 - INFO - utils.trainer -    Train loss: 0.56107, Test loss: 0.53599,Epoch time = 15.191s
+11/24/2025 18:46:16 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:46:32 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:46:36 - INFO - utils.trainer -   AUC: 0.77576
+11/24/2025 18:46:36 - INFO - utils.trainer -   Accuracy: 0.75483
+11/24/2025 18:46:36 - INFO - utils.trainer -   Precision: 0.67281
+11/24/2025 18:46:36 - INFO - utils.trainer -   Recall: 0.88773
+11/24/2025 18:46:36 - INFO - utils.trainer -   F_score: 0.76547
+11/24/2025 18:46:36 - INFO - utils.trainer -   Specificity: 0.64577
+11/24/2025 18:46:36 - INFO - utils.trainer -   Sensitivity: 0.88773
+11/24/2025 18:46:36 - INFO - utils.trainer -   Loss: 0.55767
+11/24/2025 18:46:36 - INFO - utils.trainer -    Train loss: 0.54774, Test loss: 0.55767,Epoch time = 15.418s
+11/24/2025 18:46:52 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:46:56 - INFO - utils.trainer -   AUC: 0.76738
+11/24/2025 18:46:56 - INFO - utils.trainer -   Accuracy: 0.76421
+11/24/2025 18:46:56 - INFO - utils.trainer -   Precision: 0.73409
+11/24/2025 18:46:56 - INFO - utils.trainer -   Recall: 0.74769
+11/24/2025 18:46:56 - INFO - utils.trainer -   F_score: 0.74083
+11/24/2025 18:46:56 - INFO - utils.trainer -   Specificity: 0.77778
+11/24/2025 18:46:56 - INFO - utils.trainer -   Sensitivity: 0.74769
+11/24/2025 18:46:56 - INFO - utils.trainer -   Loss: 0.54822
+11/24/2025 18:46:56 - INFO - utils.trainer -    Train loss: 0.54824, Test loss: 0.54822,Epoch time = 15.489s
+11/24/2025 18:47:11 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:47:15 - INFO - utils.trainer -   AUC: 0.77039
+11/24/2025 18:47:15 - INFO - utils.trainer -   Accuracy: 0.77047
+11/24/2025 18:47:15 - INFO - utils.trainer -   Precision: 0.77532
+11/24/2025 18:47:15 - INFO - utils.trainer -   Recall: 0.69097
+11/24/2025 18:47:15 - INFO - utils.trainer -   F_score: 0.73072
+11/24/2025 18:47:15 - INFO - utils.trainer -   Specificity: 0.83571
+11/24/2025 18:47:15 - INFO - utils.trainer -   Sensitivity: 0.69097
+11/24/2025 18:47:15 - INFO - utils.trainer -   Loss: 0.54210
+11/24/2025 18:47:15 - INFO - utils.trainer -    Train loss: 0.55847, Test loss: 0.54210,Epoch time = 15.636s
+11/24/2025 18:47:31 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:47:35 - INFO - utils.trainer -   AUC: 0.74929
+11/24/2025 18:47:35 - INFO - utils.trainer -   Accuracy: 0.75326
+11/24/2025 18:47:35 - INFO - utils.trainer -   Precision: 0.80031
+11/24/2025 18:47:35 - INFO - utils.trainer -   Recall: 0.60301
+11/24/2025 18:47:35 - INFO - utils.trainer -   F_score: 0.68779
+11/24/2025 18:47:35 - INFO - utils.trainer -   Specificity: 0.87654
+11/24/2025 18:47:35 - INFO - utils.trainer -   Sensitivity: 0.60301
+11/24/2025 18:47:35 - INFO - utils.trainer -   Loss: 0.55910
+11/24/2025 18:47:35 - INFO - utils.trainer -    Train loss: 0.55163, Test loss: 0.55910,Epoch time = 15.533s
+11/24/2025 18:47:51 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:47:55 - INFO - utils.trainer -   AUC: 0.78236
+11/24/2025 18:47:55 - INFO - utils.trainer -   Accuracy: 0.77517
+11/24/2025 18:47:55 - INFO - utils.trainer -   Precision: 0.72910
+11/24/2025 18:47:55 - INFO - utils.trainer -   Recall: 0.79745
+11/24/2025 18:47:55 - INFO - utils.trainer -   F_score: 0.76175
+11/24/2025 18:47:55 - INFO - utils.trainer -   Specificity: 0.75689
+11/24/2025 18:47:55 - INFO - utils.trainer -   Sensitivity: 0.79745
+11/24/2025 18:47:55 - INFO - utils.trainer -   Loss: 0.53734
+11/24/2025 18:47:55 - INFO - utils.trainer -    Train loss: 0.55725, Test loss: 0.53734,Epoch time = 15.471s
+11/24/2025 18:48:10 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:48:14 - INFO - utils.trainer -   AUC: 0.75804
+11/24/2025 18:48:14 - INFO - utils.trainer -   Accuracy: 0.73657
+11/24/2025 18:48:14 - INFO - utils.trainer -   Precision: 0.64996
+11/24/2025 18:48:14 - INFO - utils.trainer -   Recall: 0.90046
+11/24/2025 18:48:14 - INFO - utils.trainer -   F_score: 0.75497
+11/24/2025 18:48:14 - INFO - utils.trainer -   Specificity: 0.60209
+11/24/2025 18:48:14 - INFO - utils.trainer -   Sensitivity: 0.90046
+11/24/2025 18:48:14 - INFO - utils.trainer -   Loss: 0.57629
+11/24/2025 18:48:14 - INFO - utils.trainer -    Train loss: 0.56062, Test loss: 0.57629,Epoch time = 15.502s
+11/24/2025 18:48:30 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:48:34 - INFO - utils.trainer -   AUC: 0.78266
+11/24/2025 18:48:34 - INFO - utils.trainer -   Accuracy: 0.77100
+11/24/2025 18:48:34 - INFO - utils.trainer -   Precision: 0.72534
+11/24/2025 18:48:34 - INFO - utils.trainer -   Recall: 0.79167
+11/24/2025 18:48:34 - INFO - utils.trainer -   F_score: 0.75706
+11/24/2025 18:48:34 - INFO - utils.trainer -   Specificity: 0.75404
+11/24/2025 18:48:34 - INFO - utils.trainer -   Sensitivity: 0.79167
+11/24/2025 18:48:34 - INFO - utils.trainer -   Loss: 0.54153
+11/24/2025 18:48:34 - INFO - utils.trainer -    Train loss: 0.54562, Test loss: 0.54153,Epoch time = 15.104s
+11/24/2025 18:48:49 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:48:53 - INFO - utils.trainer -   AUC: 0.75686
+11/24/2025 18:48:53 - INFO - utils.trainer -   Accuracy: 0.76109
+11/24/2025 18:48:53 - INFO - utils.trainer -   Precision: 0.78039
+11/24/2025 18:48:53 - INFO - utils.trainer -   Recall: 0.65394
+11/24/2025 18:48:53 - INFO - utils.trainer -   F_score: 0.71159
+11/24/2025 18:48:53 - INFO - utils.trainer -   Specificity: 0.84900
+11/24/2025 18:48:53 - INFO - utils.trainer -   Sensitivity: 0.65394
+11/24/2025 18:48:53 - INFO - utils.trainer -   Loss: 0.55191
+11/24/2025 18:48:53 - INFO - utils.trainer -    Train loss: 0.54128, Test loss: 0.55191,Epoch time = 15.165s
+11/24/2025 18:49:09 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:49:13 - INFO - utils.trainer -   AUC: 0.77627
+11/24/2025 18:49:13 - INFO - utils.trainer -   Accuracy: 0.76787
+11/24/2025 18:49:13 - INFO - utils.trainer -   Precision: 0.71312
+11/24/2025 18:49:13 - INFO - utils.trainer -   Recall: 0.81134
+11/24/2025 18:49:13 - INFO - utils.trainer -   F_score: 0.75907
+11/24/2025 18:49:13 - INFO - utils.trainer -   Specificity: 0.73219
+11/24/2025 18:49:13 - INFO - utils.trainer -   Sensitivity: 0.81134
+11/24/2025 18:49:13 - INFO - utils.trainer -   Loss: 0.54531
+11/24/2025 18:49:13 - INFO - utils.trainer -    Train loss: 0.55265, Test loss: 0.54531,Epoch time = 15.448s
+11/24/2025 18:49:29 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:49:33 - INFO - utils.trainer -   AUC: 0.76610
+11/24/2025 18:49:33 - INFO - utils.trainer -   Accuracy: 0.76004
+11/24/2025 18:49:33 - INFO - utils.trainer -   Precision: 0.76166
+11/24/2025 18:49:33 - INFO - utils.trainer -   Recall: 0.68056
+11/24/2025 18:49:33 - INFO - utils.trainer -   F_score: 0.71883
+11/24/2025 18:49:33 - INFO - utils.trainer -   Specificity: 0.82526
+11/24/2025 18:49:33 - INFO - utils.trainer -   Sensitivity: 0.68056
+11/24/2025 18:49:33 - INFO - utils.trainer -   Loss: 0.55182
+11/24/2025 18:49:33 - INFO - utils.trainer -    Train loss: 0.54443, Test loss: 0.55182,Epoch time = 15.451s
+11/24/2025 18:49:48 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:49:52 - INFO - utils.trainer -   AUC: 0.77761
+11/24/2025 18:49:52 - INFO - utils.trainer -   Accuracy: 0.76682
+11/24/2025 18:49:52 - INFO - utils.trainer -   Precision: 0.72688
+11/24/2025 18:49:52 - INFO - utils.trainer -   Recall: 0.77315
+11/24/2025 18:49:52 - INFO - utils.trainer -   F_score: 0.74930
+11/24/2025 18:49:52 - INFO - utils.trainer -   Specificity: 0.76163
+11/24/2025 18:49:52 - INFO - utils.trainer -   Sensitivity: 0.77315
+11/24/2025 18:49:52 - INFO - utils.trainer -   Loss: 0.54584
+11/24/2025 18:49:52 - INFO - utils.trainer -    Train loss: 0.53994, Test loss: 0.54584,Epoch time = 15.725s
+11/24/2025 18:50:08 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:50:13 - INFO - utils.trainer -   AUC: 0.78549
+11/24/2025 18:50:13 - INFO - utils.trainer -   Accuracy: 0.77830
+11/24/2025 18:50:13 - INFO - utils.trainer -   Precision: 0.73526
+11/24/2025 18:50:13 - INFO - utils.trainer -   Recall: 0.79398
+11/24/2025 18:50:13 - INFO - utils.trainer -   F_score: 0.76349
+11/24/2025 18:50:13 - INFO - utils.trainer -   Specificity: 0.76543
+11/24/2025 18:50:13 - INFO - utils.trainer -   Sensitivity: 0.79398
+11/24/2025 18:50:13 - INFO - utils.trainer -   Loss: 0.53423
+11/24/2025 18:50:13 - INFO - utils.trainer -    Train loss: 0.55375, Test loss: 0.53423,Epoch time = 15.677s
+11/24/2025 18:50:13 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:50:29 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:50:33 - INFO - utils.trainer -   AUC: 0.77485
+11/24/2025 18:50:33 - INFO - utils.trainer -   Accuracy: 0.76161
+11/24/2025 18:50:33 - INFO - utils.trainer -   Precision: 0.69363
+11/24/2025 18:50:33 - INFO - utils.trainer -   Recall: 0.84375
+11/24/2025 18:50:33 - INFO - utils.trainer -   F_score: 0.76136
+11/24/2025 18:50:33 - INFO - utils.trainer -   Specificity: 0.69421
+11/24/2025 18:50:33 - INFO - utils.trainer -   Sensitivity: 0.84375
+11/24/2025 18:50:33 - INFO - utils.trainer -   Loss: 0.55083
+11/24/2025 18:50:33 - INFO - utils.trainer -    Train loss: 0.53381, Test loss: 0.55083,Epoch time = 16.392s
+11/24/2025 18:50:49 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:50:53 - INFO - utils.trainer -   AUC: 0.75530
+11/24/2025 18:50:53 - INFO - utils.trainer -   Accuracy: 0.75587
+11/24/2025 18:50:53 - INFO - utils.trainer -   Precision: 0.75191
+11/24/2025 18:50:53 - INFO - utils.trainer -   Recall: 0.68403
+11/24/2025 18:50:53 - INFO - utils.trainer -   F_score: 0.71636
+11/24/2025 18:50:53 - INFO - utils.trainer -   Specificity: 0.81481
+11/24/2025 18:50:53 - INFO - utils.trainer -   Sensitivity: 0.68403
+11/24/2025 18:50:53 - INFO - utils.trainer -   Loss: 0.55686
+11/24/2025 18:50:53 - INFO - utils.trainer -    Train loss: 0.55010, Test loss: 0.55686,Epoch time = 15.384s
+11/24/2025 18:51:08 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:51:12 - INFO - utils.trainer -   AUC: 0.74569
+11/24/2025 18:51:12 - INFO - utils.trainer -   Accuracy: 0.75013
+11/24/2025 18:51:12 - INFO - utils.trainer -   Precision: 0.76262
+11/24/2025 18:51:12 - INFO - utils.trainer -   Recall: 0.64699
+11/24/2025 18:51:12 - INFO - utils.trainer -   F_score: 0.70006
+11/24/2025 18:51:12 - INFO - utils.trainer -   Specificity: 0.83476
+11/24/2025 18:51:12 - INFO - utils.trainer -   Sensitivity: 0.64699
+11/24/2025 18:51:12 - INFO - utils.trainer -   Loss: 0.56284
+11/24/2025 18:51:12 - INFO - utils.trainer -    Train loss: 0.55749, Test loss: 0.56284,Epoch time = 15.381s
+11/24/2025 18:51:27 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:51:32 - INFO - utils.trainer -   AUC: 0.78688
+11/24/2025 18:51:32 - INFO - utils.trainer -   Accuracy: 0.77934
+11/24/2025 18:51:32 - INFO - utils.trainer -   Precision: 0.75316
+11/24/2025 18:51:32 - INFO - utils.trainer -   Recall: 0.75926
+11/24/2025 18:51:32 - INFO - utils.trainer -   F_score: 0.75620
+11/24/2025 18:51:32 - INFO - utils.trainer -   Specificity: 0.79582
+11/24/2025 18:51:32 - INFO - utils.trainer -   Sensitivity: 0.75926
+11/24/2025 18:51:32 - INFO - utils.trainer -   Loss: 0.53361
+11/24/2025 18:51:32 - INFO - utils.trainer -    Train loss: 0.54351, Test loss: 0.53361,Epoch time = 15.120s
+11/24/2025 18:51:32 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:51:47 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:51:51 - INFO - utils.trainer -   AUC: 0.78502
+11/24/2025 18:51:51 - INFO - utils.trainer -   Accuracy: 0.77360
+11/24/2025 18:51:51 - INFO - utils.trainer -   Precision: 0.72775
+11/24/2025 18:51:51 - INFO - utils.trainer -   Recall: 0.79514
+11/24/2025 18:51:51 - INFO - utils.trainer -   F_score: 0.75996
+11/24/2025 18:51:51 - INFO - utils.trainer -   Specificity: 0.75594
+11/24/2025 18:51:51 - INFO - utils.trainer -   Sensitivity: 0.79514
+11/24/2025 18:51:51 - INFO - utils.trainer -   Loss: 0.53921
+11/24/2025 18:51:51 - INFO - utils.trainer -    Train loss: 0.54416, Test loss: 0.53921,Epoch time = 15.116s
+11/24/2025 18:52:06 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:52:11 - INFO - utils.trainer -   AUC: 0.78959
+11/24/2025 18:52:11 - INFO - utils.trainer -   Accuracy: 0.77726
+11/24/2025 18:52:11 - INFO - utils.trainer -   Precision: 0.72273
+11/24/2025 18:52:11 - INFO - utils.trainer -   Recall: 0.82060
+11/24/2025 18:52:11 - INFO - utils.trainer -   F_score: 0.76856
+11/24/2025 18:52:11 - INFO - utils.trainer -   Specificity: 0.74169
+11/24/2025 18:52:11 - INFO - utils.trainer -   Sensitivity: 0.82060
+11/24/2025 18:52:11 - INFO - utils.trainer -   Loss: 0.53570
+11/24/2025 18:52:11 - INFO - utils.trainer -    Train loss: 0.53660, Test loss: 0.53570,Epoch time = 15.281s
+11/24/2025 18:52:26 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:52:30 - INFO - utils.trainer -   AUC: 0.74198
+11/24/2025 18:52:30 - INFO - utils.trainer -   Accuracy: 0.74752
+11/24/2025 18:52:30 - INFO - utils.trainer -   Precision: 0.81353
+11/24/2025 18:52:30 - INFO - utils.trainer -   Recall: 0.57060
+11/24/2025 18:52:30 - INFO - utils.trainer -   F_score: 0.67075
+11/24/2025 18:52:30 - INFO - utils.trainer -   Specificity: 0.89269
+11/24/2025 18:52:30 - INFO - utils.trainer -   Sensitivity: 0.57060
+11/24/2025 18:52:30 - INFO - utils.trainer -   Loss: 0.56552
+11/24/2025 18:52:30 - INFO - utils.trainer -    Train loss: 0.54062, Test loss: 0.56552,Epoch time = 15.447s
+11/24/2025 18:52:46 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:52:50 - INFO - utils.trainer -   AUC: 0.77998
+11/24/2025 18:52:50 - INFO - utils.trainer -   Accuracy: 0.76265
+11/24/2025 18:52:50 - INFO - utils.trainer -   Precision: 0.68374
+11/24/2025 18:52:50 - INFO - utils.trainer -   Recall: 0.88079
+11/24/2025 18:52:50 - INFO - utils.trainer -   F_score: 0.76985
+11/24/2025 18:52:50 - INFO - utils.trainer -   Specificity: 0.66572
+11/24/2025 18:52:50 - INFO - utils.trainer -   Sensitivity: 0.88079
+11/24/2025 18:52:50 - INFO - utils.trainer -   Loss: 0.55005
+11/24/2025 18:52:50 - INFO - utils.trainer -    Train loss: 0.53913, Test loss: 0.55005,Epoch time = 15.476s
+11/24/2025 18:53:06 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:53:10 - INFO - utils.trainer -   AUC: 0.78882
+11/24/2025 18:53:10 - INFO - utils.trainer -   Accuracy: 0.77934
+11/24/2025 18:53:10 - INFO - utils.trainer -   Precision: 0.73433
+11/24/2025 18:53:10 - INFO - utils.trainer -   Recall: 0.79977
+11/24/2025 18:53:10 - INFO - utils.trainer -   F_score: 0.76565
+11/24/2025 18:53:10 - INFO - utils.trainer -   Specificity: 0.76258
+11/24/2025 18:53:10 - INFO - utils.trainer -   Sensitivity: 0.79977
+11/24/2025 18:53:10 - INFO - utils.trainer -   Loss: 0.53322
+11/24/2025 18:53:10 - INFO - utils.trainer -    Train loss: 0.52979, Test loss: 0.53322,Epoch time = 15.871s
+11/24/2025 18:53:10 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:53:25 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:53:29 - INFO - utils.trainer -   AUC: 0.79443
+11/24/2025 18:53:29 - INFO - utils.trainer -   Accuracy: 0.78665
+11/24/2025 18:53:29 - INFO - utils.trainer -   Precision: 0.74701
+11/24/2025 18:53:29 - INFO - utils.trainer -   Recall: 0.79630
+11/24/2025 18:53:29 - INFO - utils.trainer -   F_score: 0.77087
+11/24/2025 18:53:29 - INFO - utils.trainer -   Specificity: 0.77873
+11/24/2025 18:53:29 - INFO - utils.trainer -   Sensitivity: 0.79630
+11/24/2025 18:53:29 - INFO - utils.trainer -   Loss: 0.52539
+11/24/2025 18:53:29 - INFO - utils.trainer -    Train loss: 0.53122, Test loss: 0.52539,Epoch time = 15.643s
+11/24/2025 18:53:29 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:53:45 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:53:49 - INFO - utils.trainer -   AUC: 0.79466
+11/24/2025 18:53:49 - INFO - utils.trainer -   Accuracy: 0.78299
+11/24/2025 18:53:49 - INFO - utils.trainer -   Precision: 0.72951
+11/24/2025 18:53:49 - INFO - utils.trainer -   Recall: 0.82407
+11/24/2025 18:53:49 - INFO - utils.trainer -   F_score: 0.77391
+11/24/2025 18:53:49 - INFO - utils.trainer -   Specificity: 0.74929
+11/24/2025 18:53:49 - INFO - utils.trainer -   Sensitivity: 0.82407
+11/24/2025 18:53:49 - INFO - utils.trainer -   Loss: 0.52954
+11/24/2025 18:53:49 - INFO - utils.trainer -    Train loss: 0.53595, Test loss: 0.52954,Epoch time = 15.351s
+11/24/2025 18:54:04 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:54:09 - INFO - utils.trainer -   AUC: 0.77286
+11/24/2025 18:54:09 - INFO - utils.trainer -   Accuracy: 0.76891
+11/24/2025 18:54:09 - INFO - utils.trainer -   Precision: 0.72806
+11/24/2025 18:54:09 - INFO - utils.trainer -   Recall: 0.77778
+11/24/2025 18:54:09 - INFO - utils.trainer -   F_score: 0.75210
+11/24/2025 18:54:09 - INFO - utils.trainer -   Specificity: 0.76163
+11/24/2025 18:54:09 - INFO - utils.trainer -   Sensitivity: 0.77778
+11/24/2025 18:54:09 - INFO - utils.trainer -   Loss: 0.54349
+11/24/2025 18:54:09 - INFO - utils.trainer -    Train loss: 0.53906, Test loss: 0.54349,Epoch time = 15.368s
+11/24/2025 18:54:24 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:54:28 - INFO - utils.trainer -   AUC: 0.79123
+11/24/2025 18:54:28 - INFO - utils.trainer -   Accuracy: 0.78143
+11/24/2025 18:54:28 - INFO - utils.trainer -   Precision: 0.73695
+11/24/2025 18:54:28 - INFO - utils.trainer -   Recall: 0.80093
+11/24/2025 18:54:28 - INFO - utils.trainer -   F_score: 0.76761
+11/24/2025 18:54:28 - INFO - utils.trainer -   Specificity: 0.76543
+11/24/2025 18:54:28 - INFO - utils.trainer -   Sensitivity: 0.80093
+11/24/2025 18:54:28 - INFO - utils.trainer -   Loss: 0.53127
+11/24/2025 18:54:28 - INFO - utils.trainer -    Train loss: 0.53658, Test loss: 0.53127,Epoch time = 15.368s
+11/24/2025 18:54:43 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:54:47 - INFO - utils.trainer -   AUC: 0.80388
+11/24/2025 18:54:47 - INFO - utils.trainer -   Accuracy: 0.79082
+11/24/2025 18:54:47 - INFO - utils.trainer -   Precision: 0.74039
+11/24/2025 18:54:47 - INFO - utils.trainer -   Recall: 0.82523
+11/24/2025 18:54:47 - INFO - utils.trainer -   F_score: 0.78051
+11/24/2025 18:54:47 - INFO - utils.trainer -   Specificity: 0.76258
+11/24/2025 18:54:47 - INFO - utils.trainer -   Sensitivity: 0.82523
+11/24/2025 18:54:47 - INFO - utils.trainer -   Loss: 0.52150
+11/24/2025 18:54:47 - INFO - utils.trainer -    Train loss: 0.53183, Test loss: 0.52150,Epoch time = 14.855s
+11/24/2025 18:54:47 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:55:03 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:55:08 - INFO - utils.trainer -   AUC: 0.80326
+11/24/2025 18:55:08 - INFO - utils.trainer -   Accuracy: 0.78456
+11/24/2025 18:55:08 - INFO - utils.trainer -   Precision: 0.71094
+11/24/2025 18:55:08 - INFO - utils.trainer -   Recall: 0.87963
+11/24/2025 18:55:08 - INFO - utils.trainer -   F_score: 0.78634
+11/24/2025 18:55:08 - INFO - utils.trainer -   Specificity: 0.70655
+11/24/2025 18:55:08 - INFO - utils.trainer -   Sensitivity: 0.87963
+11/24/2025 18:55:08 - INFO - utils.trainer -   Loss: 0.52795
+11/24/2025 18:55:08 - INFO - utils.trainer -    Train loss: 0.53020, Test loss: 0.52795,Epoch time = 15.643s
+11/24/2025 18:55:24 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:55:29 - INFO - utils.trainer -   AUC: 0.79149
+11/24/2025 18:55:29 - INFO - utils.trainer -   Accuracy: 0.77100
+11/24/2025 18:55:29 - INFO - utils.trainer -   Precision: 0.69058
+11/24/2025 18:55:29 - INFO - utils.trainer -   Recall: 0.89120
+11/24/2025 18:55:29 - INFO - utils.trainer -   F_score: 0.77817
+11/24/2025 18:55:29 - INFO - utils.trainer -   Specificity: 0.67236
+11/24/2025 18:55:29 - INFO - utils.trainer -   Sensitivity: 0.89120
+11/24/2025 18:55:29 - INFO - utils.trainer -   Loss: 0.54111
+11/24/2025 18:55:29 - INFO - utils.trainer -    Train loss: 0.53175, Test loss: 0.54111,Epoch time = 15.697s
+11/24/2025 18:55:45 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:55:50 - INFO - utils.trainer -   AUC: 0.79175
+11/24/2025 18:55:50 - INFO - utils.trainer -   Accuracy: 0.79082
+11/24/2025 18:55:50 - INFO - utils.trainer -   Precision: 0.78758
+11/24/2025 18:55:50 - INFO - utils.trainer -   Recall: 0.73380
+11/24/2025 18:55:50 - INFO - utils.trainer -   F_score: 0.75974
+11/24/2025 18:55:50 - INFO - utils.trainer -   Specificity: 0.83761
+11/24/2025 18:55:50 - INFO - utils.trainer -   Sensitivity: 0.73380
+11/24/2025 18:55:50 - INFO - utils.trainer -   Loss: 0.52234
+11/24/2025 18:55:50 - INFO - utils.trainer -    Train loss: 0.53234, Test loss: 0.52234,Epoch time = 16.068s
+11/24/2025 18:55:50 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:56:06 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:56:10 - INFO - utils.trainer -   AUC: 0.79741
+11/24/2025 18:56:10 - INFO - utils.trainer -   Accuracy: 0.79291
+11/24/2025 18:56:10 - INFO - utils.trainer -   Precision: 0.75631
+11/24/2025 18:56:10 - INFO - utils.trainer -   Recall: 0.79745
+11/24/2025 18:56:10 - INFO - utils.trainer -   F_score: 0.77634
+11/24/2025 18:56:10 - INFO - utils.trainer -   Specificity: 0.78917
+11/24/2025 18:56:10 - INFO - utils.trainer -   Sensitivity: 0.79745
+11/24/2025 18:56:10 - INFO - utils.trainer -   Loss: 0.52035
+11/24/2025 18:56:10 - INFO - utils.trainer -    Train loss: 0.52156, Test loss: 0.52035,Epoch time = 15.999s
+11/24/2025 18:56:10 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:56:27 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:56:31 - INFO - utils.trainer -   AUC: 0.78035
+11/24/2025 18:56:31 - INFO - utils.trainer -   Accuracy: 0.78091
+11/24/2025 18:56:31 - INFO - utils.trainer -   Precision: 0.79211
+11/24/2025 18:56:31 - INFO - utils.trainer -   Recall: 0.69676
+11/24/2025 18:56:31 - INFO - utils.trainer -   F_score: 0.74138
+11/24/2025 18:56:31 - INFO - utils.trainer -   Specificity: 0.84995
+11/24/2025 18:56:31 - INFO - utils.trainer -   Sensitivity: 0.69676
+11/24/2025 18:56:31 - INFO - utils.trainer -   Loss: 0.53184
+11/24/2025 18:56:31 - INFO - utils.trainer -    Train loss: 0.52035, Test loss: 0.53184,Epoch time = 16.387s
+11/24/2025 18:56:48 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:56:53 - INFO - utils.trainer -   AUC: 0.77018
+11/24/2025 18:56:53 - INFO - utils.trainer -   Accuracy: 0.77204
+11/24/2025 18:56:53 - INFO - utils.trainer -   Precision: 0.79048
+11/24/2025 18:56:53 - INFO - utils.trainer -   Recall: 0.67245
+11/24/2025 18:56:53 - INFO - utils.trainer -   F_score: 0.72670
+11/24/2025 18:56:53 - INFO - utils.trainer -   Specificity: 0.85375
+11/24/2025 18:56:53 - INFO - utils.trainer -   Sensitivity: 0.67245
+11/24/2025 18:56:53 - INFO - utils.trainer -   Loss: 0.54032
+11/24/2025 18:56:53 - INFO - utils.trainer -    Train loss: 0.53057, Test loss: 0.54032,Epoch time = 16.555s
+11/24/2025 18:57:09 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:57:14 - INFO - utils.trainer -   AUC: 0.81036
+11/24/2025 18:57:14 - INFO - utils.trainer -   Accuracy: 0.79656
+11/24/2025 18:57:14 - INFO - utils.trainer -   Precision: 0.74383
+11/24/2025 18:57:14 - INFO - utils.trainer -   Recall: 0.83681
+11/24/2025 18:57:14 - INFO - utils.trainer -   F_score: 0.78758
+11/24/2025 18:57:14 - INFO - utils.trainer -   Specificity: 0.76353
+11/24/2025 18:57:14 - INFO - utils.trainer -   Sensitivity: 0.83681
+11/24/2025 18:57:14 - INFO - utils.trainer -   Loss: 0.51615
+11/24/2025 18:57:14 - INFO - utils.trainer -    Train loss: 0.52707, Test loss: 0.51615,Epoch time = 16.369s
+11/24/2025 18:57:14 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 18:57:30 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:57:35 - INFO - utils.trainer -   AUC: 0.79026
+11/24/2025 18:57:35 - INFO - utils.trainer -   Accuracy: 0.78352
+11/24/2025 18:57:35 - INFO - utils.trainer -   Precision: 0.74270
+11/24/2025 18:57:35 - INFO - utils.trainer -   Recall: 0.79514
+11/24/2025 18:57:35 - INFO - utils.trainer -   F_score: 0.76803
+11/24/2025 18:57:35 - INFO - utils.trainer -   Specificity: 0.77398
+11/24/2025 18:57:35 - INFO - utils.trainer -   Sensitivity: 0.79514
+11/24/2025 18:57:35 - INFO - utils.trainer -   Loss: 0.52924
+11/24/2025 18:57:35 - INFO - utils.trainer -    Train loss: 0.52331, Test loss: 0.52924,Epoch time = 16.263s
+11/24/2025 18:57:51 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:57:56 - INFO - utils.trainer -   AUC: 0.79733
+11/24/2025 18:57:56 - INFO - utils.trainer -   Accuracy: 0.78560
+11/24/2025 18:57:56 - INFO - utils.trainer -   Precision: 0.74434
+11/24/2025 18:57:56 - INFO - utils.trainer -   Recall: 0.79861
+11/24/2025 18:57:56 - INFO - utils.trainer -   F_score: 0.77052
+11/24/2025 18:57:56 - INFO - utils.trainer -   Specificity: 0.77493
+11/24/2025 18:57:56 - INFO - utils.trainer -   Sensitivity: 0.79861
+11/24/2025 18:57:56 - INFO - utils.trainer -   Loss: 0.52700
+11/24/2025 18:57:56 - INFO - utils.trainer -    Train loss: 0.52939, Test loss: 0.52700,Epoch time = 16.127s
+11/24/2025 18:58:12 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:58:17 - INFO - utils.trainer -   AUC: 0.76198
+11/24/2025 18:58:17 - INFO - utils.trainer -   Accuracy: 0.76474
+11/24/2025 18:58:17 - INFO - utils.trainer -   Precision: 0.78326
+11/24/2025 18:58:17 - INFO - utils.trainer -   Recall: 0.66088
+11/24/2025 18:58:17 - INFO - utils.trainer -   F_score: 0.71689
+11/24/2025 18:58:17 - INFO - utils.trainer -   Specificity: 0.84995
+11/24/2025 18:58:17 - INFO - utils.trainer -   Sensitivity: 0.66088
+11/24/2025 18:58:17 - INFO - utils.trainer -   Loss: 0.54786
+11/24/2025 18:58:17 - INFO - utils.trainer -    Train loss: 0.52439, Test loss: 0.54786,Epoch time = 16.266s
+11/24/2025 18:58:33 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:58:38 - INFO - utils.trainer -   AUC: 0.79289
+11/24/2025 18:58:38 - INFO - utils.trainer -   Accuracy: 0.78299
+11/24/2025 18:58:38 - INFO - utils.trainer -   Precision: 0.72266
+11/24/2025 18:58:38 - INFO - utils.trainer -   Recall: 0.84144
+11/24/2025 18:58:38 - INFO - utils.trainer -   F_score: 0.77754
+11/24/2025 18:58:38 - INFO - utils.trainer -   Specificity: 0.73504
+11/24/2025 18:58:38 - INFO - utils.trainer -   Sensitivity: 0.84144
+11/24/2025 18:58:38 - INFO - utils.trainer -   Loss: 0.52951
+11/24/2025 18:58:38 - INFO - utils.trainer -    Train loss: 0.51831, Test loss: 0.52951,Epoch time = 15.940s
+11/24/2025 18:58:54 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:58:59 - INFO - utils.trainer -   AUC: 0.75434
+11/24/2025 18:58:59 - INFO - utils.trainer -   Accuracy: 0.76056
+11/24/2025 18:58:59 - INFO - utils.trainer -   Precision: 0.82927
+11/24/2025 18:58:59 - INFO - utils.trainer -   Recall: 0.59028
+11/24/2025 18:58:59 - INFO - utils.trainer -   F_score: 0.68966
+11/24/2025 18:58:59 - INFO - utils.trainer -   Specificity: 0.90028
+11/24/2025 18:58:59 - INFO - utils.trainer -   Sensitivity: 0.59028
+11/24/2025 18:58:59 - INFO - utils.trainer -   Loss: 0.55084
+11/24/2025 18:58:59 - INFO - utils.trainer -    Train loss: 0.52082, Test loss: 0.55084,Epoch time = 15.923s
+11/24/2025 18:59:14 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:59:19 - INFO - utils.trainer -   AUC: 0.78966
+11/24/2025 18:59:19 - INFO - utils.trainer -   Accuracy: 0.77830
+11/24/2025 18:59:19 - INFO - utils.trainer -   Precision: 0.72467
+11/24/2025 18:59:19 - INFO - utils.trainer -   Recall: 0.81944
+11/24/2025 18:59:19 - INFO - utils.trainer -   F_score: 0.76915
+11/24/2025 18:59:19 - INFO - utils.trainer -   Specificity: 0.74454
+11/24/2025 18:59:19 - INFO - utils.trainer -   Sensitivity: 0.81944
+11/24/2025 18:59:19 - INFO - utils.trainer -   Loss: 0.53466
+11/24/2025 18:59:19 - INFO - utils.trainer -    Train loss: 0.52490, Test loss: 0.53466,Epoch time = 15.644s
+11/24/2025 18:59:34 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:59:39 - INFO - utils.trainer -   AUC: 0.79391
+11/24/2025 18:59:39 - INFO - utils.trainer -   Accuracy: 0.77882
+11/24/2025 18:59:39 - INFO - utils.trainer -   Precision: 0.70333
+11/24/2025 18:59:39 - INFO - utils.trainer -   Recall: 0.88079
+11/24/2025 18:59:39 - INFO - utils.trainer -   F_score: 0.78212
+11/24/2025 18:59:39 - INFO - utils.trainer -   Specificity: 0.69516
+11/24/2025 18:59:39 - INFO - utils.trainer -   Sensitivity: 0.88079
+11/24/2025 18:59:39 - INFO - utils.trainer -   Loss: 0.53362
+11/24/2025 18:59:39 - INFO - utils.trainer -    Train loss: 0.53235, Test loss: 0.53362,Epoch time = 15.306s
+11/24/2025 18:59:55 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 18:59:59 - INFO - utils.trainer -   AUC: 0.80620
+11/24/2025 18:59:59 - INFO - utils.trainer -   Accuracy: 0.79395
+11/24/2025 18:59:59 - INFO - utils.trainer -   Precision: 0.74051
+11/24/2025 18:59:59 - INFO - utils.trainer -   Recall: 0.83565
+11/24/2025 18:59:59 - INFO - utils.trainer -   F_score: 0.78521
+11/24/2025 18:59:59 - INFO - utils.trainer -   Specificity: 0.75973
+11/24/2025 18:59:59 - INFO - utils.trainer -   Sensitivity: 0.83565
+11/24/2025 18:59:59 - INFO - utils.trainer -   Loss: 0.51883
+11/24/2025 18:59:59 - INFO - utils.trainer -    Train loss: 0.52638, Test loss: 0.51883,Epoch time = 15.660s
+11/24/2025 19:00:15 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 19:00:20 - INFO - utils.trainer -   AUC: 0.80604
+11/24/2025 19:00:20 - INFO - utils.trainer -   Accuracy: 0.79551
+11/24/2025 19:00:20 - INFO - utils.trainer -   Precision: 0.75268
+11/24/2025 19:00:20 - INFO - utils.trainer -   Recall: 0.81366
+11/24/2025 19:00:20 - INFO - utils.trainer -   F_score: 0.78198
+11/24/2025 19:00:20 - INFO - utils.trainer -   Specificity: 0.78063
+11/24/2025 19:00:20 - INFO - utils.trainer -   Sensitivity: 0.81366
+11/24/2025 19:00:20 - INFO - utils.trainer -   Loss: 0.51632
+11/24/2025 19:00:20 - INFO - utils.trainer -    Train loss: 0.52626, Test loss: 0.51632,Epoch time = 15.737s
+11/24/2025 19:00:36 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 19:00:41 - INFO - utils.trainer -   AUC: 0.79282
+11/24/2025 19:00:41 - INFO - utils.trainer -   Accuracy: 0.78456
+11/24/2025 19:00:41 - INFO - utils.trainer -   Precision: 0.73563
+11/24/2025 19:00:41 - INFO - utils.trainer -   Recall: 0.81481
+11/24/2025 19:00:41 - INFO - utils.trainer -   F_score: 0.77320
+11/24/2025 19:00:41 - INFO - utils.trainer -   Specificity: 0.75973
+11/24/2025 19:00:41 - INFO - utils.trainer -   Sensitivity: 0.81481
+11/24/2025 19:00:41 - INFO - utils.trainer -   Loss: 0.52801
+11/24/2025 19:00:41 - INFO - utils.trainer -    Train loss: 0.52507, Test loss: 0.52801,Epoch time = 15.857s
+11/24/2025 19:00:57 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 19:01:01 - INFO - utils.trainer -   AUC: 0.79121
+11/24/2025 19:01:01 - INFO - utils.trainer -   Accuracy: 0.78039
+11/24/2025 19:01:01 - INFO - utils.trainer -   Precision: 0.72128
+11/24/2025 19:01:01 - INFO - utils.trainer -   Recall: 0.83565
+11/24/2025 19:01:01 - INFO - utils.trainer -   F_score: 0.77426
+11/24/2025 19:01:01 - INFO - utils.trainer -   Specificity: 0.73504
+11/24/2025 19:01:01 - INFO - utils.trainer -   Sensitivity: 0.83565
+11/24/2025 19:01:01 - INFO - utils.trainer -   Loss: 0.53186
+11/24/2025 19:01:01 - INFO - utils.trainer -    Train loss: 0.52292, Test loss: 0.53186,Epoch time = 16.115s
+11/24/2025 19:01:18 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 19:01:22 - INFO - utils.trainer -   AUC: 0.80333
+11/24/2025 19:01:22 - INFO - utils.trainer -   Accuracy: 0.79238
+11/24/2025 19:01:22 - INFO - utils.trainer -   Precision: 0.74840
+11/24/2025 19:01:22 - INFO - utils.trainer -   Recall: 0.81250
+11/24/2025 19:01:22 - INFO - utils.trainer -   F_score: 0.77913
+11/24/2025 19:01:22 - INFO - utils.trainer -   Specificity: 0.77588
+11/24/2025 19:01:22 - INFO - utils.trainer -   Sensitivity: 0.81250
+11/24/2025 19:01:22 - INFO - utils.trainer -   Loss: 0.52111
+11/24/2025 19:01:22 - INFO - utils.trainer -    Train loss: 0.52939, Test loss: 0.52111,Epoch time = 16.163s
+11/24/2025 19:01:39 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 19:01:44 - INFO - utils.trainer -   AUC: 0.78808
+11/24/2025 19:01:44 - INFO - utils.trainer -   Accuracy: 0.76474
+11/24/2025 19:01:44 - INFO - utils.trainer -   Precision: 0.68291
+11/24/2025 19:01:44 - INFO - utils.trainer -   Recall: 0.89236
+11/24/2025 19:01:44 - INFO - utils.trainer -   F_score: 0.77371
+11/24/2025 19:01:44 - INFO - utils.trainer -   Specificity: 0.66002
+11/24/2025 19:01:44 - INFO - utils.trainer -   Sensitivity: 0.89236
+11/24/2025 19:01:44 - INFO - utils.trainer -   Loss: 0.54762
+11/24/2025 19:01:44 - INFO - utils.trainer -    Train loss: 0.52232, Test loss: 0.54762,Epoch time = 16.444s
+11/24/2025 19:02:00 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 19:02:04 - INFO - utils.trainer -   AUC: 0.80092
+11/24/2025 19:02:04 - INFO - utils.trainer -   Accuracy: 0.78925
+11/24/2025 19:02:04 - INFO - utils.trainer -   Precision: 0.72593
+11/24/2025 19:02:04 - INFO - utils.trainer -   Recall: 0.85532
+11/24/2025 19:02:04 - INFO - utils.trainer -   F_score: 0.78533
+11/24/2025 19:02:04 - INFO - utils.trainer -   Specificity: 0.73504
+11/24/2025 19:02:04 - INFO - utils.trainer -   Sensitivity: 0.85532
+11/24/2025 19:02:04 - INFO - utils.trainer -   Loss: 0.52352
+11/24/2025 19:02:04 - INFO - utils.trainer -    Train loss: 0.52499, Test loss: 0.52352,Epoch time = 16.028s
+11/24/2025 19:02:21 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 19:02:25 - INFO - utils.trainer -   AUC: 0.79402
+11/24/2025 19:02:25 - INFO - utils.trainer -   Accuracy: 0.78247
+11/24/2025 19:02:25 - INFO - utils.trainer -   Precision: 0.72151
+11/24/2025 19:02:25 - INFO - utils.trainer -   Recall: 0.84259
+11/24/2025 19:02:25 - INFO - utils.trainer -   F_score: 0.77736
+11/24/2025 19:02:25 - INFO - utils.trainer -   Specificity: 0.73314
+11/24/2025 19:02:25 - INFO - utils.trainer -   Sensitivity: 0.84259
+11/24/2025 19:02:25 - INFO - utils.trainer -   Loss: 0.53079
+11/24/2025 19:02:25 - INFO - utils.trainer -    Train loss: 0.52052, Test loss: 0.53079,Epoch time = 16.444s
+11/24/2025 19:02:41 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 19:02:46 - INFO - utils.trainer -   AUC: 0.80405
+11/24/2025 19:02:46 - INFO - utils.trainer -   Accuracy: 0.79343
+11/24/2025 19:02:46 - INFO - utils.trainer -   Precision: 0.74224
+11/24/2025 19:02:46 - INFO - utils.trainer -   Recall: 0.82986
+11/24/2025 19:02:46 - INFO - utils.trainer -   F_score: 0.78361
+11/24/2025 19:02:46 - INFO - utils.trainer -   Specificity: 0.76353
+11/24/2025 19:02:46 - INFO - utils.trainer -   Sensitivity: 0.82986
+11/24/2025 19:02:46 - INFO - utils.trainer -   Loss: 0.51923
+11/24/2025 19:02:46 - INFO - utils.trainer -    Train loss: 0.51944, Test loss: 0.51923,Epoch time = 15.598s
+11/24/2025 19:03:01 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 19:03:06 - INFO - utils.trainer -   AUC: 0.79215
+11/24/2025 19:03:06 - INFO - utils.trainer -   Accuracy: 0.78560
+11/24/2025 19:03:06 - INFO - utils.trainer -   Precision: 0.73520
+11/24/2025 19:03:06 - INFO - utils.trainer -   Recall: 0.81944
+11/24/2025 19:03:06 - INFO - utils.trainer -   F_score: 0.77504
+11/24/2025 19:03:06 - INFO - utils.trainer -   Specificity: 0.75783
+11/24/2025 19:03:06 - INFO - utils.trainer -   Sensitivity: 0.81944
+11/24/2025 19:03:06 - INFO - utils.trainer -   Loss: 0.52739
+11/24/2025 19:03:06 - INFO - utils.trainer -    Train loss: 0.51992, Test loss: 0.52739,Epoch time = 15.652s
+11/24/2025 19:03:21 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 19:03:25 - INFO - utils.trainer -   AUC: 0.80706
+11/24/2025 19:03:25 - INFO - utils.trainer -   Accuracy: 0.80073
+11/24/2025 19:03:25 - INFO - utils.trainer -   Precision: 0.77324
+11/24/2025 19:03:25 - INFO - utils.trainer -   Recall: 0.78935
+11/24/2025 19:03:25 - INFO - utils.trainer -   F_score: 0.78121
+11/24/2025 19:03:25 - INFO - utils.trainer -   Specificity: 0.81007
+11/24/2025 19:03:25 - INFO - utils.trainer -   Sensitivity: 0.78935
+11/24/2025 19:03:25 - INFO - utils.trainer -   Loss: 0.51165
+11/24/2025 19:03:25 - INFO - utils.trainer -    Train loss: 0.53360, Test loss: 0.51165,Epoch time = 15.419s
+11/24/2025 19:03:25 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 19:03:41 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 19:03:45 - INFO - utils.trainer -   AUC: 0.80656
+11/24/2025 19:03:45 - INFO - utils.trainer -   Accuracy: 0.79812
+11/24/2025 19:03:45 - INFO - utils.trainer -   Precision: 0.75399
+11/24/2025 19:03:45 - INFO - utils.trainer -   Recall: 0.81944
+11/24/2025 19:03:45 - INFO - utils.trainer -   F_score: 0.78536
+11/24/2025 19:03:45 - INFO - utils.trainer -   Specificity: 0.78063
+11/24/2025 19:03:45 - INFO - utils.trainer -   Sensitivity: 0.81944
+11/24/2025 19:03:45 - INFO - utils.trainer -   Loss: 0.51444
+11/24/2025 19:03:45 - INFO - utils.trainer -    Train loss: 0.52865, Test loss: 0.51444,Epoch time = 15.264s
+11/24/2025 19:04:01 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 19:04:05 - INFO - utils.trainer -   AUC: 0.81103
+11/24/2025 19:04:05 - INFO - utils.trainer -   Accuracy: 0.80490
+11/24/2025 19:04:05 - INFO - utils.trainer -   Precision: 0.76515
+11/24/2025 19:04:05 - INFO - utils.trainer -   Recall: 0.81829
+11/24/2025 19:04:05 - INFO - utils.trainer -   F_score: 0.79083
+11/24/2025 19:04:05 - INFO - utils.trainer -   Specificity: 0.79392
+11/24/2025 19:04:05 - INFO - utils.trainer -   Sensitivity: 0.81829
+11/24/2025 19:04:05 - INFO - utils.trainer -   Loss: 0.50765
+11/24/2025 19:04:05 - INFO - utils.trainer -    Train loss: 0.51609, Test loss: 0.50765,Epoch time = 15.752s
+11/24/2025 19:04:05 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 19:04:21 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 19:04:25 - INFO - utils.trainer -   AUC: 0.80439
+11/24/2025 19:04:25 - INFO - utils.trainer -   Accuracy: 0.79760
+11/24/2025 19:04:25 - INFO - utils.trainer -   Precision: 0.76386
+11/24/2025 19:04:25 - INFO - utils.trainer -   Recall: 0.79745
+11/24/2025 19:04:25 - INFO - utils.trainer -   F_score: 0.78029
+11/24/2025 19:04:25 - INFO - utils.trainer -   Specificity: 0.79772
+11/24/2025 19:04:25 - INFO - utils.trainer -   Sensitivity: 0.79745
+11/24/2025 19:04:25 - INFO - utils.trainer -   Loss: 0.51502
+11/24/2025 19:04:25 - INFO - utils.trainer -    Train loss: 0.52291, Test loss: 0.51502,Epoch time = 15.034s
+11/24/2025 19:04:40 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 19:04:45 - INFO - utils.trainer -   AUC: 0.80700
+11/24/2025 19:04:45 - INFO - utils.trainer -   Accuracy: 0.80125
+11/24/2025 19:04:45 - INFO - utils.trainer -   Precision: 0.77165
+11/24/2025 19:04:45 - INFO - utils.trainer -   Recall: 0.79398
+11/24/2025 19:04:45 - INFO - utils.trainer -   F_score: 0.78266
+11/24/2025 19:04:45 - INFO - utils.trainer -   Specificity: 0.80722
+11/24/2025 19:04:45 - INFO - utils.trainer -   Sensitivity: 0.79398
+11/24/2025 19:04:45 - INFO - utils.trainer -   Loss: 0.51148
+11/24/2025 19:04:45 - INFO - utils.trainer -    Train loss: 0.52937, Test loss: 0.51148,Epoch time = 15.371s
+11/24/2025 19:05:01 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 19:05:05 - INFO - utils.trainer -   AUC: 0.80547
+11/24/2025 19:05:05 - INFO - utils.trainer -   Accuracy: 0.79656
+11/24/2025 19:05:05 - INFO - utils.trainer -   Precision: 0.75159
+11/24/2025 19:05:05 - INFO - utils.trainer -   Recall: 0.81944
+11/24/2025 19:05:05 - INFO - utils.trainer -   F_score: 0.78405
+11/24/2025 19:05:05 - INFO - utils.trainer -   Specificity: 0.77778
+11/24/2025 19:05:05 - INFO - utils.trainer -   Sensitivity: 0.81944
+11/24/2025 19:05:05 - INFO - utils.trainer -   Loss: 0.51576
+11/24/2025 19:05:05 - INFO - utils.trainer -    Train loss: 0.52482, Test loss: 0.51576,Epoch time = 15.730s
+11/24/2025 19:05:21 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 19:05:25 - INFO - utils.trainer -   AUC: 0.80427
+11/24/2025 19:05:25 - INFO - utils.trainer -   Accuracy: 0.79343
+11/24/2025 19:05:25 - INFO - utils.trainer -   Precision: 0.74788
+11/24/2025 19:05:25 - INFO - utils.trainer -   Recall: 0.81713
+11/24/2025 19:05:25 - INFO - utils.trainer -   F_score: 0.78097
+11/24/2025 19:05:25 - INFO - utils.trainer -   Specificity: 0.77398
+11/24/2025 19:05:25 - INFO - utils.trainer -   Sensitivity: 0.81713
+11/24/2025 19:05:25 - INFO - utils.trainer -   Loss: 0.51890
+11/24/2025 19:05:25 - INFO - utils.trainer -    Train loss: 0.52136, Test loss: 0.51890,Epoch time = 15.637s
+11/24/2025 19:05:41 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 19:05:46 - INFO - utils.trainer -   AUC: 0.80521
+11/24/2025 19:05:46 - INFO - utils.trainer -   Accuracy: 0.79708
+11/24/2025 19:05:46 - INFO - utils.trainer -   Precision: 0.75510
+11/24/2025 19:05:46 - INFO - utils.trainer -   Recall: 0.81366
+11/24/2025 19:05:46 - INFO - utils.trainer -   F_score: 0.78329
+11/24/2025 19:05:46 - INFO - utils.trainer -   Specificity: 0.78348
+11/24/2025 19:05:46 - INFO - utils.trainer -   Sensitivity: 0.81366
+11/24/2025 19:05:46 - INFO - utils.trainer -   Loss: 0.51443
+11/24/2025 19:05:46 - INFO - utils.trainer -    Train loss: 0.52201, Test loss: 0.51443,Epoch time = 15.986s
+11/24/2025 19:06:01 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 19:06:06 - INFO - utils.trainer -   AUC: 0.80420
+11/24/2025 19:06:06 - INFO - utils.trainer -   Accuracy: 0.79395
+11/24/2025 19:06:06 - INFO - utils.trainer -   Precision: 0.74973
+11/24/2025 19:06:06 - INFO - utils.trainer -   Recall: 0.81481
+11/24/2025 19:06:06 - INFO - utils.trainer -   F_score: 0.78092
+11/24/2025 19:06:06 - INFO - utils.trainer -   Specificity: 0.77683
+11/24/2025 19:06:06 - INFO - utils.trainer -   Sensitivity: 0.81481
+11/24/2025 19:06:06 - INFO - utils.trainer -   Loss: 0.51895
+11/24/2025 19:06:06 - INFO - utils.trainer -    Train loss: 0.52293, Test loss: 0.51895,Epoch time = 15.735s
+11/24/2025 19:06:22 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 19:06:27 - INFO - utils.trainer -   AUC: 0.81376
+11/24/2025 19:06:27 - INFO - utils.trainer -   Accuracy: 0.80282
+11/24/2025 19:06:27 - INFO - utils.trainer -   Precision: 0.76940
+11/24/2025 19:06:27 - INFO - utils.trainer -   Recall: 0.80324
+11/24/2025 19:06:27 - INFO - utils.trainer -   F_score: 0.78596
+11/24/2025 19:06:27 - INFO - utils.trainer -   Specificity: 0.80247
+11/24/2025 19:06:27 - INFO - utils.trainer -   Sensitivity: 0.80324
+11/24/2025 19:06:27 - INFO - utils.trainer -   Loss: 0.50975
+11/24/2025 19:06:27 - INFO - utils.trainer -    Train loss: 0.52071, Test loss: 0.50975,Epoch time = 16.286s
+11/24/2025 19:06:43 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 19:06:47 - INFO - utils.trainer -   AUC: 0.80177
+11/24/2025 19:06:47 - INFO - utils.trainer -   Accuracy: 0.78925
+11/24/2025 19:06:47 - INFO - utils.trainer -   Precision: 0.73566
+11/24/2025 19:06:47 - INFO - utils.trainer -   Recall: 0.83102
+11/24/2025 19:06:47 - INFO - utils.trainer -   F_score: 0.78043
+11/24/2025 19:06:47 - INFO - utils.trainer -   Specificity: 0.75499
+11/24/2025 19:06:47 - INFO - utils.trainer -   Sensitivity: 0.83102
+11/24/2025 19:06:47 - INFO - utils.trainer -   Loss: 0.52290
+11/24/2025 19:06:47 - INFO - utils.trainer -    Train loss: 0.53013, Test loss: 0.52290,Epoch time = 15.533s
+11/24/2025 19:07:02 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 19:07:07 - INFO - utils.trainer -   AUC: 0.80302
+11/24/2025 19:07:07 - INFO - utils.trainer -   Accuracy: 0.79447
+11/24/2025 19:07:07 - INFO - utils.trainer -   Precision: 0.74633
+11/24/2025 19:07:07 - INFO - utils.trainer -   Recall: 0.82407
+11/24/2025 19:07:07 - INFO - utils.trainer -   F_score: 0.78328
+11/24/2025 19:07:07 - INFO - utils.trainer -   Specificity: 0.77018
+11/24/2025 19:07:07 - INFO - utils.trainer -   Sensitivity: 0.82407
+11/24/2025 19:07:07 - INFO - utils.trainer -   Loss: 0.51756
+11/24/2025 19:07:07 - INFO - utils.trainer -    Train loss: 0.52274, Test loss: 0.51756,Epoch time = 15.454s
+11/24/2025 19:07:23 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+11/24/2025 19:07:27 - INFO - utils.trainer -   AUC: 0.80947
+11/24/2025 19:07:27 - INFO - utils.trainer -   Accuracy: 0.79604
+11/24/2025 19:07:27 - INFO - utils.trainer -   Precision: 0.75294
+11/24/2025 19:07:27 - INFO - utils.trainer -   Recall: 0.81481
+11/24/2025 19:07:27 - INFO - utils.trainer -   F_score: 0.78266
+11/24/2025 19:07:27 - INFO - utils.trainer -   Specificity: 0.78063
+11/24/2025 19:07:27 - INFO - utils.trainer -   Sensitivity: 0.81481
+11/24/2025 19:07:27 - INFO - utils.trainer -   Loss: 0.51595
+11/24/2025 19:07:27 - INFO - utils.trainer -    Train loss: 0.52817, Test loss: 0.51595,Epoch time = 15.591s
+11/24/2025 19:07:41 - INFO - __main__ -   ########## Repeat:1 ##########
+11/24/2025 19:07:41 - INFO - utils.trainer -   ***** Running training *****
+11/24/2025 19:07:41 - INFO - utils.trainer -     Num examples = 239
+11/24/2025 19:07:41 - INFO - utils.trainer -     Num Epochs = 200
+11/24/2025 19:07:41 - INFO - utils.trainer -     Total train batch size = 16
+11/24/2025 19:07:41 - INFO - utils.trainer -     warmup steps = 400
+11/24/2025 19:07:41 - INFO - utils.trainer -     Total optimization steps = 47800
+11/24/2025 19:07:41 - INFO - utils.trainer -     Save steps = 200
+11/24/2025 19:07:41 - INFO - root -   Parameters [normal] length [11]
+11/24/2025 19:07:57 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+11/24/2025 19:08:01 - INFO - utils.trainer -   AUC: 0.51394
+11/24/2025 19:08:01 - INFO - utils.trainer -   Accuracy: 0.52582
+11/24/2025 19:08:01 - INFO - utils.trainer -   Precision: 0.46601
+11/24/2025 19:08:01 - INFO - utils.trainer -   Recall: 0.38211
+11/24/2025 19:08:01 - INFO - utils.trainer -   F_score: 0.41991
+11/24/2025 19:08:01 - INFO - utils.trainer -   Specificity: 0.64299
+11/24/2025 19:08:01 - INFO - utils.trainer -   Sensitivity: 0.38211
+11/24/2025 19:08:01 - INFO - utils.trainer -   Loss: 0.78457
+11/24/2025 19:08:01 - INFO - utils.trainer -    Train loss: 0.76623, Test loss: 0.78457,Epoch time = 15.742s
+11/24/2025 19:08:01 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 19:08:16 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+11/24/2025 19:08:20 - INFO - utils.trainer -   AUC: 0.52759
+11/24/2025 19:08:20 - INFO - utils.trainer -   Accuracy: 0.54356
+11/24/2025 19:08:20 - INFO - utils.trainer -   Precision: 0.48845
+11/24/2025 19:08:20 - INFO - utils.trainer -   Recall: 0.34379
+11/24/2025 19:08:20 - INFO - utils.trainer -   F_score: 0.40354
+11/24/2025 19:08:20 - INFO - utils.trainer -   Specificity: 0.70644
+11/24/2025 19:08:20 - INFO - utils.trainer -   Sensitivity: 0.34379
+11/24/2025 19:08:20 - INFO - utils.trainer -   Loss: 0.76849
+11/24/2025 19:08:20 - INFO - utils.trainer -    Train loss: 0.75918, Test loss: 0.76849,Epoch time = 15.407s
+11/24/2025 19:08:20 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 19:08:36 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+11/24/2025 19:08:40 - INFO - utils.trainer -   AUC: 0.53467
+11/24/2025 19:08:40 - INFO - utils.trainer -   Accuracy: 0.54669
+11/24/2025 19:08:40 - INFO - utils.trainer -   Precision: 0.49401
+11/24/2025 19:08:40 - INFO - utils.trainer -   Recall: 0.38328
+11/24/2025 19:08:40 - INFO - utils.trainer -   F_score: 0.43165
+11/24/2025 19:08:40 - INFO - utils.trainer -   Specificity: 0.67992
+11/24/2025 19:08:40 - INFO - utils.trainer -   Sensitivity: 0.38328
+11/24/2025 19:08:40 - INFO - utils.trainer -   Loss: 0.76370
+11/24/2025 19:08:40 - INFO - utils.trainer -    Train loss: 0.76665, Test loss: 0.76370,Epoch time = 15.525s
+11/24/2025 19:08:40 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 19:08:55 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+11/24/2025 19:08:59 - INFO - utils.trainer -   AUC: 0.52390
+11/24/2025 19:08:59 - INFO - utils.trainer -   Accuracy: 0.56182
+11/24/2025 19:08:59 - INFO - utils.trainer -   Precision: 0.55172
+11/24/2025 19:08:59 - INFO - utils.trainer -   Recall: 0.13008
+11/24/2025 19:08:59 - INFO - utils.trainer -   F_score: 0.21053
+11/24/2025 19:08:59 - INFO - utils.trainer -   Specificity: 0.91383
+11/24/2025 19:08:59 - INFO - utils.trainer -   Sensitivity: 0.13008
+11/24/2025 19:08:59 - INFO - utils.trainer -   Loss: 0.75063
+11/24/2025 19:08:59 - INFO - utils.trainer -    Train loss: 0.73472, Test loss: 0.75063,Epoch time = 15.199s
+11/24/2025 19:08:59 - INFO - utils.trainer -   Saving model checkpoint to output_dir/EEGNet
+11/24/2025 19:09:15 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+11/24/2025 19:09:19 - INFO - utils.trainer -   AUC: 0.50834
+11/24/2025 19:09:19 - INFO - utils.trainer -   Accuracy: 0.55451
+11/24/2025 19:09:19 - INFO - utils.trainer -   Precision: 0.56140
+11/24/2025 19:09:19 - INFO - utils.trainer -   Recall: 0.03717
+11/24/2025 19:09:19 - INFO - utils.trainer -   F_score: 0.06972
+11/24/2025 19:09:19 - INFO - utils.trainer -   Specificity: 0.97633
+11/24/2025 19:09:19 - INFO - utils.trainer -   Sensitivity: 0.03717
+11/24/2025 19:09:19 - INFO - utils.trainer -   Loss: 0.75782
+11/24/2025 19:09:19 - INFO - utils.trainer -    Train loss: 0.74281, Test loss: 0.75782,Epoch time = 15.210s
+11/24/2025 19:09:34 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+11/24/2025 19:09:38 - INFO - utils.trainer -   AUC: 0.54059
+11/24/2025 19:09:38 - INFO - utils.trainer -   Accuracy: 0.54617
+11/24/2025 19:09:38 - INFO - utils.trainer -   Precision: 0.49421
+11/24/2025 19:09:38 - INFO - utils.trainer -   Recall: 0.44599
+11/24/2025 19:09:38 - INFO - utils.trainer -   F_score: 0.46886
+11/24/2025 19:09:38 - INFO - utils.trainer -   Specificity: 0.62784
+11/24/2025 19:09:38 - INFO - utils.trainer -   Sensitivity: 0.44599
+11/24/2025 19:09:38 - INFO - utils.trainer -   Loss: 0.76633
+11/24/2025 19:09:38 - INFO - utils.trainer -    Train loss: 0.74965, Test loss: 0.76633,Epoch time = 15.192s
+11/24/2025 19:09:53 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+11/24/2025 19:09:58 - INFO - utils.trainer -   AUC: 0.52050
+11/24/2025 19:09:58 - INFO - utils.trainer -   Accuracy: 0.55034
+11/24/2025 19:09:58 - INFO - utils.trainer -   Precision: 0.49827
+11/24/2025 19:09:58 - INFO - utils.trainer -   Recall: 0.16725
+11/24/2025 19:09:58 - INFO - utils.trainer -   F_score: 0.25043
+11/24/2025 19:09:58 - INFO - utils.trainer -   Specificity: 0.86269
+11/24/2025 19:09:58 - INFO - utils.trainer -   Sensitivity: 0.16725
+11/24/2025 19:09:58 - INFO - utils.trainer -   Loss: 0.76144
+11/24/2025 19:09:58 - INFO - utils.trainer -    Train loss: 0.73696, Test loss: 0.76144,Epoch time = 15.019s
+11/24/2025 19:10:14 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+11/24/2025 19:10:19 - INFO - utils.trainer -   AUC: 0.52053
+11/24/2025 19:10:19 - INFO - utils.trainer -   Accuracy: 0.55816
+11/24/2025 19:10:19 - INFO - utils.trainer -   Precision: 0.53846
+11/24/2025 19:10:19 - INFO - utils.trainer -   Recall: 0.11382
+11/24/2025 19:10:19 - INFO - utils.trainer -   F_score: 0.18792
+11/24/2025 19:10:19 - INFO - utils.trainer -   Specificity: 0.92045
+11/24/2025 19:10:19 - INFO - utils.trainer -   Sensitivity: 0.11382
+11/24/2025 19:10:19 - INFO - utils.trainer -   Loss: 0.75424
+11/24/2025 19:10:19 - INFO - utils.trainer -    Train loss: 0.74172, Test loss: 0.75424,Epoch time = 15.748s
+11/24/2025 19:10:34 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+11/24/2025 19:10:38 - INFO - utils.trainer -   AUC: 0.50827
+11/24/2025 19:10:38 - INFO - utils.trainer -   Accuracy: 0.55503
+11/24/2025 19:10:38 - INFO - utils.trainer -   Precision: 0.56061
+11/24/2025 19:10:38 - INFO - utils.trainer -   Recall: 0.04297
+11/24/2025 19:10:38 - INFO - utils.trainer -   F_score: 0.07983
+11/24/2025 19:10:38 - INFO - utils.trainer -   Specificity: 0.97254
+11/24/2025 19:10:38 - INFO - utils.trainer -   Sensitivity: 0.04297
+11/24/2025 19:10:38 - INFO - utils.trainer -   Loss: 0.75753
+11/24/2025 19:10:38 - INFO - utils.trainer -    Train loss: 0.76286, Test loss: 0.75753,Epoch time = 15.735s
+11/24/2025 19:10:54 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+11/24/2025 19:10:58 - INFO - utils.trainer -   AUC: 0.50953
+11/24/2025 19:10:58 - INFO - utils.trainer -   Accuracy: 0.55556
+11/24/2025 19:10:58 - INFO - utils.trainer -   Precision: 0.58491
+11/24/2025 19:10:58 - INFO - utils.trainer -   Recall: 0.03600
+11/24/2025 19:10:58 - INFO - utils.trainer -   F_score: 0.06783
+11/24/2025 19:10:58 - INFO - utils.trainer -   Specificity: 0.97917
+11/24/2025 19:10:58 - INFO - utils.trainer -   Sensitivity: 0.03600
+11/24/2025 19:10:58 - INFO - utils.trainer -   Loss: 0.75685
+11/24/2025 19:10:58 - INFO - utils.trainer -    Train loss: 0.75310, Test loss: 0.75685,Epoch time = 15.603s
+11/24/2025 19:11:14 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+11/24/2025 19:11:18 - INFO - utils.trainer -   AUC: 0.50028
+11/24/2025 19:11:18 - INFO - utils.trainer -   Accuracy: 0.54982
+11/24/2025 19:11:18 - INFO - utils.trainer -   Precision: 0.42857
+11/24/2025 19:11:18 - INFO - utils.trainer -   Recall: 0.00697
+11/24/2025 19:11:18 - INFO - utils.trainer -   F_score: 0.01371
+11/24/2025 19:11:18 - INFO - utils.trainer -   Specificity: 0.99242
+11/24/2025 19:11:18 - INFO - utils.trainer -   Sensitivity: 0.00697
+11/24/2025 19:11:18 - INFO - utils.trainer -   Loss: 0.76270
+11/24/2025 19:11:18 - INFO - utils.trainer -    Train loss: 0.75572, Test loss: 0.76270,Epoch time = 15.913s
+11/24/2025 19:11:35 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+11/24/2025 19:11:39 - INFO - utils.trainer -   AUC: 0.49953
+11/24/2025 19:11:39 - INFO - utils.trainer -   Accuracy: 0.55034
+11/24/2025 19:11:39 - INFO - utils.trainer -   Precision: 0.00000
+11/24/2025 19:11:39 - INFO - utils.trainer -   Recall: 0.00000
+11/24/2025 19:11:39 - INFO - utils.trainer -   F_score: 0.00000
+11/24/2025 19:11:39 - INFO - utils.trainer -   Specificity: 0.99905
+11/24/2025 19:11:39 - INFO - utils.trainer -   Sensitivity: 0.00000
+11/24/2025 19:11:39 - INFO - utils.trainer -   Loss: 0.76222
+11/24/2025 19:11:39 - INFO - utils.trainer -    Train loss: 0.75825, Test loss: 0.76222,Epoch time = 16.225s
+11/24/2025 19:11:55 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+11/24/2025 19:11:59 - INFO - utils.trainer -   AUC: 0.50174
+11/24/2025 19:11:59 - INFO - utils.trainer -   Accuracy: 0.55243
+11/24/2025 19:11:59 - INFO - utils.trainer -   Precision: 1.00000
+11/24/2025 19:11:59 - INFO - utils.trainer -   Recall: 0.00348
+11/24/2025 19:11:59 - INFO - utils.trainer -   F_score: 0.00694
+11/24/2025 19:11:59 - INFO - utils.trainer -   Specificity: 1.00000
+11/24/2025 19:11:59 - INFO - utils.trainer -   Sensitivity: 0.00348
+11/24/2025 19:11:59 - INFO - utils.trainer -   Loss: 0.76014
+11/24/2025 19:11:59 - INFO - utils.trainer -    Train loss: 0.76056, Test loss: 0.76014,Epoch time = 15.501s
+11/24/2025 19:12:15 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+11/24/2025 19:12:19 - INFO - utils.trainer -   AUC: 0.50000
+11/24/2025 19:12:19 - INFO - utils.trainer -   Accuracy: 0.55086
+11/24/2025 19:12:19 - INFO - utils.trainer -   Precision: 0.00000
+11/24/2025 19:12:19 - INFO - utils.trainer -   Recall: 0.00000
+11/24/2025 19:12:19 - INFO - utils.trainer -   F_score: 0.00000
+11/24/2025 19:12:19 - INFO - utils.trainer -   Specificity: 1.00000
+11/24/2025 19:12:19 - INFO - utils.trainer -   Sensitivity: 0.00000
+11/24/2025 19:12:19 - INFO - utils.trainer -   Loss: 0.76170
+11/24/2025 19:12:19 - INFO - utils.trainer -    Train loss: 0.76277, Test loss: 0.76170,Epoch time = 16.018s
+11/24/2025 19:12:34 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+11/24/2025 19:12:38 - INFO - utils.trainer -   AUC: 0.50000
+11/24/2025 19:12:38 - INFO - utils.trainer -   Accuracy: 0.55086
+11/24/2025 19:12:38 - INFO - utils.trainer -   Precision: 0.00000
+11/24/2025 19:12:38 - INFO - utils.trainer -   Recall: 0.00000
+11/24/2025 19:12:38 - INFO - utils.trainer -   F_score: 0.00000
+11/24/2025 19:12:38 - INFO - utils.trainer -   Specificity: 1.00000
+11/24/2025 19:12:38 - INFO - utils.trainer -   Sensitivity: 0.00000
+11/24/2025 19:12:38 - INFO - utils.trainer -   Loss: 0.76170
+11/24/2025 19:12:38 - INFO - utils.trainer -    Train loss: 0.76201, Test loss: 0.76170,Epoch time = 15.157s
+11/24/2025 19:12:53 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+11/24/2025 19:12:58 - INFO - utils.trainer -   AUC: 0.50000
+11/24/2025 19:12:58 - INFO - utils.trainer -   Accuracy: 0.55086
+11/24/2025 19:12:58 - INFO - utils.trainer -   Precision: 0.00000
+11/24/2025 19:12:58 - INFO - utils.trainer -   Recall: 0.00000
+11/24/2025 19:12:58 - INFO - utils.trainer -   F_score: 0.00000
+11/24/2025 19:12:58 - INFO - utils.trainer -   Specificity: 1.00000
+11/24/2025 19:12:58 - INFO - utils.trainer -   Sensitivity: 0.00000
+11/24/2025 19:12:58 - INFO - utils.trainer -   Loss: 0.76170
+11/24/2025 19:12:58 - INFO - utils.trainer -    Train loss: 0.76253, Test loss: 0.76170,Epoch time = 15.056s
+11/24/2025 19:13:14 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+11/24/2025 19:13:18 - INFO - utils.trainer -   AUC: 0.50058
+11/24/2025 19:13:18 - INFO - utils.trainer -   Accuracy: 0.55086
+11/24/2025 19:13:18 - INFO - utils.trainer -   Precision: 0.00000
+11/24/2025 19:13:18 - INFO - utils.trainer -   Recall: 0.00000
+11/24/2025 19:13:18 - INFO - utils.trainer -   F_score: 0.00000
+11/24/2025 19:13:18 - INFO - utils.trainer -   Specificity: 1.00000
+11/24/2025 19:13:18 - INFO - utils.trainer -   Sensitivity: 0.00000
+11/24/2025 19:13:18 - INFO - utils.trainer -   Loss: 0.76170
+11/24/2025 19:13:18 - INFO - utils.trainer -    Train loss: 0.76357, Test loss: 0.76170,Epoch time = 15.771s
+11/24/2025 19:13:34 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+11/24/2025 19:13:39 - INFO - utils.trainer -   AUC: 0.50000
+11/24/2025 19:13:39 - INFO - utils.trainer -   Accuracy: 0.55086
+11/24/2025 19:13:39 - INFO - utils.trainer -   Precision: 0.00000
+11/24/2025 19:13:39 - INFO - utils.trainer -   Recall: 0.00000
+11/24/2025 19:13:39 - INFO - utils.trainer -   F_score: 0.00000
+11/24/2025 19:13:39 - INFO - utils.trainer -   Specificity: 1.00000
+11/24/2025 19:13:39 - INFO - utils.trainer -   Sensitivity: 0.00000
+11/24/2025 19:13:39 - INFO - utils.trainer -   Loss: 0.76170
+11/24/2025 19:13:39 - INFO - utils.trainer -    Train loss: 0.76436, Test loss: 0.76170,Epoch time = 15.932s
+11/24/2025 19:13:55 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+11/24/2025 19:14:00 - INFO - utils.trainer -   AUC: 0.50000
+11/24/2025 19:14:00 - INFO - utils.trainer -   Accuracy: 0.55086
+11/24/2025 19:14:00 - INFO - utils.trainer -   Precision: 0.00000
+11/24/2025 19:14:00 - INFO - utils.trainer -   Recall: 0.00000
+11/24/2025 19:14:00 - INFO - utils.trainer -   F_score: 0.00000
+11/24/2025 19:14:00 - INFO - utils.trainer -   Specificity: 1.00000
+11/24/2025 19:14:00 - INFO - utils.trainer -   Sensitivity: 0.00000
+11/24/2025 19:14:00 - INFO - utils.trainer -   Loss: 0.76170
+11/24/2025 19:14:00 - INFO - utils.trainer -    Train loss: 0.76331, Test loss: 0.76170,Epoch time = 16.090s
+11/24/2025 19:14:16 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+11/24/2025 19:14:20 - INFO - utils.trainer -   AUC: 0.50000
+11/24/2025 19:14:20 - INFO - utils.trainer -   Accuracy: 0.55086
+11/24/2025 19:14:20 - INFO - utils.trainer -   Precision: 0.00000
+11/24/2025 19:14:20 - INFO - utils.trainer -   Recall: 0.00000
+11/24/2025 19:14:20 - INFO - utils.trainer -   F_score: 0.00000
+11/24/2025 19:14:20 - INFO - utils.trainer -   Specificity: 1.00000
+11/24/2025 19:14:20 - INFO - utils.trainer -   Sensitivity: 0.00000
+11/24/2025 19:14:20 - INFO - utils.trainer -   Loss: 0.76170
+11/24/2025 19:14:20 - INFO - utils.trainer -    Train loss: 0.76386, Test loss: 0.76170,Epoch time = 16.186s
+11/24/2025 19:14:37 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+11/24/2025 19:14:42 - INFO - utils.trainer -   AUC: 0.50000
+11/24/2025 19:14:42 - INFO - utils.trainer -   Accuracy: 0.55086
+11/24/2025 19:14:42 - INFO - utils.trainer -   Precision: 0.00000
+11/24/2025 19:14:42 - INFO - utils.trainer -   Recall: 0.00000
+11/24/2025 19:14:42 - INFO - utils.trainer -   F_score: 0.00000
+11/24/2025 19:14:42 - INFO - utils.trainer -   Specificity: 1.00000
+11/24/2025 19:14:42 - INFO - utils.trainer -   Sensitivity: 0.00000
+11/24/2025 19:14:42 - INFO - utils.trainer -   Loss: 0.76170
+11/24/2025 19:14:42 - INFO - utils.trainer -    Train loss: 0.76305, Test loss: 0.76170,Epoch time = 16.292s
+11/24/2025 19:14:58 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+11/24/2025 19:15:03 - INFO - utils.trainer -   AUC: 0.50000
+11/24/2025 19:15:03 - INFO - utils.trainer -   Accuracy: 0.55086
+11/24/2025 19:15:03 - INFO - utils.trainer -   Precision: 0.00000
+11/24/2025 19:15:03 - INFO - utils.trainer -   Recall: 0.00000
+11/24/2025 19:15:03 - INFO - utils.trainer -   F_score: 0.00000
+11/24/2025 19:15:03 - INFO - utils.trainer -   Specificity: 1.00000
+11/24/2025 19:15:03 - INFO - utils.trainer -   Sensitivity: 0.00000
+11/24/2025 19:15:03 - INFO - utils.trainer -   Loss: 0.76170
+11/24/2025 19:15:03 - INFO - utils.trainer -    Train loss: 0.76331, Test loss: 0.76170,Epoch time = 16.190s
+11/24/2025 19:15:19 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+11/24/2025 19:15:23 - INFO - utils.trainer -   AUC: 0.50000
+11/24/2025 19:15:23 - INFO - utils.trainer -   Accuracy: 0.55086
+11/24/2025 19:15:23 - INFO - utils.trainer -   Precision: 0.00000
+11/24/2025 19:15:23 - INFO - utils.trainer -   Recall: 0.00000
+11/24/2025 19:15:23 - INFO - utils.trainer -   F_score: 0.00000
+11/24/2025 19:15:23 - INFO - utils.trainer -   Specificity: 1.00000
+11/24/2025 19:15:23 - INFO - utils.trainer -   Sensitivity: 0.00000
+11/24/2025 19:15:23 - INFO - utils.trainer -   Loss: 0.76170
+11/24/2025 19:15:23 - INFO - utils.trainer -    Train loss: 0.76305, Test loss: 0.76170,Epoch time = 15.853s
+11/24/2025 19:15:39 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+11/24/2025 19:15:44 - INFO - utils.trainer -   AUC: 0.50000
+11/24/2025 19:15:44 - INFO - utils.trainer -   Accuracy: 0.55086
+11/24/2025 19:15:44 - INFO - utils.trainer -   Precision: 0.00000
+11/24/2025 19:15:44 - INFO - utils.trainer -   Recall: 0.00000
+11/24/2025 19:15:44 - INFO - utils.trainer -   F_score: 0.00000
+11/24/2025 19:15:44 - INFO - utils.trainer -   Specificity: 1.00000
+11/24/2025 19:15:44 - INFO - utils.trainer -   Sensitivity: 0.00000
+11/24/2025 19:15:44 - INFO - utils.trainer -   Loss: 0.76170
+11/24/2025 19:15:44 - INFO - utils.trainer -    Train loss: 0.76331, Test loss: 0.76170,Epoch time = 15.707s
+11/24/2025 19:16:00 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****

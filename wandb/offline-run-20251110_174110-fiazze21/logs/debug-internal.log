@@ -1,0 +1,14 @@
+{"time":"2025-11-10T17:41:10.920182922+08:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-11-10T17:41:11.080412891+08:00","level":"WARN","msg":"GraphQL client is nil, skipping feature loading"}
+{"time":"2025-11-10T17:41:11.080610706+08:00","level":"INFO","msg":"stream: created new stream","id":"fiazze21"}
+{"time":"2025-11-10T17:41:11.080653759+08:00","level":"INFO","msg":"stream: started","id":"fiazze21"}
+{"time":"2025-11-10T17:41:11.080708287+08:00","level":"INFO","msg":"sender: started","stream_id":"fiazze21"}
+{"time":"2025-11-10T17:41:11.080695617+08:00","level":"INFO","msg":"writer: Do: started","stream_id":"fiazze21"}
+{"time":"2025-11-10T17:41:11.080754999+08:00","level":"INFO","msg":"handler: started","stream_id":"fiazze21"}
+{"time":"2025-11-10T17:41:11.448851489+08:00","level":"WARN","msg":"runupserter: server does not expand metric globs but the x_server_side_expand_glob_metrics setting is set; ignoring"}
+{"time":"2025-11-10T18:07:15.521906156+08:00","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-11-10T18:07:15.525910296+08:00","level":"INFO","msg":"stream: closing","id":"fiazze21"}
+{"time":"2025-11-10T18:07:15.525927769+08:00","level":"INFO","msg":"handler: closed","stream_id":"fiazze21"}
+{"time":"2025-11-10T18:07:15.525936133+08:00","level":"INFO","msg":"writer: Close: closed","stream_id":"fiazze21"}
+{"time":"2025-11-10T18:07:15.525943222+08:00","level":"INFO","msg":"sender: closed","stream_id":"fiazze21"}
+{"time":"2025-11-10T18:07:15.526037344+08:00","level":"INFO","msg":"stream: closed","id":"fiazze21"}
