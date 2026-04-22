@@ -1,2 +1,14 @@
 01/18/2026 20:37:34 - INFO - utils.trainer -   Model doesn't exists! Train first!
 01/18/2026 20:37:34 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+01/26/2026 23:04:56 - INFO - utils.trainer -   Model doesn't exists! Train first!
+01/26/2026 23:04:56 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+01/26/2026 23:20:22 - INFO - utils.trainer -   Model doesn't exists! Train first!
+01/26/2026 23:20:22 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+01/26/2026 23:24:27 - INFO - utils.trainer -   Model doesn't exists! Train first!
+01/26/2026 23:24:27 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+01/27/2026 10:49:08 - INFO - utils.trainer -   ***** Model Loaded *****
+01/27/2026 10:49:08 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+01/27/2026 10:55:38 - INFO - utils.trainer -   ***** Model Loaded *****
+01/27/2026 10:55:38 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+01/27/2026 11:07:32 - INFO - utils.trainer -   ***** Model Loaded *****
+01/27/2026 11:07:32 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****

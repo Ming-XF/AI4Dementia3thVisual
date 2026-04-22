@@ -86,7 +86,7 @@ class SrCVIB(nn.Module):
         self.last_logit_loss = torch.tensor(1, device='cuda')
         self.last_vae_loss = torch.tensor(1000000, device='cuda')
 
-    def forward(self, time_series, node_feature, labels, r_mu, r_logvar, train):
+    def forward(self, time_series, node_feature, labels, subject_id, r_mu, r_logvar, train):
         
         #消融脑区2，65，36，55，24
         # pdb.set_trace()
@@ -114,30 +114,13 @@ class SrCVIB(nn.Module):
             adj = (a1 + a2 + a3) / 3
             adj = torch.mean(adj, dim=1).unsqueeze(1)
 
-        ts_data = {
-            0: [],
-            1: [],
-            2: [],
-            3: [],
-        }
-        ori_data = {
-            0: [],
-            1: [],
-            2: [],
-            3: [],
-        }
-
+        
         ys = np.argmax(labels.detach().cpu().numpy(), axis=1)
-        con1s = adj.cpu().numpy()
-        con2s = node_feature.unsqueeze(1).cpu().numpy()
-        for ts, con1, con2, y in zip(time_series, con1s, con2s, ys):
-            ts_data[y].append(con1)
-            ori_data[y].append(con2)
+        con1s = node_feature.cpu().numpy()
+        con2s = adj.squeeze(1).cpu().numpy()
+        subject_id = subject_id.cpu().numpy()
 
-            
-
-
-        return ModelOutputs(logits=ts_data, loss=ori_data)
+        return ModelOutputs(logits=[con1s, con2s, ys, subject_id], loss=None)
         
 
 

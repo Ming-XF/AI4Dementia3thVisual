@@ -4,3 +4,7 @@
 01/19/2026 10:25:14 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
 01/19/2026 10:25:58 - INFO - utils.trainer -   Model doesn't exists! Train first!
 01/19/2026 10:25:58 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+01/26/2026 23:08:44 - INFO - utils.trainer -   Model doesn't exists! Train first!
+01/26/2026 23:08:44 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+01/27/2026 10:51:47 - INFO - utils.trainer -   ***** Model Loaded *****
+01/27/2026 10:51:47 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****

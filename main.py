@@ -82,7 +82,7 @@ def cross_subject(args):
     #     # results.save(os.path.join(args.model_dir, args.model, 'results.json'))
     # elif args.do_test:
     # pdb.set_trace()
-    trainer = eval(args.model + 'Trainer')(args)
+    trainer = eval(args.model + 'Trainer')(args, task_id=2)
     init_logger(f'{args.log_dir}/test_{args.model}{args.append}_{args.dataset}.log')
     trainer.load_model()
     trainer.evaluate()

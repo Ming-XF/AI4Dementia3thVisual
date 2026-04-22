@@ -72,3 +72,81 @@
 01/15/2026 17:10:34 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
 01/18/2026 20:36:37 - INFO - utils.trainer -   Model doesn't exists! Train first!
 01/18/2026 20:36:37 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+01/26/2026 23:14:22 - INFO - utils.trainer -   Model doesn't exists! Train first!
+01/26/2026 23:14:22 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+01/26/2026 23:19:10 - INFO - utils.trainer -   Model doesn't exists! Train first!
+01/26/2026 23:19:10 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+01/26/2026 23:22:56 - INFO - utils.trainer -   Model doesn't exists! Train first!
+01/26/2026 23:22:56 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+01/26/2026 23:23:28 - INFO - utils.trainer -   Model doesn't exists! Train first!
+01/26/2026 23:23:28 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+01/27/2026 10:35:56 - INFO - utils.trainer -   Model doesn't exists! Train first!
+01/27/2026 10:35:56 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+01/27/2026 10:41:19 - INFO - utils.trainer -   Model doesn't exists! Train first!
+01/27/2026 10:41:19 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+01/27/2026 10:45:42 - INFO - utils.trainer -   ***** Model Loaded *****
+01/27/2026 10:45:42 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+01/27/2026 10:47:32 - INFO - utils.trainer -   ***** Model Loaded *****
+01/27/2026 10:47:32 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+01/27/2026 10:57:34 - INFO - utils.trainer -   ***** Model Loaded *****
+01/27/2026 10:57:34 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+01/27/2026 11:11:18 - INFO - utils.trainer -   ***** Model Loaded *****
+01/27/2026 11:11:18 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+03/02/2026 21:48:03 - INFO - utils.trainer -   ***** Model Loaded *****
+03/02/2026 21:48:03 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+04/18/2026 08:11:07 - INFO - utils.trainer -   ***** Model Loaded *****
+04/18/2026 08:11:07 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+04/18/2026 08:15:23 - INFO - utils.trainer -   ***** Model Loaded *****
+04/18/2026 08:15:23 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+04/18/2026 15:46:15 - INFO - utils.trainer -   ***** Model Loaded *****
+04/18/2026 15:46:15 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+04/21/2026 20:02:45 - INFO - utils.trainer -   ***** Model Loaded *****
+04/21/2026 20:02:45 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+04/21/2026 20:03:23 - INFO - utils.trainer -   ***** Model Loaded *****
+04/21/2026 20:03:23 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+04/21/2026 20:04:01 - INFO - utils.trainer -   ***** Model Loaded *****
+04/21/2026 20:04:01 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+04/21/2026 20:08:49 - INFO - utils.trainer -   Model doesn't exists! Train first!
+04/21/2026 20:08:49 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+04/21/2026 20:11:52 - INFO - utils.trainer -   Model doesn't exists! Train first!
+04/21/2026 20:11:52 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+04/21/2026 20:13:29 - INFO - utils.trainer -   Model doesn't exists! Train first!
+04/21/2026 20:13:29 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+04/21/2026 20:26:02 - INFO - utils.trainer -   ***** Model Loaded *****
+04/21/2026 20:26:02 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+04/21/2026 20:27:21 - INFO - utils.trainer -   ***** Model Loaded *****
+04/21/2026 20:27:21 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+04/21/2026 20:30:55 - INFO - utils.trainer -   ***** Model Loaded *****
+04/21/2026 20:30:55 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+04/21/2026 20:33:04 - INFO - utils.trainer -   ***** Model Loaded *****
+04/21/2026 20:33:04 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+04/21/2026 21:26:13 - INFO - utils.trainer -   ***** Model Loaded *****
+04/21/2026 21:26:13 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+04/21/2026 21:43:23 - INFO - utils.trainer -   ***** Model Loaded *****
+04/21/2026 21:43:23 - INFO - utils.trainer -   ***** Running evaluation on test1 dataset *****
+04/21/2026 22:07:06 - INFO - utils.trainer -   ***** Model Loaded *****
+04/21/2026 22:07:06 - INFO - utils.trainer -   ***** Running evaluation on test2 dataset *****
+04/21/2026 22:08:49 - INFO - utils.trainer -   ***** Model Loaded *****
+04/21/2026 22:08:49 - INFO - utils.trainer -   ***** Running evaluation on test0 dataset *****
+04/21/2026 22:12:22 - INFO - utils.trainer -   ***** Model Loaded *****
+04/21/2026 22:12:22 - INFO - utils.trainer -   ***** Running evaluation on test2 dataset *****
+04/22/2026 16:27:46 - INFO - utils.trainer -   ***** Model Loaded *****
+04/22/2026 16:27:46 - INFO - utils.trainer -   ***** Running evaluation on test2 dataset *****
+04/22/2026 16:29:17 - INFO - utils.trainer -   ***** Model Loaded *****
+04/22/2026 16:29:17 - INFO - utils.trainer -   ***** Running evaluation on test2 dataset *****
+04/22/2026 16:30:22 - INFO - utils.trainer -   ***** Model Loaded *****
+04/22/2026 16:30:22 - INFO - utils.trainer -   ***** Running evaluation on test2 dataset *****
+04/22/2026 16:31:37 - INFO - utils.trainer -   ***** Model Loaded *****
+04/22/2026 16:31:37 - INFO - utils.trainer -   ***** Running evaluation on test2 dataset *****
+04/22/2026 16:32:22 - INFO - utils.trainer -   ***** Model Loaded *****
+04/22/2026 16:32:22 - INFO - utils.trainer -   ***** Running evaluation on test2 dataset *****
+04/22/2026 16:40:54 - INFO - utils.trainer -   ***** Model Loaded *****
+04/22/2026 16:40:54 - INFO - utils.trainer -   ***** Running evaluation on test2 dataset *****
+04/22/2026 16:41:40 - INFO - utils.trainer -   ***** Model Loaded *****
+04/22/2026 16:41:40 - INFO - utils.trainer -   ***** Running evaluation on test2 dataset *****
+04/22/2026 16:42:20 - INFO - utils.trainer -   ***** Model Loaded *****
+04/22/2026 16:42:20 - INFO - utils.trainer -   ***** Running evaluation on test2 dataset *****
+04/22/2026 16:48:35 - INFO - utils.trainer -   ***** Model Loaded *****
+04/22/2026 16:48:35 - INFO - utils.trainer -   ***** Running evaluation on test2 dataset *****
+04/22/2026 16:59:18 - INFO - utils.trainer -   ***** Model Loaded *****
+04/22/2026 16:59:18 - INFO - utils.trainer -   ***** Running evaluation on test2 dataset *****

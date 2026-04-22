@@ -929,6 +929,7 @@ class SrCVIBTrainer(Trainer):
         time_series = inputs['time_series']
         node_feature = inputs['correlation']
         labels = inputs['labels']
+        subject_id = inputs['subject_id']
 
         mu = []
         logvar = []
@@ -948,6 +949,7 @@ class SrCVIBTrainer(Trainer):
         return {"time_series": time_series.to(self.device),
                 "node_feature": node_feature.to(self.device),
                 "labels": labels.float().to(self.device),
+                "subject_id": subject_id.int().to(self.device),
                 "r_mu": mu.to(self.device) if len(mu) > 0 else None,
                 "r_logvar": logvar.to(self.device) if len(logvar) > 0 else None,
                 "train": True if train else False}

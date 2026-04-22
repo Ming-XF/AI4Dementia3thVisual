@@ -249,40 +249,36 @@ class Trainer(object):
         result = {}
         preds = None
 
-        ts_datas = {
-            0: [],
-            1: [],
-            2: [],
-            3: [],
-        }
-        ori_datas = {
-            0: [],
-            1: [],
-            2: [],
-            3: [],
-        }
+        connect1s = []
+        connect2s = []
+        yss = []
+        subids = []
         with torch.no_grad():
             for inputs in evaluate_dataloader:
                 input_kwargs = self.prepare_inputs_kwargs(inputs)
                 outputs = self.model(**input_kwargs)
 
-                ts_data = outputs.logits
-                ori_data = outputs.loss
-
-                for y in ts_datas.keys():
-                    ts_datas[y].extend(ts_data[y])
-                    ori_datas[y].extend(ori_data[y])
-
-            for y in ts_datas.keys():
-                if len(ts_datas[y]) > 0:
-                    ts_datas[y] = np.concatenate(ts_datas[y])
-                    ori_datas[y] = np.concatenate(ori_datas[y])
+                con1s, con2s, ys, subject_id = outputs.logits
+                connect1s.append(con1s)
+                connect2s.append(con2s)
+                yss.append(ys)
+                subids.append(subject_id)
 
             # pdb.set_trace()
-            data = [ts_datas, ori_datas]
+            connect1s = np.concatenate(connect1s, axis=0)
+            connect2s = np.concatenate(connect2s, axis=0)
+            yss = np.concatenate(yss, axis=0)
+            subids = np.concatenate(subids, axis=0)
+
+            # pdb.set_trace()
+            data = [connect1s, connect2s, yss, subids]
             with open('data.pkl', 'wb') as f:
                 pickle.dump(data, f)
-            print("保存成功: 0样本{},1样本{},2样本{},3样本{}".format(len(ts_datas[0]), len(ts_datas[1]), len(ts_datas[2]), len(ts_datas[3])))
+            unique_labels, label_counts = np.unique(yss, return_counts=True)
+            print("标签统计结果：")
+            print("=" * 40)
+            for label, count in zip(unique_labels, label_counts):
+                print(f"标签 {label}: {count} 个样本")
         return
                 
             #     loss = outputs.loss
@@ -353,10 +349,11 @@ class Trainer(object):
         logger.info("Saving model checkpoint to %s", path)
 
     def load_model(self):
-        path = os.path.join(self.args.model_dir + "_" + self.args.dataset, f'{self.args.model}')
+        path = os.path.join(self.args.model_dir, self.args.model + "_" + self.args.dataset)
         path = os.path.join(path, f'{self.args.model}-2.bin')
         if not os.path.exists(path):
             logger.info("Model doesn't exists! Train first!")
+            print("Model doesn't exists! Train first!")
             return
             # raise Exception("Model doesn't exists! Train first!")
 
@@ -367,6 +364,7 @@ class Trainer(object):
             self.model = torch.load(os.path.join(".", path), weights_only=False)
             self.model.to(self.device)
         logger.info("***** Model Loaded *****")
+        print("***** Model Loaded *****")
 
     def visualize(self):
         self.model.eval()
