@@ -258,6 +258,9 @@ def plot_brain_comparison(lut_dfs, titles, view='medial', path='output.png', tem
         )
         # 移除colorbar，保持画面简洁
         axes[idx]._colorbars[0].remove()
+        axes[idx].title.set_size(30)  # 可以调整为所需大小，如14、18等
+        # 或者设置其他属性
+        # axes[idx].title.set_fontweight('bold')  # 设置粗体
     
     plt.tight_layout()
     plt.savefig(path, dpi=300, bbox_inches='tight')
@@ -276,9 +279,9 @@ if __name__ == "__main__":
     old_df= pd.read_csv(lut, sep='\t')
     
     # activation_dict_Nor_vs_MCI = get_active_from_csv("../model_2_testset_result/cvib0_Nor_vs_MCI_significant_connections.csv")
-    activation_dict_Nor_vs_DSC = get_active_from_csv("../model_2_testset_result/cvib0_Nor_vs_DSC_significant_connections.csv")
-    activation_dict_Nor_vs_MCI = get_active_from_csv("../model_2_testset_result/cvib0_Nor_vs_MCI_significant_connections.csv")
-    activation_dict_Nor_vs_AD = get_active_from_csv("../model_2_testset_result/cvib0_Nor_vs_AD_significant_connections.csv")
+    activation_dict_Nor_vs_DSC = get_active_from_csv("../model_2_testset_result/cvib0_NC vs SCD_significant_connections.csv")
+    activation_dict_Nor_vs_MCI = get_active_from_csv("../model_2_testset_result/cvib0_NC vs MCI_significant_connections.csv")
+    activation_dict_Nor_vs_AD = get_active_from_csv("../model_2_testset_result/cvib0_NC vs AD_significant_connections.csv")
     
     # 生成新的dataframe
     # new_df = generate_colormap_based_on_activation(
@@ -298,6 +301,7 @@ if __name__ == "__main__":
         vmin=0,
         vmax=1
     )
+    new_df_DSC.to_csv('new_df_DSC.csv', index=False, encoding='utf-8-sig')
     
     new_df_MCI = generate_colormap_based_on_activation(
         old_df=old_df,
@@ -307,6 +311,7 @@ if __name__ == "__main__":
         vmin=0,
         vmax=1
     )
+    new_df_MCI.to_csv('new_df_MCI.csv', index=False, encoding='utf-8-sig')
     
     new_df_AD = generate_colormap_based_on_activation(
         old_df=old_df,
@@ -316,27 +321,35 @@ if __name__ == "__main__":
         vmin=0,
         vmax=1
     )
+    new_df_AD.to_csv('new_df_AD.csv', index=False, encoding='utf-8-sig')
 
     # plot_brain(new_df, view='medial')
     plot_brain_comparison(
         lut_dfs=[new_df_DSC, new_df_MCI, new_df_AD],
-        titles=['Nor vs DSC', 'Nor vs MCI', 'Nor vs AD'],
+        titles=['NC vs SCD', 'NC vs MCI', 'Nor vs AD'],
         view='medial',
         path="output_medial.png"
     )
 
     plot_brain_comparison(
         lut_dfs=[new_df_DSC, new_df_MCI, new_df_AD],
-        titles=['Nor vs DSC', 'Nor vs MCI', 'Nor vs AD'],
+        titles=['NC vs SCD', 'NC vs MCI', 'Nor vs AD'],
         view='dorsal',
         path="output_dorsal.png"
     )
 
     plot_brain_comparison(
         lut_dfs=[new_df_DSC, new_df_MCI, new_df_AD],
-        titles=['Nor vs DSC', 'Nor vs MCI', 'Nor vs AD'],
+        titles=['NC vs SCD', 'NC vs MCI', 'Nor vs AD'],
         view='posterior',
         path="output_posterior.png"
+    )
+
+    plot_brain_comparison(
+        lut_dfs=[new_df_DSC, new_df_MCI, new_df_AD],
+        titles=['NC vs SCD', 'NC vs MCI', 'Nor vs AD'],
+        view='ventral',
+        path="output_ventral.png"
     )
 
 

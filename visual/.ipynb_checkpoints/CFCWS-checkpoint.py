@@ -105,14 +105,15 @@ def analyze_correlation_comparison(ori_correlations, vae_correlations,
 
 def plot_results(ori_mean_corrs, vae_mean_corrs):
     """绘制小提琴图"""
-    
+
+    fs = 22
     # 设置全局字体大小
     plt.rcParams.update({
-        'font.size': 32,
-        'axes.titlesize': 32,
-        'axes.labelsize': 32,
-        'legend.fontsize': 32,
-        'figure.titlesize': 32,
+        'font.size': fs,
+        'axes.titlesize': fs,
+        'axes.labelsize': fs,
+        'legend.fontsize': fs,
+        'figure.titlesize': fs,
     })
     
     # 创建图形，只包含一个小提琴图
@@ -154,8 +155,8 @@ def plot_results(ori_mean_corrs, vae_mean_corrs):
     # 设置标题和标签
     # ax.set_title('Comparison of Intra-Subject Correlations\nBefore and After Processing', 
     #             fontsize=18, fontweight='bold', pad=20)
-    ax.set_xlabel('', fontsize=32)
-    ax.set_ylabel('Average Correlation', fontsize=32)
+    ax.set_xlabel('', fontsize=fs)
+    ax.set_ylabel('Average Correlation', fontsize=fs)
     
     plt.tight_layout()
     

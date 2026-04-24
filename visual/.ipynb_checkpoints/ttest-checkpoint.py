@@ -102,6 +102,134 @@ def perform_group_comparison(positive_data, negative_data, alpha=0.05, correctio
     
     return t_stats, p_values, corrected_p_matrix, significant_connections, cohens_d
 
+def create_separate_figure(all_results, cvib_list, pair_names, fig_type='t_stats'):
+    """
+    创建两张图，每张图有一行3个子图
+    第一张图：cvib=0的三个对比
+    第二张图：cvib=1的三个对比
+    """
+    fs = 17
+    
+    # 分离cvib=0和cvib=1的结果
+    results_cvib0 = [result for idx, result in enumerate(all_results) if cvib_list[idx] == 0]
+    results_cvib1 = [result for idx, result in enumerate(all_results) if cvib_list[idx] == 1]
+    
+    # 对应的对比名称
+    pair_names_cvib0 = pair_names[:3]
+    pair_names_cvib1 = pair_names[:3]
+    
+    figures = []
+    
+    # 创建第一张图 (cvib=0)
+    fig1, axes1 = plt.subplots(1, 3, figsize=(18, 6))
+    # fig1.suptitle(f'{fig_type} Heatmaps for cvib=0 Comparisons', fontsize=16, fontweight='bold')
+    
+    for idx, (ax, result) in enumerate(zip(axes1, results_cvib0)):
+        pair_name = pair_names_cvib0[idx]
+        
+        if fig_type == 't_stats':
+            # 创建显著连接矩阵（只显示显著连接的t值）
+            data_matrix = result['t_stats'].copy()
+            data_matrix[~result['significant_connections']] = 0
+            cmap = 'RdBu_r'
+            vmax = np.max(np.abs(data_matrix)) if np.any(data_matrix != 0) else 1
+            title = f'{pair_name}\nSignificant Connections (FDR<0.05)'
+            cbar_label = 'T-statistic'
+        elif fig_type == 'significant':
+            # 创建显著连接矩阵（只显示显著连接的p值）
+            data_matrix = result['corrected_p_matrix'].copy()
+            data_matrix = -np.log10(data_matrix + 1e-10)
+            data_matrix[data_matrix > 10] = 10  # 限制范围便于可视化
+            data_matrix[~result['significant_connections']] = 0
+            cmap = 'Reds'  # 或 'Blues', 'viridis'，不需要 _r 了
+            vmax = np.max(np.abs(data_matrix)) if np.any(data_matrix != 0) else 1
+            title = f'{pair_name}\nSignificant Connections (FDR<0.05)'
+            cbar_label = '-log10(corrected p-value)'
+        elif fig_type == 'high_effect':
+            # 创建高效应量矩阵（只显示|d|>0.8的连接）
+            data_matrix = result['cohens_d'].copy()
+            data_matrix[np.abs(data_matrix) <= 0.8] = 0
+            cmap = 'RdBu_r'
+            vmax = np.max(np.abs(data_matrix)) if np.any(data_matrix != 0) else 1
+            title = f'{pair_name}\nHigh Effect Size (|d|>0.8)'
+            cbar_label = "Cohen's d"
+        
+        # 创建下三角掩码
+        mask = np.triu(np.ones_like(data_matrix, dtype=bool), k=1)
+        masked_data = np.ma.masked_where(mask, data_matrix)
+        
+        im = ax.imshow(masked_data, cmap=cmap, aspect='equal', 
+                      vmin=-vmax if vmax > 0 and fig_type != "significant" else 0, vmax=vmax if vmax > 0 else 1, 
+                      interpolation='nearest')
+        ax.tick_params(axis='both', labelsize=fs)
+        
+        ax.set_xlabel('Brain Region', fontsize=fs)
+        ax.set_ylabel('Brain Region', fontsize=fs)
+        ax.set_title(title, fontsize=fs-1)
+        
+        cbar = plt.colorbar(im, ax=ax, shrink=0.8)
+        cbar.ax.tick_params(labelsize=fs)
+        cbar.set_label(cbar_label, fontsize=fs)
+    
+    plt.tight_layout()
+    figures.append(fig1)
+    
+    # 创建第二张图 (cvib=1)
+    fig2, axes2 = plt.subplots(1, 3, figsize=(18, 6))
+    # fig2.suptitle(f'{fig_type} Heatmaps for cvib=1 Comparisons', fontsize=16, fontweight='bold')
+    
+    for idx, (ax, result) in enumerate(zip(axes2, results_cvib1)):
+        pair_name = pair_names_cvib1[idx]
+        
+        if fig_type == 't_stats':
+            # 创建显著连接矩阵（只显示显著连接的t值）
+            data_matrix = result['t_stats'].copy()
+            data_matrix[~result['significant_connections']] = 0
+            cmap = 'RdBu_r'
+            vmax = np.max(np.abs(data_matrix)) if np.any(data_matrix != 0) else 1
+            title = f'{pair_name}\nSignificant Connections (FDR<0.05)'
+            cbar_label = 'T-statistic'
+        elif fig_type == 'significant':
+            # 创建显著连接矩阵（只显示显著连接的p值）
+            data_matrix = result['corrected_p_matrix'].copy()
+            data_matrix = -np.log10(data_matrix + 1e-10)
+            data_matrix[data_matrix > 10] = 10  # 限制范围便于可视化
+            data_matrix[~result['significant_connections']] = 0
+            cmap = 'Reds'  # 或 'Blues', 'viridis'，不需要 _r 了
+            vmax = np.max(np.abs(data_matrix)) if np.any(data_matrix != 0) else 1
+            title = f'{pair_name}\nSignificant Connections (FDR<0.05)'
+            cbar_label = '-log10(corrected p-value)'
+        elif fig_type == 'high_effect':
+            # 创建高效应量矩阵（只显示|d|>0.8的连接）
+            data_matrix = result['cohens_d'].copy()
+            data_matrix[np.abs(data_matrix) <= 0.8] = 0
+            cmap = 'RdBu_r'
+            vmax = np.max(np.abs(data_matrix)) if np.any(data_matrix != 0) else 1
+            title = f'{pair_name}\nHigh Effect Size (|d|>0.8)'
+            cbar_label = "Cohen's d"
+        
+        # 创建下三角掩码
+        mask = np.triu(np.ones_like(data_matrix, dtype=bool), k=1)
+        masked_data = np.ma.masked_where(mask, data_matrix)
+        
+        im = ax.imshow(masked_data, cmap=cmap, aspect='equal', 
+                      vmin=-vmax if vmax > 0 and fig_type != "significant" else 0, vmax=vmax if vmax > 0 else 1, 
+                      interpolation='nearest')
+        ax.tick_params(axis='both', labelsize=fs)
+        
+        ax.set_xlabel('Brain Region', fontsize=fs)
+        ax.set_ylabel('Brain Region', fontsize=fs)
+        ax.set_title(title, fontsize=fs-1)
+        
+        cbar = plt.colorbar(im, ax=ax, shrink=0.8)
+        cbar.ax.tick_params(labelsize=fs)
+        cbar.set_label(cbar_label, fontsize=fs)
+    
+    plt.tight_layout()
+    figures.append(fig2)
+    
+    return figures
+
 def create_combined_figure(all_results, cvib_list, pair_names, fig_type='t_stats'):
     """
     创建包含6个子图的组合图
@@ -114,19 +242,23 @@ def create_combined_figure(all_results, cvib_list, pair_names, fig_type='t_stats
         pair_name = pair_names[idx % 3]
         
         if fig_type == 't_stats':
-            data_matrix = result['t_stats']
-            cmap = 'RdBu_r'
-            vmax = np.max(np.abs(data_matrix))
-            title = f'cvib={cvib}, {pair_name}\nT-statistics'
-            cbar_label = 'T-statistic'
-        elif fig_type == 'significant':
-            # 创建显著连接矩阵（只显示显著连接的t值或p值）
+            # 创建显著连接矩阵（只显示显著连接的t值）
             data_matrix = result['t_stats'].copy()
             data_matrix[~result['significant_connections']] = 0
             cmap = 'RdBu_r'
             vmax = np.max(np.abs(data_matrix)) if np.any(data_matrix != 0) else 1
-            title = f'cvib={cvib}, {pair_name}\nSignificant Connections (FDR<0.05)'
+            title = f'{pair_name}\nSignificant Connections (FDR<0.05)'
             cbar_label = 'T-statistic'
+        elif fig_type == 'significant':
+            # 创建显著连接矩阵（只显示显著连接的p值）
+            data_matrix = result['corrected_p_matrix'].copy()
+            data_matrix = -np.log10(data_matrix + 1e-10)
+            data_matrix[data_matrix > 10] = 10  # 限制范围便于可视化
+            data_matrix[~result['significant_connections']] = 0
+            cmap = 'Reds'  # 或 'Blues', 'viridis'，不需要 _r 了
+            vmax = np.max(np.abs(data_matrix)) if np.any(data_matrix != 0) else 1
+            title = f'{pair_name}\nSignificant Connections (FDR<0.05)'
+            cbar_label = '-log10(corrected p-value)'
         elif fig_type == 'high_effect':
             # 创建高效应量矩阵（只显示|d|>0.8的连接）
             data_matrix = result['cohens_d'].copy()
@@ -141,7 +273,7 @@ def create_combined_figure(all_results, cvib_list, pair_names, fig_type='t_stats
         masked_data = np.ma.masked_where(mask, data_matrix)
         
         im = ax.imshow(masked_data, cmap=cmap, aspect='auto', 
-                      vmin=-vmax if vmax > 0 else -1, vmax=vmax if vmax > 0 else 1, 
+                      vmin=-vmax if vmax > 0 and fig_type != "significant" else 0, vmax=vmax if vmax > 0 else 1, 
                       interpolation='nearest')
         
         ax.set_xlabel('Brain Region')
@@ -272,7 +404,7 @@ def main_analysis():
     主分析函数
     """
     # 创建输出目录
-    output_dir = './analysis_results'
+    output_dir = './model_2_data_result'
     os.makedirs(output_dir, exist_ok=True)
     os.chdir(output_dir)
     
@@ -280,7 +412,7 @@ def main_analysis():
     cvib_list = [0, 0, 0, 1, 1, 1]
     pos_classes = [0, 2, 1, 0, 2, 1]
     neg_class = 3
-    pair_names = ['Nor_vs_AD', 'Nor_vs_MCI', 'Nor_vs_DSC']
+    pair_names = ['NC vs AD', 'NC vs MCI', 'NC vs SCD']
     
     # 存储所有结果
     all_results = []
@@ -331,20 +463,41 @@ def main_analysis():
                 'df': high_quality_df
             })
     
-    # 绘制t值热图（6张子图）
-    fig_t = create_combined_figure(all_results, cvib_list, pair_names, 't_stats')
-    fig_t.savefig('combined_t_stats_heatmap.png', dpi=300, bbox_inches='tight')
-    plt.close(fig_t)
+    # # 绘制t值热图（6张子图）
+    # fig_t = create_combined_figure(all_results, cvib_list, pair_names, 't_stats')
+    # fig_t.savefig('combined_t_stats_heatmap.png', dpi=300, bbox_inches='tight')
+    # plt.close(fig_t)
     
-    # 绘制显著连接热图（6张子图）
-    fig_sig = create_combined_figure(all_results, cvib_list, pair_names, 'significant')
-    fig_sig.savefig('combined_significant_connections_heatmap.png', dpi=300, bbox_inches='tight')
-    plt.close(fig_sig)
+    # # 绘制显著连接热图（6张子图）
+    # fig_sig = create_combined_figure(all_results, cvib_list, pair_names, 'significant')
+    # fig_sig.savefig('combined_significant_connections_heatmap.png', dpi=300, bbox_inches='tight')
+    # plt.close(fig_sig)
     
-    # 绘制高效应量热图（6张子图）
-    fig_effect = create_combined_figure(all_results, cvib_list, pair_names, 'high_effect')
-    fig_effect.savefig('combined_high_effect_heatmap.png', dpi=300, bbox_inches='tight')
-    plt.close(fig_effect)
+    # # 绘制高效应量热图（6张子图）
+    # fig_effect = create_combined_figure(all_results, cvib_list, pair_names, 'high_effect')
+    # fig_effect.savefig('combined_high_effect_heatmap.png', dpi=300, bbox_inches='tight')
+    # plt.close(fig_effect)
+
+    # 绘制t值热图（两张图，每张一行3列）
+    figs_t = create_separate_figure(all_results, cvib_list, pair_names, 't_stats')
+    figs_t[0].savefig('cvib0_t_stats_heatmap.png', dpi=300, bbox_inches='tight')
+    figs_t[1].savefig('cvib1_t_stats_heatmap.png', dpi=300, bbox_inches='tight')
+    plt.close(figs_t[0])
+    plt.close(figs_t[1])
+    
+    # 绘制显著连接热图（两张图，每张一行3列）
+    figs_sig = create_separate_figure(all_results, cvib_list, pair_names, 'significant')
+    figs_sig[0].savefig('cvib0_significant_connections_heatmap.png', dpi=300, bbox_inches='tight')
+    figs_sig[1].savefig('cvib1_significant_connections_heatmap.png', dpi=300, bbox_inches='tight')
+    plt.close(figs_sig[0])
+    plt.close(figs_sig[1])
+    
+    # 绘制高效应量热图（两张图，每张一行3列）
+    figs_effect = create_separate_figure(all_results, cvib_list, pair_names, 'high_effect')
+    figs_effect[0].savefig('cvib0_high_effect_heatmap.png', dpi=300, bbox_inches='tight')
+    figs_effect[1].savefig('cvib1_high_effect_heatmap.png', dpi=300, bbox_inches='tight')
+    plt.close(figs_effect[0])
+    plt.close(figs_effect[1])
     
     # 保存所有高显著高效应量连接到单个CSV
     all_hq_connections = []
