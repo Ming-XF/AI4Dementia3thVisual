@@ -225,5 +225,5 @@ def main():
 
 if __name__ == "__main__":
     # 创建输出目录
-    os.makedirs('./output', exist_ok=True)
+    os.makedirs('./output_cfcws', exist_ok=True)
     main()

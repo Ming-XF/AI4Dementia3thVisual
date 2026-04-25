@@ -1,4 +1,5 @@
 import numpy as np
+import os
 import pandas as pd
 import networkx as nx
 from scipy import stats
@@ -7,8 +8,64 @@ import seaborn as sns
 from joblib import Parallel, delayed
 from tqdm import tqdm
 import pickle
+
+from brain import coordinates_data
+
+import pdb
+
 import warnings
 warnings.filterwarnings('ignore')
+
+def get_dmn_indices(coordinates_data):
+    """
+    返回 coordinates_data 字典中属于 DMN 网络节点的脑区的索引位置 (从0开始)。
+
+    参数:
+        coordinates_data: dict, 键是脑区名称，值是坐标列表的字典（需保持插入顺序，Python 3.7+ 字典默认有序）
+
+    返回:
+        list: 属于 DMN 的脑区在字典中的索引位置列表
+    """
+    # 定义属于 DMN 的脑区名称集合
+    dmn_regions = {
+        # 后部核心
+        'l.precuneus', 'r.precuneus',
+        'l.posteriorcingulate', 'r.posteriorcingulate',
+        'l.isthmuscingulate', 'r.isthmuscingulate',
+        # 前扣带回膝下部
+        'l.rostralanteriorcingulate', 'r.rostralanteriorcingulate',
+        # 顶下小叶 (包含角回)
+        'l.inferiorparietal', 'r.inferiorparietal',
+        # 缘上回 (常与下颌交界区相关)
+        'l.supramarginal', 'r.supramarginal',
+        # 内侧前额叶皮层
+        'l.medialorbitofrontal', 'r.medialorbitofrontal',
+        # 内侧颞叶子系统
+        'l.parahippocampal', 'r.parahippocampal',
+        # 外侧颞叶
+        'l.middletemporal', 'r.middletemporal',
+        'l.temporalpole', 'r.temporalpole',
+    }
+    
+    # 使用列表推导式找到所有属于 DMN 的脑区索引
+    indices = [idx for idx, region_name in enumerate(coordinates_data.keys()) if region_name in dmn_regions]
+    
+    return indices
+
+def extract_subgraph_numpy(adj_matrix, node_indices):
+    """
+    从邻接矩阵中提取子图。
+    
+    参数:
+        adj_matrix: numpy.ndarray, 形状为 (68, 68) 的邻接矩阵
+        node_indices: list, 要提取的节点索引列表
+    
+    返回:
+        subgraph: numpy.ndarray, 子图的邻接矩阵
+    """
+    # 使用 np.ix_ 创建索引网格，同时提取行和列
+    subgraph = adj_matrix[np.ix_(node_indices, node_indices)]
+    return subgraph
 
 def load_and_preprocess_data():
     """
@@ -33,6 +90,9 @@ def calculate_graph_metrics_fast(adj_matrix, threshold=0.25):
     """
     优化后的图论指标计算
     """
+    # node_indices = get_dmn_indices(coordinates_data)
+    # adj_matrix = extract_subgraph_numpy(adj_matrix, node_indices)
+    
     # 确保矩阵对称
     np.fill_diagonal(adj_matrix, 0)
     adj_matrix = (adj_matrix + adj_matrix.T) / 2
@@ -139,164 +199,6 @@ def print_statistics(con1_metrics, con2_metrics, unique_labels, group_mapping):
                 t_stat, p_val = stats.ttest_ind(data1, data2, equal_var=False)
                 significace = "***" if p_val < 0.001 else "**" if p_val < 0.01 else "*" if p_val < 0.05 else "ns"
                 print(f"  Statistics: t={t_stat:.4f}, p={p_val:.4f} {significace}")
-
-# def plot_metrics_comparison(con1_metrics, con2_metrics, labels, group_names, save_path=None):
-#     """
-#     绘制原始数据和降噪后数据的图论指标对比 - 箱线图+趋势线版本
-#     保持原有的x轴分组结构：Original (con1) vs Denoised (con2)
-    
-#     参数:
-#     con1_metrics: 原始数据的指标字典 {label: {'C': [], 'Eloc': []}}
-#     con2_metrics: 降噪后数据的指标字典
-#     labels: 标签列表
-#     group_names: 组名映射字典 {0: 'AD', 1: 'SCD', 2: 'MCI', 3: 'NC'}
-#     save_path: 保存路径
-#     """
-#     metrics = ['C', 'Eloc']
-#     metric_names = {
-#         'C': 'Clustering Coefficient',
-#         'Eloc': 'Local Efficiency'
-#     }
-    
-#     # 按照 AD, MCI, SCD, NC 的顺序排列（保持原有顺序）
-#     category_order = ['AD', 'MCI', 'SCD', 'NC']
-    
-#     # 创建标签到名称的映射
-#     label_to_name = {label: group_names[label] for label in labels}
-    
-#     # 按照指定顺序获取标签
-#     ordered_labels = []
-#     for cat in category_order:
-#         for label, name in label_to_name.items():
-#             if name == cat:
-#                 ordered_labels.append(label)
-#                 break
-    
-#     # 创建图形 - 1行2列
-#     fig, axes = plt.subplots(1, 2, figsize=(12, 6))
-    
-#     # 颜色方案：为不同组使用不同颜色
-#     colors = ['#E74C3C', '#3498DB', '#2ECC71', '#F39C12']  # AD, MCI, SCD, NC的颜色
-    
-#     for idx, metric in enumerate(metrics):
-#         ax = axes[idx]
-        
-#         # 准备数据
-#         con1_values = []
-#         con2_values = []
-#         con1_data_full = []
-#         con2_data_full = []
-        
-#         for label in ordered_labels:
-#             con1_data = [x for x in con1_metrics[label][metric] if not np.isnan(x)]
-#             con2_data = [x for x in con2_metrics[label][metric] if not np.isnan(x)]
-            
-#             con1_values.append(np.mean(con1_data))
-#             con2_values.append(np.mean(con2_data))
-#             con1_data_full.append(con1_data)
-#             con2_data_full.append(con2_data)
-        
-#         # 设置柱状图位置 - 保持原有分组结构
-#         n_categories = len(ordered_labels)  # 4个类别
-#         bar_width = 0.8
-#         x1_positions = np.arange(n_categories)  # 原始数据组：4个位置
-#         x2_positions = np.arange(n_categories) + n_categories + 0.5  # 降噪数据组：4个位置，中间留间隙
-        
-#         # 绘制箱线图
-#         bp1 = ax.boxplot(con1_data_full, positions=x1_positions, widths=bar_width,
-#                          patch_artist=True,
-#                          boxprops=dict(facecolor='lightblue', alpha=0.8),
-#                          medianprops=dict(color='darkblue', linewidth=2),
-#                          flierprops=dict(marker='o', markerfacecolor='darkblue', markersize=4, alpha=0.5))
-        
-#         bp2 = ax.boxplot(con2_data_full, positions=x2_positions, widths=bar_width,
-#                          patch_artist=True,
-#                          boxprops=dict(facecolor='lightcoral', alpha=0.8),
-#                          medianprops=dict(color='darkred', linewidth=2),
-#                          flierprops=dict(marker='o', markerfacecolor='darkred', markersize=4, alpha=0.5))
-        
-#         # 计算中位数用于趋势线
-#         original_medians = [np.median(data) if len(data) > 0 else np.nan for data in con1_data_full]
-#         denoised_medians = [np.median(data) if len(data) > 0 else np.nan for data in con2_data_full]
-        
-#         # 绘制连接中位数的折线（在各自的分组内）
-#         # Original组内的趋势线（连接4个类别的中位数）
-#         ax.plot(x1_positions, original_medians, 'o-', color='darkblue', 
-#                 linewidth=2.5, markersize=8, label='Original Median Trend', zorder=5)
-        
-#         # Denoised组内的趋势线（连接4个类别的中位数）
-#         ax.plot(x2_positions, denoised_medians, 's-', color='darkred', 
-#                 linewidth=2.5, markersize=8, label='Denoised Median Trend', zorder=5)
-        
-#         # 添加线性回归趋势线
-#         if len(original_medians) >= 2:
-#             valid_indices = ~np.isnan(original_medians)
-#             if sum(valid_indices) >= 2:
-#                 slope, intercept, r_value, p_value, std_err = stats.linregress(
-#                     x1_positions[valid_indices], np.array(original_medians)[valid_indices]
-#                 )
-#                 x_line = np.linspace(min(x1_positions) - 0.5, max(x1_positions) + 0.5, 100)
-#                 y_line = slope * x_line + intercept
-#                 ax.plot(x_line, y_line, '--', color='darkblue', alpha=0.4, linewidth=1.5,
-#                        label=f'Original Trend (r={r_value:.3f}, p={p_value:.3f})')
-        
-#         if len(denoised_medians) >= 2:
-#             valid_indices = ~np.isnan(denoised_medians)
-#             if sum(valid_indices) >= 2:
-#                 slope, intercept, r_value, p_value, std_err = stats.linregress(
-#                     x2_positions[valid_indices], np.array(denoised_medians)[valid_indices]
-#                 )
-#                 x_line = np.linspace(min(x2_positions) - 0.5, max(x2_positions) + 0.5, 100)
-#                 y_line = slope * x_line + intercept
-#                 ax.plot(x_line, y_line, '--', color='darkred', alpha=0.4, linewidth=1.5,
-#                        label=f'Denoised Trend (r={r_value:.3f}, p={p_value:.3f})')
-        
-#         # 设置x轴刻度和标签 - 保持原来的两个分组
-#         all_positions = list(x1_positions) + list(x2_positions)
-#         group_centers = [(x1_positions[0] + x1_positions[-1]) / 2,
-#                         (x2_positions[0] + x2_positions[-1]) / 2]
-        
-#         ax.set_xticks(group_centers)
-#         ax.set_xticklabels(['Original', 'Denoised'], fontsize=12, fontweight='bold')
-        
-#         # 为x轴添加类别标签
-#         # 在x轴上方添加类别标识
-#         for i, (pos, cat) in enumerate(zip(x1_positions, category_order)):
-#             ax.text(pos, ax.get_ylim()[0] - 0.02 * (ax.get_ylim()[1] - ax.get_ylim()[0]), 
-#                    cat, ha='center', va='top', fontsize=8, color=colors[i], fontweight='bold')
-        
-#         for i, (pos, cat) in enumerate(zip(x2_positions, category_order)):
-#             ax.text(pos, ax.get_ylim()[0] - 0.02 * (ax.get_ylim()[1] - ax.get_ylim()[0]), 
-#                    cat, ha='center', va='top', fontsize=8, color=colors[i], fontweight='bold')
-        
-#         # 添加类别图例（只在第一个子图中）
-#         if idx == 0:
-#             legend_elements = [plt.Rectangle((0,0),1,1, facecolor=colors[i], alpha=0.7, 
-#                                             label=category_order[i]) for i in range(n_categories)]
-#             legend_elements.extend([
-#                 plt.Line2D([0], [0], color='darkblue', linewidth=2.5, marker='o', label='Original Trend'),
-#                 plt.Line2D([0], [0], color='darkred', linewidth=2.5, marker='s', label='Denoised Trend')
-#             ])
-#             ax.legend(handles=legend_elements, loc='upper left', fontsize=9)
-        
-#         # 设置标签和标题
-#         ax.set_ylabel(metric_names[metric], fontsize=12)
-#         ax.set_title(f'{metric_names[metric]} Comparison', fontsize=14, fontweight='bold')
-#         ax.grid(True, alpha=0.3, axis='y', linestyle='--')
-        
-#         # 调整y轴范围以留出一些空间
-#         all_data = [val for sublist in con1_data_full + con2_data_full for val in sublist]
-#         if all_data:
-#             y_min = min(all_data)
-#             y_max = max(all_data)
-#             y_range = y_max - y_min
-#             ax.set_ylim(y_min - y_range * 0.1, y_max + y_range * 0.1)  # 只留10%的边距
-#         else:
-#             ax.set_ylim(0, 1)
-    
-#     plt.tight_layout()
-#     plt.savefig(save_path, dpi=300, bbox_inches='tight')
-#     # plt.show()
 
 
 def plot_metrics_comparison(con1_metrics, con2_metrics, labels, group_names, save_path=None):
@@ -480,16 +382,18 @@ def plot_metrics_comparison(con1_metrics, con2_metrics, labels, group_names, sav
         plt.tight_layout()
         
         # 为每个指标保存独立的图形
-        if save_path:
-            # 在保存路径中添加指标名称
-            path_parts = save_path.rsplit('.', 1)
-            metric_save_path = f"{path_parts[0]}_{metric}.{path_parts[1]}"
-            plt.savefig(metric_save_path, dpi=300, bbox_inches='tight')
+        plt.savefig(os.path.join(save_path, f"graph_metrics_comparison_boxplot_trend_{metric}.png"), dpi=300, bbox_inches='tight')
+        # if save_path:
+        #     # 在保存路径中添加指标名称
+        #     path_parts = save_path.rsplit('.', 1)
+        #     metric_save_path = f"{path_parts[0]}_{metric}.{path_parts[1]}"
+        #     plt.savefig(metric_save_path, dpi=300, bbox_inches='tight')
         # plt.show()
         plt.close()  # 关闭当前图形，避免内存占用
     
 # 使用优化版本
 if __name__ == "__main__":
+    os.makedirs('./output_graph', exist_ok=True)
     con1, con2, label, subject_id = load_and_preprocess_data()
     
     # 使用优化后的函数，n_jobs=-1使用所有CPU核心
@@ -502,4 +406,4 @@ if __name__ == "__main__":
     plot_metrics_comparison(con1_metrics, con2_metrics, 
                           np.unique(label), 
                           {0: 'AD', 1: 'SCD', 2: 'MCI', 3: 'NC'},
-                          save_path='graph_metrics_comparison_boxplot_trend.png')
+                          save_path='./output_graph')
