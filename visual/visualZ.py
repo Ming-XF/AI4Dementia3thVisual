@@ -6,8 +6,228 @@ import umap
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
 from typing import Tuple, Optional, List, Union
 import seaborn as sns
+from scipy.linalg import orthogonal_procrustes
+from sklearn.preprocessing import StandardScaler
 
 import pickle
+import os
+
+def procrustes_align(source: np.ndarray, target: np.ndarray, 
+                     use_scaling: bool = False) -> np.ndarray:
+    """
+    将 source 通过 Procrustes 分析对齐到 target 空间
+    
+    Parameters:
+    -----------
+    source : ndarray, shape (N, 2)
+        待对齐的嵌入
+    target : ndarray, shape (N, 2)
+        目标嵌入（作为参考）
+    
+    Returns:
+    --------
+    aligned : ndarray, shape (N, 2)
+        对齐后的嵌入
+    """
+    # 去均值
+    source_mean = source.mean(axis=0)
+    target_mean = target.mean(axis=0)
+    source_centered = source - source_mean
+    target_centered = target - target_mean
+    
+    # 计算缩放因子和正交旋转矩阵
+    # orthogonal_procrustes 返回旋转矩阵 R 和缩放因子 scale
+    R, scale = orthogonal_procrustes(source_centered, target_centered)
+    if not use_scaling:
+        scale = 1.0  # 强制不缩放
+    
+    # 对齐：缩放 + 旋转 + 平移
+    aligned = scale * source_centered @ R + target_mean
+    
+    return aligned
+
+
+def align_all_to_reference(embeddings: List[np.ndarray], 
+                           reference_idx: int = 0) -> List[np.ndarray]:
+    """
+    将所有嵌入对齐到指定的参考嵌入
+    
+    Parameters:
+    -----------
+    embeddings : list of ndarray
+        三个VAE的嵌入列表
+    reference_idx : int
+        参考嵌入的索引（默认0，即对齐到VAE1）
+    
+    Returns:
+    --------
+    aligned_embeddings : list of ndarray
+        对齐后的嵌入列表
+    """
+    reference = embeddings[reference_idx]
+    aligned = [reference]  # 参考嵌入不变
+    
+    for i, emb in enumerate(embeddings):
+        if i == reference_idx:
+            continue
+        aligned.append(procrustes_align(emb, reference))
+    
+    # 按原顺序返回
+    result = []
+    aligned_idx = 0
+    for i in range(len(embeddings)):
+        if i == reference_idx:
+            result.append(embeddings[i])
+        else:
+            aligned_idx += 1
+            result.append(aligned[aligned_idx])
+    
+    return result
+
+def visualize_procrustes_with_connections(
+    embeddings: List[np.ndarray],
+    vae_names: List[str],
+    labels: np.ndarray,
+    reference_idx: int = 0,
+    class_names: Optional[List[str]] = None,
+    sample_indices: Optional[List[int]] = None,
+    figsize: Tuple[int, int] = (10, 8),
+    save_path: Optional[str] = None
+):
+    """
+    绘制 Procrustes 对齐后的单张图，用不同形状区分VAE，用线连接同一个体
+    
+    Parameters:
+    -----------
+    embeddings : list of ndarray
+        三个VAE的原始嵌入列表
+    vae_names : list of str
+        VAE名称列表
+    labels : ndarray
+        类别标签
+    reference_idx : int
+        对齐参考（默认对齐到VAE1）
+    sample_indices : list or None
+        要展示连线的样本索引（None则随机选取20个，设为'none'则不画连线）
+    class_names : list of str, optional
+        类别名称
+    figsize : tuple
+        图像大小
+    save_path : str, optional
+        保存路径
+    """
+    # 对齐
+    aligned_embeddings = align_all_to_reference(embeddings, reference_idx)
+
+    # 调试：检查 VAE1 的坐标范围
+    # print("VAE1 坐标范围:")
+    # print(f"  X: [{aligned_embeddings[0][:, 0].min():.4f}, {aligned_embeddings[0][:, 0].max():.4f}]")
+    # print(f"  Y: [{aligned_embeddings[0][:, 1].min():.4f}, {aligned_embeddings[0][:, 1].max():.4f}]")
+    # print(f"  均值: ({aligned_embeddings[0][:, 0].mean():.4f}, {aligned_embeddings[0][:, 1].mean():.4f})")
+    # print(f"  前5个点:\n{aligned_embeddings[0][:5]}")
+    
+    n_classes = len(np.unique(labels))
+    if class_names is None:
+        class_names = [f'Class {i}' for i in range(n_classes)]
+    
+    # 配色与形状
+    class_colors = sns.color_palette('husl', n_classes)
+    vae_markers = ['o', 's', '^']  # ○ □ △
+    marker_size = 40
+    vae_alphas = [1.0, 0.5, 0.5]
+    
+    fig, ax = plt.subplots(1, 1, figsize=figsize)
+    
+    for vae_idx in [2, 1, 0]:  # 改为倒序：先VAE3, 再VAE2, 最后VAE1
+        marker = vae_markers[vae_idx]
+        aligned_emb = aligned_embeddings[vae_idx]
+        vae_name = vae_names[vae_idx]
+        for class_idx in range(n_classes):
+            mask = labels == class_idx
+            ax.scatter(
+                aligned_emb[mask, 0],
+                aligned_emb[mask, 1],
+                c=[class_colors[class_idx]],
+                marker=marker,
+                label=f'{vae_name} - {class_names[class_idx]}',
+                alpha=vae_alphas[vae_idx],
+                s=marker_size,
+                edgecolors='white' if vae_idx == 0 else 'black',
+                linewidth=0.5,
+                zorder=2 if vae_idx == 0 else 2  # VAE1最高
+            )
+    
+    ax.set_title(
+        f'Procrustes Alignment (Reference: {vae_names[reference_idx]})\n'
+        f'○={vae_names[0]}  □={vae_names[1]}  △={vae_names[2]}  ×=Center',
+        fontsize=13, fontweight='bold'
+    )
+    ax.set_xlabel(f'{vae_names[reference_idx]} Component 1 (aligned)', fontsize=11)
+    ax.set_ylabel(f'{vae_names[reference_idx]} Component 2 (aligned)', fontsize=11)
+    ax.grid(True, alpha=0.2, linestyle='--')
+    ax.set_aspect('equal')
+    
+    # 图例优化：只显示类别和形状含义
+    handles, labels_ax = ax.get_legend_handles_labels()
+    # 简化图例：只保留类别相关的
+    unique_class_handles = []
+    unique_class_labels = []
+    for class_idx in range(n_classes):
+        mask = labels == class_idx
+        if np.any(mask):
+            # 取第一个VAE的该类别的handle
+            for h, l in zip(handles, labels_ax):
+                if l.startswith(vae_names[0]) and class_names[class_idx] in l:
+                    unique_class_handles.append(h)
+                    unique_class_labels.append(class_names[class_idx])
+                    break
+    
+    legend1 = ax.legend(unique_class_handles, unique_class_labels, 
+                        title='Classes', loc='upper left', fontsize=9)
+    ax.add_artist(legend1)
+    
+    # 添加形状图例
+    from matplotlib.lines import Line2D
+    shape_handles = [
+        Line2D([0], [0], marker='o', color='gray', label=vae_names[0], 
+               markersize=8, linestyle='None'),
+        Line2D([0], [0], marker='s', color='gray', label=vae_names[1], 
+               markersize=8, linestyle='None'),
+        Line2D([0], [0], marker='^', color='gray', label=vae_names[2], 
+               markersize=8, linestyle='None'),
+    ]
+    ax.legend(handles=shape_handles, title='VAE Domain', loc='upper right', fontsize=9)
+    
+    plt.tight_layout()
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight', facecolor='white')
+        print(f"Procrustes 对齐图已保存: {save_path}")
+    
+    # plt.show()
+
+
+def compute_procrustes_disparity(
+    embeddings: List[np.ndarray],
+    labels: np.ndarray,
+    reference_idx: int = 0
+) -> np.ndarray:
+    """
+    计算每个样本在三个VAE对齐后的位移量（互补性度量）
+    
+    Returns:
+    --------
+    disparities : ndarray, shape (N, 3)
+        每列是该样本在某个VAE与参考VAE的欧氏距离
+        第一列为0（参考VAE与自身距离为0）
+    """
+    aligned = align_all_to_reference(embeddings, reference_idx)
+    N = len(labels)
+    disparities = np.zeros((N, 3))
+    
+    for i in range(3):
+        disparities[:, i] = np.sqrt(np.sum((aligned[i] - aligned[reference_idx])**2, axis=1))
+    
+    return disparities
 
 
 def reparameterize(mu: np.ndarray, logvar: np.ndarray, random_state: int = 42) -> np.ndarray:
@@ -316,7 +536,7 @@ def visualize_embeddings(
         plt.savefig(save_path, dpi=300, bbox_inches='tight', facecolor='white')
         print(f"图像已保存: {save_path}")
     
-    plt.show()
+    # plt.show()
 
 
 # =================== 使用示例 ===================
@@ -330,15 +550,55 @@ def load_data():
     return mu1, mu2, mu3, logvar1, logvar2, logvar3, labels
 
 if __name__ == '__main__':
+
+    class_names = ['AD', 'SCD', 'MCI', 'NC']
+    mu1, mu2, mu3, logvar1, logvar2, logvar3, labels = load_data()
+
+    path = './output_visualZ'
+    os.makedirs(path, exist_ok=True)
+
+    # ===== Procrustes 对齐可视化 =====
+    print("\n" + "=" * 60)
+    print("Procrustes 对齐 — 多视角互补性可视化")
+    print("=" * 60)
+    
+    # 使用UMAP降维结果做对齐（类别界限最分明）
+    embeddings_for_align, names_for_align, labs_for_align = process_all_vaes(
+        mu1, logvar1, mu2, logvar2, mu3, logvar3,
+        labels,
+        use_sampling=True,
+        method='umap',
+        random_state=42
+    )
+    
+    # 绘制对齐图（对齐到VAE1，随机选30个样本画连线）
+    visualize_procrustes_with_connections(
+        embeddings=embeddings_for_align,
+        vae_names=['VAE1 (Time)', 'VAE2 (Freq)', 'VAE3 (Phase)'],
+        labels=labs_for_align,
+        reference_idx=0,           # 对齐到时间域VAE
+        class_names=class_names,
+        sample_indices=None,       # None=随机选20个；设为'none'=不画连线
+        save_path=os.path.join(path, 'procrustes_alignment.png')
+    )
+    
+    # 计算并输出互补性统计
+    disparities = compute_procrustes_disparity(
+        embeddings_for_align, labs_for_align, reference_idx=0
+    )
+    
+    print("\n样本跨视角平均位移（互补性指标）：")
+    for i, name in enumerate(['VAE1 (ref)', 'VAE2', 'VAE3']):
+        print(f"  {name}: {disparities[:, i].mean():.4f} ± {disparities[:, i].std():.4f}")
+    
+    print(f"\n平均跨视角位移: {disparities[:, 1:].mean():.4f}")
+    print("位移越大 → 三视角互补性越强")
     
     
     # ===== 正确做法：三个VAE都有mu和logvar，都进行采样 =====
     print("=" * 60)
     print("【正确做法】三个VAE都进行重参数化采样")
     print("=" * 60)
-
-    class_names = ['AD', 'SCD', 'MCI', 'NC']
-    mu1, mu2, mu3, logvar1, logvar2, logvar3, labels = load_data()
     
     # 方法1：全部采样
     embeddings_sampled, names_sampled, labs = process_all_vaes(
@@ -350,7 +610,7 @@ if __name__ == '__main__':
     visualize_embeddings(
         embeddings_sampled, names_sampled, labs,
         method='UMAP (全部采样)', class_names=class_names,
-        save_path='vae_all_sampled.png'
+        save_path=os.path.join(path, 'vae_all_sampled.png')
     )
     
     # # 方法2：全部使用均值（确定性编码）
