@@ -202,8 +202,10 @@ class VAE(nn.Module):
         kld = torch.sum(gaussian_kl_divergence(mu, logvar, r_mu, r_logvar))
         
         out = self.reparameterize(mu, logvar).reshape(B, C, -1, self.d_model).permute(0, 2, 1, 3)
+        mu_out = mu.reshape(B, C, -1, self.d_model).permute(0, 2, 1, 3)  # (B, L', C, d_model)
+        logvar_out = logvar.reshape(B, C, -1, self.d_model).permute(0, 2, 1, 3)  # (B, L', C, d_mode
         
-        return out, recon_loss, kld
+        return mu_out, logvar_out, out, recon_loss, kld
     
 
     

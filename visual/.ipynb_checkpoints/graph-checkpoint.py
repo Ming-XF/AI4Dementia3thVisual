@@ -86,12 +86,13 @@ def calculate_Eloc(G):
 def calcaulate_C(G):
     return nx.average_clustering(G)
 
-def calculate_graph_metrics_fast(adj_matrix, threshold=0.25):
+def calculate_graph_metrics_fast(adj_matrix, threshold=0.25, sub_graph=False):
     """
     优化后的图论指标计算
     """
-    # node_indices = get_dmn_indices(coordinates_data)
-    # adj_matrix = extract_subgraph_numpy(adj_matrix, node_indices)
+    if sub_graph:
+        node_indices = get_dmn_indices(coordinates_data)
+        adj_matrix = extract_subgraph_numpy(adj_matrix, node_indices)
     
     # 确保矩阵对称
     np.fill_diagonal(adj_matrix, 0)

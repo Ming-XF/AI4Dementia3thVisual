@@ -253,6 +253,13 @@ class Trainer(object):
         connect2s = []
         yss = []
         subids = []
+
+        mu1s = []
+        mu2s = []
+        mu3s = []
+        logvar1s = []
+        logvar2s = []
+        logvar3s = []
         with torch.no_grad():
             for inputs in evaluate_dataloader:
                 input_kwargs = self.prepare_inputs_kwargs(inputs)
@@ -264,21 +271,48 @@ class Trainer(object):
                 yss.append(ys)
                 subids.append(subject_id)
 
+                #保存可视化数据
+                mu1, mu2, mu3, logvar1, logvar2, logvar3 = outputs.loss
+                mu1s.append(mu1)
+                mu2s.append(mu2)
+                mu3s.append(mu3)
+                logvar1s.append(logvar1)
+                logvar2s.append(logvar2)
+                logvar3s.append(logvar3)
+
             # pdb.set_trace()
             connect1s = np.concatenate(connect1s, axis=0)
             connect2s = np.concatenate(connect2s, axis=0)
             yss = np.concatenate(yss, axis=0)
             subids = np.concatenate(subids, axis=0)
 
+            mu1s = np.concatenate(mu1s, axis=0)
+            mu2s = np.concatenate(mu2s, axis=0)
+            mu3s = np.concatenate(mu3s, axis=0)
+            logvar1s = np.concatenate(logvar1s, axis=0)
+            logvar2s = np.concatenate(logvar2s, axis=0)
+            logvar3s = np.concatenate(logvar3s, axis=0)
+            
+            weight = self.model.dense3.weight.detach().cpu().numpy()
+            bias = self.model.dense3.bias.detach().cpu().numpy()
+
             # pdb.set_trace()
             data = [connect1s, connect2s, yss, subids]
             with open('data.pkl', 'wb') as f:
                 pickle.dump(data, f)
             unique_labels, label_counts = np.unique(yss, return_counts=True)
+            
+
+            #保存可视化数据
+            data2 = [mu1s, mu2s, mu3s, logvar1s, logvar2s, logvar3s, yss, weight, bias]
+            with open('data2.pkl', 'wb') as f:
+                pickle.dump(data2, f)
+
             print("标签统计结果：")
             print("=" * 40)
             for label, count in zip(unique_labels, label_counts):
                 print(f"标签 {label}: {count} 个样本")
+            
         return
                 
             #     loss = outputs.loss

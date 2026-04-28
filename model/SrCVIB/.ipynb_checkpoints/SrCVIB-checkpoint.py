@@ -1,5 +1,7 @@
 from .SrCVIBLayers import *
 from ..base import BaseConfig, ModelOutputs
+import os
+import numpy as np
 
 
 class SrCVIBConfig(BaseConfig):
@@ -88,31 +90,26 @@ class SrCVIB(nn.Module):
 
     def forward(self, time_series, node_feature, labels, subject_id, r_mu, r_logvar, train):
         
-        #消融脑区2，65，36，55，24
         # pdb.set_trace()
-        # (B, 68, 1500)
-        if self.config.abla_channel >= 0:
-            time_series = torch.cat([time_series[:, :self.config.abla_channel, :], time_series[:, self.config.abla_channel+1:, :]], dim=1)
-        
-        # pdb.set_trace()
+        mu1, logvar1, z1, rl1, kl1 = self.vae1(time_series, r_mu, r_logvar)
+        mu2, logvar2, z2, rl2, kl2 = self.vae2(time_series, r_mu, r_logvar)
+        mu3, logvar3, z3, rl3, kl3 = self.vae3(time_series, r_mu, r_logvar)
+        a1 = self.batch_channel_pearson(z1)
+        a2 = self.batch_channel_pearson(z2)
+        a3 = self.batch_channel_pearson(z3)
+        adj = (a1 + a2 + a3) / 3
+        adj = torch.mean(adj, dim=1).unsqueeze(1)
 
-        if self.config.abla_vae in self.vae_configs:
-            mu1, rl1, kl1 = self.vae1(time_series, r_mu, r_logvar)
-            mu2, rl2, kl2 = self.vae2(time_series, r_mu, r_logvar)
-            a1 = self.batch_channel_pearson(mu1)
-            a2 = self.batch_channel_pearson(mu2)
-            adj = (a1 + a2) / 2
-            adj = torch.mean(adj, dim=1).unsqueeze(1)
-            
-        else:
-            mu1, rl1, kl1 = self.vae1(time_series, r_mu, r_logvar)
-            mu2, rl2, kl2 = self.vae2(time_series, r_mu, r_logvar)
-            mu3, rl3, kl3 = self.vae3(time_series, r_mu, r_logvar)
-            a1 = self.batch_channel_pearson(mu1)
-            a2 = self.batch_channel_pearson(mu2)
-            a3 = self.batch_channel_pearson(mu3)
-            adj = (a1 + a2 + a3) / 3
-            adj = torch.mean(adj, dim=1).unsqueeze(1)
+        mu1 = mu1.detach().cpu().numpy()
+        mu2 = mu2.detach().cpu().numpy()
+        mu3 = mu3.detach().cpu().numpy()
+        logvar1 = logvar1.detach().cpu().numpy()
+        logvar2 = logvar2.detach().cpu().numpy()
+        logvar3 = logvar3.detach().cpu().numpy()
+        
+
+        out = self.bnc(adj)
+        logits = F.leaky_relu(self.dense3(out), negative_slope=0.33)
 
         
         ys = np.argmax(labels.detach().cpu().numpy(), axis=1)
@@ -120,7 +117,7 @@ class SrCVIB(nn.Module):
         con2s = adj.squeeze(1).cpu().numpy()
         subject_id = subject_id.cpu().numpy()
 
-        return ModelOutputs(logits=[con1s, con2s, ys, subject_id], loss=None)
+        return ModelOutputs(logits=[con1s, con2s, ys, subject_id], loss=[mu1, mu2, mu3, logvar1, logvar2, logvar3])
         
 
 
@@ -161,6 +158,7 @@ class SrCVIB(nn.Module):
         #     return ModelOutputs(logits=logits, loss=loss), z
         # else:
         #     return ModelOutputs(logits=logits, loss=loss)
+
         
     def compute_channel_attention(self, x):
         """

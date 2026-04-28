@@ -9,6 +9,8 @@ import pickle
 import os
 import warnings
 
+from graph import calculate_graph_metrics_fast
+
 import pdb
 warnings.filterwarnings('ignore')
 
@@ -52,17 +54,17 @@ def load_clinical_scores(filepath: str) -> pd.DataFrame:
     
     return df
 
-
-def extract_connection_strength(
+def extract_fc_feature(
     node_feature: np.ndarray,
     adj: np.ndarray,
     subject_ids: np.ndarray,
-    i: int,
-    j: int,
+    feature_type: str = 'connection',
+    i: int = None,
+    j: int = None,
     use_original: bool = True
 ) -> pd.DataFrame:
     """
-    提取指定连接的强度值及对应的受试者ID
+    提取FC特征（连接强度或图论指标）
     
     Parameters:
     -----------
@@ -72,15 +74,17 @@ def extract_connection_strength(
         VAE降噪后的FC图，形状为(n_samples, n_nodes, n_nodes)
     subject_ids : np.ndarray
         每个FC图对应的受试者ID，形状为(n_samples,)
-    i, j : int
-        要提取的连接索引
+    feature_type : str
+        特征类型：'connection'表示连接强度，'clustering'表示平均聚类系数
+    i, j : int, optional
+        当feature_type='connection'时需要的连接索引
     use_original : bool
         是否使用原始FC图(node_feature)，False则使用VAE降噪后的图(adj)
     
     Returns:
     --------
     pd.DataFrame
-        包含subject_id和连接强度的DataFrame
+        包含subject_id和FC特征的DataFrame
     """
     n_samples = len(subject_ids)
     
@@ -92,34 +96,63 @@ def extract_connection_strength(
         fc_data = adj
         data_type = 'vae_denoised'
     
-    # 提取指定连接的强度
-    connection_strengths = []
-    for idx in range(n_samples):
-        # 根据数据维度提取连接强度
-        if len(fc_data.shape) == 3:
-            # 如果是3D数组 (n_samples, n_nodes, n_nodes)
-            strength = fc_data[idx, i, j]
-        elif len(fc_data.shape) == 2:
-            # 如果是2D数组 (n_samples, n_features)
-            # 假设是展平的FC矩阵，需要计算索引
-            n_nodes = int(np.sqrt(fc_data.shape[1]))
-            flat_idx = i * n_nodes + j
-            strength = fc_data[idx, flat_idx]
-        else:
-            raise ValueError(f"Unexpected fc_data shape: {fc_data.shape}")
+    # 根据feature_type提取不同特征
+    if feature_type == 'connection':
+        if i is None or j is None:
+            raise ValueError("i and j must be specified when feature_type='connection'")
         
-        connection_strengths.append(strength)
+        # 提取连接强度
+        connection_strengths = []
+        for idx in range(n_samples):
+            if len(fc_data.shape) == 3:
+                strength = fc_data[idx, i, j]
+            elif len(fc_data.shape) == 2:
+                n_nodes = int(np.sqrt(fc_data.shape[1]))
+                flat_idx = i * n_nodes + j
+                strength = fc_data[idx, flat_idx]
+            else:
+                raise ValueError(f"Unexpected fc_data shape: {fc_data.shape}")
+            connection_strengths.append(strength)
+        
+        feature_values = connection_strengths
+        feature_name = f'connection_strength_{i}_{j}_{data_type}'
+        
+    elif feature_type == 'clustering':
+        # 计算平均聚类系数
+        clustering_coeffs = []
+        for idx in range(n_samples):
+            if len(fc_data.shape) == 3:
+                fc_matrix = fc_data[idx, :, :]
+            elif len(fc_data.shape) == 2:
+                n_nodes = int(np.sqrt(fc_data.shape[1]))
+                fc_matrix = fc_data[idx, :].reshape(n_nodes, n_nodes)
+            else:
+                raise ValueError(f"Unexpected fc_data shape: {fc_data.shape}")
+            
+            # 使用绝对值构建无向图
+            # G = nx.from_numpy_array(np.abs(fc_matrix))
+            # avg_clustering = nx.average_clustering(G)
+            # clustering_coeffs.append(avg_clustering)
+            metrics = calculate_graph_metrics_fast(fc_matrix, threshold=0.25, sub_graph=True)
+            clustering_coeffs.append(metrics['C'])
+            
+        
+        feature_values = clustering_coeffs
+        feature_name = f'avg_clustering_{data_type}'
+        
+    else:
+        raise ValueError(f"Unknown feature_type: {feature_type}. Use 'connection' or 'clustering'")
     
     # 创建DataFrame
-    df_connection = pd.DataFrame({
+    df_feature = pd.DataFrame({
         'subject_id': subject_ids,
-        f'connection_strength_{data_type}': connection_strengths
+        feature_name: feature_values
     })
 
-    # 新增：每个受试者只保留第一个数据
-    df_connection = df_connection.groupby('subject_id').first().reset_index()
+    # 每个受试者只保留第一个数据
+    df_feature = df_feature.groupby('subject_id').first().reset_index()
     
-    return df_connection
+    return df_feature
 
 
 def merge_clinical_and_fc_data(
@@ -176,7 +209,8 @@ def plot_scatter_with_fit(
     figsize: Tuple[int, int] = (10, 6),
     save_path: Optional[str] = None,
     show_stats: bool = True,
-    color_by_subject: bool = True
+    color_by_subject: bool = True,
+    thred = 0.3
 ) -> Tuple[plt.Figure, plt.Axes, dict]:
     """
     绘制散点图和拟合线
@@ -213,7 +247,7 @@ def plot_scatter_with_fit(
     y = df_merged[clinical_score].values
 
     slope, intercept, r_value, p_value, std_err = stats.linregress(x, y)
-    if abs(r_value) < 0.3:
+    if abs(r_value) < thred:
         return None, None, None
 
     # 创建图形
@@ -266,9 +300,9 @@ def plot_scatter_with_fit(
     
     # 设置标签和标题
     data_type = "Original FC" if use_original else "VAE Denoised FC"
-    ax.set_xlabel(f'Connection Strength ({i}, {j})', fontsize=12, fontweight='bold')
+    ax.set_xlabel(connection_col, fontsize=12, fontweight='bold')
     ax.set_ylabel(f'{clinical_score} Score', fontsize=12, fontweight='bold')
-    ax.set_title(f'{clinical_score} vs FC Connection ({i},{j})\n{data_type}', 
+    ax.set_title(f'{clinical_score} vs FC {connection_col}\n{data_type}', 
                  fontsize=14, fontweight='bold')
     
     # 添加网格
@@ -306,7 +340,7 @@ def plot_scatter_with_fit(
     
     # 保存图形
     if save_path:
-        plt.savefig(os.path.join(save_path, f'{i}_{j}_{clinical_score}_{stats_dict['pearson_r']:.2f}_{stats_dict['p_value']:.3f}.png'), dpi=300, bbox_inches='tight')
+        plt.savefig(os.path.join(save_path, f'{connection_col}_{clinical_score}_{stats_dict['pearson_r']:.2f}_{stats_dict['p_value']:.3f}.png'), dpi=300, bbox_inches='tight')
         print(f"Figure saved to: {save_path}")
 
     
@@ -321,9 +355,11 @@ def analyze_fc_clinical_correlation(
     i: int,
     j: int,
     clinical_score: str,
+    feature_type: str = 'connection',
     use_original: bool = True,
     save_path: Optional[str] = None,
-    verbose: bool = True
+    verbose: bool = True,
+    thred = 0.3
 ) -> dict:
     """
     综合分析FC连接强度与临床量表评分的相关性
@@ -358,7 +394,7 @@ def analyze_fc_clinical_correlation(
         print("=" * 60)
         print("FC-Clinical Correlation Analysis")
         print("=" * 60)
-        print(f"Analyzing connection: ({i}, {j})")
+        print(f"Analyzing {feature_type}")
         print(f"Clinical score: {clinical_score}")
         print(f"Using {'Original' if use_original else 'VAE Denoised'} FC data")
         print("-" * 60)
@@ -369,18 +405,22 @@ def analyze_fc_clinical_correlation(
         print(f"\nLoaded clinical data for {len(df_clinical)} subjects")
         print(f"Available clinical scores: {list(df_clinical.columns)}")
     
-    # 2. 提取FC连接强度
-    df_connection = extract_connection_strength(
-        node_feature, adj, subject_ids, i, j, use_original
+    # # 2. 提取FC连接强度
+    # df_connection = extract_connection_strength(
+    #     node_feature, adj, subject_ids, i, j, use_original
+    # )
+    # 2. 提取FC特征
+    df_feature = extract_fc_feature(
+        node_feature, adj, subject_ids, feature_type, i, j, use_original
     )
     if verbose:
-        print(f"\nExtracted connection strengths for {len(df_connection)} FC graphs")
-        print(f"Unique subjects in FC data: {df_connection['subject_id'].nunique()}")
+        print(f"\nExtracted {feature_type} for {len(df_feature)} FC graphs")
+        print(f"Unique subjects in FC data: {df_feature['subject_id'].nunique()}")
     
     # 3. 合并数据
-    connection_col = df_connection.columns[1]  # 获取连接强度列名
+    feature_col = df_feature.columns[1]  # 获取指标列名
     df_merged = merge_clinical_and_fc_data(
-        df_clinical, df_connection, clinical_score
+        df_clinical, df_feature, clinical_score
     )
     if verbose:
         print(f"\nMerged data: {len(df_merged)} samples")
@@ -390,8 +430,8 @@ def analyze_fc_clinical_correlation(
     
     # 4. 绘制散点图和拟合线
     fig, ax, stats_dict = plot_scatter_with_fit(
-        df_merged, connection_col, clinical_score, i, j, 
-        use_original, save_path=save_path
+        df_merged, feature_col, clinical_score, i, j, 
+        use_original, save_path=save_path, thred=thred
     )
     
     # 5. 打印统计结果
@@ -425,10 +465,6 @@ if __name__ == "__main__":
     os.makedirs('./output_score', exist_ok=True)
     clinical_scores_path = "./MMS.txt"  # 请替换为您的实际文件路径
     node_feature, adj, _, subject_ids = load_and_preprocess_data()
-    
-    # 示例1：分析单个连接
-    print("Example 1: Single connection analysis")
-    print("-" * 40)
 
     items = ['MMSE','MoCA总分','即刻记忆','延迟回忆','线索回忆','长时延迟再认','数字广度顺向','数字广度逆向','连线测验A','连线测验B','Boston-初始命名','CDR_SOB','CDR','TMT B-A','CDT']
 
@@ -440,11 +476,28 @@ if __name__ == "__main__":
                     adj=adj,
                     subject_ids=subject_ids,
                     clinical_scores_path=clinical_scores_path,
+                    feature_type='connection',
                     i=i,
                     j=j,
                     clinical_score=clinical_score,
                     use_original=False,
-                    save_path=f'./output_score'
+                    save_path=f'./output_score',
+                    thred=0.3,
                 )
+
+    # for clinical_score in items:
+    #     result = analyze_fc_clinical_correlation(
+    #         node_feature=node_feature,
+    #         adj=adj,
+    #         subject_ids=subject_ids,
+    #         clinical_scores_path=clinical_scores_path,
+    #         feature_type='clustering',
+    #         i=-1,
+    #         j=-1,
+    #         clinical_score=clinical_score,
+    #         use_original=False,
+    #         save_path=f'./output_score',
+    #         thred = 0.1,
+    #     )
 
 
