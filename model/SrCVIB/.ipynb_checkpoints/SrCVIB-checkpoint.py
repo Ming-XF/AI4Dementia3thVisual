@@ -116,8 +116,9 @@ class SrCVIB(nn.Module):
         con1s = node_feature.cpu().numpy()
         con2s = adj.squeeze(1).cpu().numpy()
         subject_id = subject_id.cpu().numpy()
+        cnn = out.cpu().numpy()
 
-        return ModelOutputs(logits=[con1s, con2s, ys, subject_id], loss=[mu1, mu2, mu3, logvar1, logvar2, logvar3])
+        return ModelOutputs(logits=[con1s, con2s, ys, subject_id, cnn], loss=[mu1, mu2, mu3, logvar1, logvar2, logvar3])
         
 
 
