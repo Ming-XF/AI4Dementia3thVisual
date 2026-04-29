@@ -163,7 +163,7 @@ class VAE(nn.Module):
         assert (self.view == "t" or self.view == "f" or self.view == "p"), "Not find view"
         recon_loss = None
         if self.view == "t":
-            recon_loss = nn.MSELoss(reduction='sum')(recon_x, x)
+            recon_loss = nn.MSELoss(reduction='none')(recon_x, x)
         elif self.view == "f":
             fft_x = torch.fft.fft(x, dim=-1)
             fft_x = torch.complex(
@@ -179,7 +179,7 @@ class VAE(nn.Module):
             )
             f_recon_x = torch.abs(fft_recon_x)
             f_recon_x = torch.clamp(f_recon_x, min=1e-8, max=1e8)
-            recon_loss = nn.MSELoss(reduction='sum')(f_recon_x, f_x)
+            recon_loss = nn.MSELoss(reduction='none')(f_recon_x, f_x)
         else:
             fft_x = torch.fft.fft(x, dim=-1)
             fft_x = torch.complex(
@@ -193,18 +193,18 @@ class VAE(nn.Module):
                 torch.clamp(fft_recon_x.imag, min=-1e8, max=1e8)
             )
             p_recon_x = torch.angle(fft_recon_x)
-            recon_loss = nn.MSELoss(reduction='sum')(p_recon_x, p_x)
+            recon_loss = nn.MSELoss(reduction='none')(p_recon_x, p_x)
             
         # kld = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
         if r_mu is not None:
             r_mu = r_mu.permute(0, 2, 1, 3).reshape(B*C, -1, self.d_model)
             r_logvar = r_logvar.permute(0, 2, 1, 3).reshape(B*C, -1, self.d_model)
-        kld = torch.sum(gaussian_kl_divergence(mu, logvar, r_mu, r_logvar))
+        kld = torch.mean(gaussian_kl_divergence(mu, logvar, r_mu, r_logvar))
         
         out = self.reparameterize(mu, logvar).reshape(B, C, -1, self.d_model).permute(0, 2, 1, 3)
         mu_out = mu.reshape(B, C, -1, self.d_model).permute(0, 2, 1, 3)  # (B, L', C, d_model)
         logvar_out = logvar.reshape(B, C, -1, self.d_model).permute(0, 2, 1, 3)  # (B, L', C, d_mode
-        
+
         return mu_out, logvar_out, out, recon_loss, kld
     
 

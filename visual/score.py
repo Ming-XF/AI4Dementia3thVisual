@@ -18,7 +18,7 @@ def load_and_preprocess_data():
     with open('../data.pkl', 'rb') as f:
         data = pickle.load(f)
 
-    node_feature, adj, label, subject_id, cnns = data
+    node_feature, adj, label, subject_id, cnns, r1, r2, r3 = data
     return node_feature, adj, label, subject_id, cnns
 
 def load_clinical_scores(filepath: str) -> pd.DataFrame:

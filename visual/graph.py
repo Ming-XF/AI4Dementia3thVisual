@@ -74,7 +74,7 @@ def load_and_preprocess_data():
     with open('../data.pkl', 'rb') as f:
         data = pickle.load(f)
 
-    node_feature, adj, y, subject_id = data
+    node_feature, adj, y, subject_id, cnn, r1, r2, r3 = data
     for i in range(len(node_feature)):
         np.fill_diagonal(node_feature[i], 0)
         np.fill_diagonal(adj[i], 0)

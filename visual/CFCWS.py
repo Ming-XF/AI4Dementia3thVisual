@@ -12,7 +12,7 @@ def load_data():
     with open('../data.pkl', 'rb') as f:
         data = pickle.load(f)
 
-    node_feature, adj, y, subject_id = data
+    node_feature, adj, y, subject_id, cnn, r1, r2, r3 = data
 
     return node_feature, adj, subject_id
 
@@ -103,7 +103,7 @@ def analyze_correlation_comparison(ori_correlations, vae_correlations,
     
     return improvement
 
-def plot_results(ori_mean_corrs, vae_mean_corrs):
+def plot_results(ori_mean_corrs, vae_mean_corrs, path):
     """绘制小提琴图"""
 
     fs = 22
@@ -161,13 +161,13 @@ def plot_results(ori_mean_corrs, vae_mean_corrs):
     plt.tight_layout()
     
     # 保存图像
-    plt.savefig('./output/correlation_violin_plot.png', dpi=300, bbox_inches='tight', 
+    plt.savefig(os.path.join(path, 'correlation_violin_plot.png'), dpi=300, bbox_inches='tight', 
                 facecolor='white')
     # plt.show()
     
-    print(f"\n小提琴图已保存到: ./output/correlation_violin_plot.png")
+    print(f"\n小提琴图已保存到: correlation_violin_plot.png")
 
-def save_detailed_results(ori_mean_corrs, vae_mean_corrs, subject_ids, improvement):
+def save_detailed_results(ori_mean_corrs, vae_mean_corrs, subject_ids, improvement, path):
     """保存详细结果到CSV文件"""
     unique_subjects = np.unique(subject_ids)
     
@@ -178,13 +178,13 @@ def save_detailed_results(ori_mean_corrs, vae_mean_corrs, subject_ids, improveme
         'improvement': improvement
     })
     
-    # 创建输出目录
-    os.makedirs('./output', exist_ok=True)
+    # # 创建输出目录
+    # os.makedirs('./output', exist_ok=True)
     
-    results_df.to_csv('./output/correlation_analysis_results.csv', index=False)
-    print(f"\n详细结果已保存到: ./output/correlation_analysis_results.csv")
+    results_df.to_csv(os.path.join(path, 'correlation_analysis_results.csv'), index=False)
+    print(f"\n详细结果已保存到: correlation_analysis_results.csv")
 
-def main():
+def main(path):
     """主函数"""
     # 加载数据
     ori_data, vae_data, subject_ids = load_data()
@@ -206,10 +206,10 @@ def main():
     
     # 绘制小提琴图（只绘制第一张图）
     print("\n生成小提琴图...")
-    plot_results(ori_mean_corrs, vae_mean_corrs)
+    plot_results(ori_mean_corrs, vae_mean_corrs, path)
     
     # 保存详细结果
-    save_detailed_results(ori_mean_corrs, vae_mean_corrs, subject_ids, improvement)
+    save_detailed_results(ori_mean_corrs, vae_mean_corrs, subject_ids, improvement, path)
     
     # 结论
     print("\n" + "="*50)
@@ -225,5 +225,6 @@ def main():
 
 if __name__ == "__main__":
     # 创建输出目录
-    os.makedirs('./output_cfcws', exist_ok=True)
-    main()
+    path = './output_cfcws'
+    os.makedirs(path, exist_ok=True)
+    main(path)

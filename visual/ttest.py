@@ -17,7 +17,7 @@ def load_and_preprocess_data(cvib=0, positive_class=0, negative_class=3):
     with open('../../data.pkl', 'rb') as f:
         data = pickle.load(f)
 
-    node_feature, adj, y, subject_id = data
+    node_feature, adj, y, subject_id, cnn, r1, r2, r3 = data
     mask_pos = (y == positive_class)
     mask_nev = (y == negative_class)
     if cvib == 1:

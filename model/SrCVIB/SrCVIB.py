@@ -89,6 +89,8 @@ class SrCVIB(nn.Module):
         self.last_vae_loss = torch.tensor(1000000, device='cuda')
 
     def forward(self, time_series, node_feature, labels, subject_id, r_mu, r_logvar, train):
+
+        B, C, L = time_series.shape
         
         # pdb.set_trace()
         mu1, logvar1, z1, rl1, kl1 = self.vae1(time_series, r_mu, r_logvar)
@@ -118,7 +120,14 @@ class SrCVIB(nn.Module):
         subject_id = subject_id.cpu().numpy()
         cnn = out.cpu().numpy()
 
-        return ModelOutputs(logits=[con1s, con2s, ys, subject_id, cnn], loss=[mu1, mu2, mu3, logvar1, logvar2, logvar3])
+        #B,L,C,D
+        # pdb.set_trace()
+        r1 = z1.permute(0, 2, 1, 3).cpu().numpy()
+        r2 = z2.permute(0, 2, 1, 3).cpu().numpy()
+        r3 = z3.permute(0, 2, 1, 3).cpu().numpy()
+        
+
+        return ModelOutputs(logits=[con1s, con2s, ys, subject_id, cnn, r1, r2, r3], loss=[mu1, mu2, mu3, logvar1, logvar2, logvar3])
         
 
 
