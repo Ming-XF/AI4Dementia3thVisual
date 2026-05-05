@@ -43,7 +43,7 @@ class Dementia400Dataset(BaseDataset):
             self.select_subject()
         groups = np.array([f"{int(s)}_{int(l)}" for s, l in zip(self.all_data['subject_id'], labels)])
         self.train_index, self.test_index = list(self.k_fold.split(self.all_data['time_series'], groups))[self.k]
-        self.test_index = np.concatenate([self.train_index, self.test_index])
+        # self.test_index = np.concatenate([self.train_index, self.test_index])
         # self.train_index, self.test_index = list(self.k_fold.split(self.all_data['time_series'], groups))[self.k]
         self.all_data['labels'] = F.one_hot(torch.from_numpy(self.all_data['labels']).to(torch.int64)).numpy()
         shuffle(self.train_index)

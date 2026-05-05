@@ -260,3 +260,5 @@
 04/29/2026 23:47:06 - INFO - utils.trainer -   ***** Running evaluation on test2 dataset *****
 04/29/2026 23:54:10 - INFO - utils.trainer -   ***** Model Loaded *****
 04/29/2026 23:54:10 - INFO - utils.trainer -   ***** Running evaluation on test2 dataset *****
+05/03/2026 20:50:53 - INFO - utils.trainer -   ***** Model Loaded *****
+05/03/2026 20:50:53 - INFO - utils.trainer -   ***** Running evaluation on test2 dataset *****

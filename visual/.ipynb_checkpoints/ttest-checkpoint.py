@@ -454,7 +454,7 @@ def main_analysis():
         high_effect_df = save_connection_data_to_csv(result, cvib, pair_name, 'high_effect')
         
         # 筛选高显著和高效应量连接
-        high_quality_df = filter_high_quality_connections(result, p_threshold=0.01, effect_threshold=0.8)
+        high_quality_df = filter_high_quality_connections(result, p_threshold=0.05, effect_threshold=0.8)
         if len(high_quality_df) > 0:
             high_quality_df.to_csv(f'cvib{cvib}_{pair_name}_high_quality_connections.csv', index=False)
             all_high_quality_dfs.append({
