@@ -18,9 +18,9 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # 设置中文字体和绘图风格
-plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans']
-plt.rcParams['axes.unicode_minus'] = False
-sns.set_style("whitegrid")
+# plt.rcParams['font.sans-serif'] = ['SimHei', 'DejaVu Sans']
+# plt.rcParams['axes.unicode_minus'] = False
+# sns.set_style("whitegrid")
 
 def calculate_band_power_efficient(time_series, hz, freq_bands):
     """
@@ -338,9 +338,9 @@ def comprehensive_analysis(r1: np.ndarray, r2: np.ndarray, r3: np.ndarray,
     comparisons = [('NC', 'AD'), ('NC', 'MCI'), ('NC', 'DSC')]
     
     viewpoints = {
-        '时域 (r1)': r1,
-        '频域 (r2)': r2,
-        '相位域 (r3)': r3
+        'time': r1,
+        'frequency': r2,
+        'phase': r3
     }
     
     all_results = {}
