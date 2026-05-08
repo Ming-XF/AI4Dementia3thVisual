@@ -22,8 +22,9 @@ def load_and_preprocess_data():
     """
     with open('../data.pkl', 'rb') as f:
         data = pickle.load(f)
+        
 
-    node_feature, adj, label, subject_id, cnns, r1, r2, r3 = data
+    node_feature, adj, label, subject_id, cnns, r1, r2, r3, ts = data
     return subject_id, r1, r2, r3
 
 def load_clinical_scores(filepath: str) -> pd.DataFrame:
@@ -56,51 +57,64 @@ def load_clinical_scores(filepath: str) -> pd.DataFrame:
     
     return df
 
-def calculate_band_power_efficient(time_series, hz, freq_bands):
+def calculate_band_power_efficient(time_series, hz, freq_bands, 
+                                   window_sec=4, return_relative=False):
     """
-    最高效版本：完全向量化，避免Python循环
-    适合大规模数据处理
+    改进后的频段功率计算函数
     
     Parameters:
     -----------
-    time_series : ndarray
-        形状为 (N, C, L)
-    hz : float
-        采样频率
-    freq_bands : dict
-        频段字典
+    time_series : ndarray, shape (N, C, L)
+    hz : float, 采样频率
+    freq_bands : dict, 频段定义
+    window_sec : float, Welch窗口长度（秒），建议≥4
+    return_relative : bool, 是否同时返回相对功率
     
     Returns:
     --------
     band_powers : dict
-        每个频段的功率，形状为 (N, C)
     """
     N, C, L = time_series.shape
     band_powers = {}
     
-    # 将数据重塑为 (N*C, L) 以便一次性处理所有通道
+    # Welch参数设定
+    nperseg = min(L, int(hz * window_sec))
+    noverlap = nperseg // 2
+    
+    # 重塑数据
     data_reshaped = time_series.reshape(-1, L)
     
-    # 一次性对所有(样本, 通道)组合计算功率谱
+    # 计算功率谱密度（添加去趋势）
     freqs, psd_matrix = signal.welch(
         data_reshaped,
         fs=hz,
-        nperseg=min(L, hz * 2),
-        noverlap=min(L, hz * 2) // 2,
+        nperseg=nperseg,
+        noverlap=noverlap,
+        detrend='constant',
         axis=-1
     )
     
-    # 为每个频段计算功率并重塑回 (N, C)
+    # 如果需要相对功率，计算总功率
+    if return_relative:
+        total_mask = (freqs >= 0.5) & (freqs <= 45)
+        total_power = simpson(psd_matrix[:, total_mask], 
+                             freqs[total_mask], axis=-1)
+        band_powers['total_power'] = total_power.reshape(N, C)
+    
+    # 计算各频段功率
     for band_name, (f_low, f_high) in freq_bands.items():
         freq_mask = (freqs >= f_low) & (freqs <= f_high)
         freq_range = freqs[freq_mask]
         psd_band = psd_matrix[:, freq_mask]
         
-        # 向量化积分
-        band_power = simpson(psd_band, freq_range, axis=-1)
+        # 绝对功率
+        abs_power = simpson(psd_band, freq_range, axis=-1)
+        band_powers[band_name] = abs_power.reshape(N, C)
         
-        # 重塑回 (N, C)
-        band_powers[band_name] = band_power.reshape(N, C)
+        # 相对功率
+        if return_relative:
+            rel_power = abs_power / total_power
+            band_powers[band_name + '_relative'] = rel_power.reshape(N, C)
     
     return band_powers
 
@@ -112,9 +126,9 @@ def extract_power_feature(
     """
     提取time_series的指定通道，指定频段的功率
     """
-
-    feature_values = power[:, channel]
-    feature_name = f'power_channel_{channel}'
+    N, C = power.shape
+    feature_values = power[:, channel].reshape(N, -1).mean(axis=-1)
+    feature_name = f'power_channel_{channel[0]}-{channel[-1]}'
     
     # 创建DataFrame
     df_feature = pd.DataFrame({
@@ -178,10 +192,11 @@ def plot_scatter_with_fit(
     cnn_feature_col: str,
     clinical_score: str,
     save_path,
+    custom_name: str,
     figsize: Tuple[int, int] = (10, 6),
     show_stats: bool = True,
     color_by_subject: bool = True,
-    thred: float = 0.3
+    thred: float = 0.3,
 ) -> Tuple[plt.Figure, plt.Axes, dict]:
     """
     绘制散点图和拟合线
@@ -310,7 +325,7 @@ def plot_scatter_with_fit(
     }
     
     # 保存图形
-    filename = f'power_channel_{channel}_{clinical_score}_r{stats_dict["pearson_r"]:.2f}_p{stats_dict["p_value"]:.3f}.png'
+    filename = f'{custom_name}_{clinical_score}_r{stats_dict["pearson_r"]:.2f}_p{stats_dict["p_value"]:.3f}.png'
     plt.savefig(os.path.join(save_path, filename), dpi=300, bbox_inches='tight')
     print(f"Figure saved to: {os.path.join(save_path, filename)}")
     
@@ -319,13 +334,15 @@ def plot_scatter_with_fit(
 
 def analyze_cnn_clinical_correlation(
     power,
-    channel: int,
+    channel,
     subject_ids: np.ndarray,
     clinical_scores_path: str,
     clinical_score: str,
     save_path,
+    custom_name: str,
     verbose: bool = True,
-    thred: float = 0.3
+    thred: float = 0.3,
+    
 ) -> dict:
     """
     综合分析CNN特征维度与临床量表评分的相关性
@@ -390,7 +407,7 @@ def analyze_cnn_clinical_correlation(
     
     # 4. 绘制散点图和拟合线
     fig, ax, stats_dict = plot_scatter_with_fit(
-        df_merged, channel, cnn_feature_col, clinical_score, save_path, thred=thred
+        df_merged, channel, cnn_feature_col, clinical_score, save_path, custom_name, thred=thred,
     )
     
     # 5. 打印统计结果
@@ -419,18 +436,31 @@ def analyze_cnn_clinical_correlation(
     return stats_dict
 
 
+# def calculate_acg_zsp(r1, freq_bands):
+#     # 计算所有维度的频段功率并求平均
+#     all_zsps = []  # 存储所有维度的zsp
+#     for i in range(32):
+#         zsp = calculate_band_power_efficient(r1[..., i], 938/(15000/250), freq_bands)
+#         all_zsps.append(zsp)
+    
+#     # 在维度上求平均功率
+#     avg_zsp = {}
+#     for key in freq_bands.keys():
+#         # 收集所有维度该频段的功率
+#         key_powers = [zsp[key] for zsp in all_zsps]  # 每个元素的形状: (N, C)
+#         # 在维度上求平均
+#         avg_power = np.mean(np.stack(key_powers, axis=-1), axis=-1)  # 形状: (N, C)
+#         avg_zsp[key] = avg_power
+
+#     return avg_zsp
+
+
 if __name__ == "__main__":
     # 临床评分文件路径
     clinical_scores_path = "./MMS.txt"  # 请替换为您的实际文件路径
     
     # 加载数据
     subject_ids, r1, r2, r3 = load_and_preprocess_data()
-    N, C, L, D = r1.shape
-
-    pca = PCA(n_components=1)
-    r1 = pca.fit_transform(r1.reshape(-1, D)).reshape(N, C, L)
-    r2 = pca.fit_transform(r2.reshape(-1, D)).reshape(N, C, L)
-    r3 = pca.fit_transform(r3.reshape(-1, D)).reshape(N, C, L)
 
     freq_bands = {
         'delta': (0.5, 4),
@@ -439,12 +469,6 @@ if __name__ == "__main__":
         'beta': (13, 30),
         'gamma': (30, 50)
     }
-
-    r1Power = calculate_band_power_efficient(r1, 250, freq_bands)
-    r2Power = calculate_band_power_efficient(r2, 250, freq_bands)
-    r3Power = calculate_band_power_efficient(r3, 250, freq_bands)
-
-    powers = [r1Power, r2Power, r3Power]
     
     # 临床量表评分列表
     items = [
@@ -453,36 +477,119 @@ if __name__ == "__main__":
         '连线测验A', '连线测验B', 'Boston-初始命名', 
         'CDR_SOB', 'CDR', 'TMT B-A', 'CDT'
     ]
-    
-    # 创建输出目录
-    output_dir = './output_score_power'
-    os.makedirs(output_dir, exist_ok=True)
 
+
+    # 定义对比组类型
+    comparison_types = ['NC_vs_AD', 'NC_vs_MCI', 'NC_vs_DSC']
+    
+    # 创建基础输出目录
+    base_output_dir = './output_score_power'
+    os.makedirs(base_output_dir, exist_ok=True)
+    
     names = ['time', 'frequency', 'phase']
-    for name, power in zip(names, powers):
-        output_dir1 = output_dir+"/"+name
-        os.makedirs(output_dir1, exist_ok=True)
+    
+    # 为每个频段创建文件夹
+    for band_name, _ in freq_bands.items():
+        band_output_dir = os.path.join(base_output_dir, band_name)
+        os.makedirs(band_output_dir, exist_ok=True)
+        print(f"\n{'='*60}")
+        print(f"Processing band: {band_name}")
+        print(f"Output directory: {band_output_dir}")
+        print(f"{'='*60}")
         
-        for band_name, _ in freq_bands.items():
-            path = "./"+"output_msettest/"+band_name+f"/{name}_NC_vs_AD_results.csv"
-    
-            output_dir2 = output_dir1+"/"+band_name
-            os.makedirs(output_dir2, exist_ok=True)
-    
-            df = pd.read_csv(path)
-            channels = df[df['Significant_FDR'] == True].index
-    
-            for channel in channels:
+        for name, time_series in zip(names, [r1, r2, r3]):
+            print(f"\n--- Processing {name} perspective ---")
+            
+            # 计算功率
+            zsp = calculate_band_power_efficient(time_series, 250, freq_bands)
+            
+            # 对每种对比组类型
+            for comparison in comparison_types:
+                print(f"  Comparison: {comparison}")
+                
+                # 构建路径（根据实际文件结构调整）
+                path = f"./output_msettest/{band_name}/denoised_{name}_{band_name}_{comparison}_results.csv"
+                
+                # 检查文件是否存在
+                if not os.path.exists(path):
+                    print(f"    Warning: File not found - {path}")
+                    continue
+                
+                # # 读取显著通道
+                # df = pd.read_csv(path)
+                # # channels = df[df['Significant_FDR'] == True and df[df['t_statistic'] > 0]].index
+                # channels = df[(df['Significant_FDR'] == True) & (df['T_statistic'] > 0)].index
+                
+                # if len(channels) == 0:
+                #     print(f"    Warning: No significant channels found for {name}/{band_name}/{comparison}")
+                #     continue
+                
+                # print(f"    Found {len(channels)} significant channels")
+                
+                # 计算功率特征（z-score归一化的log10功率）
+                power_zscored = stats.zscore(np.log10(zsp[band_name]), axis=1)
+                
+                # 对每个显著通道进行拟合
+                # for channel in channels:
+                #     for item in items:
+                #         # 自定义保存路径和文件名
+                #         # 修改 analyze_cnn_clinical_correlation 函数以支持自定义文件名
+                #         result = analyze_cnn_clinical_correlation(
+                #             power=power_zscored,
+                #             channel=[channel],
+                #             subject_ids=subject_ids,
+                #             clinical_scores_path=clinical_scores_path,
+                #             clinical_score=item,
+                #             save_path=band_output_dir,  # 直接保存到频段文件夹
+                #             custom_name=f"{name}_{band_name}_{comparison}_ch{channel}",
+                #             verbose=True,  # 减少输出
+                #             thred=0.3,
+                            
+                #         )
+
+
+                # 读取显著通道
+                df = pd.read_csv(path)
+                positive_channels = df[(df['Significant_FDR'] == True) & (df['T_statistic'] > 0)].index
+                negative_channels = df[(df['Significant_FDR'] == True) & (df['T_statistic'] < 0)].index
+                
+                if len(positive_channels) == 0:
+                    print(f"    Warning: No significant positive channels found for {name}/{band_name}/{comparison}")
+                    continue
+                
+                print(f"    Found {len(positive_channels)} significant positive channels")
+                
+                # 可选：对所有显著通道的平均值进行拟合
                 for item in items:
                     result = analyze_cnn_clinical_correlation(
-                        power=power[band_name],
-                        channel=channel,
+                        power=power_zscored,
+                        channel=positive_channels.tolist() if isinstance(positive_channels, pd.Index) else channels,
                         subject_ids=subject_ids,
                         clinical_scores_path=clinical_scores_path,
                         clinical_score=item,
-                        save_path=output_dir2,
-                        verbose=True,
-                        thred=0.3  # 强制保存
+                        save_path=band_output_dir,
+                        verbose=False,
+                        thred=0.3,
+                        custom_name=f"{name}_{band_name}_{comparison}_positive_avg_channels"
                     )
-        
+
+                if len(negative_channels) == 0:
+                    print(f"    Warning: No significant negative channels found for {name}/{band_name}/{comparison}")
+                    continue
+                
+                print(f"    Found {len(negative_channels)} significant negative channels")
+                
+                # 可选：对所有显著通道的平均值进行拟合
+                for item in items:
+                    result = analyze_cnn_clinical_correlation(
+                        power=power_zscored,
+                        channel=negative_channels.tolist() if isinstance(negative_channels, pd.Index) else channels,
+                        subject_ids=subject_ids,
+                        clinical_scores_path=clinical_scores_path,
+                        clinical_score=item,
+                        save_path=band_output_dir,
+                        verbose=False,
+                        thred=0.3,
+                        custom_name=f"{name}_{band_name}_{comparison}_negative_avg_channels"
+                    )
     

@@ -22,51 +22,64 @@ warnings.filterwarnings('ignore')
 # plt.rcParams['axes.unicode_minus'] = False
 # sns.set_style("whitegrid")
 
-def calculate_band_power_efficient(time_series, hz, freq_bands):
+def calculate_band_power_efficient(time_series, hz, freq_bands, 
+                                   window_sec=4, return_relative=False):
     """
-    最高效版本：完全向量化，避免Python循环
-    适合大规模数据处理
+    改进后的频段功率计算函数
     
     Parameters:
     -----------
-    time_series : ndarray
-        形状为 (N, C, L)
-    hz : float
-        采样频率
-    freq_bands : dict
-        频段字典
+    time_series : ndarray, shape (N, C, L)
+    hz : float, 采样频率
+    freq_bands : dict, 频段定义
+    window_sec : float, Welch窗口长度（秒），建议≥4
+    return_relative : bool, 是否同时返回相对功率
     
     Returns:
     --------
     band_powers : dict
-        每个频段的功率，形状为 (N, C)
     """
     N, C, L = time_series.shape
     band_powers = {}
     
-    # 将数据重塑为 (N*C, L) 以便一次性处理所有通道
+    # Welch参数设定
+    nperseg = min(L, int(hz * window_sec))
+    noverlap = nperseg // 2
+    
+    # 重塑数据
     data_reshaped = time_series.reshape(-1, L)
     
-    # 一次性对所有(样本, 通道)组合计算功率谱
+    # 计算功率谱密度（添加去趋势）
     freqs, psd_matrix = signal.welch(
         data_reshaped,
         fs=hz,
-        nperseg=min(L, hz * 2),
-        noverlap=min(L, hz * 2) // 2,
+        nperseg=nperseg,
+        noverlap=noverlap,
+        detrend='constant',
         axis=-1
     )
     
-    # 为每个频段计算功率并重塑回 (N, C)
+    # 如果需要相对功率，计算总功率
+    if return_relative:
+        total_mask = (freqs >= 0.5) & (freqs <= 45)
+        total_power = simpson(psd_matrix[:, total_mask], 
+                             freqs[total_mask], axis=-1)
+        band_powers['total_power'] = total_power.reshape(N, C)
+    
+    # 计算各频段功率
     for band_name, (f_low, f_high) in freq_bands.items():
         freq_mask = (freqs >= f_low) & (freqs <= f_high)
         freq_range = freqs[freq_mask]
         psd_band = psd_matrix[:, freq_mask]
         
-        # 向量化积分
-        band_power = simpson(psd_band, freq_range, axis=-1)
+        # 绝对功率
+        abs_power = simpson(psd_band, freq_range, axis=-1)
+        band_powers[band_name] = abs_power.reshape(N, C)
         
-        # 重塑回 (N, C)
-        band_powers[band_name] = band_power.reshape(N, C)
+        # 相对功率
+        if return_relative:
+            rel_power = abs_power / total_power
+            band_powers[band_name + '_relative'] = rel_power.reshape(N, C)
     
     return band_powers
 
@@ -310,7 +323,7 @@ def plot_viewpoint_results(results: Dict, viewpoint_name: str,
     return fig
 
 
-def comprehensive_analysis(r1: np.ndarray, r2: np.ndarray, r3: np.ndarray,
+def comprehensive_analysis(zs: np.ndarray, name: str,
                           labels: np.ndarray, label_map: Dict = None,
                           channel_names: List[str] = None, output_dir: str = "./") -> Dict:
     """
@@ -338,9 +351,7 @@ def comprehensive_analysis(r1: np.ndarray, r2: np.ndarray, r3: np.ndarray,
     comparisons = [('NC', 'AD'), ('NC', 'MCI'), ('NC', 'DSC')]
     
     viewpoints = {
-        'time': r1,
-        'frequency': r2,
-        'phase': r3
+        name: zs,
     }
     
     all_results = {}
@@ -406,14 +417,34 @@ def load_and_preprocess_data():
     with open('../data.pkl', 'rb') as f:
         data = pickle.load(f)
 
-    _, _, labels, _, _, r1, r2, r3 = data
-    return labels, r1, r2, r3
+    _, _, labels, _, _, r1, r2, r3, ts = data
+    return labels, r1, r2, r3, ts
+
+# def calculate_acg_zsp(r1, freq_bands):
+#     # 计算所有维度的频段功率并求平均
+#     all_zsps = []  # 存储所有维度的zsp
+#     for i in range(32):
+#         zsp = calculate_band_power_efficient(r1[..., i], 250, freq_bands)
+#         all_zsps.append(zsp)
+    
+#     # 在维度上求平均功率
+#     avg_zsp = {}
+#     for key in freq_bands.keys():
+#         # 收集所有维度该频段的功率
+#         key_powers = [zsp[key] for zsp in all_zsps]  # 每个元素的形状: (N, C)
+#         # 在维度上求平均
+#         avg_power = np.mean(np.stack(key_powers, axis=-1), axis=-1)  # 形状: (N, C)
+#         avg_zsp[key] = avg_power
+
+#     return avg_zsp
 
 if __name__ == "__main__":
 
+    output_path = "./output_msettest"
+    
     channel_names = []
-    labels, r1, r2, r3 = load_and_preprocess_data()
-    N, C, L, D = r1.shape
+    labels, r1, r2, r3, ts = load_and_preprocess_data()
+    # N, C, L, D = r1.shape
     for i in range(r1.shape[1]):
         channel_names.append('region_'+str(i))
     freq_bands = {
@@ -423,40 +454,66 @@ if __name__ == "__main__":
         'beta': (13, 30),
         'gamma': (30, 50)
     }
-    # pdb.set_trace()
-    # r1 = calculate_band_power_efficient(r1, 250, freq_bands)['gamma']
-    # r2 = calculate_band_power_efficient(r2, 250, freq_bands)['gamma']
-    # r3 = calculate_band_power_efficient(r3, 250, freq_bands)['gamma']
 
-    pca = PCA(n_components=1)
-    r1 = pca.fit_transform(r1.reshape(-1, D)).reshape(N, C, L)
-    r2 = pca.fit_transform(r2.reshape(-1, D)).reshape(N, C, L)
-    r3 = pca.fit_transform(r3.reshape(-1, D)).reshape(N, C, L)
+    tsp = calculate_band_power_efficient(ts, 250, freq_bands)
+    os.makedirs(output_path, exist_ok=True)
 
-    # pdb.set_trace()
-    
-    
-    print("数据形状:")
-    print(f"labels: {labels.shape}")
-    print(f"r1 (时域): {r1.shape}")
-    print(f"r2 (频域): {r2.shape}")
-    print(f"r3 (相位域): {r3.shape}")
-        
     for key in freq_bands.keys():
-        k1 = calculate_band_power_efficient(r1, 250, freq_bands)[key]
-        k2 = calculate_band_power_efficient(r2, 250, freq_bands)[key]
-        k3 = calculate_band_power_efficient(r3, 250, freq_bands)[key]
-
-        output_dir = f'./output_msettest/{key}'
-        os.makedirs(output_dir, exist_ok=True)
-        
+        tspk = tsp[key]
         # 执行综合分析
+        output_dir = f'{output_path}/{key}'
+        os.makedirs(output_dir, exist_ok=True)
         all_results = comprehensive_analysis(
-            k1, k2, k3, 
+            tspk, f"origin_{key}",
             labels, 
             channel_names=channel_names,
             output_dir=output_dir
         )
-        
         # 导出结果
         export_results_to_csv(all_results, channel_names, output_dir=output_dir)
+
+
+
+    names = ['time', 'frequency', 'phase']
+    for name, time_series in zip(names, [r1, r2, r3]):
+        # avg_zsp = calculate_acg_zsp(r1, freq_bands)
+        zsp = calculate_band_power_efficient(time_series, 250, freq_bands)
+        
+        # 分析平均功率
+        os.makedirs(output_dir, exist_ok=True)
+        for key in freq_bands.keys():
+            avg_zspk = zsp[key]
+            output_dir = f'{output_path}/{key}'
+            os.makedirs(output_dir, exist_ok=True)
+            
+            all_results = comprehensive_analysis(
+                avg_zspk, f"denoised_{name}_{key}",
+                labels, 
+                channel_names=channel_names,
+                output_dir=output_dir
+            )
+            export_results_to_csv(all_results, channel_names, output_dir=output_dir)
+        
+        
+
+    # 将zsp的计算移到外面，每个维度只计算一次
+    # for i in range(32):
+    #     zsp = calculate_band_power_efficient(r1[..., i], 250*(938/15000), freq_bands)
+    #     with open(f'{output_path}/zsp_dim_{i}.pkl', 'wb') as f:
+    #         pickle.dump(zsp, f)
+        
+    #     for key in freq_bands.keys():
+    #         zspk = zsp[key]
+    #         output_dir = f'{output_path}/{key}/dim_{i}'
+    #         os.makedirs(output_dir, exist_ok=True)
+
+    #         # 执行综合分析
+    #         all_results = comprehensive_analysis(
+    #             zspk, f"denoised_{key}_dim_{i}",
+    #             labels, 
+    #             channel_names=channel_names,
+    #             output_dir=output_dir
+    #         )
+            
+    #         # 导出结果
+    #         export_results_to_csv(all_results, channel_names, output_dir=output_dir)

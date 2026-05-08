@@ -93,9 +93,9 @@ class SrCVIB(nn.Module):
         B, C, L = time_series.shape
         
         # pdb.set_trace()
-        mu1, logvar1, z1, rl1, kl1 = self.vae1(time_series, r_mu, r_logvar)
-        mu2, logvar2, z2, rl2, kl2 = self.vae2(time_series, r_mu, r_logvar)
-        mu3, logvar3, z3, rl3, kl3 = self.vae3(time_series, r_mu, r_logvar)
+        mu1, logvar1, z1, rl1, kl1, rx1 = self.vae1(time_series, r_mu, r_logvar)
+        mu2, logvar2, z2, rl2, kl2, rx2 = self.vae2(time_series, r_mu, r_logvar)
+        mu3, logvar3, z3, rl3, kl3, rx3 = self.vae3(time_series, r_mu, r_logvar)
         a1 = self.batch_channel_pearson(z1)
         a2 = self.batch_channel_pearson(z2)
         a3 = self.batch_channel_pearson(z3)
@@ -122,12 +122,14 @@ class SrCVIB(nn.Module):
 
         #B,L,C,D
         # pdb.set_trace()
-        r1 = z1.permute(0, 2, 1, 3).cpu().numpy()
-        r2 = z2.permute(0, 2, 1, 3).cpu().numpy()
-        r3 = z3.permute(0, 2, 1, 3).cpu().numpy()
+        r1 = rx1.cpu().numpy()
+        r2 = rx2.cpu().numpy()
+        r3 = rx3.cpu().numpy()
+
+        ts = time_series.cpu().numpy()
         
 
-        return ModelOutputs(logits=[con1s, con2s, ys, subject_id, cnn, r1, r2, r3], loss=[mu1, mu2, mu3, logvar1, logvar2, logvar3])
+        return ModelOutputs(logits=[con1s, con2s, ys, subject_id, cnn, r1, r2, r3, ts], loss=[mu1, mu2, mu3, logvar1, logvar2, logvar3])
         
 
 

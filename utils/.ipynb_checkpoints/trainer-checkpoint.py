@@ -257,6 +257,7 @@ class Trainer(object):
         r1s = []
         r2s = []
         r3s = []
+        tss = []
 
         mu1s = []
         mu2s = []
@@ -269,7 +270,7 @@ class Trainer(object):
                 input_kwargs = self.prepare_inputs_kwargs(inputs)
                 outputs = self.model(**input_kwargs)
 
-                con1s, con2s, ys, subject_id, cnn, r1, r2, r3 = outputs.logits
+                con1s, con2s, ys, subject_id, cnn, r1, r2, r3, ts = outputs.logits
                 connect1s.append(con1s)
                 connect2s.append(con2s)
                 yss.append(ys)
@@ -278,6 +279,7 @@ class Trainer(object):
                 r1s.append(r1)
                 r2s.append(r2)
                 r3s.append(r3)
+                tss.append(ts)
 
                 #保存可视化数据
                 mu1, mu2, mu3, logvar1, logvar2, logvar3 = outputs.loss
@@ -297,6 +299,7 @@ class Trainer(object):
             r1s = np.concatenate(r1s, axis=0)
             r2s = np.concatenate(r2s, axis=0)
             r3s = np.concatenate(r3s, axis=0)
+            tss = np.concatenate(tss, axis=0)
 
             mu1s = np.concatenate(mu1s, axis=0)
             mu2s = np.concatenate(mu2s, axis=0)
@@ -308,7 +311,7 @@ class Trainer(object):
             bias = self.model.dense3.bias.detach().cpu().numpy()
 
             # pdb.set_trace()
-            data = [connect1s, connect2s, yss, subids, cnns, r1s, r2s, r3s]
+            data = [connect1s, connect2s, yss, subids, cnns, r1s, r2s, r3s, tss]
             with open('data.pkl', 'wb') as f:
                 pickle.dump(data, f)
             unique_labels, label_counts = np.unique(yss, return_counts=True)

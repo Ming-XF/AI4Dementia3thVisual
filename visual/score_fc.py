@@ -484,7 +484,7 @@ def analyze_fc_clinical_correlation(
 
 if __name__ == "__main__":
     # 临床评分文件路径
-    os.makedirs('./output_score', exist_ok=True)
+    os.makedirs('./output_scor_fc', exist_ok=True)
     clinical_scores_path = "./MMS.txt"  # 请替换为您的实际文件路径
     node_feature, adj, _, subject_ids = load_and_preprocess_data()
     significant_connections_file = "./model_2_data_result/cvib0_NC vs AD_high_quality_connections.csv"  # 显著连接文件路径
@@ -503,7 +503,7 @@ if __name__ == "__main__":
                 significant_connections_file=significant_connections_file,
                 clinical_score=clinical_score,
                 use_original=False,
-                save_path='./output_score',
+                save_path='./output_score_fc',
                 thred=0.3,
             )
 
