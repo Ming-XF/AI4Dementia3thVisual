@@ -7,6 +7,7 @@ import seaborn as sns
 from pathlib import Path
 import pickle
 import os
+from statsmodels.stats.multitest import multipletests
 import warnings
 
 from graph import calculate_graph_metrics_fast
@@ -21,7 +22,7 @@ def load_and_preprocess_data():
     with open('../data.pkl', 'rb') as f:
         data = pickle.load(f)
 
-    node_feature, adj, label, subject_id, cnn, r1, r2, r3 = data
+    node_feature, adj, label, subject_id, cnn, r1, r2, r3, ts = data
     return node_feature, adj, label, subject_id
 
 def load_clinical_scores(filepath: str) -> pd.DataFrame:
@@ -334,7 +335,9 @@ def plot_scatter_with_fit(
         'p_value': p_value,
         'slope': slope,
         'intercept': intercept,
-        'std_err': std_err
+        'std_err': std_err,
+        'connection': connection_col,
+        'score': clinical_score,
     }
     
     # 保存图形
@@ -484,14 +487,16 @@ def analyze_fc_clinical_correlation(
 
 if __name__ == "__main__":
     # 临床评分文件路径
-    os.makedirs('./output_scor_fc', exist_ok=True)
+    os.makedirs('./output_score_fc', exist_ok=True)
     clinical_scores_path = "./MMS.txt"  # 请替换为您的实际文件路径
     node_feature, adj, _, subject_ids = load_and_preprocess_data()
-    significant_connections_file = "./model_2_data_result/cvib0_NC vs AD_high_quality_connections.csv"  # 显著连接文件路径
+    significant_connections_file = "./model_2_testset_result/cvib0_NC vs AD_high_quality_connections.csv"  # 显著连接文件路径
 
     items = ['MMSE','MoCA总分','即刻记忆','延迟回忆','线索回忆','长时延迟再认','数字广度顺向','数字广度逆向','连线测验A','连线测验B','Boston-初始命名','CDR_SOB','CDR','TMT B-A','CDT']
 
+    
     for connections_group in ['positive', 'negative']:
+        all_results = []
         for clinical_score in items:
             result = analyze_fc_clinical_correlation(
                 node_feature=node_feature,
@@ -506,6 +511,29 @@ if __name__ == "__main__":
                 save_path='./output_score_fc',
                 thred=0.3,
             )
+            if result is not None:
+                all_results.append(result)
+        if all_results:
+            df_results = pd.DataFrame(all_results)
+    
+            p_values = df_results['p_value'].values
+            reject_fdr, p_fdr, _, _ = multipletests(
+                p_values, 
+                alpha=0.05, 
+                method='fdr_bh'  # Benjamini-Hochberg FDR校正
+            )
+    
+            df_results['p_value_fdr'] = p_fdr
+            df_results['significant_fdr'] = reject_fdr
+            
+            # 按相关系数绝对值排序
+            df_results['abs_r'] = np.abs(df_results['pearson_r'])
+            df_results = df_results.sort_values('abs_r', ascending=False)
+            
+            # 保存结果到CSV
+            results_file = os.path.join("./output_score_fc", f'fc_clinical_correlation_{connections_group}_results.csv')
+            df_results.to_csv(results_file, index=False)
+            print(f"\nResults saved to: {results_file}")
 
     # for clinical_score in items:
     #     result = analyze_fc_clinical_correlation(

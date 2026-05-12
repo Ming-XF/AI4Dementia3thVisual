@@ -10,6 +10,7 @@ from scipy.integrate import simpson
 from sklearn.decomposition import PCA
 import pickle
 import os
+from statsmodels.stats.multitest import multipletests
 import warnings
 
 import pdb
@@ -487,7 +488,8 @@ if __name__ == "__main__":
     os.makedirs(base_output_dir, exist_ok=True)
     
     names = ['time', 'frequency', 'phase']
-    
+
+    all_results = []
     # 为每个频段创建文件夹
     for band_name, _ in freq_bands.items():
         band_output_dir = os.path.join(base_output_dir, band_name)
@@ -572,6 +574,8 @@ if __name__ == "__main__":
                         thred=0.3,
                         custom_name=f"{name}_{band_name}_{comparison}_positive_avg_channels"
                     )
+                    if result is not None:
+                        all_results.append(result)
 
                 if len(negative_channels) == 0:
                     print(f"    Warning: No significant negative channels found for {name}/{band_name}/{comparison}")
@@ -592,4 +596,27 @@ if __name__ == "__main__":
                         thred=0.3,
                         custom_name=f"{name}_{band_name}_{comparison}_negative_avg_channels"
                     )
+                    if result is not None:
+                        all_results.append(result)
+    if all_results:
+        df_results = pd.DataFrame(all_results)
+
+        p_values = df_results['p_value'].values
+        reject_fdr, p_fdr, _, _ = multipletests(
+            p_values, 
+            alpha=0.05, 
+            method='fdr_bh'  # Benjamini-Hochberg FDR校正
+        )
+
+        df_results['p_value_fdr'] = p_fdr
+        df_results['significant_fdr'] = reject_fdr
+        
+        # 按相关系数绝对值排序
+        df_results['abs_r'] = np.abs(df_results['pearson_r'])
+        df_results = df_results.sort_values('abs_r', ascending=False)
+        
+        # 保存结果到CSV
+        results_file = os.path.join(base_output_dir, 'power_clinical_correlation_results.csv')
+        df_results.to_csv(results_file, index=False)
+        print(f"\nResults saved to: {results_file}")
     

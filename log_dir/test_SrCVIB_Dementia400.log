@@ -302,3 +302,5 @@
 05/07/2026 22:40:54 - INFO - utils.trainer -   ***** Running evaluation on test2 dataset *****
 05/07/2026 22:46:22 - INFO - utils.trainer -   ***** Model Loaded *****
 05/07/2026 22:46:22 - INFO - utils.trainer -   ***** Running evaluation on test2 dataset *****
+05/10/2026 18:26:32 - INFO - utils.trainer -   ***** Model Loaded *****
+05/10/2026 18:26:32 - INFO - utils.trainer -   ***** Running evaluation on test2 dataset *****

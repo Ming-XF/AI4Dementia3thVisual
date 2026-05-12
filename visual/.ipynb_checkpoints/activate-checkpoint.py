@@ -280,11 +280,14 @@ if __name__ == "__main__":
         extension="tsv",
     )
     old_df= pd.read_csv(lut, sep='\t')
-    
-    # activation_dict_Nor_vs_MCI = get_active_from_csv("../model_2_testset_result/cvib0_Nor_vs_MCI_significant_connections.csv")
-    activation_dict_Nor_vs_DSC = get_active_from_csv("./model_2_testset_result/cvib0_NC vs SCD_significant_connections.csv")
-    activation_dict_Nor_vs_MCI = get_active_from_csv("./model_2_testset_result/cvib0_NC vs MCI_significant_connections.csv")
-    activation_dict_Nor_vs_AD = get_active_from_csv("./model_2_testset_result/cvib0_NC vs AD_significant_connections.csv")
+
+    activation_dict_Nor_vs_DSC = get_active_from_csv("./model_2_testset_result/cvib0_NC vs SCD_high_quality_connections.csv")
+    activation_dict_Nor_vs_MCI = get_active_from_csv("./model_2_testset_result/cvib0_NC vs MCI_high_quality_connections.csv")
+    activation_dict_Nor_vs_AD = get_active_from_csv("./model_2_testset_result/cvib0_NC vs AD_high_quality_connections.csv")
+
+    # activation_dict_Nor_vs_DSC = get_active_from_csv("./model_2_testset_result/cvib0_NC vs SCD_significant_connections.csv")
+    # activation_dict_Nor_vs_MCI = get_active_from_csv("./model_2_testset_result/cvib0_NC vs MCI_significant_connections.csv")
+    # activation_dict_Nor_vs_AD = get_active_from_csv("./model_2_testset_result/cvib0_NC vs AD_significant_connections.csv")
     
     # 生成新的dataframe
     # new_df = generate_colormap_based_on_activation(

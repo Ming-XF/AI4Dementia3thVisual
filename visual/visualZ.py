@@ -457,9 +457,9 @@ def process_all_vaes(
     
     # 准备数据
     vaes_data = [
-        {'mu': mu1, 'logvar': logvar1, 'name': 'VAE1 (Time)'},
-        {'mu': mu2, 'logvar': logvar2, 'name': 'VAE2 (Frequency)'},
-        {'mu': mu3, 'logvar': logvar3, 'name': 'VAE3 (Phase)'}
+        {'mu': mu1, 'logvar': logvar1, 'name': 'Time'},
+        {'mu': mu2, 'logvar': logvar2, 'name': 'Frequency'},
+        {'mu': mu3, 'logvar': logvar3, 'name': 'Phase'}
     ]
     
     embeddings = []
@@ -480,7 +480,7 @@ def process_all_vaes(
         )
         
         embeddings.append(embedding)
-        vae_names.append(f"{vae['name']} ({sampling_str})")
+        vae_names.append(f"{vae['name']}")
         print(f"{vae['name']}: 使用{sampling_str}, 嵌入形状 {embedding.shape}")
     
     return embeddings, vae_names, labels
@@ -499,6 +499,8 @@ def visualize_embeddings(
 ):
     """可视化三个VAE的降维结果（并排对比）"""
     n_classes = len(np.unique(labels))
+
+    fs = 16
     
     if class_names is None:
         class_names = [f'Class {i}' for i in range(n_classes)]
@@ -521,15 +523,17 @@ def visualize_embeddings(
                 linewidth=0.5
             )
         
-        ax.set_title(f'{name}', fontsize=13, fontweight='bold')
-        ax.set_xlabel('Component 1', fontsize=11)
-        ax.set_ylabel('Component 2', fontsize=11)
-        ax.legend(loc='best', fontsize=8, markerscale=2)
+        ax.set_title(f'{name}', fontsize=fs)
+        ax.tick_params(axis='y', labelsize=fs)
+        ax.tick_params(axis='x', labelsize=fs)
+        ax.set_xlabel('Component 1', fontsize=fs)
+        ax.set_ylabel('Component 2', fontsize=fs)
+        ax.legend(loc='best', fontsize=fs, markerscale=2)
         ax.grid(True, alpha=0.3, linestyle='--')
-        ax.set_aspect('equal')
+        # ax.set_aspect('equal')
     
-    fig.suptitle(f'Latent Space Visualization ({method})', 
-                 fontsize=15, fontweight='bold', y=1.02)
+    # fig.suptitle(f'Latent Space Visualization ({method})', 
+    #              fontsize=15, fontweight='bold', y=1.02)
     plt.tight_layout()
     
     if save_path:
@@ -609,7 +613,7 @@ if __name__ == '__main__':
     )
     visualize_embeddings(
         embeddings_sampled, names_sampled, labs,
-        method='UMAP (全部采样)', class_names=class_names,
+        method='UMAP', class_names=class_names,
         save_path=os.path.join(path, 'vae_all_sampled.png')
     )
     
