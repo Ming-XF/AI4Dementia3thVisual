@@ -247,8 +247,24 @@ def plot_scatter_with_fit(
     y = df_merged[clinical_score].values
 
     slope, intercept, r_value, p_value, std_err = stats.linregress(x, y)
+
+    n = len(x)
+
+    # 统计信息（无论 r 是否低于阈值都计算）
+    stats_dict = {
+        'n_samples': n,
+        'pearson_r': r_value,
+        'r_squared': r_value**2,
+        'p_value': p_value,
+        'slope': slope,
+        'intercept': intercept,
+        'std_err': std_err,
+        'connection': connection_col,
+        'score': clinical_score,
+    }
+
     if abs(r_value) < thred:
-        return None, None, None
+        return None, None, stats_dict
 
     # 创建图形
     fig, ax = plt.subplots(figsize=figsize)
@@ -327,19 +343,6 @@ def plot_scatter_with_fit(
     sns.despine()
     plt.tight_layout()
 
-    # 统计信息
-    stats_dict = {
-        'n_samples': n,
-        'pearson_r': r_value,
-        'r_squared': r_value**2,
-        'p_value': p_value,
-        'slope': slope,
-        'intercept': intercept,
-        'std_err': std_err,
-        'connection': connection_col,
-        'score': clinical_score,
-    }
-    
     # 保存图形
     if save_path:
         plt.savefig(os.path.join(save_path, f'{connection_col}_{clinical_score}_{stats_dict['pearson_r']:.2f}_{stats_dict['p_value']:.3f}.png'), dpi=300, bbox_inches='tight')
@@ -460,10 +463,12 @@ def analyze_fc_clinical_correlation(
     )
     
     # 5. 打印统计结果
-    if verbose and fig is not None:
+    if verbose:
         print("\n" + "=" * 60)
         print("Statistical Results")
         print("=" * 60)
+        if fig is None:
+            print("(Figure skipped: |r| below threshold)")
         print(f"Pearson r: {stats_dict['pearson_r']:.4f}")
         print(f"R-squared: {stats_dict['r_squared']:.4f}")
         print(f"P-value: {stats_dict['p_value']:.4f}")
@@ -485,16 +490,229 @@ def analyze_fc_clinical_correlation(
     
     return stats_dict
 
+# 认知领域分组定义
+COGNITIVE_DOMAINS = {
+    'CDR_SOB':       ('Global Dementia Severity', '#8B0000'),
+    'CDR':           ('Global Dementia Severity', '#8B0000'),
+    '即刻记忆':          ('Episodic Memory', '#2166AC'),
+    '线索回忆':          ('Episodic Memory', '#2166AC'),
+    '延迟回忆':          ('Episodic Memory', '#2166AC'),
+    '长时延迟再认':        ('Episodic Memory', '#2166AC'),
+    'MMSE':           ('Global Cognition', '#D73027'),
+    'MoCA总分':        ('Global Cognition', '#D73027'),
+    '连线测验A':         ('Executive Function', '#E08214'),
+    '连线测验B':         ('Executive Function', '#E08214'),
+    'TMT B-A':        ('Executive Function', '#E08214'),
+    'Boston-初始命名':    ('Language', '#4DAF4A'),
+    'CDT':            ('Visuospatial', '#7B3294'),
+    '数字广度逆向':         ('Attention / WM', '#999999'),
+    '数字广度顺向':         ('Attention / WM', '#999999'),
+}
+
+# 用于在柱状图中替代过长的中文标签的英文短标签
+SCORE_SHORT_LABELS = {
+    'MMSE': 'MMSE', 'MoCA总分': 'MoCA', '即刻记忆': 'Immediate\nRecall',
+    '延迟回忆': 'Delayed\nRecall', '线索回忆': 'Cued\nRecall',
+    '长时延迟再认': 'Long-delayed\nRecognition', '数字广度顺向': 'Digit Span\nForward',
+    '数字广度逆向': 'Digit Span\nBackward', '连线测验A': 'TMT-A',
+    '连线测验B': 'TMT-B', 'Boston-初始命名': 'Boston\nNaming',
+    'CDR_SOB': 'CDR-SOB', 'CDR': 'CDR', 'TMT B-A': 'TMT B-A', 'CDT': 'CDT',
+}
+
+
+def plot_grouped_bar_chart(df_pos, df_neg, save_path):
+    """分组柱状图：x轴为临床量表，按量表类型分左右两组，竖线分隔，展示镜像反转及FDR显著性"""
+    plt.rcParams['font.family'] = 'DejaVu Sans'
+
+    IMPAIRMENT_SCALES = {'CDR_SOB', 'CDR', '连线测验A', '连线测验B', 'TMT B-A'}
+
+    merged = df_pos[['score', 'pearson_r', 'significant_fdr']].merge(
+        df_neg[['score', 'pearson_r', 'significant_fdr']],
+        on='score', suffixes=('_pos', '_neg')
+    )
+    merged['is_impairment'] = merged['score'].isin(IMPAIRMENT_SCALES)
+    # 损伤量表组按 |r| 降序，能力量表组也按 |r| 降序
+    merged = pd.concat([
+        merged[merged['is_impairment']].sort_values('pearson_r_pos', ascending=True),
+        merged[~merged['is_impairment']].sort_values('pearson_r_pos', ascending=False),
+    ])
+
+    labels = [SCORE_SHORT_LABELS.get(s, s) for s in merged['score']]
+    r_pos = merged['pearson_r_pos'].values
+    r_neg = merged['pearson_r_neg'].values
+    sig_pos = merged['significant_fdr_pos'].values
+    sig_neg = merged['significant_fdr_neg'].values
+    is_impairment = merged['is_impairment'].values
+
+    x = np.arange(len(labels))
+    width = 0.35
+
+    # ====== 可调参数：控制x轴延伸和图例偏移距离 ======
+    X_AXIS_RIGHT_EXTEND = 1.5   # x轴向右延伸的额外单位（增大则柱子区域更宽，图例更靠右）
+    LEGEND_X_OFFSET = 0.7       # 图例在axes中的x位置（0~1，越大越靠右）
+    FIG_WIDTH = 20               # 画布宽度
+    # ====================================================
+
+    fig, ax = plt.subplots(figsize=(FIG_WIDTH, 9))
+
+    ax.bar(x - width/2, r_pos, width,
+           color='#2166AC', edgecolor='white', linewidth=0.5,
+           label='Degenerative Disconnection (NC > AD)')
+    ax.bar(x + width/2, r_neg, width,
+           color='#E08214', edgecolor='white', linewidth=0.5,
+           label='Pathological Hyper-connectivity (AD > NC)')
+
+    ax.axhline(y=0, color='black', linewidth=0.8, linestyle='--', alpha=0.6)
+
+    # 两类量表之间的分隔竖线
+    n_impairment = is_impairment.sum()
+    if 0 < n_impairment < len(labels):
+        ax.axvline(x=n_impairment - 0.5, color='#555555', linewidth=1.2, linestyle='-', alpha=0.6)
+
+    for i in range(len(x)):
+        if sig_pos[i]:
+            ax.text(x[i] - width/2, r_pos[i] + (0.04 if r_pos[i] >= 0 else -0.06),
+                    '*', ha='center', va='center', fontsize=20, color='#2166AC', fontweight='bold')
+        else:
+            ax.text(x[i] - width/2, r_pos[i] + (0.04 if r_pos[i] >= 0 else -0.06),
+                    '×', ha='center', va='center', fontsize=20, color='#888888', fontweight='bold')
+        if sig_neg[i]:
+            ax.text(x[i] + width/2, r_neg[i] + (0.04 if r_neg[i] >= 0 else -0.06),
+                    '*', ha='center', va='center', fontsize=20, color='#E08214', fontweight='bold')
+        else:
+            ax.text(x[i] + width/2, r_neg[i] + (0.04 if r_neg[i] >= 0 else -0.06),
+                    '×', ha='center', va='center', fontsize=20, color='#888888', fontweight='bold')
+
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels, fontsize=22, rotation=45, ha='right')
+    ax.set_ylabel("Pearson's r", fontsize=22)
+    ax.set_xlabel('')
+    ax.tick_params(axis='y', labelsize=22)
+
+    # 图例：两组连接 + FDR显著性标记
+    from matplotlib.patches import Patch
+    from matplotlib.lines import Line2D
+    legend_elements = [
+        Patch(facecolor='#2166AC', edgecolor='white', label='Degenerative Disconnection'),
+        Patch(facecolor='#E08214', edgecolor='white', label='Pathological Hyper-connectivity'),
+        Line2D([0], [0], marker='*', linestyle='None', markerfacecolor='black', markersize=12,
+               label='FDR significant (p < 0.05)'),
+    ]
+    ax.legend(handles=legend_elements, loc='upper right', fontsize=20, framealpha=0.9,
+              handlelength=1.5, handleheight=1.0)
+    ax.set_ylim(-0.85, 0.85)
+    ax.set_xlim(-0.6, len(labels) - 0.4 + X_AXIS_RIGHT_EXTEND)
+
+    # 分组标注：放在x轴上方、柱子下方
+    if n_impairment > 0:
+        x_impair_axes = ((n_impairment - 1) / 2) / (len(labels) - 1) if len(labels) > 1 else 0.5
+        ax.text(x_impair_axes, 0.02, 'Impairment scales (higher = worse)',
+                ha='center', va='bottom', fontsize=18, color='#555555',
+                transform=ax.transAxes)
+    if n_impairment < len(labels):
+        x_ability_axes = (n_impairment + (len(labels) - n_impairment - 1) / 2) / (len(labels) - 1) if len(labels) > 1 else 0.5
+        ax.text(x_ability_axes, 0.02, 'Ability scales (higher = better)',
+                ha='center', va='bottom', fontsize=18, color='#555555',
+                transform=ax.transAxes)
+
+    sns.despine()
+    plt.subplots_adjust(top=0.92, bottom=0.18, left=0.10, right=0.95)
+    fig.savefig(os.path.join(save_path, 'fig_grouped_bar_mirror_correlation.png'), dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"[Figure] Grouped bar chart saved to: {save_path}/fig_grouped_bar_mirror_correlation.png")
+
+
+def plot_horizontal_bar_chart(df_pos, save_path, legend_y=0.92):
+    """水平条形图：按认知领域颜色编码展示|r|梯度，映射AD病理层级
+
+    Parameters:
+    -----------
+    legend_y : float
+        图例顶部在axes中的y位置（0~1），默认0.98（最顶部）
+    """
+    plt.rcParams['font.family'] = 'DejaVu Sans'
+
+    df = df_pos.copy()
+    df['domain'], df['color'] = zip(*df['score'].map(
+        lambda s: COGNITIVE_DOMAINS.get(s, ('Other', '#AAAAAA'))))
+    df = df.sort_values('abs_r', ascending=True)
+
+    domain_order = [
+        'Global Dementia Severity', 'Episodic Memory', 'Global Cognition',
+        'Executive Function', 'Language', 'Visuospatial', 'Attention / WM'
+    ]
+    domain_colors = {
+        'Global Dementia Severity': '#8B0000',
+        'Episodic Memory': '#2166AC',
+        'Global Cognition': '#D73027',
+        'Executive Function': '#E08214',
+        'Language': '#4DAF4A',
+        'Visuospatial': '#7B3294',
+        'Attention / WM': '#999999',
+    }
+
+    fig, ax = plt.subplots(figsize=(10, 8))
+
+    y_pos = 0
+    y_ticks, y_labels, y_colors = [], [], []
+    for domain in domain_order:
+        sub = df[df['domain'] == domain]
+        if sub.empty:
+            continue
+        for _, row in sub.iterrows():
+            ax.barh(y_pos, row['abs_r'], height=0.55,
+                    color=domain_colors[domain], edgecolor='white', linewidth=0.5)
+            ax.text(row['abs_r'] + 0.012, y_pos, f"{row['abs_r']:.2f}", va='center', fontsize=9)
+            y_ticks.append(y_pos)
+            label_text = SCORE_SHORT_LABELS.get(row['score'], row['score']).replace('\n', ' ')
+            y_labels.append(label_text)
+            y_colors.append(domain_colors[domain])
+            y_pos += 1
+        y_pos += 0.45
+
+    ax.set_yticks(y_ticks)
+    ax.set_yticklabels(y_labels, fontsize=11)
+    for i, (tick, color) in enumerate(zip(ax.get_yticklabels(), y_colors)):
+        tick.set_color(color)
+    ax.set_xlabel("|Pearson's r| (Degenerative Disconnection Group)", fontsize=11)
+    ax.tick_params(axis='x', labelsize=11)
+
+    ax.set_xlim(0, 0.85)
+    ax.invert_yaxis()
+
+    y_bottom = y_pos + 2
+    ax.set_ylim(-0.8, y_bottom)
+
+    legend_handles = [plt.Rectangle((0, 0), 1, 1, color=domain_colors[d], ec='white') for d in domain_order]
+    ax.legend(legend_handles, domain_order, loc='upper right', fontsize=11, framealpha=0.9, ncol=1,
+              title='Cognitive Domain', title_fontsize=12,
+              bbox_to_anchor=(0.98, legend_y))
+
+    sns.despine()
+    plt.subplots_adjust(left=0.28, right=0.95, top=0.92, bottom=0.15)
+
+    pathology_labels = ['MTL (Early)', 'Neocortex (Mid)', 'Primary (Late)']
+    pathology_x_data = [0.68, 0.53, 0.32]
+    for px, pl in zip(pathology_x_data, pathology_labels):
+        ax.text(px, y_bottom - 1.4, pl, fontsize=10, ha='center', va='center', color='#555555')
+    ax.text(0.49, y_bottom - 0.6, '<-- AD Pathology Progression -->', fontsize=11,
+            ha='center', va='center', color='#555555', fontstyle='italic')
+
+    fig.savefig(os.path.join(save_path, 'fig_horizontal_bar_domain_gradient.png'), dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"[Figure] Horizontal bar chart saved to: {save_path}/fig_horizontal_bar_domain_gradient.png")
+
+
 if __name__ == "__main__":
-    # 临床评分文件路径
     os.makedirs('./output_score_fc', exist_ok=True)
-    clinical_scores_path = "./MMS.txt"  # 请替换为您的实际文件路径
+    clinical_scores_path = "./MMS.txt"
     node_feature, adj, _, subject_ids = load_and_preprocess_data()
-    significant_connections_file = "./model_2_testset_result/cvib0_NC vs AD_high_quality_connections.csv"  # 显著连接文件路径
+    significant_connections_file = "./model_2_testset_result/cvib0_NC vs AD_high_quality_connections.csv"
 
     items = ['MMSE','MoCA总分','即刻记忆','延迟回忆','线索回忆','长时延迟再认','数字广度顺向','数字广度逆向','连线测验A','连线测验B','Boston-初始命名','CDR_SOB','CDR','TMT B-A','CDT']
 
-    
+    saved_results = {}
+
     for connections_group in ['positive', 'negative']:
         all_results = []
         for clinical_score in items:
@@ -515,39 +733,42 @@ if __name__ == "__main__":
                 all_results.append(result)
         if all_results:
             df_results = pd.DataFrame(all_results)
-    
+
             p_values = df_results['p_value'].values
             reject_fdr, p_fdr, _, _ = multipletests(
-                p_values, 
-                alpha=0.05, 
-                method='fdr_bh'  # Benjamini-Hochberg FDR校正
+                p_values,
+                alpha=0.05,
+                method='fdr_bh'
             )
-    
+
             df_results['p_value_fdr'] = p_fdr
             df_results['significant_fdr'] = reject_fdr
-            
-            # 按相关系数绝对值排序
             df_results['abs_r'] = np.abs(df_results['pearson_r'])
             df_results = df_results.sort_values('abs_r', ascending=False)
-            
-            # 保存结果到CSV
+
             results_file = os.path.join("./output_score_fc", f'fc_clinical_correlation_{connections_group}_results.csv')
             df_results.to_csv(results_file, index=False)
             print(f"\nResults saved to: {results_file}")
 
-    # for clinical_score in items:
-    #     result = analyze_fc_clinical_correlation(
-    #         node_feature=node_feature,
-    #         adj=adj,
-    #         subject_ids=subject_ids,
-    #         clinical_scores_path=clinical_scores_path,
-    #         feature_type='clustering',
-    #         connections_group=None,
-    #         significant_connections_file=None,
-    #         clinical_score=clinical_score,
-    #         use_original=False,
-    #         save_path=f'./output_score',
-    #         thred = 0.1,
-    #     )
+            print("\n" + "=" * 80)
+            print(f"FDR-Corrected Results Summary [{connections_group} connections]")
+            print("=" * 80)
+            print(f"{'Clinical Score':<20s} {'r':>8s} {'p_raw':>10s} {'p_fdr':>10s} {'FDR sig':>8s}")
+            print("-" * 60)
+            for _, row in df_results.iterrows():
+                print(f"{row['score']:<20s} {row['pearson_r']:>8.3f} {row['p_value']:>10.4f} {row['p_value_fdr']:>10.4f} {'*' if row['significant_fdr'] else '':>8s}")
+            print("-" * 60)
+            n_sig = df_results['significant_fdr'].sum()
+            print(f"Significant after FDR correction: {n_sig}/{len(df_results)}")
+
+            saved_results[connections_group] = df_results
+
+    if 'positive' in saved_results and 'negative' in saved_results:
+        print("\n" + "=" * 80)
+        print("Generating summary figures...")
+        print("=" * 80)
+        plot_grouped_bar_chart(saved_results['positive'], saved_results['negative'], './output_score_fc')
+        plot_horizontal_bar_chart(saved_results['positive'], './output_score_fc')
+        print("\nAll done.")
 
 

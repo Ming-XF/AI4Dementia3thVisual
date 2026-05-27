@@ -23,17 +23,16 @@ def get_active_from_csv(path):
 
     return region_counts.to_dict()
 
-# fs_name格式：ctx-lh-bankssts -> l.bankssts
+# fs_name格式：ctx-lh-bankssts -> bankssts L
 def fs_name_to_key(fs_name):
     parts = fs_name.split('-')
     if len(parts) >= 3:
         hemisphere = parts[1]  # 'lh' or 'rh'
         region_name = parts[2]
-        
-        # 转换hemisphere标识
-        hemi_short = 'l' if hemisphere == 'lh' else 'r'
-        
-        return f"{hemi_short}.{region_name}"
+
+        hemi_short = 'L' if hemisphere == 'lh' else 'R'
+
+        return f"{region_name} {hemi_short}"
     return None
 
 def generate_colormap_based_on_activation(old_df, coordinates_dict, activation_dict, cmap='coolwarm', vmin=None, vmax=None):
@@ -45,7 +44,7 @@ def generate_colormap_based_on_activation(old_df, coordinates_dict, activation_d
     old_df : pandas.DataFrame
         原始的dataframe，包含脑区信息
     coordinates_dict : dict
-        脑区坐标字典，key格式为 'l.bankssts' 等
+        脑区坐标字典，key格式为 'bankssts L' 等
     activation_dict : dict
         激活值字典，key为节点ID（0-67），value为激活值
     cmap : str
@@ -268,10 +267,46 @@ def plot_brain_comparison(lut_dfs, titles, view='medial', path='output.png', tem
     plt.show()
 
 
+def print_activation_by_region(activation_dict, group_name, coordinates_dict):
+    """打印每个脑区名称对应的激活值（异常连接数），按值降序排列"""
+
+    region_names = list(coordinates_dict.keys())
+
+    print(f"\n{'='*80}")
+    print(f"  {group_name}")
+    print(f"{'='*80}")
+    print(f"{'Index':<6} {'Region':<35} {'Occurrences':>20}")
+    print(f"{'-'*6} {'-'*35} {'-'*20}")
+
+    total = 0
+    non_zero_count = 0
+    for idx, name in enumerate(region_names):
+        val = activation_dict.get(idx, 0)
+        total += val
+        if val > 0:
+            non_zero_count += 1
+        print(f"{idx:<6} {name:<35} {val:>20}")
+
+    print(f"{'-'*6} {'-'*35} {'-'*20}")
+    print(f"{'':<6} {'Total':<35} {total:>20}")
+    print(f"{'':<6} {'Non-zero regions':<35} {non_zero_count:>20}")
+
+    # 按激活值降序排列，只显示非零的
+    print(f"\n  Top regions (sorted by occurrences):")
+    ranked = sorted(
+        [(name, activation_dict.get(idx, 0)) for idx, name in enumerate(region_names)],
+        key=lambda x: x[1], reverse=True
+    )
+    for rank, (name, val) in enumerate(ranked, 1):
+        if val == 0:
+            break
+        print(f"    {rank:>2}. {name:<35} {val}")
+
+
 if __name__ == "__main__":
     # 运行主分析
     os.makedirs('./output_active', exist_ok=True)
-    
+
     template = "fsaverage"
     lut = tflow.get(
         template,
@@ -284,6 +319,11 @@ if __name__ == "__main__":
     activation_dict_Nor_vs_DSC = get_active_from_csv("./model_2_testset_result/cvib0_NC vs SCD_high_quality_connections.csv")
     activation_dict_Nor_vs_MCI = get_active_from_csv("./model_2_testset_result/cvib0_NC vs MCI_high_quality_connections.csv")
     activation_dict_Nor_vs_AD = get_active_from_csv("./model_2_testset_result/cvib0_NC vs AD_high_quality_connections.csv")
+
+    # 打印每个对比组的脑区激活值
+    print_activation_by_region(activation_dict_Nor_vs_DSC, "NC vs SCD", coordinates_data)
+    print_activation_by_region(activation_dict_Nor_vs_MCI, "NC vs MCI", coordinates_data)
+    print_activation_by_region(activation_dict_Nor_vs_AD, "NC vs AD", coordinates_data)
 
     # activation_dict_Nor_vs_DSC = get_active_from_csv("./model_2_testset_result/cvib0_NC vs SCD_significant_connections.csv")
     # activation_dict_Nor_vs_MCI = get_active_from_csv("./model_2_testset_result/cvib0_NC vs MCI_significant_connections.csv")

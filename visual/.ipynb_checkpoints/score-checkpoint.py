@@ -212,11 +212,6 @@ def plot_scatter_with_fit(
                       edgecolors='black',
                       linewidth=0.5)
         
-        # 如果受试者太多，不显示图例
-        if len(unique_subjects) > 10:
-            ax.legend().set_visible(False)
-        else:
-            ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', fontsize=8)
     else:
         ax.scatter(x, y, alpha=0.7, s=80, edgecolors='black', linewidth=0.5)
     
@@ -242,32 +237,59 @@ def plot_scatter_with_fit(
                     alpha=0.2, color='red',
                     label='95% CI')
     
-    # 设置标签和标题
-    ax.set_xlabel(cnn_feature_col, fontsize=12, fontweight='bold')
-    ax.set_ylabel(f'{clinical_score} Score', fontsize=12, fontweight='bold')
-    ax.set_title(f'{clinical_score} vs CNN Feature {cnn_feature_col}', 
-                 fontsize=14, fontweight='bold')
-    
-    # 添加网格
-    ax.grid(True, alpha=0.3, linestyle='--')
+    # 量表名称翻译
+    SCALE_NAME_TRANSLATION = {
+        'MoCA总分': 'MoCA Total',
+        '即刻记忆': 'Immediate Memory',
+        '延迟回忆': 'Delayed Recall',
+        '线索回忆': 'Cued Recall',
+        '长时延迟再认': 'Long-delayed Recognition',
+        '数字广度顺向': 'Digit Span Forward',
+        '数字广度逆向': 'Digit Span Backward',
+        '连线测验A': 'TMT-A',
+        '连线测验B': 'TMT-B',
+        'Boston-初始命名': 'Boston Naming',
+    }
+    clinical_display = SCALE_NAME_TRANSLATION.get(clinical_score, clinical_score)
+
+    # 设置标签
+    ax.set_xlabel(cnn_feature_col.replace("_", " "), fontsize=28)
+    ax.set_ylabel(f'{clinical_display} Score', fontsize=28)
+    ax.tick_params(axis='both', labelsize=28)
     
     # 添加统计信息文本框（显示校正后的p值）
     if show_stats:
         stats_text = f'N = {n}\n'
         stats_text += f'R = {r_value:.3f}\n'
-        stats_text += f'R² = {r_value**2:.3f}\n'
-        stats_text += f'p_uncorrected = {p_value:.4f}\n'
+        # stats_text += f'R² = {r_value**2:.3f}\n'
+        # stats_text += f'p_uncorrected = {p_value:.4f}\n'
         if p_value_fdr is not None:
-            stats_text += f'p_fdr = {p_value_fdr:.4f}\n'
-        stats_text += f'Slope = {slope:.4f}\n'
-        stats_text += f'Intercept = {intercept:.4f}'
-        
-        ax.text(0.05, 0.95, stats_text,
+            stats_text += f'p_fdr = {p_value_fdr:.4f}'
+        # stats_text += f'Slope = {slope:.4f}\n'
+        # stats_text += f'Intercept = {intercept:.4f}'
+
+        # 根据相关性正负设置文本框位置
+        if r_value > 0:
+            text_x, text_ha = 0.05, 'left'
+        else:
+            text_x, text_ha = 0.95, 'right'
+
+        ax.text(text_x, 0.95, stats_text,
                 transform=ax.transAxes,
-                fontsize=10,
+                fontsize=28,
                 verticalalignment='top',
+                horizontalalignment=text_ha,
                 bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.8))
-    
+
+    # 根据相关性正负设置图例位置
+    if r_value > 0:
+        legend_loc = 'upper left'
+    else:
+        legend_loc = 'upper right'
+
+    if color_by_subject and len(unique_subjects) <= 10:
+        ax.legend(loc=legend_loc, fontsize=28)
+
     # 美化图形
     sns.despine()
     plt.tight_layout()
@@ -291,7 +313,7 @@ def plot_scatter_with_fit(
         p_str = f"p{p_value:.3f}"
         if p_value_fdr is not None:
             p_str += f"_pfdr{p_value_fdr:.3f}"
-        filename = f'cnn_dim{feature_dim}_{clinical_score}_r{r_value:.2f}_{p_str}.png'
+        filename = f'cnn_dim{feature_dim}_{clinical_display}_r{r_value:.2f}_{p_str}.png'
         plt.savefig(os.path.join(save_path, filename), dpi=300, bbox_inches='tight')
         print(f"Figure saved to: {os.path.join(save_path, filename)}")
     
@@ -432,59 +454,52 @@ def plot_correlation_heatmap(
     save_path: str,
     figsize: Tuple[int, int] = (14, 10),
     cmap: str = 'RdBu_r',
-    annotate: bool = True  # 添加参数控制是否显示数值
+    annotate: bool = True,
+    thred: float = 0.3
 ) -> Tuple[plt.Figure, plt.Axes]:
     """
-    绘制CNN特征维度与临床量表评分的相关性热图
-    
+    Plot correlation heatmap of CNN feature dimensions vs clinical scores.
+
     Parameters:
     -----------
     df_results : pd.DataFrame
-        包含分析结果的DataFrame，必须包含列：
-        - cnn_dim: CNN特征维度
-        - clinical_score: 临床量表名称
-        - pearson_r: 相关系数
-        - significant_fdr: FDR校正后的显著性
+        Must contain columns: cnn_dim, clinical_score, pearson_r, significant_fdr.
     save_path : str
-        图片保存路径
+        Output directory for the figure.
     figsize : Tuple[int, int]
-        图形大小
+        Figure size.
     cmap : str
-        颜色映射
+        Colormap.
     annotate : bool
-        是否在格子中显示数值
-    
+        Whether to show numeric values in cells.
+    thred : float
+        Correlation threshold for black border marking.
+
     Returns:
     --------
     Tuple[plt.Figure, plt.Axes]
-        图形对象和轴对象
     """
-    # 创建透视表：行为临床量表，列为CNN维度，值为相关系数
     pivot_corr = df_results.pivot_table(
         values='pearson_r',
         index='clinical_score',
         columns='cnn_dim',
         aggfunc='first'
     )
-    
-    # 创建显著性矩阵（FDR校正后）
+
     pivot_sig = df_results.pivot_table(
         values='significant_fdr',
         index='clinical_score',
         columns='cnn_dim',
         aggfunc='first'
     )
-    
-    # 创建图形
+
     fig, ax = plt.subplots(figsize=figsize)
-    
-    # 创建注释矩阵（可选）
+
     if annotate:
         annot_matrix = pivot_corr.round(2).values
     else:
         annot_matrix = None
-    
-    # 绘制热图
+
     sns.heatmap(
         pivot_corr,
         annot=annot_matrix if annotate else False,
@@ -496,214 +511,46 @@ def plot_correlation_heatmap(
         square=True,
         linewidths=0.5,
         linecolor='white',
-        cbar_kws={'label': 'Pearson Correlation Coefficient', 'shrink': 0.8},
+        cbar_kws={'label': 'Pearson Correlation Coefficient', 'shrink': 0.5},
         ax=ax,
-        annot_kws={'fontsize': 9, 'fontweight': 'bold'} if annotate else None
+        annot_kws={'fontsize': 18, 'fontweight': 'bold'} if annotate else None
     )
-    
-    # 如果需要标记显著性，在这里添加边框或标记
-    # 在显著格子周围添加粗边框
+
+    count = 0
+    # Black border for cells with FDR < 0.05 AND |r| > thred
     for i in range(pivot_corr.shape[0]):
         for j in range(pivot_corr.shape[1]):
             is_sig = pivot_sig.iloc[i, j] if not pd.isna(pivot_sig.iloc[i, j]) else False
-            if is_sig:
-                # 在显著格子周围添加粗边框
-                rect = plt.Rectangle((j, i), 1, 1, 
-                                    fill=False, 
-                                    edgecolor='black', 
-                                    linewidth=2.5,
-                                    linestyle='-')
+            corr_val = pivot_corr.iloc[i, j]
+            if is_sig and not pd.isna(corr_val) and abs(corr_val) > thred:
+                count += 1
+                rect = plt.Rectangle((j, i), 1, 1,
+                                     fill=False,
+                                     edgecolor='black',
+                                     linewidth=2.5)
                 ax.add_patch(rect)
-    
-    # 设置标签和标题
-    ax.set_xlabel('CNN Feature Dimension', fontsize=14, fontweight='bold')
-    ax.set_ylabel('Clinical Assessment Score', fontsize=14, fontweight='bold')
-    ax.set_title('Correlation Heatmap: CNN Features vs Clinical Scores\n'
-                 '(Black border: FDR corrected p < 0.05)', 
-                 fontsize=14, fontweight='bold', pad=20)
-    
-    # 旋转x轴标签
-    ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
-    ax.set_yticklabels(ax.get_yticklabels(), rotation=0)
-    
+
+    print(f"total {count} / {pivot_corr.shape[0] * pivot_corr.shape[1]}\n")
+    ax.set_xlabel('CNN Feature Dimension', fontsize=16)
+    ax.set_ylabel('Clinical Assessment Score', fontsize=16)
+    # ax.set_title('Correlation Heatmap: CNN Features vs Clinical Scores',
+    #              fontsize=18, fontweight='bold', pad=20)
+
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right', fontsize=16)
+    ax.set_yticklabels(ax.get_yticklabels(), rotation=0, fontsize=16)
+
+    cbar = ax.collections[0].colorbar
+    cbar.ax.tick_params(labelsize=16)
+    cbar.set_label('Pearson Correlation Coefficient', fontsize=16)
+
     plt.tight_layout()
-    
-    # 保存图片
+
     heatmap_path = os.path.join(save_path, 'cnn_clinical_correlation_heatmap.png')
     plt.savefig(heatmap_path, dpi=300, bbox_inches='tight')
     print(f"Heatmap saved to: {heatmap_path}")
-    
-    # 同时保存PDF版本
-    # heatmap_pdf = os.path.join(save_path, 'cnn_clinical_correlation_heatmap.pdf')
-    # plt.savefig(heatmap_pdf, dpi=300, bbox_inches='tight')
-    # print(f"Heatmap PDF saved to: {heatmap_pdf}")
-    
+
     return fig, ax
 
-
-def plot_correlation_heatmap_enhanced(
-    df_results: pd.DataFrame,
-    save_path: str,
-    thred: float = 0.3,
-    figsize: Tuple[int, int] = (16, 12),
-    cmap: str = 'RdBu_r',
-    annotate: bool = False  # 添加参数控制是否显示数值，默认不显示
-) -> Tuple[plt.Figure, plt.Axes]:
-    """
-    绘制增强版相关性热图，包含所有相关系数，用边框标记显著性和阈值
-    
-    Parameters:
-    -----------
-    df_results : pd.DataFrame
-        包含所有分析结果的DataFrame
-    save_path : str
-        图片保存路径
-    thred : float
-        相关系数阈值，用于在低于阈值的格子上添加标记
-    figsize : Tuple[int, int]
-        图形大小
-    cmap : str
-        颜色映射
-    annotate : bool
-        是否在格子中显示数值和星号
-    
-    Returns:
-    --------
-    Tuple[plt.Figure, plt.Axes]
-    """
-    # 创建透视表
-    pivot_corr = df_results.pivot_table(
-        values='pearson_r',
-        index='clinical_score',
-        columns='cnn_dim',
-        aggfunc='first'
-    )
-    
-    pivot_sig = df_results.pivot_table(
-        values='significant_fdr',
-        index='clinical_score',
-        columns='cnn_dim',
-        aggfunc='first'
-    )
-    
-    # 创建图形，包含两个子图：热图和颜色条
-    fig = plt.figure(figsize=figsize)
-    
-    # 创建网格布局
-    gs = fig.add_gridspec(1, 2, width_ratios=[20, 1])
-    ax = fig.add_subplot(gs[0, 0])
-    cax = fig.add_subplot(gs[0, 1])
-    
-    # 创建注释矩阵
-    if annotate:
-        # 创建包含数值和显著性标记的注释
-        annot_data = pivot_corr.copy()
-        for i in range(pivot_corr.shape[0]):
-            for j in range(pivot_corr.shape[1]):
-                corr_value = pivot_corr.iloc[i, j]
-                is_sig = pivot_sig.iloc[i, j] if not pd.isna(pivot_sig.iloc[i, j]) else False
-                
-                if not pd.isna(corr_value):
-                    if is_sig:
-                        p_fdr = df_results[
-                            (df_results['clinical_score'] == pivot_corr.index[i]) & 
-                            (df_results['cnn_dim'] == pivot_corr.columns[j])
-                        ]['p_value_fdr'].values[0]
-                        
-                        if p_fdr < 0.001:
-                            annot_data.iloc[i, j] = f'{corr_value:.2f}***'
-                        elif p_fdr < 0.01:
-                            annot_data.iloc[i, j] = f'{corr_value:.2f}**'
-                        elif p_fdr < 0.05:
-                            annot_data.iloc[i, j] = f'{corr_value:.2f}*'
-                        else:
-                            annot_data.iloc[i, j] = f'{corr_value:.2f}'
-                    else:
-                        annot_data.iloc[i, j] = f'{corr_value:.2f}'
-                else:
-                    annot_data.iloc[i, j] = ''
-        
-        annot_matrix = annot_data.values
-        fmt = ''
-    else:
-        annot_matrix = None
-        fmt = '.2f'
-    
-    # 绘制热图
-    sns.heatmap(
-        pivot_corr,
-        annot=annot_matrix if annotate else False,
-        fmt=fmt,
-        cmap=cmap,
-        center=0,
-        vmin=-1,
-        vmax=1,
-        square=True,
-        linewidths=0.5,
-        linecolor='gray',
-        cbar_ax=cax,
-        cbar_kws={'label': "Pearson's r"},
-        ax=ax,
-        annot_kws={'fontsize': 9, 'fontweight': 'bold'} if annotate else None
-    )
-    
-    # 添加边框标记
-    for i in range(pivot_corr.shape[0]):
-        for j in range(pivot_corr.shape[1]):
-            corr_value = pivot_corr.iloc[i, j]
-            is_sig = pivot_sig.iloc[i, j] if not pd.isna(pivot_sig.iloc[i, j]) else False
-            
-            if not pd.isna(corr_value):
-                # FDR显著的格子：添加黑色粗边框
-                if is_sig:
-                    rect = plt.Rectangle((j, i), 1, 1, 
-                                        fill=False, 
-                                        edgecolor='black', 
-                                        linewidth=2.5,
-                                        linestyle='-')
-                    ax.add_patch(rect)
-                
-                # 低于阈值的格子：添加虚线边框
-                if abs(corr_value) < thred:
-                    rect = plt.Rectangle((j, i), 1, 1, 
-                                        fill=False, 
-                                        edgecolor='gray', 
-                                        linewidth=1.5,
-                                        linestyle='--',
-                                        alpha=0.7)
-                    ax.add_patch(rect)
-    
-    # 设置标签
-    ax.set_xlabel('CNN Feature Dimension', fontsize=14, fontweight='bold')
-    ax.set_ylabel('Clinical Assessment Score', fontsize=14, fontweight='bold')
-    
-    # 创建标题，包含图例说明
-    if annotate:
-        title = ('Correlation Heatmap: CNN Features vs Clinical Scores\n'
-                 '* FDR p < 0.05 | ** FDR p < 0.01 | *** FDR p < 0.001 | '
-                 f'Dashed border: |r| < {thred}')
-    else:
-        title = ('Correlation Heatmap: CNN Features vs Clinical Scores\n'
-                 f'Solid black border: FDR p < 0.05 | Dashed border: |r| < {thred}')
-    
-    ax.set_title(title, fontsize=14, fontweight='bold', pad=20)
-    
-    # 旋转标签
-    ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
-    ax.set_yticklabels(ax.get_yticklabels(), rotation=0)
-    
-    plt.tight_layout()
-    
-    # 保存图片
-    heatmap_path = os.path.join(save_path, 'cnn_clinical_correlation_heatmap_enhanced.png')
-    plt.savefig(heatmap_path, dpi=300, bbox_inches='tight')
-    print(f"Enhanced heatmap saved to: {heatmap_path}")
-    
-    # heatmap_pdf = os.path.join(save_path, 'cnn_clinical_correlation_heatmap_enhanced.pdf')
-    # plt.savefig(heatmap_pdf, dpi=300, bbox_inches='tight')
-    # print(f"Enhanced heatmap PDF saved to: {heatmap_pdf}")
-    
-    return fig, ax
 
 def batch_analysis_cnn_clinical(
     cnn_features: np.ndarray,
@@ -853,33 +700,39 @@ def batch_analysis_cnn_clinical(
         else:
             print("No significant correlations found at p < 0.05")
         
-        # 绘制相关性热图
+        # Translate Chinese scale names to English for heatmap display
+        SCALE_NAME_TRANSLATION = {
+            'MoCA总分': 'MoCA Total',
+            '即刻记忆': 'Immediate Memory',
+            '延迟回忆': 'Delayed Recall',
+            '线索回忆': 'Cued Recall',
+            '长时延迟再认': 'Long-delayed Recognition',
+            '数字广度顺向': 'Digit Span Forward',
+            '数字广度逆向': 'Digit Span Backward',
+            '连线测验A': 'TMT-A',
+            '连线测验B': 'TMT-B',
+            'Boston-初始命名': 'Boston Naming',
+        }
+        df_heatmap = df_results.copy()
+        df_heatmap['clinical_score'] = df_heatmap['clinical_score'].replace(SCALE_NAME_TRANSLATION)
+
+        # Generate correlation heatmap
         print("\n" + "=" * 80)
         print("GENERATING CORRELATION HEATMAP")
         print("=" * 80)
-        
+
         try:
-            # 基础热图
             fig, ax = plot_correlation_heatmap(
-                df_results=df_results,
+                df_results=df_heatmap,
                 save_path=save_path,
                 figsize=(16, 12),
-                annotate=False  # 不显示数字和星号
-            )
-            plt.close()  # 关闭图形以避免直接显示
-            
-            # 增强版热图（包含更多信息）
-            fig, ax = plot_correlation_heatmap_enhanced(
-                df_results=df_results,
-                save_path=save_path,
-                thred=thred,
-                figsize=(18, 14),
-                annotate=False  # 不显示数字和星号
+                annotate=False,
+                thred=thred
             )
             plt.close()
-            
-            print("\nAll heatmaps generated successfully!")
-            
+
+            print("\nHeatmap generated successfully!")
+
         except Exception as e:
             print(f"Error generating heatmap: {e}")
         

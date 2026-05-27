@@ -91,7 +91,7 @@ def visualize_procrustes_with_connections(
     reference_idx: int = 0,
     class_names: Optional[List[str]] = None,
     sample_indices: Optional[List[int]] = None,
-    figsize: Tuple[int, int] = (10, 8),
+    figsize: Tuple[int, int] = (6, 5),
     save_path: Optional[str] = None
 ):
     """
@@ -118,6 +118,7 @@ def visualize_procrustes_with_connections(
     """
     # 对齐
     aligned_embeddings = align_all_to_reference(embeddings, reference_idx)
+    fs = 16
 
     # 调试：检查 VAE1 的坐标范围
     # print("VAE1 坐标范围:")
@@ -157,15 +158,10 @@ def visualize_procrustes_with_connections(
                 zorder=2 if vae_idx == 0 else 2  # VAE1最高
             )
     
-    ax.set_title(
-        f'Procrustes Alignment (Reference: {vae_names[reference_idx]})\n'
-        f'○={vae_names[0]}  □={vae_names[1]}  △={vae_names[2]}  ×=Center',
-        fontsize=13, fontweight='bold'
-    )
-    ax.set_xlabel(f'{vae_names[reference_idx]} Component 1 (aligned)', fontsize=11)
-    ax.set_ylabel(f'{vae_names[reference_idx]} Component 2 (aligned)', fontsize=11)
+    ax.set_xlabel('Component 1', fontsize=fs)
+    ax.set_ylabel('Component 2', fontsize=fs)
+    ax.tick_params(axis='both', labelsize=fs)
     ax.grid(True, alpha=0.2, linestyle='--')
-    ax.set_aspect('equal')
     
     # 图例优化：只显示类别和形状含义
     handles, labels_ax = ax.get_legend_handles_labels()
@@ -182,21 +178,24 @@ def visualize_procrustes_with_connections(
                     unique_class_labels.append(class_names[class_idx])
                     break
     
-    legend1 = ax.legend(unique_class_handles, unique_class_labels, 
-                        title='Classes', loc='upper left', fontsize=9)
-    ax.add_artist(legend1)
-    
+    # legend1 = ax.legend(unique_class_handles, unique_class_labels,
+    #                     title='Classes', loc='upper left', fontsize=18, title_fontsize=18,
+    #                     markerscale=2)
+    # ax.add_artist(legend1)
+
     # 添加形状图例
     from matplotlib.lines import Line2D
+    short_names = [n.split(' (')[1].rstrip(')') if ' (' in n else n for n in vae_names]
     shape_handles = [
-        Line2D([0], [0], marker='o', color='gray', label=vae_names[0], 
-               markersize=8, linestyle='None'),
-        Line2D([0], [0], marker='s', color='gray', label=vae_names[1], 
-               markersize=8, linestyle='None'),
-        Line2D([0], [0], marker='^', color='gray', label=vae_names[2], 
-               markersize=8, linestyle='None'),
+        Line2D([0], [0], marker='o', color='gray', label=short_names[0],
+               markersize=5, linestyle='None'),
+        Line2D([0], [0], marker='s', color='gray', label=short_names[1],
+               markersize=5, linestyle='None'),
+        Line2D([0], [0], marker='^', color='gray', label=short_names[2],
+               markersize=5, linestyle='None'),
     ]
-    ax.legend(handles=shape_handles, title='VAE Domain', loc='upper right', fontsize=9)
+    legend2 = ax.legend(handles=shape_handles, title='Domain', loc='upper right',
+                        fontsize=fs, title_fontsize=fs, markerscale=2)
     
     plt.tight_layout()
     if save_path:
@@ -494,22 +493,22 @@ def visualize_embeddings(
     labels: np.ndarray,
     method: str = 'UMAP',
     class_names: Optional[List[str]] = None,
-    figsize: Tuple[int, int] = (18, 5),
+    figsize: Tuple[int, int] = (6, 5),
     save_path: Optional[str] = None
 ):
-    """可视化三个VAE的降维结果（并排对比）"""
+    """可视化三个VAE的降维结果（分别保存为三张独立的图）"""
     n_classes = len(np.unique(labels))
 
     fs = 16
-    
+
     if class_names is None:
         class_names = [f'Class {i}' for i in range(n_classes)]
-    
+
     colors = sns.color_palette('husl', n_classes)
-    
-    fig, axes = plt.subplots(1, 3, figsize=figsize, sharex=False, sharey=False)
-    
-    for idx, (embedding, name, ax) in enumerate(zip(embeddings, vae_names, axes)):
+
+    for idx, (embedding, name) in enumerate(zip(embeddings, vae_names)):
+        fig, ax = plt.subplots(1, 1, figsize=figsize)
+
         for class_idx in range(n_classes):
             mask = labels == class_idx
             ax.scatter(
@@ -522,25 +521,23 @@ def visualize_embeddings(
                 edgecolors='white',
                 linewidth=0.5
             )
-        
-        ax.set_title(f'{name}', fontsize=fs)
+
         ax.tick_params(axis='y', labelsize=fs)
         ax.tick_params(axis='x', labelsize=fs)
         ax.set_xlabel('Component 1', fontsize=fs)
         ax.set_ylabel('Component 2', fontsize=fs)
         ax.legend(loc='best', fontsize=fs, markerscale=2)
         ax.grid(True, alpha=0.3, linestyle='--')
-        # ax.set_aspect('equal')
-    
-    # fig.suptitle(f'Latent Space Visualization ({method})', 
-    #              fontsize=15, fontweight='bold', y=1.02)
-    plt.tight_layout()
-    
-    if save_path:
-        plt.savefig(save_path, dpi=300, bbox_inches='tight', facecolor='white')
-        print(f"图像已保存: {save_path}")
-    
-    # plt.show()
+
+        plt.tight_layout()
+
+        if save_path:
+            base, ext = os.path.splitext(save_path)
+            single_path = f'{base}_{name}{ext}'
+            plt.savefig(single_path, dpi=300, bbox_inches='tight', facecolor='white')
+            print(f"图像已保存: {single_path}")
+
+        plt.close(fig)
 
 
 # =================== 使用示例 ===================

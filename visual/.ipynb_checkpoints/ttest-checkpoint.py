@@ -67,8 +67,8 @@ def perform_group_comparison(positive_data, negative_data, alpha=0.05, correctio
         positive_conn = positive_data[:, i, j]
         negative_conn = negative_data[:, i, j]
         
-        t_stat, p_val = ttest_ind(positive_conn, negative_conn, equal_var=False)
-        d_value = calculate_cohens_d(positive_conn, negative_conn)
+        t_stat, p_val = ttest_ind(negative_conn, positive_conn, equal_var=False)
+        d_value = calculate_cohens_d(negative_conn, positive_conn)
         
         t_stats[i, j] = t_stat
         t_stats[j, i] = t_stat

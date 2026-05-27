@@ -169,38 +169,39 @@ if __name__ == "__main__":
     plt.close()
     print("Figure 2 saved: cv_reduction_summary.png")
 
-    # ===== Figure 3: Per-group line — CV across bands, r1 vs ts =====
-    fig, axes = plt.subplots(2, 2, figsize=(16, 12))
-    axes = axes.flatten()
+    # ===== Figure 3: Per-group line — CV across bands, r1 vs ts (4 separate figures) =====
+    FONT_SIZE = 22
 
-    for ax, g in zip(axes, group_order):
+    for g in group_order:
+        fig, ax = plt.subplots(figsize=(8, 6))
+
         cv_r1_vals = [cv_data['r1'][band][g] for band in band_names]
         cv_ts_vals = [cv_data['ts'][band][g] for band in band_names]
 
         x = np.arange(len(band_names))
         ax.plot(x, cv_r1_vals, 'o-', color='steelblue', linewidth=2, markersize=8,
-                label='r1 (denoised)')
+                label='Denoised')
         ax.plot(x, cv_ts_vals, 's--', color='darkorange', linewidth=2, markersize=8,
-                label='ts (original)')
+                label='Original')
 
         # Fill between
         ax.fill_between(x, cv_r1_vals, cv_ts_vals, alpha=0.15,
                         color='steelblue' if np.mean(cv_r1_vals) < np.mean(cv_ts_vals) else 'darkorange')
 
         ax.set_xticks(x)
-        ax.set_xticklabels(band_names, fontsize=11)
-        ax.set_ylabel('CV (std / mean)', fontsize=11)
-        ax.set_title(f'{g}', fontsize=14, fontweight='bold',
-                     color=group_colors[g])
-        ax.legend(fontsize=9)
+        ax.set_xticklabels(band_names, fontsize=FONT_SIZE)
+        ax.set_ylabel('CV (std / mean)', fontsize=FONT_SIZE)
+        ax.tick_params(axis='y', labelsize=FONT_SIZE)
+        ax.legend(fontsize=FONT_SIZE, loc='upper left')
         ax.grid(True, alpha=0.3)
 
-    fig.suptitle('Within-Group CV by Frequency Band: Denoised vs Original',
-                 fontsize=16, fontweight='bold')
-    plt.tight_layout()
-    fig.savefig(f'{output_path}/cv_per_group_line.png', dpi=300, bbox_inches='tight')
-    plt.close()
-    print("Figure 3 saved: cv_per_group_line.png")
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+
+        plt.tight_layout()
+        fig.savefig(f'{output_path}/cv_per_group_line_{g}.png', dpi=300, bbox_inches='tight')
+        plt.close()
+        print(f"Figure 3 ({g}) saved: cv_per_group_line_{g}.png")
 
     # ===== Print summary =====
     print("\n" + "=" * 75)

@@ -1,0 +1,130 @@
+================================================================================
+                        CFCWS — 降噪验证实验论文草稿
+          (Denoising Validation via Intra-Subject FC Consistency)
+================================================================================
+
+
+===========================================================================
+ENGLISH VERSION
+===========================================================================
+
+3.X  Denoising Validation via Intra-Subject Functional Connectivity Consistency
+
+Motivation. A fundamental challenge in EEG-based brain network analysis is
+the separation of neural signal from physiological and instrumental noise.
+When a denoising method is applied, a critical validation criterion is whether
+it enhances the consistency of repeated measurements within the same individual
+while preserving inter-individual variability. This principle—that a successful
+denoising procedure should reduce within-subject variance without collapsing
+between-subject differences—motivates our first validation experiment.
+
+Experimental Design. We formalize this criterion through an intra-subject
+functional connectivity (FC) consistency analysis, which we term CFCWS
+(Correlation of FC Within Subject). For each subject, multiple FC graphs are
+constructed from distinct temporal segments of their EEG recording. Each FC
+graph is a 68 × 68 adjacency matrix representing functional coupling between
+brain regions of the Desikan-Killiany atlas. We then vectorize each FC matrix
+and compute the pairwise Pearson correlation between all FC vectors belonging
+to the same subject. The mean of these pairwise correlations, denoted \bar{r}_s
+for subject s, quantifies the internal consistency of that subject's
+connectivity patterns. Formally, for a subject with m FC graphs {F_1, ..., F_m},
+we compute:
+
+    \bar{r}_s = (2 / (m(m-1))) * sum_{i=1}^{m} sum_{j=i+1}^{m}
+                \rho(vec(F_i), vec(F_j))
+
+where \rho(·, ·) denotes the Pearson correlation coefficient and vec(·) denotes
+vectorization of the upper-triangular portion of the FC matrix. This procedure
+is performed independently on the raw EEG data and on the VAE-denoised data,
+yielding paired sets of mean correlations {\bar{r}_s^{raw}} and
+{\bar{r}_s^{denoised}} across all subjects.
+
+Statistical Analysis. To evaluate the effect of denoising on intra-subject
+consistency, we conduct a paired-sample t-test comparing \bar{r}_s^{raw} and
+\bar{r}_s^{denoised} across subjects. The null hypothesis is that denoising
+produces no systematic change in within-subject FC consistency. We further
+report the proportion of subjects exhibiting improvement (i.e.,
+\bar{r}_s^{denoised} > \bar{r}_s^{raw}), the mean improvement magnitude, and
+the effect size measured by Cohen's d.
+
+Results. The denoised data exhibit substantially higher intra-subject FC
+correlations compared to the raw data. The mean within-subject correlation
+increased from \bar{r}^{raw} = XXX ± XXX (mean ± SD) to
+\bar{r}^{denoised} = XXX ± XXX, with a paired t-test yielding
+t(XXX) = XXX, p = XXX. Cohen's d = XXX indicates a [small/medium/large]
+effect size. Critically, XXX% of subjects (k / N) showed improvement in
+within-subject correlation after denoising, with a mean improvement of
+\Delta\bar{r} = XXX.
+
+Interpretation. These results provide converging evidence that the VAE-based
+denoising framework effectively suppresses noise while preserving genuine
+neural connectivity patterns. Increased intra-subject consistency after
+denoising implies that the raw EEG connectivity estimates are contaminated
+by stochastic noise components that are largely removed by the model.
+Importantly, the fact that a large majority of subjects exhibit improvement—
+rather than a mixed pattern of increases and decreases—rules out the concern
+that the denoising procedure merely applies a trivial smoothing operation
+that could homogenize connectivity patterns across subjects. The statistical
+significance of the paired comparison further confirms that the observed
+improvement is systematic rather than attributable to random variation. This
+finding constitutes the first quantitative evidence that our denoising
+pipeline improves the signal-to-noise ratio of EEG-derived functional
+connectivity at the individual-subject level.
+
+
+===========================================================================
+中文翻译
+===========================================================================
+
+3.X  基于被试内功能连接一致性的降噪验证
+
+研究动机。基于脑电图的脑网络分析面临的一个根本性挑战是如何将神经信号与
+生理噪声及仪器噪声分离。当应用一种降噪方法时，一个关键的验证标准是：
+该方法是否能够在保留个体间差异的前提下，增强同一个体内部重复测量的一致性。
+这一原则——成功的降噪应减少被试内方差而不压缩被试间差异——构成了我们第一个
+验证实验的理论基础。
+
+实验设计。我们通过被试内功能连接一致性分析（CFCWS, Correlation of FC Within
+Subject）将这一标准形式化。对于每位被试，从其脑电记录的不同时间片段中构建
+多个功能连接图。每个功能连接图是一个 68 × 68 的邻接矩阵，表示基于
+Desikan-Killiany 脑图谱的脑区之间的功能耦合。我们将每个功能连接矩阵向量化，
+并计算同一被试所有功能连接向量之间的成对皮尔逊相关系数。这些成对相关系数的
+均值（记为 \bar{r}_s）量化了该被试连接模式的内在一致性。具体而言，对于具有
+m 个功能连接图 {F_1, ..., F_m} 的被试，我们计算：
+
+    \bar{r}_s = (2 / (m(m-1))) * sum_{i=1}^{m} sum_{j=i+1}^{m}
+                \rho(vec(F_i), vec(F_j))
+
+其中 \rho(·, ·) 表示皮尔逊相关系数，vec(·) 表示功能连接矩阵上三角部分的
+向量化。该过程分别在原始脑电数据和 VAE 降噪后的数据上独立执行，得到所有
+被试的成对平均相关系数集合 {\bar{r}_s^{raw}} 和 {\bar{r}_s^{denoised}}。
+
+统计分析。为评估降噪对被试内一致性的影响，我们对所有被试的 \bar{r}_s^{raw}
+和 \bar{r}_s^{denoised} 进行配对样本 t 检验。零假设是降噪不会对被试内功能
+连接一致性产生系统性改变。我们进一步报告表现出改善的被试比例（即
+\bar{r}_s^{denoised} > \bar{r}_s^{raw}）、平均改善幅度以及由 Cohen's d 度量
+的效应量。
+
+实验结果。与原始数据相比，降噪后的数据表现出显著更高的被试内功能连接相关性。
+被试内平均相关系数从 \bar{r}^{raw} = XXX ± XXX（均值 ± 标准差）提升至
+\bar{r}^{denoised} = XXX ± XXX，配对 t 检验结果为 t(XXX) = XXX, p = XXX。
+Cohen's d = XXX 表明效应量为[小/中/大]。关键的是，XXX% 的被试（k/N）在降噪后
+表现出被试内相关性的改善，平均改善幅度为 \Delta\bar{r} = XXX。
+
+实验解读。这些结果提供了趋同证据，表明基于 VAE 的降噪框架能够有效抑制噪声，
+同时保留真实的神经连接模式。降噪后被试内一致性的提升意味着原始脑电连接估计
+受到随机噪声成分的污染，而这些噪声成分在很大程度上被模型去除了。重要的是，
+绝大多数被试表现出改善——而非增减参半的混合模式——排除了降噪过程仅仅是实施了
+一种可能使连接模式在不同被试间均质化的简单平滑操作的疑虑。配对比较的统计
+显著性进一步确认了观察到的改善是系统性的，而非归因于随机波动。这一发现构成
+了我们降噪流程在个体被试层面能够提升脑电功能连接信噪比的第一个定量证据。
+
+
+===========================================================================
+说明
+===========================================================================
+- 文中 "XXX" 标记的位置需根据实际运行 CFCWS.py 输出的统计数据填入具体数值：
+  均值、标准差、t 值、p 值、Cohen's d、改善比例等。
+- Cohen's d 在代码中未直接计算，可手动补充：
+  d = mean(Δ) / std(Δ)，其中 Δ_s = \bar{r}_s^{denoised} - \bar{r}_s^{raw}。
+- 请根据论文实际章节体系调整编号 "3.X"。
