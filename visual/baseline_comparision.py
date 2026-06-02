@@ -195,56 +195,79 @@ data_for_plot = pd.DataFrame(data_matrix, index=metrics_rows, columns=methods)
 # 简化行标签 & 分组信息
 metric_names = ['AUC', 'Acc', 'Pre', 'Rec', 'FS']
 group_info = [
-    ('XWEEG\n2cls', '#E8F5E9'),
-    ('CAUEEG\n2cls', '#E3F2FD'),
-    ('XWEEG\n4cls', '#FFF3E0'),
-    ('CAUEEG\n4cls', '#F3E5F5'),
+    ('XWEEG\n2-class', '#D62728'),
+    ('CAUEEG\n2-class', '#9467BD'),
+    ('XWEEG\n4-class', '#8C564B'),
+    ('CAUEEG\n4-class', '#E377C2'),
 ]
 short_labels = metric_names * len(group_info)
 group_boundaries = [i * 5 for i in range(len(group_info) + 1)]
 
 # 方法类别在x轴上的颜色条
-cat_colors = {'Temporal-Spectral': '#5DADE2', 'Brain Network': '#58D68D', 'Denoising': '#EC7063'}
+cat_colors = {'Temporal-Spectral': '#1F77B4', 'Brain Network': '#FF7F0E', 'Denoising': '#2CA02C'}
 
-fig, ax = plt.subplots(figsize=(26, 14))
+FIG_WIDTH = 26
+FIG_HEIGHT = 12   # 调整以改变每个色块的高度
+fig, ax = plt.subplots(figsize=(FIG_WIDTH, FIG_HEIGHT))
 
-# 绘制热图 —— 使用 RdYlBu_r 色阶（禁用内置colorbar，手动放在更右侧）
-sns.heatmap(data_for_plot, mask=mask, cmap='RdYlBu_r', vmin=0, vmax=100,
+# 绘制热图 —— YlOrBr 顺序色阶（禁用内置colorbar，手动放在更右侧）
+sns.heatmap(data_for_plot, mask=mask, cmap='YlOrBr', vmin=0, vmax=100,
             annot=False, fmt='', linewidths=0.3, linecolor='#EEEEEE',
             cbar=False,
             xticklabels=True, yticklabels=short_labels, ax=ax)
 
 # 字体
-ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right', fontsize=22)
-ax.set_yticklabels(ax.get_yticklabels(), fontsize=22, rotation=30, ha='right')
+ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right', fontsize=24)
+ax.set_yticklabels(ax.get_yticklabels(), fontsize=24, rotation=0)
 ax.xaxis.tick_bottom()
 
 # 手动添加 colorbar，放在右侧分组标签之后
 cbar_ax = fig.add_axes([0.9, 0.12, 0.015, 0.76])
 cbar = fig.colorbar(ax.collections[0], cax=cbar_ax)
-cbar.set_label('Score (%)', fontsize=22)
-cbar.ax.tick_params(labelsize=22)
+cbar.set_label('Score (%)', fontsize=24)
+cbar.ax.tick_params(labelsize=24)
 
-# 行分组 —— 粗分隔线 + 右侧彩色条
+# 行分组 —— 粗分隔线 + 右侧彩色条（仅色块，无文字）
 for i, (label, color) in enumerate(group_info):
     y_start, y_end = group_boundaries[i], group_boundaries[i + 1]
     if i > 0:
         ax.axhline(y=y_start, color='black', linewidth=2.0, linestyle='-')
-    rect = mpatches.Rectangle((len(methods) + 0.15, y_start), 0.55, 5,
+    rect = mpatches.Rectangle((len(methods) + 0.15, y_start), 0.3, 5,
                                facecolor=color, edgecolor='#BBBBBB', linewidth=0.5,
                                clip_on=False)
     ax.add_patch(rect)
-    ax.text(len(methods) + 0.425, (y_start + y_end) / 2, label,
-            ha='center', va='center', fontsize=19, rotation=0)
 
-# 方法类别 —— 顶部彩色条
+# 方法类别 —— 顶部彩色条（仅色块，无文字）
 cat_boundaries = {'Temporal-Spectral': (0, 8), 'Brain Network': (8, 13), 'Denoising': (13, 16)}
 for cat, (x0, x1) in cat_boundaries.items():
     rect = mpatches.Rectangle((x0, -0.65), x1 - x0, 0.55,
                                facecolor=cat_colors[cat], edgecolor='#999999', linewidth=0.5,
                                clip_on=False)
     ax.add_patch(rect)
-    ax.text((x0 + x1) / 2, -0.375, cat, ha='center', va='center', fontsize=22)
+
+# 图例（figure 顶部，横排放置，标题同行）
+legend_patches_top = [
+    mpatches.Patch(color='none', label='Method Category:'),
+    mpatches.Patch(color=cat_colors['Temporal-Spectral'], label='Temporal-Spectral'),
+    mpatches.Patch(color=cat_colors['Brain Network'], label='Brain Network'),
+    mpatches.Patch(color=cat_colors['Denoising'], label='Denoising'),
+]
+legend_patches_btm = [
+    mpatches.Patch(color='none', label='Dataset & Task:'),
+    mpatches.Patch(color=group_info[0][1], label='XWEEG 2-class'),
+    mpatches.Patch(color=group_info[1][1], label='CAUEEG 2-class'),
+    mpatches.Patch(color=group_info[2][1], label='XWEEG 4-class'),
+    mpatches.Patch(color=group_info[3][1], label='CAUEEG 4-class'),
+]
+LEGEND_Y1 = 0.96     # figure 顶部第一行图例的 y 坐标 (0~1)
+LEGEND_GAP = 0.05    # 两行图例之间的间距
+LEGEND_Y2 = LEGEND_Y1 - LEGEND_GAP
+LEGEND_X = 0.08      # 图例左对齐于 y 轴 (与 subplots_adjust left 一致)
+legend1 = fig.legend(handles=legend_patches_top, fontsize=24, framealpha=0.9,
+                     bbox_to_anchor=(LEGEND_X, LEGEND_Y1), loc='upper left', ncol=4)
+fig.add_artist(legend1)
+fig.legend(handles=legend_patches_btm, fontsize=24, framealpha=0.9,
+           bbox_to_anchor=(LEGEND_X, LEGEND_Y2), loc='upper left', ncol=5)
 
 # 高亮CVIB列
 ax.axvline(x=len(methods) - 1, color='#FFD700', linewidth=2.5, linestyle='-')
@@ -256,9 +279,9 @@ for i in range(len(metrics_rows)):
     imp = improvement_matrix[i, 0]
     if not np.isnan(imp):
         ax.text(cvib_col + 0.5, i + 0.5, f'+{imp:.2f}',
-                ha='center', va='center', color='black', fontsize=18)
+                ha='center', va='center', color='black', fontsize=20)
 
-fig.subplots_adjust(left=0.08, right=0.85, top=0.95, bottom=0.10)
+fig.subplots_adjust(left=0.08, right=0.85, top=0.82, bottom=0.06)
 
 output_path = os.path.join(os.path.dirname(__file__), "output_baseline")
 os.makedirs(output_path, exist_ok=True)

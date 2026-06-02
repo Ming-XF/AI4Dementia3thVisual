@@ -60,86 +60,74 @@ print_stats(neg_df, "Negative (T < 0)")
 
 
 # ============================================================
-# Nilearn connectome plots (only nodes with connections)
+# Nilearn connectome: Top 3 |d| from each group in a single call
+#    Positive (T > 0) → blue (+|d|),  Negative (T < 0) → red (-|d|)
 # ============================================================
-def filtered_connectome(group_df, title, cmap, output_name):
-    """Build matrix and coords for only connected nodes, then plot."""
-    # Find connected ROI indices
-    connected = set()
-    for _, row in group_df.iterrows():
-        connected.add(int(row['Region1']))
-        connected.add(int(row['Region2']))
-    connected = sorted(connected)
-
-    idx_map = {old: new for new, old in enumerate(connected)}
-    n = len(connected)
-
-    # Build reduced matrix
-    mat = np.zeros((n, n))
-    for _, row in group_df.iterrows():
-        i = idx_map[int(row['Region1'])]
-        j = idx_map[int(row['Region2'])]
-        val = abs(row['t_statistic'])
-        mat[i, j] = val
-        mat[j, i] = val
-
-    coords = ALL_COORDS[connected]
-
-    print(f"\nPlotting {title}: {n} nodes, {len(group_df)} edges")
-
-    fig = plot_connectome(
-        mat, coords,
-        edge_threshold=0.001,
-        title=title,
-        node_size=30,
-        edge_cmap=cmap,
-        edge_vmin=mat[mat > 0].min() * 0.9,
-        edge_vmax=mat[mat > 0].max(),
-        colorbar=True,
-    )
-    fig.savefig(os.path.join(output_dir, output_name), dpi=300, bbox_inches='tight')
-    print(f"  Saved to: {output_name}")
-
-
+import matplotlib.pyplot as plt
 from nilearn.plotting import plot_connectome
 from matplotlib.colors import LinearSegmentedColormap
+import matplotlib.patches as mpatches
 
-red_cmap = LinearSegmentedColormap.from_list('solid_red', ['#d73027', '#67000d'])
-blue_cmap = LinearSegmentedColormap.from_list('solid_blue', ['#2171b5', '#08306b'])
+# Gather top 3 from each group
+pos_top = pos_df.nlargest(3, 'abs_cohens_d')
+neg_top = neg_df.nlargest(3, 'abs_cohens_d')
+selected = pd.concat([pos_top, neg_top])
 
-filtered_connectome(pos_df, "NC vs AD — Positive Connections (T > 0)",
-                    red_cmap, 'connectome_positive.png')
-filtered_connectome(neg_df, "NC vs AD — Negative Connections (T < 0)",
-                    blue_cmap, 'connectome_negative.png')
+# Collect all nodes involved
+all_nodes = set()
+for _, row in selected.iterrows():
+    all_nodes.add(int(row['Region1']))
+    all_nodes.add(int(row['Region2']))
+all_nodes = sorted(all_nodes)
 
-# Combined (all connections, signed)
-connected_all = set()
-for _, row in df.iterrows():
-    connected_all.add(int(row['Region1']))
-    connected_all.add(int(row['Region2']))
-connected_all = sorted(connected_all)
-idx_map_all = {old: new for new, old in enumerate(connected_all)}
-n_all = len(connected_all)
-mat_all = np.zeros((n_all, n_all))
-for _, row in df.iterrows():
-    i = idx_map_all[int(row['Region1'])]
-    j = idx_map_all[int(row['Region2'])]
-    mat_all[i, j] = row['t_statistic']
-    mat_all[j, i] = row['t_statistic']
-coords_all = ALL_COORDS[connected_all]
+idx_map = {old: new for new, old in enumerate(all_nodes)}
+n = len(all_nodes)
+coords = ALL_COORDS[all_nodes]
 
-print(f"\nPlotting Combined: {n_all} nodes, {len(df)} edges")
-fig_all = plot_connectome(
-    mat_all, coords_all,
+# Build signed matrix: +|d| for positive group, -|d| for negative group
+mat = np.zeros((n, n))
+for _, row in pos_top.iterrows():
+    i, j = idx_map[int(row['Region1'])], idx_map[int(row['Region2'])]
+    mat[i, j] = row['abs_cohens_d']
+    mat[j, i] = row['abs_cohens_d']
+for _, row in neg_top.iterrows():
+    i, j = idx_map[int(row['Region1'])], idx_map[int(row['Region2'])]
+    mat[i, j] = -row['abs_cohens_d']
+    mat[j, i] = -row['abs_cohens_d']
+
+d_max = max(row['abs_cohens_d'] for _, row in selected.iterrows())
+
+print(f"\nPlotting top-3 connectome: {n} nodes, 6 edges  (|d| max: {d_max:.3f})")
+
+# Diverging colormap: negative → red, zero → white, positive → blue
+div_cmap = LinearSegmentedColormap.from_list('div_rb', ['#d73027', '#f7f7f7', '#2171b5'])
+
+fig = plot_connectome(
+    mat, coords,
     edge_threshold=0.001,
-    title="NC vs AD — All Connections",
+    title=None,
     node_size=30,
-    edge_cmap='coolwarm',
-    edge_vmin=df['t_statistic'].min(),
-    edge_vmax=df['t_statistic'].max(),
-    colorbar=True,
+    edge_cmap=div_cmap,
+    edge_vmin=-d_max,
+    edge_vmax=d_max,
+    colorbar=False,
 )
-fig_all.savefig(os.path.join(output_dir, 'connectome_combined.png'), dpi=300, bbox_inches='tight')
-print("  Saved to: connectome_combined.png")
+
+LEGEND_X = 0.98   # 0~1, 相对于 axes 右边界
+LEGEND_Y = 1.1   # 0~1, 相对于 axes 上边界
+LEGEND_FONTSIZE = 9
+
+ax = plt.gca()
+legend_patches = [
+    mpatches.Patch(color='#2171b5', label='Positive (T > 0)'),
+    mpatches.Patch(color='#d73027', label='Negative (T < 0)'),
+]
+ax.legend(handles=legend_patches, fontsize=LEGEND_FONTSIZE, framealpha=0.9,
+          bbox_to_anchor=(LEGEND_X, LEGEND_Y), loc='upper right',
+          bbox_transform=ax.transAxes)
+
+fig.savefig(os.path.join(output_dir, 'connectome_top3_pos_neg.png'),
+            dpi=300, bbox_inches='tight')
+print("  Saved to: connectome_top3_pos_neg.png")
 
 print("\nDone. All outputs saved to:", output_dir)

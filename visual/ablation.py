@@ -141,3 +141,22 @@ plt.savefig(output_path+'/CVIB_ablation.png', dpi=300, bbox_inches='tight',
             facecolor='white', edgecolor='none')
 plt.savefig(output_path+'/CVIB_ablation.pdf', bbox_inches='tight',
             facecolor='white', edgecolor='none')
+
+# ==================== 终端打印差值数据 ====================
+print("\n" + "=" * 80)
+print("ABLATION STUDY — Full CVIB vs. Variants  (Δ from Full CVIB)")
+print("=" * 80)
+print(f"Full CVIB:  AUC={full_metrics[0]:.2f}  Acc={full_metrics[1]:.2f}  "
+      f"Pre={full_metrics[2]:.2f}  Rec={full_metrics[3]:.2f}  FS={full_metrics[4]:.2f}")
+print("-" * 80)
+print(f"{'Variant':<20} {'AUC':>8} {'Acc.':>8} {'Pre.':>8} {'Rec.':>8} {'FS.':>8}")
+print("-" * 80)
+variant_labels = ["w.o. R.", "w.o. C.", "w.o. F.", "w.o. P.", "w.o. T."]
+for i, label in enumerate(variant_labels):
+    d = delta_matrix[i]
+    print(f"{label:<20} {d[0]:>+8.2f} {d[1]:>+8.2f} {d[2]:>+8.2f} {d[3]:>+8.2f} {d[4]:>+8.2f}")
+print("-" * 80)
+print(f"{'Mean Δ':<20} {np.mean(delta_matrix[:,0]):>+8.2f} {np.mean(delta_matrix[:,1]):>+8.2f} "
+      f"{np.mean(delta_matrix[:,2]):>+8.2f} {np.mean(delta_matrix[:,3]):>+8.2f} "
+      f"{np.mean(delta_matrix[:,4]):>+8.2f}")
+print("=" * 80)

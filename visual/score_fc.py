@@ -542,6 +542,24 @@ def plot_grouped_bar_chart(df_pos, df_neg, save_path):
     sig_neg = merged['significant_fdr_neg'].values
     is_impairment = merged['is_impairment'].values
 
+    # 打印绘图数据
+    print("\n" + "=" * 90)
+    print("GROUPED BAR CHART — Plotting Data  (Mirror: Positive vs. Negative Connections)")
+    print("=" * 90)
+    print(f"{'Scale':<22s} {'Type':<13s} {'r_pos':>8s} {'sig_pos':>9s} {'r_neg':>8s} {'sig_neg':>9s}")
+    print("-" * 70)
+    for _, row in merged.iterrows():
+        s = SCORE_SHORT_LABELS.get(row['score'], row['score']).replace('\n', ' ')
+        t = 'Impairment' if row['is_impairment'] else 'Ability'
+        sp = '*' if row['significant_fdr_pos'] else 'x'
+        sn = '*' if row['significant_fdr_neg'] else 'x'
+        print(f"{s:<22s} {t:<13s} {row['pearson_r_pos']:>+8.3f} {sp:>9s} {row['pearson_r_neg']:>+8.3f} {sn:>9s}")
+    n_pos_sig = merged['significant_fdr_pos'].sum()
+    n_neg_sig = merged['significant_fdr_neg'].sum()
+    print("-" * 70)
+    print(f"FDR-significant: Positive={n_pos_sig}/{len(merged)}, Negative={n_neg_sig}/{len(merged)}")
+    print("=" * 90)
+
     x = np.arange(len(labels))
     width = 0.35
 
