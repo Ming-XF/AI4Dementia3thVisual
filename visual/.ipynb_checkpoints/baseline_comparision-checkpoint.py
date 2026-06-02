@@ -2,7 +2,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from matplotlib.colors import LinearSegmentedColormap
 import matplotlib.patches as mpatches
 
 import os
@@ -25,6 +24,11 @@ categories = {
     'Brain Network': ['AlzNetV3', 'FBNetGen', 'ALTER', 'BNT', 'BNC'],
     'Denoising': ['VIB', 'GCDGCN', 'CVIB']
 }
+
+method_to_category = {}
+for cat, mlist in categories.items():
+    for m in mlist:
+        method_to_category[m] = cat
 
 # 定义所有指标行 (指标×数据集×任务)
 metrics_rows = []
@@ -184,63 +188,84 @@ for i in range(len(metrics_rows)):
 
 # ==================== 绘图 ====================
 
-# 创建自定义颜色映射：从白色到深红色
-colors = ['#FFFFFF', '#FFF5F0', '#FCBBA1', '#FC9272', '#FB6A4A', '#EF3B2C', '#CB181D', '#99000D']
-cmap = LinearSegmentedColormap.from_list('custom_red', colors, N=256)
-cmap.set_bad(color='lightgray')
-
-# 创建掩码DataFrame
+# 创建掩码
 mask = pd.DataFrame(np.isnan(data_matrix), index=metrics_rows, columns=methods)
-
-# 将NaN替换为0（seaborn需要数值），mask会覆盖显示
 data_for_plot = pd.DataFrame(data_matrix, index=metrics_rows, columns=methods)
 
-# 创建图形
-fig, ax = plt.subplots(figsize=(24, 14))
+# 简化行标签 & 分组信息
+metric_names = ['AUC', 'Acc', 'Pre', 'Rec', 'FS']
+group_info = [
+    ('XWEEG\n2cls', '#E8F5E9'),
+    ('CAUEEG\n2cls', '#E3F2FD'),
+    ('XWEEG\n4cls', '#FFF3E0'),
+    ('CAUEEG\n4cls', '#F3E5F5'),
+]
+short_labels = metric_names * len(group_info)
+group_boundaries = [i * 5 for i in range(len(group_info) + 1)]
 
-# 绘制热图（不标注数字）
-sns.heatmap(data_for_plot, mask=mask, cmap=cmap, vmin=0, vmax=100,
-            annot=False, fmt='', linewidths=0,
-            cbar_kws={'label': 'Performance Score (%)'},
-            xticklabels=True, yticklabels=True, ax=ax)
+# 方法类别在x轴上的颜色条
+cat_colors = {'Temporal-Spectral': '#5DADE2', 'Brain Network': '#58D68D', 'Denoising': '#EC7063'}
 
-# 统一字体大小为20
-ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right', fontsize=24)
-ax.set_yticklabels(ax.get_yticklabels(), fontsize=24)
-ax.collections[0].colorbar.ax.yaxis.label.set_size(24)
-ax.collections[0].colorbar.ax.yaxis.label.set_weight('normal')
-ax.collections[0].colorbar.ax.tick_params(labelsize=24)
+fig, ax = plt.subplots(figsize=(26, 14))
 
-# 移动x轴标签到下方
+# 绘制热图 —— 使用 RdYlBu_r 色阶（禁用内置colorbar，手动放在更右侧）
+sns.heatmap(data_for_plot, mask=mask, cmap='RdYlBu_r', vmin=0, vmax=100,
+            annot=False, fmt='', linewidths=0.3, linecolor='#EEEEEE',
+            cbar=False,
+            xticklabels=True, yticklabels=short_labels, ax=ax)
+
+# 字体
+ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right', fontsize=20)
+ax.set_yticklabels(ax.get_yticklabels(), fontsize=18)
 ax.xaxis.tick_bottom()
 
-# 添加分隔线来区分不同的数据集和任务（每5行一个block）
-for y in [5, 10, 15]:
-    ax.axhline(y=y, color='black', linewidth=1.5, linestyle='-')
+# 手动添加 colorbar，放在右侧分组标签之后
+cbar_ax = fig.add_axes([0.9, 0.12, 0.015, 0.76])
+cbar = fig.colorbar(ax.collections[0], cax=cbar_ax)
+cbar.set_label('Score (%)', fontsize=22)
+cbar.ax.tick_params(labelsize=18)
+
+# 行分组 —— 粗分隔线 + 右侧彩色条
+for i, (label, color) in enumerate(group_info):
+    y_start, y_end = group_boundaries[i], group_boundaries[i + 1]
+    if i > 0:
+        ax.axhline(y=y_start, color='black', linewidth=2.0, linestyle='-')
+    rect = mpatches.Rectangle((len(methods) + 0.15, y_start), 0.55, 5,
+                               facecolor=color, edgecolor='#BBBBBB', linewidth=0.5,
+                               clip_on=False)
+    ax.add_patch(rect)
+    ax.text(len(methods) + 0.425, (y_start + y_end) / 2, label,
+            ha='center', va='center', fontsize=19, rotation=0)
+
+# 方法类别 —— 顶部彩色条
+cat_boundaries = {'Temporal-Spectral': (0, 8), 'Brain Network': (8, 13), 'Denoising': (13, 16)}
+for cat, (x0, x1) in cat_boundaries.items():
+    rect = mpatches.Rectangle((x0, -0.65), x1 - x0, 0.55,
+                               facecolor=cat_colors[cat], edgecolor='#999999', linewidth=0.5,
+                               clip_on=False)
+    ax.add_patch(rect)
+    ax.text((x0 + x1) / 2, -0.375, cat, ha='center', va='center', fontsize=20)
 
 # 高亮CVIB列
-ax.axvline(x=len(methods)-1, color='gold', linewidth=3, linestyle='-')
-ax.axvline(x=len(methods), color='gold', linewidth=3, linestyle='-')
+ax.axvline(x=len(methods) - 1, color='#FFD700', linewidth=2.5, linestyle='-')
+ax.axvline(x=len(methods), color='#FFD700', linewidth=2.5, linestyle='-')
 
-# 在CVIB列标注相对于次优方法的提升幅度
+# CVIB列提升标注
 cvib_col = len(methods) - 1
 for i in range(len(metrics_rows)):
     imp = improvement_matrix[i, 0]
     if not np.isnan(imp):
         ax.text(cvib_col + 0.5, i + 0.5, f'+{imp:.2f}',
-                ha='center', va='center', color='white',
-                fontsize=18)
+                ha='center', va='center', color='black', fontsize=14)
 
-fig.subplots_adjust(left=0.15, right=0.92, top=0.98, bottom=0.08)
+fig.subplots_adjust(left=0.08, right=0.85, top=0.95, bottom=0.10)
 
 output_path = os.path.join(os.path.dirname(__file__), "output_baseline")
 os.makedirs(output_path, exist_ok=True)
-# 保存图像
-plt.savefig(output_path+'/CVIB_heatmap_comparison.png', dpi=300, bbox_inches='tight',
-            facecolor='white', edgecolor='none')
-plt.savefig(output_path+'/CVIB_heatmap_comparison.pdf', bbox_inches='tight',
-            facecolor='white', edgecolor='none')
-
+plt.savefig(output_path + '/CVIB_heatmap_comparison.png', dpi=300,
+            bbox_inches='tight', facecolor='white', edgecolor='none')
+plt.savefig(output_path + '/CVIB_heatmap_comparison.pdf', dpi=300,
+            bbox_inches='tight', facecolor='white', edgecolor='none')
 plt.close()
 
 print("热图已保存为 CVIB_heatmap_comparison.png 和 CVIB_heatmap_comparison.pdf")
