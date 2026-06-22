@@ -212,36 +212,27 @@ def plot_scatter_with_fit(
     save_path: Optional[str] = None,
     show_stats: bool = True,
     color_by_subject: bool = True,
-    thred = 0.3
+    thred = 0.3,
+    p_value_fdr: Optional[float] = None
 ) -> Tuple[plt.Figure, plt.Axes, dict]:
     """
     绘制散点图和拟合线
-    
-    Parameters:
-    -----------
-    df_merged : pd.DataFrame
-        合并后的数据
-    connection_col : str
-        连接强度列名
-    clinical_score : str
-        临床量表评分列名
-    use_original : bool
-        是否使用原始FC图
-    figsize : Tuple[int, int]
-        图形大小
-    save_path : Optional[str]
-        保存路径
-    show_stats : bool
-        是否显示统计信息
-    color_by_subject : bool
-        是否按受试者着色
-    
-    Returns:
-    --------
-    Tuple[plt.Figure, plt.Axes, dict]
-        图形对象、轴对象和统计信息
     """
-    
+
+    SCALE_NAME_TRANSLATION = {
+        'MoCA总分': 'MoCA Total',
+        '即刻记忆': 'Immediate Memory',
+        '延迟回忆': 'Delayed Recall',
+        '线索回忆': 'Cued Recall',
+        '长时延迟再认': 'Long-delayed Recognition',
+        '数字广度顺向': 'Digit Span Forward',
+        '数字广度逆向': 'Digit Span Backward',
+        '连线测验A': 'TMT-A',
+        '连线测验B': 'TMT-B',
+        'Boston-初始命名': 'Boston Naming',
+    }
+    clinical_display = SCALE_NAME_TRANSLATION.get(clinical_score, clinical_score)
+
     # 数据
     x = df_merged[connection_col].values
     y = df_merged[clinical_score].values
@@ -256,6 +247,7 @@ def plot_scatter_with_fit(
         'pearson_r': r_value,
         'r_squared': r_value**2,
         'p_value': p_value,
+        'p_value_fdr': p_value_fdr,
         'slope': slope,
         'intercept': intercept,
         'std_err': std_err,
@@ -268,87 +260,93 @@ def plot_scatter_with_fit(
 
     # 创建图形
     fig, ax = plt.subplots(figsize=figsize)
-    
+
     # 按受试者着色
     if color_by_subject:
         unique_subjects = df_merged['subject_id'].unique()
         colors = plt.cm.tab20(np.linspace(0, 1, len(unique_subjects)))
-        
+
         for idx, subject in enumerate(unique_subjects):
             mask = df_merged['subject_id'] == subject
-            ax.scatter(x[mask], y[mask], 
-                      color=colors[idx], 
+            ax.scatter(x[mask], y[mask],
+                      color=colors[idx],
                       label=f'Sub-{subject}',
-                      alpha=0.7, 
+                      alpha=0.7,
                       s=80,
                       edgecolors='black',
                       linewidth=0.5)
-        
-        # 如果受试者太多，不显示图例
-        if len(unique_subjects) > 10:
-            ax.legend().set_visible(False)
-        else:
-            ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', fontsize=8)
     else:
         ax.scatter(x, y, alpha=0.7, s=80, edgecolors='black', linewidth=0.5)
-    
-    # 线性拟合
-    
-    
+
     # 绘制拟合线
     x_fit = np.linspace(x.min(), x.max(), 100)
     y_fit = slope * x_fit + intercept
-    ax.plot(x_fit, y_fit, 'r-', linewidth=2, 
-            label=f'Linear fit (R²={r_value**2:.3f}, p={p_value:.4f})')
-    
+
+    p_display = p_value_fdr if p_value_fdr is not None else p_value
+    ax.plot(x_fit, y_fit, 'r-', linewidth=2,
+            label=f'Linear fit (R={r_value**2:.3f}, p_fdr={p_display:.4f})')
+
     # 添加置信区间
     n = len(x)
     x_mean = np.mean(x)
     confidence_interval = 1.96 * np.sqrt(
         np.sum((y - (slope * x + intercept))**2) / (n - 2)
     ) * np.sqrt(1/n + (x_fit - x_mean)**2 / np.sum((x - x_mean)**2))
-    
-    ax.fill_between(x_fit, 
-                    y_fit - confidence_interval, 
-                    y_fit + confidence_interval, 
+
+    ax.fill_between(x_fit,
+                    y_fit - confidence_interval,
+                    y_fit + confidence_interval,
                     alpha=0.2, color='red',
                     label='95% CI')
-    
-    # 设置标签和标题
-    data_type = "Original FC" if use_original else "VAE Denoised FC"
-    ax.set_xlabel(connection_col, fontsize=12, fontweight='bold')
-    ax.set_ylabel(f'{clinical_score} Score', fontsize=12, fontweight='bold')
-    ax.set_title(f'{clinical_score} vs FC {connection_col}\n{data_type}', 
-                 fontsize=14, fontweight='bold')
-    
-    # 添加网格
-    ax.grid(True, alpha=0.3, linestyle='--')
-    
+
+    # 设置标签
+    ax.set_xlabel("Average Connection Strength", fontsize=28)
+    ax.set_ylabel(f'{clinical_display} Score', fontsize=28)
+    ax.tick_params(axis='both', labelsize=28)
+
     # 添加统计信息文本框
     if show_stats:
         stats_text = f'N = {n}\n'
         stats_text += f'R = {r_value:.3f}\n'
-        stats_text += f'R² = {r_value**2:.3f}\n'
-        stats_text += f'p = {p_value:.4f}\n'
-        stats_text += f'Slope = {slope:.4f}\n'
-        stats_text += f'Intercept = {intercept:.4f}'
-        
-        ax.text(0.05, 0.95, stats_text,
+        if p_value_fdr is not None:
+            stats_text += f'p_fdr = {p_value_fdr:.4f}'
+        else:
+            stats_text += f'p = {p_value:.4f}'
+
+        if r_value > 0:
+            text_x, text_ha = 0.05, 'left'
+        else:
+            text_x, text_ha = 0.95, 'right'
+
+        ax.text(text_x, 0.95, stats_text,
                 transform=ax.transAxes,
-                fontsize=10,
+                fontsize=28,
                 verticalalignment='top',
+                horizontalalignment=text_ha,
                 bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.8))
-    
+
+    # 根据相关性正负设置图例位置
+    if r_value > 0:
+        legend_loc = 'upper left'
+    else:
+        legend_loc = 'upper right'
+
+    if color_by_subject and len(unique_subjects) <= 10:
+        ax.legend(loc=legend_loc, fontsize=28)
+
     # 美化图形
     sns.despine()
     plt.tight_layout()
 
     # 保存图形
     if save_path:
-        plt.savefig(os.path.join(save_path, f'{connection_col}_{clinical_score}_{stats_dict['pearson_r']:.2f}_{stats_dict['p_value']:.3f}.png'), dpi=300, bbox_inches='tight')
-        print(f"Figure saved to: {save_path}")
+        p_str = f"p{p_value:.3f}"
+        if p_value_fdr is not None:
+            p_str += f"_pfdr{p_value_fdr:.3f}"
+        filename = f'{connection_col}_{clinical_display}_r{r_value:.2f}_{p_str}.png'
+        plt.savefig(os.path.join(save_path, filename), dpi=300, bbox_inches='tight')
+        print(f"Figure saved to: {os.path.join(save_path, filename)}")
 
-    
     return fig, ax, stats_dict
 
 def load_significant_connections(filepath: str) -> Tuple[List[Tuple[int, int]], List[Tuple[int, int]]]:
@@ -544,6 +542,24 @@ def plot_grouped_bar_chart(df_pos, df_neg, save_path):
     sig_neg = merged['significant_fdr_neg'].values
     is_impairment = merged['is_impairment'].values
 
+    # 打印绘图数据
+    print("\n" + "=" * 90)
+    print("GROUPED BAR CHART — Plotting Data  (Mirror: Positive vs. Negative Connections)")
+    print("=" * 90)
+    print(f"{'Scale':<22s} {'Type':<13s} {'r_pos':>8s} {'sig_pos':>9s} {'r_neg':>8s} {'sig_neg':>9s}")
+    print("-" * 70)
+    for _, row in merged.iterrows():
+        s = SCORE_SHORT_LABELS.get(row['score'], row['score']).replace('\n', ' ')
+        t = 'Impairment' if row['is_impairment'] else 'Ability'
+        sp = '*' if row['significant_fdr_pos'] else 'x'
+        sn = '*' if row['significant_fdr_neg'] else 'x'
+        print(f"{s:<22s} {t:<13s} {row['pearson_r_pos']:>+8.3f} {sp:>9s} {row['pearson_r_neg']:>+8.3f} {sn:>9s}")
+    n_pos_sig = merged['significant_fdr_pos'].sum()
+    n_neg_sig = merged['significant_fdr_neg'].sum()
+    print("-" * 70)
+    print(f"FDR-significant: Positive={n_pos_sig}/{len(merged)}, Negative={n_neg_sig}/{len(merged)}")
+    print("=" * 90)
+
     x = np.arange(len(labels))
     width = 0.35
 
@@ -571,16 +587,16 @@ def plot_grouped_bar_chart(df_pos, df_neg, save_path):
 
     for i in range(len(x)):
         if sig_pos[i]:
-            ax.text(x[i] - width/2, r_pos[i] + (0.04 if r_pos[i] >= 0 else -0.06),
+            ax.text(x[i] - width/2, r_pos[i] + (-0.06 if r_pos[i] < -0.005 else 0.04),
                     '*', ha='center', va='center', fontsize=20, color='#2166AC', fontweight='bold')
         else:
-            ax.text(x[i] - width/2, r_pos[i] + (0.04 if r_pos[i] >= 0 else -0.06),
+            ax.text(x[i] - width/2, r_pos[i] + (-0.06 if r_pos[i] < -0.005 else 0.04),
                     '×', ha='center', va='center', fontsize=20, color='#888888', fontweight='bold')
         if sig_neg[i]:
-            ax.text(x[i] + width/2, r_neg[i] + (0.04 if r_neg[i] >= 0 else -0.06),
+            ax.text(x[i] + width/2, r_neg[i] + (-0.06 if r_neg[i] < -0.005 else 0.04),
                     '*', ha='center', va='center', fontsize=20, color='#E08214', fontweight='bold')
         else:
-            ax.text(x[i] + width/2, r_neg[i] + (0.04 if r_neg[i] >= 0 else -0.06),
+            ax.text(x[i] + width/2, r_neg[i] + (-0.06 if r_neg[i] < -0.005 else 0.04),
                     '×', ha='center', va='center', fontsize=20, color='#888888', fontweight='bold')
 
     ax.set_xticks(x)
@@ -662,7 +678,7 @@ def plot_horizontal_bar_chart(df_pos, save_path, legend_y=0.92):
         for _, row in sub.iterrows():
             ax.barh(y_pos, row['abs_r'], height=0.55,
                     color=domain_colors[domain], edgecolor='white', linewidth=0.5)
-            ax.text(row['abs_r'] + 0.012, y_pos, f"{row['abs_r']:.2f}", va='center', fontsize=9)
+            ax.text(row['abs_r'] + 0.012, y_pos, f"{row['abs_r']:.2f}", va='center', fontsize=11)
             y_ticks.append(y_pos)
             label_text = SCORE_SHORT_LABELS.get(row['score'], row['score']).replace('\n', ' ')
             y_labels.append(label_text)
@@ -671,11 +687,11 @@ def plot_horizontal_bar_chart(df_pos, save_path, legend_y=0.92):
         y_pos += 0.45
 
     ax.set_yticks(y_ticks)
-    ax.set_yticklabels(y_labels, fontsize=11)
+    ax.set_yticklabels(y_labels, fontsize=14)
     for i, (tick, color) in enumerate(zip(ax.get_yticklabels(), y_colors)):
         tick.set_color(color)
-    ax.set_xlabel("|Pearson's r| (Degenerative Disconnection Group)", fontsize=11)
-    ax.tick_params(axis='x', labelsize=11)
+    ax.set_xlabel("|Pearson's r| (Degenerative Disconnection Group)", fontsize=14)
+    ax.tick_params(axis='x', labelsize=14)
 
     ax.set_xlim(0, 0.85)
     ax.invert_yaxis()
@@ -694,8 +710,8 @@ def plot_horizontal_bar_chart(df_pos, save_path, legend_y=0.92):
     pathology_labels = ['MTL (Early)', 'Neocortex (Mid)', 'Primary (Late)']
     pathology_x_data = [0.68, 0.53, 0.32]
     for px, pl in zip(pathology_x_data, pathology_labels):
-        ax.text(px, y_bottom - 1.4, pl, fontsize=10, ha='center', va='center', color='#555555')
-    ax.text(0.49, y_bottom - 0.6, '<-- AD Pathology Progression -->', fontsize=11,
+        ax.text(px, y_bottom - 1.4, pl, fontsize=11, ha='center', va='center', color='#555555')
+    ax.text(0.49, y_bottom - 0.6, '<-- AD Pathology Progression -->', fontsize=12,
             ha='center', va='center', color='#555555', fontstyle='italic')
 
     fig.savefig(os.path.join(save_path, 'fig_horizontal_bar_domain_gradient.png'), dpi=300, bbox_inches='tight')
@@ -707,7 +723,7 @@ if __name__ == "__main__":
     os.makedirs('./output_score_fc', exist_ok=True)
     clinical_scores_path = "./MMS.txt"
     node_feature, adj, _, subject_ids = load_and_preprocess_data()
-    significant_connections_file = "./model_2_testset_result/cvib0_NC vs AD_high_quality_connections.csv"
+    significant_connections_file = "./model_2_testset_result/cvib0_NC vs SCD_high_quality_connections.csv"
 
     items = ['MMSE','MoCA总分','即刻记忆','延迟回忆','线索回忆','长时延迟再认','数字广度顺向','数字广度逆向','连线测验A','连线测验B','Boston-初始命名','CDR_SOB','CDR','TMT B-A','CDT']
 

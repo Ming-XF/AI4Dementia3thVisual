@@ -587,16 +587,16 @@ def plot_grouped_bar_chart(df_pos, df_neg, save_path):
 
     for i in range(len(x)):
         if sig_pos[i]:
-            ax.text(x[i] - width/2, r_pos[i] + (0.04 if r_pos[i] >= 0 else -0.06),
+            ax.text(x[i] - width/2, r_pos[i] + (-0.06 if r_pos[i] < -0.005 else 0.04),
                     '*', ha='center', va='center', fontsize=20, color='#2166AC', fontweight='bold')
         else:
-            ax.text(x[i] - width/2, r_pos[i] + (0.04 if r_pos[i] >= 0 else -0.06),
+            ax.text(x[i] - width/2, r_pos[i] + (-0.06 if r_pos[i] < -0.005 else 0.04),
                     '×', ha='center', va='center', fontsize=20, color='#888888', fontweight='bold')
         if sig_neg[i]:
-            ax.text(x[i] + width/2, r_neg[i] + (0.04 if r_neg[i] >= 0 else -0.06),
+            ax.text(x[i] + width/2, r_neg[i] + (-0.06 if r_neg[i] < -0.005 else 0.04),
                     '*', ha='center', va='center', fontsize=20, color='#E08214', fontweight='bold')
         else:
-            ax.text(x[i] + width/2, r_neg[i] + (0.04 if r_neg[i] >= 0 else -0.06),
+            ax.text(x[i] + width/2, r_neg[i] + (-0.06 if r_neg[i] < -0.005 else 0.04),
                     '×', ha='center', va='center', fontsize=20, color='#888888', fontweight='bold')
 
     ax.set_xticks(x)
@@ -723,7 +723,7 @@ if __name__ == "__main__":
     os.makedirs('./output_score_fc', exist_ok=True)
     clinical_scores_path = "./MMS.txt"
     node_feature, adj, _, subject_ids = load_and_preprocess_data()
-    significant_connections_file = "./model_2_testset_result/cvib0_NC vs AD_high_quality_connections.csv"
+    significant_connections_file = "./model_2_testset_result/cvib0_NC vs SCD_high_quality_connections.csv"
 
     items = ['MMSE','MoCA总分','即刻记忆','延迟回忆','线索回忆','长时延迟再认','数字广度顺向','数字广度逆向','连线测验A','连线测验B','Boston-初始命名','CDR_SOB','CDR','TMT B-A','CDT']
 
