@@ -15,6 +15,8 @@ from graph import calculate_graph_metrics_fast
 import pdb
 warnings.filterwarnings('ignore')
 
+import pdb
+
 def load_and_preprocess_data():
     """
     加载数据
@@ -638,6 +640,168 @@ def plot_grouped_bar_chart(df_pos, df_neg, save_path):
     print(f"[Figure] Grouped bar chart saved to: {save_path}/fig_grouped_bar_mirror_correlation.png")
 
 
+def plot_combined_grouped_bar_chart(all_results_dict, save_path):
+    """融合三组比较的分组柱状图：不同颜色区分比较组，深浅区分正负连接"""
+    plt.rcParams['font.family'] = 'DejaVu Sans'
+
+    IMPAIRMENT_SCALES = {'CDR_SOB', 'CDR', '连线测验A', '连线测验B', 'TMT B-A'}
+
+    COMPARISON_CONFIG = {
+        'NC vs AD':  {'dark': '#1A5276', 'light': '#85C1E9'},
+        'NC vs MCI': {'dark': '#1E8449', 'light': '#82E0AA'},
+        'NC vs SCD': {'dark': '#CA6F1E', 'light': '#F8C471'},
+    }
+
+    comparisons = ['NC vs AD', 'NC vs MCI', 'NC vs SCD']
+
+    # 按第一个比较组的正连接结果排序，确定量表顺序
+    first_comp = comparisons[0]
+    merged = all_results_dict[first_comp]['positive'][['score', 'pearson_r', 'significant_fdr']].merge(
+        all_results_dict[first_comp]['negative'][['score', 'pearson_r', 'significant_fdr']],
+        on='score', suffixes=('_pos', '_neg')
+    )
+    merged['is_impairment'] = merged['score'].isin(IMPAIRMENT_SCALES)
+    merged = pd.concat([
+        merged[merged['is_impairment']].sort_values('pearson_r_pos', ascending=True),
+        merged[~merged['is_impairment']].sort_values('pearson_r_pos', ascending=False),
+    ])
+    scale_order = merged['score'].tolist()
+    labels = [SCORE_SHORT_LABELS.get(s, s) for s in scale_order]
+    is_impairment = merged['is_impairment'].values
+
+    # 构建每个比较组的 r 值和显著性数组
+    r_data = {}
+    sig_data = {}
+    for comp in comparisons:
+        df_pos = all_results_dict[comp]['positive'].set_index('score')
+        df_neg = all_results_dict[comp]['negative'].set_index('score')
+        r_data[comp] = {
+            'pos': np.array([df_pos.loc[s, 'pearson_r'] for s in scale_order]),
+            'neg': np.array([df_neg.loc[s, 'pearson_r'] for s in scale_order]),
+        }
+        sig_data[comp] = {
+            'pos': np.array([df_pos.loc[s, 'significant_fdr'] for s in scale_order]),
+            'neg': np.array([df_neg.loc[s, 'significant_fdr'] for s in scale_order]),
+        }
+
+    # 打印绘图数据
+    print("\n" + "=" * 110)
+    print("COMBINED GROUPED BAR CHART — Plotting Data")
+    print("=" * 110)
+    header = f"{'Scale':<22s} {'Type':<13s}"
+    for comp in comparisons:
+        header += f" {comp+'_pos':>9s} {comp+'_neg':>9s}"
+    print(header)
+    print("-" * 100)
+    for idx, s in enumerate(scale_order):
+        label = SCORE_SHORT_LABELS.get(s, s).replace('\n', ' ')
+        t = 'Impairment' if is_impairment[idx] else 'Ability'
+        row = f"{label:<22s} {t:<13s}"
+        for comp in comparisons:
+            row += f" {r_data[comp]['pos'][idx]:>+9.3f} {r_data[comp]['neg'][idx]:>+9.3f}"
+        print(row)
+    print("=" * 110)
+
+    # 柱状图布局参数
+    w = 0.13
+    gap = 0.14
+    n_comp = len(comparisons)
+    offsets_pos = np.array([-gap / 2 - (n_comp - 1 - i) * w for i in range(n_comp)])
+    offsets_neg = np.array([gap / 2 + i * w for i in range(n_comp)])
+
+    X_AXIS_RIGHT_EXTEND = 1.2
+    FIG_WIDTH = 18
+
+    fig, ax = plt.subplots(figsize=(FIG_WIDTH, 9))
+
+    x = np.arange(len(labels))
+
+    for i, comp in enumerate(comparisons):
+        colors = COMPARISON_CONFIG[comp]
+        ax.bar(x + offsets_pos[i], r_data[comp]['pos'], w,
+               color=colors['dark'], edgecolor='white', linewidth=0.4,
+               label=f'{comp} — Degenerative Disconnection')
+        ax.bar(x + offsets_neg[i], r_data[comp]['neg'], w,
+               color=colors['light'], edgecolor='white', linewidth=0.4,
+               label=f'{comp} — Pathological Hyper-connectivity')
+
+    ax.axhline(y=0, color='black', linewidth=0.8, linestyle='--', alpha=0.6)
+
+    # 损伤/能力量表分隔竖线
+    n_impairment = is_impairment.sum()
+    if 0 < n_impairment < len(labels):
+        ax.axvline(x=n_impairment - 0.5, color='#555555', linewidth=1.2, linestyle='-', alpha=0.6)
+
+    # FDR 显著性标记
+    for idx in range(len(x)):
+        for i, comp in enumerate(comparisons):
+            # 正连接组（左侧）
+            val_pos = r_data[comp]['pos'][idx]
+            y_offset = -0.06 if val_pos < -0.005 else 0.04
+            if sig_data[comp]['pos'][idx]:
+                ax.text(x[idx] + offsets_pos[i], val_pos + y_offset,
+                        '*', ha='center', va='center', fontsize=12, color=COMPARISON_CONFIG[comp]['dark'], fontweight='bold')
+            else:
+                ax.text(x[idx] + offsets_pos[i], val_pos + y_offset,
+                        '×', ha='center', va='center', fontsize=12, color='#AAAAAA', fontweight='bold')
+            # 负连接组（右侧）
+            val_neg = r_data[comp]['neg'][idx]
+            y_offset = -0.06 if val_neg < -0.005 else 0.04
+            if sig_data[comp]['neg'][idx]:
+                ax.text(x[idx] + offsets_neg[i], val_neg + y_offset,
+                        '*', ha='center', va='center', fontsize=12, color=COMPARISON_CONFIG[comp]['light'], fontweight='bold')
+            else:
+                ax.text(x[idx] + offsets_neg[i], val_neg + y_offset,
+                        '×', ha='center', va='center', fontsize=12, color='#AAAAAA', fontweight='bold')
+
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels, fontsize=22, rotation=45, ha='right')
+    ax.set_ylabel("Pearson's r", fontsize=22)
+    ax.set_xlabel('')
+    ax.tick_params(axis='y', labelsize=22)
+
+    # 图例：居中三列，AD(2) | MCI(2) | SCD(2)+FDR
+    from matplotlib.patches import Patch
+    from matplotlib.lines import Line2D
+    legend_elements = []
+    dummy = Patch(facecolor='none', edgecolor='none', label='')
+    for i, comp in enumerate(comparisons):
+        colors = COMPARISON_CONFIG[comp]
+        legend_elements.append(Patch(facecolor=colors['dark'], edgecolor='white',
+                                     label=f'{comp} — Degenerative Disconnection'))
+        legend_elements.append(Patch(facecolor=colors['light'], edgecolor='white',
+                                     label=f'{comp} — Pathological Hyper-connectivity'))
+        if i < len(comparisons) - 1:
+            legend_elements.append(dummy)
+    legend_elements.append(Line2D([0], [0], marker='*', linestyle='None',
+                                  markerfacecolor='black', markersize=12,
+                                  label='FDR significant (p < 0.05)'))
+    ax.legend(handles=legend_elements, loc='lower center', fontsize=15, framealpha=0.9,
+              ncol=3, handlelength=1.5, handleheight=1.0,
+              bbox_to_anchor=(0.5, 0.94))
+
+    ax.set_ylim(-0.85, 0.85)
+    ax.set_xlim(-0.6, len(labels) - 0.4 + X_AXIS_RIGHT_EXTEND)
+
+    # 分组标注
+    if n_impairment > 0:
+        x_impair_axes = ((n_impairment - 1) / 2) / (len(labels) - 1) if len(labels) > 1 else 0.5
+        ax.text(x_impair_axes, 0.02, 'Impairment scales (higher = worse)',
+                ha='center', va='bottom', fontsize=18, color='#555555',
+                transform=ax.transAxes)
+    if n_impairment < len(labels):
+        x_ability_axes = (n_impairment + (len(labels) - n_impairment - 1) / 2) / (len(labels) - 1) if len(labels) > 1 else 0.5
+        ax.text(x_ability_axes, 0.02, 'Ability scales (higher = better)',
+                ha='center', va='bottom', fontsize=18, color='#555555',
+                transform=ax.transAxes)
+
+    sns.despine()
+    plt.subplots_adjust(top=0.92, bottom=0.18, left=0.08, right=0.95)
+    fig.savefig(os.path.join(save_path, 'fig_grouped_bar_mirror_correlation_combined.png'), dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"[Figure] Combined grouped bar chart saved to: {save_path}/fig_grouped_bar_mirror_correlation_combined.png")
+
+
 def plot_horizontal_bar_chart(df_pos, save_path, legend_y=0.92):
     """水平条形图：按认知领域颜色编码展示|r|梯度，映射AD病理层级
 
@@ -720,71 +884,89 @@ def plot_horizontal_bar_chart(df_pos, save_path, legend_y=0.92):
 
 
 if __name__ == "__main__":
+    comparisons = ['NC vs AD', 'NC vs MCI', 'NC vs SCD']
     os.makedirs('./output_score_fc', exist_ok=True)
     clinical_scores_path = "./MMS.txt"
     node_feature, adj, _, subject_ids = load_and_preprocess_data()
-    significant_connections_file = "./model_2_testset_result/cvib0_NC vs SCD_high_quality_connections.csv"
 
     items = ['MMSE','MoCA总分','即刻记忆','延迟回忆','线索回忆','长时延迟再认','数字广度顺向','数字广度逆向','连线测验A','连线测验B','Boston-初始命名','CDR_SOB','CDR','TMT B-A','CDT']
 
-    saved_results = {}
+    all_comparison_results = {}
 
-    for connections_group in ['positive', 'negative']:
-        all_results = []
-        for clinical_score in items:
-            result = analyze_fc_clinical_correlation(
-                node_feature=node_feature,
-                adj=adj,
-                subject_ids=subject_ids,
-                clinical_scores_path=clinical_scores_path,
-                feature_type='connection',
-                connections_group=connections_group,
-                significant_connections_file=significant_connections_file,
-                clinical_score=clinical_score,
-                use_original=False,
-                save_path='./output_score_fc',
-                thred=0.3,
-            )
-            if result is not None:
-                all_results.append(result)
-        if all_results:
-            df_results = pd.DataFrame(all_results)
+    for comparison in comparisons:
+        folder_name = comparison.replace(' vs ', '_').replace(' ', '_')
+        output_dir = f'./output_score_fc/output_score_fc_{folder_name}'
+        os.makedirs(output_dir, exist_ok=True)
 
-            p_values = df_results['p_value'].values
-            reject_fdr, p_fdr, _, _ = multipletests(
-                p_values,
-                alpha=0.05,
-                method='fdr_bh'
-            )
+        significant_connections_file = f"./model_2_testset_result/cvib0_{comparison}_high_quality_connections.csv"
 
-            df_results['p_value_fdr'] = p_fdr
-            df_results['significant_fdr'] = reject_fdr
-            df_results['abs_r'] = np.abs(df_results['pearson_r'])
-            df_results = df_results.sort_values('abs_r', ascending=False)
-
-            results_file = os.path.join("./output_score_fc", f'fc_clinical_correlation_{connections_group}_results.csv')
-            df_results.to_csv(results_file, index=False)
-            print(f"\nResults saved to: {results_file}")
-
-            print("\n" + "=" * 80)
-            print(f"FDR-Corrected Results Summary [{connections_group} connections]")
-            print("=" * 80)
-            print(f"{'Clinical Score':<20s} {'r':>8s} {'p_raw':>10s} {'p_fdr':>10s} {'FDR sig':>8s}")
-            print("-" * 60)
-            for _, row in df_results.iterrows():
-                print(f"{row['score']:<20s} {row['pearson_r']:>8.3f} {row['p_value']:>10.4f} {row['p_value_fdr']:>10.4f} {'*' if row['significant_fdr'] else '':>8s}")
-            print("-" * 60)
-            n_sig = df_results['significant_fdr'].sum()
-            print(f"Significant after FDR correction: {n_sig}/{len(df_results)}")
-
-            saved_results[connections_group] = df_results
-
-    if 'positive' in saved_results and 'negative' in saved_results:
         print("\n" + "=" * 80)
-        print("Generating summary figures...")
+        print(f"Processing: {comparison}")
         print("=" * 80)
-        plot_grouped_bar_chart(saved_results['positive'], saved_results['negative'], './output_score_fc')
-        plot_horizontal_bar_chart(saved_results['positive'], './output_score_fc')
-        print("\nAll done.")
+
+        saved_results = {}
+
+        for connections_group in ['positive', 'negative']:
+            all_results = []
+            for clinical_score in items:
+                result = analyze_fc_clinical_correlation(
+                    node_feature=node_feature,
+                    adj=adj,
+                    subject_ids=subject_ids,
+                    clinical_scores_path=clinical_scores_path,
+                    feature_type='connection',
+                    connections_group=connections_group,
+                    significant_connections_file=significant_connections_file,
+                    clinical_score=clinical_score,
+                    use_original=False,
+                    save_path=output_dir,
+                    thred=0.3,
+                )
+                if result is not None:
+                    all_results.append(result)
+            if all_results:
+                df_results = pd.DataFrame(all_results)
+
+                p_values = df_results['p_value'].values
+                reject_fdr, p_fdr, _, _ = multipletests(
+                    p_values,
+                    alpha=0.05,
+                    method='fdr_bh'
+                )
+
+                df_results['p_value_fdr'] = p_fdr
+                df_results['significant_fdr'] = reject_fdr
+                df_results['abs_r'] = np.abs(df_results['pearson_r'])
+                df_results = df_results.sort_values('abs_r', ascending=False)
+
+                results_file = os.path.join(output_dir, f'fc_clinical_correlation_{connections_group}_results.csv')
+                df_results.to_csv(results_file, index=False)
+                print(f"\nResults saved to: {results_file}")
+
+                print("\n" + "=" * 80)
+                print(f"FDR-Corrected Results Summary [{comparison} | {connections_group} connections]")
+                print("=" * 80)
+                print(f"{'Clinical Score':<20s} {'r':>8s} {'p_raw':>10s} {'p_fdr':>10s} {'FDR sig':>8s}")
+                print("-" * 60)
+                for _, row in df_results.iterrows():
+                    print(f"{row['score']:<20s} {row['pearson_r']:>8.3f} {row['p_value']:>10.4f} {row['p_value_fdr']:>10.4f} {'*' if row['significant_fdr'] else '':>8s}")
+                print("-" * 60)
+                n_sig = df_results['significant_fdr'].sum()
+                print(f"Significant after FDR correction: {n_sig}/{len(df_results)}")
+
+                saved_results[connections_group] = df_results
+
+        if 'positive' in saved_results and 'negative' in saved_results:
+            all_comparison_results[comparison] = saved_results
+            print(f"\nGenerating horizontal bar chart for {comparison}...")
+            plot_horizontal_bar_chart(saved_results['positive'], output_dir)
+
+    if all_comparison_results:
+        print("\n" + "=" * 80)
+        print("Generating combined grouped bar chart...")
+        print("=" * 80)
+        plot_combined_grouped_bar_chart(all_comparison_results, './output_score_fc')
+
+    print("\nAll done.")
 
 
